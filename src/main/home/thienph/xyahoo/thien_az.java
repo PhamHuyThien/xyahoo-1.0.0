@@ -1,0 +1,17 @@
+package home.thienph.xyahoo;
+
+final class thien_az
+implements thien_ae {
+    private thien_ay a;
+
+    thien_az(thien_ay thien_ay2) {
+        this.a = thien_ay2;
+    }
+
+    public final void a() {
+        String string = thien_ay.c[thien_ay.a((thien_ay)this.a)].a;
+        if (thien_ay.b(this.a) == 1) {
+            thien_a.a(string, thien_ba.z);
+        }
+    }
+}
