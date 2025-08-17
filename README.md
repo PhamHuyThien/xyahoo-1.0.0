@@ -11,6 +11,8 @@
 - Cài đặt Sun Java Wireless Toolkit 2.5.2_01 [tải về](https://www.oracle.com/java/technologies/java-archive-downloads-javame-downloads.html)
 
 # Lưu ý:
+- Vì app đã đóng cửa quá lâu, và gần như không tìm đuợc version mới nhất của app
+- Đây là version hiếm hoi còn sót lại trên internet 
 - Mã nguồn gốc client nằm ở thư mục `/official-application`
 - bản JAR đã đổi tên class (tránh lỗi dịch ngược) `x-yahoo-1.0.0-rename-class.jar`
 
