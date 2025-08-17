@@ -6,9 +6,9 @@
 - Cùng đón chờ server-side nhé ^^
 
 # Hướng dẫn cài đặt
-- Cài đặt Java SE 6 [tải về (https://www.oracle.com/java/technologies/javase-java-archive-javase6-downloads.html)]
-- Tải Netbean IDE 7.0 [tải về (https://dn721908.ca.archive.org/0/items/netbeans-olds/7.0/)]
-- Cài đặt Sun Java Wireless Toolkit 2.5.2_01 [tải về (https://www.oracle.com/java/technologies/java-archive-downloads-javame-downloads.html)]
+- Cài đặt Java SE 6 [tải về](https://www.oracle.com/java/technologies/javase-java-archive-javase6-downloads.html)
+- Tải Netbean IDE 7.0 [tải về](https://dn721908.ca.archive.org/0/items/netbeans-olds/7.0/)
+- Cài đặt Sun Java Wireless Toolkit 2.5.2_01 [tải về](https://www.oracle.com/java/technologies/java-archive-downloads-javame-downloads.html)
 
 # Lưu ý:
 - Mã nguồn gốc client nằm ở thư mục `/official-application`
