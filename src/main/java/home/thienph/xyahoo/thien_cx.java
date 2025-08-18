@@ -7,6 +7,6 @@ implements thien_ae {
 
     public final void a() {
         thien_di.c.c();
-        thien_di.c.b(thien_as.aW());
+        thien_di.c.b(TextConstant.youWillReceiveYourPassword());
     }
 }

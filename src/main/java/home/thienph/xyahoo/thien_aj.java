@@ -31,7 +31,7 @@ extends thien_ac {
         super.s = s2;
         this.e = e;
         super.t = e * this.c.length;
-        super.y = new thien_ab(thien_as.P(), null);
+        super.y = new thien_ab(TextConstant.select(), null);
         this.f = (e >> 1) + 2;
         this.g = (e - thien_w.f >> 1) + 1;
     }

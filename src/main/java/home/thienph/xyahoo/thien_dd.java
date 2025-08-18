@@ -11,13 +11,13 @@ implements thien_ae {
     public final void a() {
         thien_cq.a(this.a);
         if (this.a.D.c().equals("")) {
-            thien_di.b().b(thien_as.aU());
+            thien_di.b().b(TextConstant.enterYourYahooId());
             return;
         }
         GameCanvas.instance.connectToServer();
         MessageHandler.b();
         Packet packet2 = new Packet(269, 13);
         thien_hc.a(packet2);
-        thien_di.b().b(thien_as.au());
+        thien_di.b().b(TextConstant.pleaseWait());
     }
 }

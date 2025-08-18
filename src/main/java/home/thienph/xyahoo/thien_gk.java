@@ -70,7 +70,7 @@ final class thien_gk implements thien_ae {
          }
 
          if (var15) {
-            thien_di.b().b(thien_as.A());
+            thien_di.b().b(TextConstant.thisIdAlreadyAdded());
          } else {
             MessageHandler.b(var1, var2, 1);
             thien_di.b().c(this.c);

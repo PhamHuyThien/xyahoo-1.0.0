@@ -6,6 +6,6 @@ implements thien_ae {
     }
 
     public final void a() {
-        thien_di.b().a(thien_as.D(), new thien_ci(this));
+        thien_di.b().a(TextConstant.areYouSure(), new thien_ci(this));
     }
 }

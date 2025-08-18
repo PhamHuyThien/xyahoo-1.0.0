@@ -12,7 +12,7 @@ implements thien_ae {
 
     public final void a() {
         thien_di.c.c();
-        thien_di.c.b(thien_as.au());
+        thien_di.c.b(TextConstant.pleaseWait());
         Xuka.startThread(this.a, this.b, null, null, true);
     }
 }

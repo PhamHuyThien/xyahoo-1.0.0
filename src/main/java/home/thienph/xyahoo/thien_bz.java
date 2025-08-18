@@ -130,13 +130,13 @@ public final class thien_bz extends thien_ac
         if (this.a != null && !this.j) {
             graphics.drawImage(thien_ba.aj[this.F], this.e, this.f, this.L);
             graphics.setColor(16777215);
-            thien_w.a(thien_w.d).a(String.valueOf(thien_as.bA()) + ": " + thien_ba.S.C + " " + a(), 5, 2 - thien_w.f, graphics);
+            thien_w.a(thien_w.d).a(String.valueOf(TextConstant.bet()) + ": " + thien_ba.S.C + " " + a(), 5, 2 - thien_w.f, graphics);
             if (!thien_ba.S.E) {
                 if (this.H) {
-                    this.d = thien_as.l();
+                    this.d = TextConstant.host();
                 }
                 else if (this.g) {
-                    this.d = thien_as.bz();
+                    this.d = TextConstant.ready();
                 }
                 else {
                     this.d = "";
@@ -188,8 +188,8 @@ public final class thien_bz extends thien_ac
                     thien_w.a(thien_w.b).a(new StringBuffer(String.valueOf(this.P)).toString(), this.e - 17, this.f - 5, graphics);
                     return;
                 }
-                thien_ba.S.l.a = thien_as.bC();
-                thien_ba.S.m.a = thien_as.i();
+                thien_ba.S.l.a = TextConstant.deny();
+                thien_ba.S.m.a = TextConstant.dropCard();
                 thien_w.a(thien_w.b).a(new StringBuffer(String.valueOf(this.P)).toString(), this.e - 17, this.f - 5, graphics);
             }
         }

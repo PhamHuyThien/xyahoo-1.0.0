@@ -66,7 +66,7 @@ public final class thien_ba extends thien_an {
    private thien_am aD;
    public static Image[] aj;
    private int aE = -1;
-   private thien_ab aF = new thien_ab(thien_as.F(), new thien_bb(this));
+   private thien_ab aF = new thien_ab(TextConstant.smileys(), new thien_bb(this));
    private thien_ab aG = new thien_ab("Chat", new thien_bm(this));
    private thien_ab aH = new thien_ab("Đặt cược", new thien_br(this));
    private static int aI = -1;
@@ -113,11 +113,11 @@ public final class thien_ba extends thien_an {
 
    private thien_ba(int var1) {
       new thien_ab("Tài khoản", new thien_bs(this));
-      this.aO = new thien_ab(thien_as.bB(), new thien_bt(this));
+      this.aO = new thien_ab(TextConstant.update(), new thien_bt(this));
       this.aP = new thien_ab("Tìm bàn", new thien_bu(this));
       z = thien_ff.y;
       if (var1 == 1) {
-         super.g = thien_as.by();
+         super.g = TextConstant.bigTwo();
       }
 
       this.az = new Vector();
@@ -218,7 +218,7 @@ public final class thien_ba extends thien_an {
       if (this.aw == null) {
          this.ax = new Vector();
          this.ay = new thien_am(this.ax);
-         this.aw = new thien_ab(thien_as.j(), null);
+         this.aw = new thien_ab(TextConstant.kick(), null);
          this.aw.c = this.ay;
       }
 
@@ -325,21 +325,21 @@ public final class thien_ba extends thien_an {
       super.k = new thien_ab("Menu", new thien_bd(this));
       super.l = null;
       if (z.equals(this.w)) {
-         super.m = new thien_ab(thien_as.k(), new thien_be(this));
+         super.m = new thien_ab(TextConstant.playNow(), new thien_be(this));
       } else if (!var10) {
-         super.m = new thien_ab(thien_as.bz(), new thien_bf(this));
+         super.m = new thien_ab(TextConstant.ready(), new thien_bf(this));
       }
 
       this.av = this.F[0];
       ap = null;
       (ap = new thien_at("", 9, 1)).a(0, thien_an.f - thien_di.g - (thien_w.f << 1) - 10, thien_an.e - 1, thien_w.f + 6);
       if (this.aM == null) {
-         this.aM = new thien_ab(thien_as.ae(), new thien_bp(this));
+         this.aM = new thien_ab(TextConstant.close(), new thien_bp(this));
       }
 
       ap.w = this.aM;
       if (this.aN == null) {
-         this.aN = new thien_ab(thien_as.bA(), new thien_bq(this));
+         this.aN = new thien_ab(TextConstant.bet(), new thien_bq(this));
       }
 
       ap.y = this.aN;
@@ -397,7 +397,7 @@ public final class thien_ba extends thien_an {
       }
 
       System.gc();
-      var5.l = new thien_ab(thien_as.bC(), new thien_bg(var5, var7));
+      var5.l = new thien_ab(TextConstant.deny(), new thien_bg(var5, var7));
       var5.av = var5.P;
       var5.k();
       var5.k = new thien_ab("Menu", new thien_bh(var5));
@@ -528,7 +528,7 @@ public final class thien_ba extends thien_an {
       String[] var1 = new String[this.at];
       long[] var2 = new long[this.at];
       int[] var3 = new int[this.at];
-      String var4 = thien_as.g() + "\n";
+      String var4 = TextConstant.finish() + "\n";
 
       for (int var5 = 0; var5 < this.V.length; var5++) {
          String var6;
@@ -548,7 +548,7 @@ public final class thien_ba extends thien_an {
          }
       }
 
-      thien_di.c.a(var4, null, null, new thien_ab(thien_as.ae(), new thien_bk(this)));
+      thien_di.c.a(var4, null, null, new thien_ab(TextConstant.close(), new thien_bk(this)));
       boolean var8 = false;
 
       for (int var9 = 0; var9 < this.at; var9++) {
@@ -567,7 +567,7 @@ public final class thien_ba extends thien_an {
       }
 
       super.m.a = "";
-      super.l = new thien_ab(thien_as.bx(), new thien_bl(this));
+      super.l = new thien_ab(TextConstant.resume(), new thien_bl(this));
    }
 
    public final void g() {
@@ -625,12 +625,12 @@ public final class thien_ba extends thien_an {
       I = null;
       (I = new thien_at("", 50, 0)).a(0, thien_an.f - thien_di.g - (thien_w.f << 1) - 10, thien_an.e - 1, thien_w.f + 6);
       if (this.aK == null) {
-         this.aK = new thien_ab(thien_as.z(), new thien_bn(this));
+         this.aK = new thien_ab(TextConstant.cancel(), new thien_bn(this));
       }
 
       I.w = this.aK;
       if (this.aL == null) {
-         this.aL = new thien_ab(thien_as.t(), new thien_bo(this));
+         this.aL = new thien_ab(TextConstant.send(), new thien_bo(this));
       }
 
       I.y = this.aL;

@@ -42,6 +42,6 @@ implements thien_ae {
             thien_di.b().j.x.a(thien_u2.d);
             return;
         }
-        thien_di.b().b(thien_as.ai());
+        thien_di.b().b(TextConstant.youCanDeleteEmptyGroup());
     }
 }

@@ -34,11 +34,11 @@ public final class thien_cn extends thien_an {
    public thien_cn() {
       this.A.a = true;
       this.A.a(0, thien_an.f - thien_di.g - thien_w.f - 11, thien_an.e - 6, thien_w.f + 6);
-      super.g = thien_as.ak();
+      super.g = TextConstant.inviteConference();
       this.a(this.y);
       this.c(this.y);
       super.l = new thien_ab("OK", new thien_co(this));
-      super.k = new thien_ab(thien_as.z(), new thien_cp(this));
+      super.k = new thien_ab(TextConstant.cancel(), new thien_cp(this));
    }
 
    public final void f() {

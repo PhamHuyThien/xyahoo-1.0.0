@@ -12,7 +12,7 @@ public final class thien_ca extends thien_ap {
    thien_at F = null;
    boolean G;
    public thien_af H;
-   static thien_ab I = new thien_ab(thien_as.M(), new thien_cb());
+   static thien_ab I = new thien_ab(TextConstant.info(), new thien_cb());
 
    private void f() {
       String[] var1;
@@ -37,21 +37,21 @@ public final class thien_ca extends thien_ap {
       this.a(this.H);
       this.c(this.H);
       thien_af var10000 = this.H;
-      thien_ab var7 = new thien_ab(thien_as.P(), new thien_cc(this));
+      thien_ab var7 = new thien_ab(TextConstant.select(), new thien_cc(this));
       var10000.y = var7;
    }
 
    public thien_ca() {
       super.g = "X Yahoo!";
       D = this;
-      thien_ab var1 = new thien_ab(thien_as.L(), new thien_cd(this));
-      thien_ab var2 = new thien_ab(thien_as.e(), new thien_ce(this));
-      thien_ab var3 = new thien_ab(thien_as.C(), new thien_ch(this));
+      thien_ab var1 = new thien_ab(TextConstant.settings(), new thien_cd(this));
+      thien_ab var2 = new thien_ab(TextConstant.comment(), new thien_ce(this));
+      thien_ab var3 = new thien_ab(TextConstant.signOut(), new thien_ch(this));
       Vector var4;
       (var4 = new Vector()).addElement(I);
       var4.addElement(var2);
       var4.addElement(thien_cq.H);
-      (var2 = new thien_ab(thien_as.c(), null)).c = new thien_am(var4);
+      (var2 = new thien_ab(TextConstant.support(), null)).c = new thien_am(var4);
       this.J = new Vector();
       this.J.addElement(var2);
       this.J.addElement(var1);

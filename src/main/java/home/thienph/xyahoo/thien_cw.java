@@ -10,7 +10,7 @@ final class thien_cw
 
     public final void a() {
         thien_di.c.c();
-        thien_di.c.b(thien_as.au());
+        thien_di.c.b(TextConstant.pleaseWait());
         Xuka.startThread(String.valueOf(thien_di.D) + this.a.D.c(), thien_di.c.w(), new thien_cx(this), null, true);
     }
 }

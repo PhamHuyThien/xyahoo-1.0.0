@@ -22,7 +22,7 @@ extends thien_ac {
         this.r = n2;
         this.s = n3;
         this.t = n4;
-        this.y = new thien_ab(thien_as.P(), null);
+        this.y = new thien_ab(TextConstant.select(), null);
     }
 
     public final boolean b(int n) {

@@ -43,9 +43,9 @@ extends thien_ac {
     public thien_al(int n, int n2, int n3, int n4, int n5) {
         super(1, 1, n3, n4, true);
         new Vector();
-        this.b = new thien_ab(thien_as.P(), null);
+        this.b = new thien_ab(TextConstant.select(), null);
         this.m = new thien_ab("", null);
-        (new String[1])[0] = thien_as.au();
+        (new String[1])[0] = TextConstant.pleaseWait();
         System.currentTimeMillis();
         this.n = 0;
         this.p = true;

@@ -18,7 +18,7 @@ implements thien_ae {
         } else {
             MessageHandler.a(string, this.a.g, 1);
         }
-        this.a.z.a(this.b ? thien_gp.y : thien_ff.A, this.b ? thien_as.b[0] : thien_as.s(), 0);
+        this.a.z.a(this.b ? thien_gp.y : thien_ff.A, this.b ? TextConstant.buzz[0] : TextConstant.buzz(), 0);
         thien_di.b().a();
         this.a.z.b();
     }

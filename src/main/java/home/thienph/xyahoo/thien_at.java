@@ -50,7 +50,7 @@ extends thien_ac {
         Object object;
         TextBox textBox = new TextBox("", "", 500, 0);
         textBox.addCommand(new Command("OK", 4, 0));
-        textBox.addCommand(new Command(thien_as.z(), 3, 0));
+        textBox.addCommand(new Command(TextConstant.cancel(), 3, 0));
         textBox.setCommandListener((CommandListener)new thien_au(this, textBox));
         try {
             if (this.d) {
@@ -98,7 +98,7 @@ extends thien_ac {
 
     private void d() {
         i = thien_w.f + 1;
-        this.x = new thien_ab(thien_as.aD(), new thien_av(this));
+        this.x = new thien_ab(TextConstant.clear(), new thien_av(this));
         K = thien_w.a("ABC", thien_w.j) + 1;
     }
 

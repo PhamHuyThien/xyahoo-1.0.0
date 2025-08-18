@@ -19,7 +19,7 @@ implements thien_ae {
             return;
         }
         if (this.a.x.c(string)) {
-            thien_di.b().b(thien_as.aG());
+            thien_di.b().b(TextConstant.thisGroupNameAlreadyExist());
             return;
         }
         MessageHandler.h(this.c, string);

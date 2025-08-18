@@ -104,7 +104,7 @@ extends thien_ac {
         int n = this.r + 3 + (thien_w.a ? 0 : 1);
         graphics.setColor(0xFFFFFF);
         if (this.a.length == 0) {
-            thien_w.a(thien_w.d).a(thien_as.aH(), this.q + (this.s >> 1), n, 2, graphics, thien_w.j, thien_w.f);
+            thien_w.a(thien_w.d).a(TextConstant.noItem(), this.q + (this.s >> 1), n, 2, graphics, thien_w.j, thien_w.f);
         } else {
             thien_w.a(thien_w.d).a(this.e, this.q + (this.s >> 1), n, 2, graphics, thien_w.j, thien_w.f);
         }

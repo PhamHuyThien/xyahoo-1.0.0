@@ -25,13 +25,13 @@ public final class thien_b extends thien_ac {
    private int J;
    private int K;
    public int h;
-   public thien_ab i = new thien_ab(thien_as.P(), null);
+   public thien_ab i = new thien_ab(TextConstant.select(), null);
    private thien_ab L = new thien_ab("", null);
-   public thien_ab j = new thien_ab(thien_as.aj(), null);
+   public thien_ab j = new thien_ab(TextConstant.mark(), null);
    private boolean M = false;
    public thien_s k;
    public Vector l;
-   public String[] m = new String[]{thien_as.au()};
+   public String[] m = new String[]{TextConstant.pleaseWait()};
    public boolean n;
    private thien_u N;
    private thien_ab O;
@@ -266,9 +266,9 @@ public final class thien_b extends thien_ac {
             }
 
             if (this.M) {
-               thien_u var1;
-               (var1 = (thien_u)this.l.elementAt(this.h)).h = !var1.h;
-               var1.i.e = !var1.i.e;
+               thien_u thien_u2 = (thien_u)this.l.elementAt(this.h);
+               ((thien_u)this.l.elementAt(this.h)).h = !thien_u2.h;
+               thien_u2.i.e = !thien_u2.i.e;
                return;
             }
 
@@ -297,7 +297,7 @@ public final class thien_b extends thien_ac {
       var1.setClip(super.q, super.r, super.s + 1, super.t);
       if (this.e) {
          var1.setColor(16777215);
-         thien_w.a(thien_w.d).a(thien_as.au(), this.T, 20, 2, var1, thien_w.j, thien_w.f);
+         thien_w.a(thien_w.d).a(TextConstant.pleaseWait(), this.T, 20, 2, var1, thien_w.j, thien_w.f);
          thien_di.c.a(var1, this.T, thien_w.f + 35);
       } else if (this.K == 0) {
          var1.setColor(16777215);

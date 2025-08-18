@@ -157,7 +157,7 @@ public class MessageHandler {
                         thien_ab var205 = parseMenuEntry(var1);
                         if (thien_di.c(var188)) {
                            Vector var212;
-                           (var212 = new Vector()).addElement(new thien_ab(thien_as.F(), new thien_m()));
+                           (var212 = new Vector()).addElement(new thien_ab(TextConstant.smileys(), new thien_m()));
                            var212.addElement(var205);
                            thien_am var218 = new thien_am(var212);
                            var195.k = new thien_ab("Menu", new thien_n(var218));
@@ -274,7 +274,7 @@ public class MessageHandler {
                         );
                         var174.a(var110);
                         var174.c(var110);
-                        thien_ab var112 = new thien_ab(thien_as.P(), new thien_q(var236, var110, var1));
+                        thien_ab var112 = new thien_ab(TextConstant.select(), new thien_q(var236, var110, var1));
                         var110.y = var112;
                         break;
                      case 12:
@@ -813,10 +813,10 @@ public class MessageHandler {
       Packet var6;
       if (var3 == 1) {
          Packet var5 = new Packet(1016, 13);
-         if (thien_as.a == 1) {
+         if (TextConstant.languageId == 1) {
             writeInt(2, var5);
          } else {
-            writeInt(thien_as.a, var5);
+            writeInt(TextConstant.languageId, var5);
          }
 
          thien_hc.a(var5);

@@ -12,7 +12,7 @@ final class thien_gv
 
     public final void a() {
         if (!this.a.C) {
-            thien_di.c.a(thien_as.au(), (Image)null, 1);
+            thien_di.c.a(TextConstant.pleaseWait(), (Image)null, 1);
             return;
         }
         thien_gp.a(this.a);

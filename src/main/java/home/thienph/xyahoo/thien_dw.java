@@ -25,14 +25,14 @@ implements thien_ae {
         int n = 0;
         while (n < this.d.a.length) {
             if (string.equals(this.d.a[n])) {
-                this.a.b(String.valueOf(thien_as.an()) + string);
+                this.a.b(String.valueOf(TextConstant.deleteSuccess()) + string);
                 this.a.c(this.c);
                 this.a.k();
                 return;
             }
             ++n;
         }
-        this.a.b(String.valueOf(thien_as.X()) + string + thien_as.Y());
+        this.a.b(String.valueOf(TextConstant.add2()) + string + TextConstant.success());
         this.a.c(this.c);
         this.a.k();
     }

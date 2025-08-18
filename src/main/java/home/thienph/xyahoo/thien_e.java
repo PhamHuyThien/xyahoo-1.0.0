@@ -76,7 +76,7 @@ public final class thien_e extends thien_ac {
 
    public final void a(String var1, String var2, int var3) {
       if ((var2 = thien_fe.b(var2)).startsWith("http")) {
-         this.a(var1, thien_as.bw(), var3);
+         this.a(var1, TextConstant.clickHere(), var3);
          var2 = '祼' + var2;
          this.f.addElement(var2);
          this.l = this.f.size();

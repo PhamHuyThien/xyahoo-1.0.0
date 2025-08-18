@@ -23,12 +23,12 @@ implements thien_ae {
             return;
         }
         if (this.c.c().length() < 6 || this.c.c().length() > 64) {
-            thien_di.b().a(String.valueOf(thien_as.G()) + thien_as.q(), (Image)null, 1);
+            thien_di.b().a(String.valueOf(TextConstant.password()) + TextConstant.lengthMustBeFrom6To64(), (Image)null, 1);
             this.a.c(this.c);
             return;
         }
         if (this.c.c().equals("") || this.d.c().equals("") || !this.c.c().equals(this.d.c())) {
-            thien_di.b().a(thien_as.ac(), (Image)null, 1);
+            thien_di.b().a(TextConstant.typePasswordAgain(), (Image)null, 1);
             this.a.c(this.c);
             return;
         }

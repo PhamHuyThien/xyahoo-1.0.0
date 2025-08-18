@@ -15,7 +15,7 @@ extends thien_ac {
         this.r = n2;
         this.s = n3;
         this.t = n4;
-        this.x = new thien_ab(thien_as.P(), null);
+        this.x = new thien_ab(TextConstant.select(), null);
     }
 
     public final boolean a(int n) {

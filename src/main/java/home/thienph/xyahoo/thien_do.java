@@ -14,6 +14,6 @@ implements thien_ae {
         thien_dm thien_dm2 = this.a;
         thien_dm2.a.c();
         thien_dm2 = this.a;
-        thien_dm2.a.b(thien_as.O(), this.b);
+        thien_dm2.a.b(TextConstant.sendSmsFailed(), this.b);
     }
 }

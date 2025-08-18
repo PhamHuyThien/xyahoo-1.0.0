@@ -31,7 +31,7 @@ implements Runnable {
             messageConnection.send((Message)textMessage);
             if (this.c == null) {
                 thien_di.c.c();
-                thien_di.c.b(thien_as.N());
+                thien_di.c.b(TextConstant.sendSmsCompleted());
                 return;
             }
             this.c.a();
@@ -42,7 +42,7 @@ implements Runnable {
                 thien_di.c.c();
             }
             if (this.e == null) {
-                thien_di.c.b(thien_as.O());
+                thien_di.c.b(TextConstant.sendSmsFailed());
                 return;
             }
             this.e.a();

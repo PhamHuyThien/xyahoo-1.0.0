@@ -12,6 +12,6 @@ implements thien_ae {
         thien_dm thien_dm2 = this.a;
         thien_dm2.a.c();
         thien_dm2 = this.a;
-        thien_dm2.a.b(thien_as.aS());
+        thien_dm2.a.b(TextConstant.pleaseWaitForTheReturnActiveSms());
     }
 }

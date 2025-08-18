@@ -49,7 +49,7 @@ extends thien_an {
         this.J = new thien_at();
         this.J.a(thien_ap.A, n, thien_ap.C, thien_w.f + 6);
         this.J.e(0);
-        this.K = new thien_ai(String.valueOf(thien_as.G()) + ":", thien_ap.z, n += this.J.t + 7, thien_w.f);
+        this.K = new thien_ai(String.valueOf(TextConstant.password()) + ":", thien_ap.z, n += this.J.t + 7, thien_w.f);
         this.K.s = thien_ap.B;
         this.L = new thien_at();
         this.L.a(thien_ap.A, n, thien_ap.C, thien_w.f + 6);
@@ -63,8 +63,8 @@ extends thien_an {
         this.N.s = thien_ap.B;
         this.O = new thien_z(new String[]{"@yahoo", "@ymail", "@rocketmail"}, thien_ap.A, n, thien_ap.C, thien_w.f + 6);
         this.O.c(Xuka.readDomainYahoo());
-        int n3 = thien_an.e - (thien_w.a(thien_as.I(), thien_w.j) + 13 + 4) >> 1;
-        this.M = new thien_x(thien_as.I(), n3, n += 6 + this.O.t, thien_w.a(thien_as.I(), thien_w.j) + 13 + 4, thien_w.f + 4);
+        int n3 = thien_an.e - (thien_w.a(TextConstant.invisible(), thien_w.j) + 13 + 4) >> 1;
+        this.M = new thien_x(TextConstant.invisible(), n3, n += 6 + this.O.t, thien_w.a(TextConstant.invisible(), thien_w.j) + 13 + 4, thien_w.f + 4);
         this.M.a = Xuka.readFlag("statusYahoo", false);
         int cfr_ignored_0 = this.M.t;
         this.H = new thien_at();
@@ -76,10 +76,10 @@ extends thien_an {
         this.w.c = true;
         this.w.d = Xuka.readFlag("hideOffline", true);
         this.G = new Vector();
-        this.G.addElement(new thien_ab(thien_as.ay(), new thien_gq(this)));
-        this.G.addElement(new thien_ab(thien_as.ar(), new thien_gv(this)));
-        this.G.addElement(new thien_ab(thien_as.aY(), new thien_gw(this)));
-        this.G.addElement(new thien_ab(thien_as.aL(), new thien_gx(this)));
+        this.G.addElement(new thien_ab(TextConstant.showHideOffline(), new thien_gq(this)));
+        this.G.addElement(new thien_ab(TextConstant.status(), new thien_gv(this)));
+        this.G.addElement(new thien_ab(TextConstant.inviteYahoo(), new thien_gw(this)));
+        this.G.addElement(new thien_ab(TextConstant.signOutYahoo(), new thien_gx(this)));
     }
 
     public final void e() {
@@ -112,8 +112,8 @@ extends thien_an {
             this.c(this.w);
         } else {
             if (this.S == null) {
-                this.S = new thien_ab(thien_as.H(), new thien_gz(this));
-                this.T = new thien_ab(thien_as.ae(), new thien_gr(this));
+                this.S = new thien_ab(TextConstant.signIn(), new thien_gz(this));
+                this.T = new thien_ab(TextConstant.close(), new thien_gr(this));
             }
             this.m = this.S;
             this.k = this.T;
@@ -241,7 +241,7 @@ extends thien_an {
 
     public final void h() {
         Xuka.setXpamFlag(x);
-        thien_di.b().a(String.valueOf(thien_as.bf()) + "?", new thien_gs(this));
+        thien_di.b().a(String.valueOf(TextConstant.inviteYourYahoo()) + "?", new thien_gs(this));
     }
 
     static void a(thien_gp thien_gp2) {
@@ -256,15 +256,15 @@ extends thien_an {
         if (thien_gp2.V == null) {
             System.gc();
             thien_gp2.V = new thien_ap();
-            thien_gp2.V.g = thien_as.ar();
+            thien_gp2.V.g = TextConstant.status();
             thien_ap cfr_ignored_0 = thien_gp2.V;
             thien_ap.e(70, 150);
             thien_gp2.V.x += 20;
-            thien_gp2.W = thien_y.a(thien_gp2.V, thien_as.ar(), new String[]{thien_as.aQ(), thien_as.aR()});
-            thien_gp2.X = thien_y.b(thien_gp2.V, thien_as.as(), 0, -1);
+            thien_gp2.W = thien_y.a(thien_gp2.V, TextConstant.status(), new String[]{TextConstant.available(), TextConstant.invisible2()});
+            thien_gp2.X = thien_y.b(thien_gp2.V, TextConstant.statusMessage(), 0, -1);
             thien_gp2.V.c(thien_gp2.W);
             thien_gp2.V.m = new thien_ab("OK", new thien_gt(thien_gp2));
-            thien_gp2.V.k = new thien_ab(thien_as.z(), new thien_gu(thien_gp2));
+            thien_gp2.V.k = new thien_ab(TextConstant.cancel(), new thien_gu(thien_gp2));
         }
         thien_gp2.W.c(z == 0 ? 0 : 1);
         thien_di.b().b(thien_gp2.V);

@@ -9,7 +9,7 @@ implements thien_ae {
     }
 
     public final void a() {
-        if (this.a.m.a.equals(thien_as.bz())) {
+        if (this.a.m.a.equals(TextConstant.ready())) {
             int n = 0;
             while (n < this.a.F.length) {
                 if (this.a.F[n].a.equals(thien_ba.z)) {

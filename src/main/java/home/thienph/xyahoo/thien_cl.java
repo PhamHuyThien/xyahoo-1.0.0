@@ -8,7 +8,7 @@ extends thien_ap {
         this.p = true;
         this.g = string;
         this.D = thien_y.b(this, string2, 0, -1);
-        this.k = new thien_ab(thien_as.ae(), new thien_cm(this));
+        this.k = new thien_ab(TextConstant.close(), new thien_cm(this));
         this.c(this.D);
     }
 

@@ -194,8 +194,8 @@ public final class thien_di implements thien_et {
          var1.setClip(-1000, -1000, 2000, 2000);
          thien_an.c(var1);
          var1.setColor(16777215);
-         thien_w.a(thien_w.d).a(thien_as.P(), 4, GameCanvas.screenHeight - (g >> 1) - (thien_w.f >> 1), var1);
-         thien_w.a(thien_w.d).a(thien_as.z(), this.U - 4, GameCanvas.screenHeight - (g >> 1) - (thien_w.f >> 1), 1, var1, thien_w.j, thien_w.f);
+         thien_w.a(thien_w.d).a(TextConstant.select(), 4, GameCanvas.screenHeight - (g >> 1) - (thien_w.f >> 1), var1);
+         thien_w.a(thien_w.d).a(TextConstant.cancel(), this.U - 4, GameCanvas.screenHeight - (g >> 1) - (thien_w.f >> 1), 1, var1, thien_w.j, thien_w.f);
       }
    }
 
@@ -378,10 +378,10 @@ public final class thien_di implements thien_et {
 
    public final void d() {
       if (thien_hc.d) {
-         this.a(thien_as.bv(), null, null, new thien_ab(thien_as.ae(), new thien_dj(this))).a(true);
+         this.a(TextConstant.checkingConnection(), null, null, new thien_ab(TextConstant.close(), new thien_dj(this))).a(true);
       } else if (this.aK) {
          this.c();
-         this.a(thien_as.T(), null, null, new thien_ab(thien_as.ae(), new thien_du(this)));
+         this.a(TextConstant.connectionError(), null, null, new thien_ab(TextConstant.close(), new thien_du(this)));
       }
    }
 
@@ -555,8 +555,8 @@ public final class thien_di implements thien_et {
          thien_an.c(var15);
          var15.setColor(16777215);
          var20 = GameCanvas.screenHeight - (g >> 1) - (thien_w.f >> 1) + (thien_w.a ? 0 : 1);
-         thien_w.a(thien_w.d).a(thien_as.P(), 4, var20, var15);
-         thien_w.a(thien_w.d).a(thien_as.z(), var2.U - 4, var20, 1, var15, thien_w.j, thien_w.f);
+         thien_w.a(thien_w.d).a(TextConstant.select(), 4, var20, var15);
+         thien_w.a(thien_w.d).a(TextConstant.cancel(), var2.U - 4, var20, 1, var15, thien_w.j, thien_w.f);
       } else if (this.ao) {
          this.b(var1);
       }
@@ -657,11 +657,11 @@ public final class thien_di implements thien_et {
    }
 
    public final thien_ad a(String var1) {
-      return this.a(var1, null, this.m(thien_as.z()), null);
+      return this.a(var1, null, this.m(TextConstant.cancel()), null);
    }
 
    public final thien_ad a(String var1, thien_ae var2) {
-      return this.a(thien_w.b(var1, GameCanvas.screenWidth - 30, thien_w.j), new thien_ab("OK", var2), new thien_ab("", var2), this.m(thien_as.z()));
+      return this.a(thien_w.b(var1, GameCanvas.screenWidth - 30, thien_w.j), new thien_ab("OK", var2), new thien_ab("", var2), this.m(TextConstant.cancel()));
    }
 
    public final void b(String var1, thien_ae var2) {
@@ -1455,7 +1455,7 @@ public final class thien_di implements thien_et {
 
    public final void m() {
       this.c();
-      this.a(thien_as.Q(), null, new thien_ab("OK", new thien_eb(this)), null);
+      this.a(TextConstant.registrationError(), null, new thien_ab("OK", new thien_eb(this)), null);
    }
 
    public final void n() {
@@ -1471,14 +1471,14 @@ public final class thien_di implements thien_et {
 
    public final void o() {
       this.c();
-      this.b(thien_as.S());
+      this.b(TextConstant.wrongNameOrPassword());
    }
 
    public final void p() {
       this.aK = true;
       if (GameCanvas.gameState == 1) {
          this.c();
-         this.a(thien_as.T(), null, null, new thien_ab(thien_as.ae(), new thien_ec(this)));
+         this.a(TextConstant.connectionError(), null, null, new thien_ab(TextConstant.close(), new thien_ec(this)));
       }
    }
 
@@ -1504,7 +1504,7 @@ public final class thien_di implements thien_et {
       switch (var3) {
          case 1:
             if (this.j.x.a(var1, var2)) {
-               String var9 = var2 == 1 ? thien_as.az() : thien_as.aA();
+               String var9 = var2 == 1 ? TextConstant.isOnline() : TextConstant.isOffline();
                int var11 = this.aD instanceof thien_ew ? 2 : 0;
                this.a(var1 + var9, var2 == 1 ? thien_b.a[1] : thien_b.a[0], var11);
 
@@ -1523,7 +1523,7 @@ public final class thien_di implements thien_et {
          case 2:
             try {
                if (this.k != null && this.k.w != null && this.k.w.a(var1, var2)) {
-                  String var8 = var2 == 1 ? thien_as.az() : thien_as.aA();
+                  String var8 = var2 == 1 ? TextConstant.isOnline() : TextConstant.isOffline();
                   int var4 = this.aD instanceof thien_ew ? 2 : 0;
                   this.a("Y! " + var1 + var8, var2 == 1 ? thien_b.a[1] : thien_b.a[0], var4);
 
@@ -1552,15 +1552,15 @@ public final class thien_di implements thien_et {
       this.F();
       this.b(this.l);
       this.c();
-      this.a(thien_as.U(), (Image)null, 0);
+      this.a(TextConstant.disconnected(), (Image)null, 0);
    }
 
    public final void g(String var1) {
-      this.b(thien_as.V() + var1);
+      this.b(TextConstant.addFriendFailed() + var1);
    }
 
    public final void h(String var1) {
-      this.b(var1 + thien_as.W());
+      this.b(var1 + TextConstant.refusedToBeAdded());
    }
 
    public final void a(int var1, thien_r var2, String var3) {
@@ -1576,11 +1576,11 @@ public final class thien_di implements thien_et {
       this.j.x.a(var1, var2);
       this.j.x.a(var1, var3, 1);
       a(var5, false);
-      this.b(thien_as.X() + var1 + thien_as.Y());
+      this.b(TextConstant.add2() + var1 + TextConstant.success());
    }
 
    public final void r() {
-      this.b(thien_as.al());
+      this.b(TextConstant.cannotCreateConference());
    }
 
    public final void c(String var1, String var2) {
@@ -1607,7 +1607,7 @@ public final class thien_di implements thien_et {
          this.aC = var2.length;
 
          for (int var8 = 0; var8 < this.aC; var8++) {
-            var4.z.a(thien_as.at() + var2[var8] + "...", 1);
+            var4.z.a(TextConstant.inviting() + var2[var8] + "...", 1);
          }
 
          var4.z.b();
@@ -1620,10 +1620,10 @@ public final class thien_di implements thien_et {
    public final void c(String var1, String var2, String var3) {
       if (!n(var1)) {
          this.a(
-            new String[]{var1 + thien_as.am(), var3},
-            new thien_ab(thien_as.z(), new thien_ed(this)),
+            new String[]{var1 + TextConstant.inviteConference2(), var3},
+            new thien_ab(TextConstant.cancel(), new thien_ed(this)),
             new thien_ab("OK", new thien_ee(this, var2, var1, var3)),
-            new thien_ab(thien_as.z(), new thien_ef(this, var2, var1))
+            new thien_ab(TextConstant.cancel(), new thien_ef(this, var2, var1))
          );
       }
    }
@@ -1635,7 +1635,7 @@ public final class thien_di implements thien_et {
          thien_an var4;
          if ((var4 = (thien_an)this.L.elementAt(var3)).h.equals(var2)) {
             thien_ew var5;
-            (var5 = (thien_ew)var4).z.a(var1 + thien_as.ao(), 2);
+            (var5 = (thien_ew)var4).z.a(var1 + TextConstant.hasJoined(), 2);
             var5.z.b();
          }
       }
@@ -1648,7 +1648,7 @@ public final class thien_di implements thien_et {
          thien_an var4;
          if ((var4 = (thien_an)this.L.elementAt(var3)).h.equals(var2)) {
             thien_ew var5;
-            (var5 = (thien_ew)var4).z.a(var1 + thien_as.aq(), 2);
+            (var5 = (thien_ew)var4).z.a(var1 + TextConstant.hasRefused(), 2);
             var5.z.b();
          }
       }
@@ -1661,7 +1661,7 @@ public final class thien_di implements thien_et {
          thien_an var4;
          if ((var4 = (thien_an)this.L.elementAt(var3)).h.equals(var2)) {
             thien_ew var5;
-            (var5 = (thien_ew)var4).z.a(var1 + thien_as.ap(), 2);
+            (var5 = (thien_ew)var4).z.a(var1 + TextConstant.hasLeft(), 2);
             var5.z.b();
          }
       }
@@ -1705,7 +1705,7 @@ public final class thien_di implements thien_et {
             this.aC = var2.length;
 
             for (int var6 = 0; var6 < this.aC; var6++) {
-               var5.z.a(var2[var6] + thien_as.ao(), 1);
+               var5.z.a(var2[var6] + TextConstant.hasJoined(), 1);
             }
 
             var5.z.b();
@@ -1717,16 +1717,16 @@ public final class thien_di implements thien_et {
    public final void s() {
       this.k.C = false;
       this.k.a(false);
-      this.a(thien_as.aw(), (Image)null, 0);
+      this.a(TextConstant.disconnectYahoo(), (Image)null, 0);
    }
 
    public final void t() {
       this.k.a(false);
-      this.b(thien_as.ax());
+      this.b(TextConstant.wrongYahooIdOrPassword());
    }
 
    public final void i(String var1) {
-      this.b(var1, thien_as.b[0]);
+      this.b(var1, TextConstant.buzz[0]);
       this.a();
    }
 
@@ -1735,12 +1735,12 @@ public final class thien_di implements thien_et {
    }
 
    public final void j(String var1) {
-      this.a(var1, thien_as.s());
+      this.a(var1, TextConstant.buzz());
       this.a();
    }
 
    public final void g(String var1, String var2) {
-      this.a(thien_as.aB() + var1, new thien_ab(thien_as.aC(), new thien_eg(this, var2)), null, new thien_ab(thien_as.z(), new thien_dk(this)));
+      this.a(TextConstant.updateNewVersionXYahoo() + var1, new thien_ab(TextConstant.download(), new thien_eg(this, var2)), null, new thien_ab(TextConstant.cancel(), new thien_dk(this)));
    }
 
    public final String v() {
@@ -1758,10 +1758,10 @@ public final class thien_di implements thien_et {
       thien_dm var5 = new thien_dm(this, var3, var4);
       String var7 = var3 + Xuka.refCode;
       this.a(
-         thien_w.b(var1 + thien_as.R() + var7 + " => " + var2.substring(6), GameCanvas.screenWidth - 30, thien_w.j),
+         thien_w.b(var1 + TextConstant.syntax() + var7 + " => " + var2.substring(6), GameCanvas.screenWidth - 30, thien_w.j),
          new thien_ab("OK", var5),
          null,
-         new thien_ab(thien_as.z(), var4)
+         new thien_ab(TextConstant.cancel(), var4)
       );
    }
 
@@ -1843,7 +1843,7 @@ public final class thien_di implements thien_et {
 
       t.removeAllElements();
       MessageHandler.d();
-      int var1 = thien_as.a;
+      int var1 = TextConstant.languageId;
       Packet var3 = new Packet(59, 14);
       MessageHandler.writeInt(var1, var3);
       thien_hc.a(var3);
@@ -1871,7 +1871,7 @@ public final class thien_di implements thien_et {
    public final void a(thien_s var1, int var2) {
       a(var2, false);
       a(var1, false, thien_ff.y);
-      this.j.x.m = thien_w.b(thien_as.aX(), GameCanvas.screenWidth - 40, thien_w.j);
+      this.j.x.m = thien_w.b(TextConstant.welcomeToXYahoo(), GameCanvas.screenWidth - 40, thien_w.j);
       this.j.x.a(var1, -1);
       this.c();
    }
@@ -1901,27 +1901,27 @@ public final class thien_di implements thien_et {
 
    public final void k(String var1) {
       thien_ap var2;
-      (var2 = new thien_ap()).g = thien_as.y();
-      thien_y.a(var2, var1 + thien_as.be());
-      thien_at var3 = thien_y.a(var2, thien_as.x(), 0);
+      (var2 = new thien_ap()).g = TextConstant.addFriend();
+      thien_y.a(var2, var1 + TextConstant.wantToAddYou());
+      thien_at var3 = thien_y.a(var2, TextConstant.toNewGroup(), 0);
       thien_z var4;
-      (var4 = thien_y.a(var2, thien_as.aI(), this.j.x.i())).a(new thien_dq(this, var4, var3));
+      (var4 = thien_y.a(var2, TextConstant.orExisting(), this.j.x.i())).a(new thien_dq(this, var4, var3));
       if (var4.a != null && var4.a.length != 0) {
          var3.a(var4.b());
       } else {
          var3.a("Friends");
       }
 
-      var2.k = new thien_ab(thien_as.z(), new thien_dr(this, var3, var1, var2));
+      var2.k = new thien_ab(TextConstant.cancel(), new thien_dr(this, var3, var1, var2));
       var2.m = new thien_ab("OK", new thien_ds(this, var3, var1, var2));
-      var2.l = new thien_ab(thien_as.ae(), new thien_dt(this, var2));
+      var2.l = new thien_ab(TextConstant.close(), new thien_dt(this, var2));
       var2.c((thien_ac)var2.j.elementAt(0));
       this.e(var2);
    }
 
    public final void a(Vector var1) {
       thien_an var2;
-      (var2 = new thien_an()).g = thien_as.bj();
+      (var2 = new thien_an()).g = TextConstant.ignoreList();
       int var3;
       if ((var3 = GameCanvas.screenWidth - 30) > 150) {
          var3 = 180;
@@ -1932,7 +1932,7 @@ public final class thien_di implements thien_et {
       }
 
       int var4 = GameCanvas.screenWidth - var3 >> 1;
-      thien_ai var6 = new thien_ai(thien_as.bj(), var4, 10, thien_w.f);
+      thien_ai var6 = new thien_ai(TextConstant.ignoreList(), var4, 10, thien_w.f);
       int var5 = 10 + 1 + var6.t;
       String[] var7;
       if (var1.size() == 0) {
@@ -1947,12 +1947,12 @@ public final class thien_di implements thien_et {
 
       thien_z var16 = new thien_z(var7, var4, var5, var3, thien_w.f + 6);
       var5 += 8 + var16.t;
-      thien_ai var9 = new thien_ai(thien_as.bk(), var4, var5, thien_w.f);
+      thien_ai var9 = new thien_ai(TextConstant.typeIdToAddDelete(), var4, var5, thien_w.f);
       var5 += 3 + var6.t;
       thien_at var15;
       (var15 = new thien_at()).a(var4, var5, var3, thien_w.f + 6);
       var5 += 10 + var15.t;
-      thien_v var10 = new thien_v(thien_as.v() + "/" + thien_as.ag(), var4, var5, var3, thien_w.f + 6);
+      thien_v var10 = new thien_v(TextConstant.add() + "/" + TextConstant.delete(), var4, var5, var3, thien_w.f + 6);
       var16.b = new thien_dv(this, var16, var15);
       String var11;
       if (!(var11 = var16.b()).equals("---")) {
@@ -1966,7 +1966,7 @@ public final class thien_di implements thien_et {
       var2.a(var15);
       var2.a(var10);
       var2.c(var16);
-      var2.k = new thien_ab(thien_as.z(), new thien_dx(this, var2));
+      var2.k = new thien_ab(TextConstant.cancel(), new thien_dx(this, var2));
       this.b(var2);
       this.j();
       this.c();
@@ -1974,9 +1974,9 @@ public final class thien_di implements thien_et {
 
    public final void b(boolean var1) {
       if (var1) {
-         this.b(thien_as.bg());
+         this.b(TextConstant.changeSuccess());
       } else {
-         this.b(thien_as.bh());
+         this.b(TextConstant.wrongOldPassword());
       }
    }
 
@@ -2015,7 +2015,7 @@ public final class thien_di implements thien_et {
    }
 
    public final void l(String var1) {
-      this.a(var1 + thien_as.br(), new thien_ab("OK", new thien_dy(this, var1)), null, new thien_ab(thien_as.z(), new thien_dz(this, var1)));
+      this.a(var1 + TextConstant.addYouHisFriendlist(), new thien_ab("OK", new thien_dy(this, var1)), null, new thien_ab(TextConstant.cancel(), new thien_dz(this, var1)));
    }
 
    public final void a(String[] var1, int[] var2) {
@@ -2077,11 +2077,11 @@ public final class thien_di implements thien_et {
       this.j.x.b(var1);
       a(this.j.x.k, false, thien_ff.y);
       a(var2, false);
-      this.b(thien_as.an());
+      this.b(TextConstant.deleteSuccess());
    }
 
    public final void a(int var1, String var2, String var3) {
-      this.b(thien_as.aM());
+      this.b(TextConstant.moveIdSuccess());
       this.j.x.b(var2, var3);
       a(this.j.x.k, false, thien_ff.y);
       a(var1, false);
@@ -2089,7 +2089,7 @@ public final class thien_di implements thien_et {
 
    public final void b(int var1, String var2, String var3) {
       this.j.x.a(var2, var3);
-      this.b(thien_as.aN());
+      this.b(TextConstant.renameGroupSuccess());
       a(this.j.x.k, false, thien_ff.y);
       a(var1, false);
    }
@@ -2137,7 +2137,7 @@ public final class thien_di implements thien_et {
 
       for (int var8 = 0; var8 < thien_ba.S.F.length; var8++) {
          if (thien_ba.S.F[var8].a.equals(var2)) {
-            thien_ba.S.F[var8].d = thien_as.h() + var7;
+            thien_ba.S.F[var8].d = TextConstant.go() + var7;
             thien_ba.S.F[var8].h = true;
          }
       }
@@ -2150,7 +2150,7 @@ public final class thien_di implements thien_et {
    public final void a(String var1, String var2, String var3, String[] var4, int var5) {
       if (var2.equals(thien_ba.z)) {
          if (var5 == 1) {
-            this.a(thien_as.f(), (Image)null, 1);
+            this.a(TextConstant.beKickByHost(), (Image)null, 1);
          }
 
          thien_ba.e();
@@ -2275,7 +2275,7 @@ public final class thien_di implements thien_et {
    }
 
    public final void a(long var1) {
-      this.a(thien_as.bD() + var1 + " xuxu", (Image)null, 1);
+      this.a(TextConstant.yourMoneys() + var1 + " xuxu", (Image)null, 1);
    }
 
    public final void b(String var1, String var2, int var3) {
@@ -2317,7 +2317,7 @@ public final class thien_di implements thien_et {
 
       thien_ba var5 = thien_ba.d(1);
       if (this.L.contains(var5) && thien_ba.x) {
-         this.b(thien_as.m());
+         this.b(TextConstant.pleaseQuitYourCurrentGame());
       } else {
          thien_ba.ai = var1;
          thien_ba.S.g = var4;

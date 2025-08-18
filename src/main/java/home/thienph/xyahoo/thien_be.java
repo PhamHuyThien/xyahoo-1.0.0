@@ -9,7 +9,7 @@ implements thien_ae {
     }
 
     public final void a() {
-        if (this.a.m.a.equals(thien_as.k())) {
+        if (this.a.m.a.equals(TextConstant.playNow())) {
             MessageHandler.c(thien_ba.B, thien_ba.z);
         }
     }

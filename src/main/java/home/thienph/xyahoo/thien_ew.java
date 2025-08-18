@@ -28,15 +28,15 @@ public final class thien_ew extends thien_an {
       this.a(this.A);
       this.c(this.A);
       this.E = new Vector();
-      this.E.addElement(new thien_ab(thien_as.F(), new thien_ex(this)));
-      this.E.addElement(new thien_ab(thien_as.s(), new thien_ey(this, var2)));
+      this.E.addElement(new thien_ab(TextConstant.smileys(), new thien_ex(this)));
+      this.E.addElement(new thien_ab(TextConstant.buzz(), new thien_ey(this, var2)));
       if (var3) {
-         this.E.addElement(new thien_ab(thien_as.av(), new thien_ez(this)));
+         this.E.addElement(new thien_ab(TextConstant.invite(), new thien_ez(this)));
       }
 
       this.E.addElement(new thien_ab("Copy", new thien_fa(this)));
-      this.E.addElement(new thien_ab(thien_as.bn(), new thien_fb(this)));
-      this.E.addElement(new thien_ab(thien_as.ae(), new thien_fc(this, var3)));
+      this.E.addElement(new thien_ab(TextConstant.paste(), new thien_fb(this)));
+      this.E.addElement(new thien_ab(TextConstant.close(), new thien_fc(this, var3)));
       this.D = new thien_am(this.E);
       super.k = new thien_ab("Menu", new thien_fd(this));
       super.m = new thien_ab("Chat", null);

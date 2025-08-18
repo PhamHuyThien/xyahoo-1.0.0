@@ -18,9 +18,9 @@ extends thien_an {
         this.c(this.w);
         this.l = new thien_ab("T\u00ecm ph\u00f2ng", new thien_eo(this));
         this.A = new Vector();
-        this.A.addElement(new thien_ab(thien_as.bB(), new thien_ep(this)));
+        this.A.addElement(new thien_ab(TextConstant.update(), new thien_ep(this)));
         this.A.addElement(z);
-        this.A.addElement(new thien_ab(thien_as.ae(), new thien_eq(this)));
+        this.A.addElement(new thien_ab(TextConstant.close(), new thien_eq(this)));
         this.y = new thien_am(this.A);
         this.k = new thien_ab("Menu", new thien_er(this));
     }

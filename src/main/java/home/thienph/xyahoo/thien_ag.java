@@ -51,7 +51,7 @@ extends thien_ac {
 
     public thien_ag() {
         this.o = false;
-        this.y = new thien_ab(thien_as.P(), new thien_ah(this));
+        this.y = new thien_ab(TextConstant.select(), new thien_ah(this));
     }
 
     public final boolean b(int n) {
