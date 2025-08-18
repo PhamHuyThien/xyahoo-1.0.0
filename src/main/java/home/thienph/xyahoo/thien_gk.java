@@ -1,27 +1,27 @@
 package home.thienph.xyahoo;
 
-final class thien_gk implements thien_ae {
-   private final thien_at a;
-   private final thien_at b;
-   private final thien_an c;
+final class thien_gk implements IAction {
+   private final TextField a;
+   private final TextField b;
+   private final Screen c;
 
-   thien_gk(thien_ff var1, thien_at var2, thien_at var3, thien_an var4) {
+   thien_gk(thien_ff var1, TextField var2, TextField var3, Screen var4) {
       this.a = var2;
       this.b = var3;
       this.c = var4;
    }
 
-   public final void a() {
-      String var1 = this.a.c().trim().toLowerCase();
-      String var2 = this.b.c().trim();
+   public final void action() {
+      String var1 = this.a.getText().trim().toLowerCase();
+      String var2 = this.b.getText().trim();
       String var13;
       boolean var15;
       if (var1.equals("")) {
-         this.c.c(this.a);
+         this.c.selectControl(this.a);
       } else if (var2.equals("")) {
-         this.c.c(this.b);
+         this.c.selectControl(this.b);
       } else {
-         thien_s var10000 = thien_di.b().j.x.b();
+         thien_s var10000 = thien_di.getInstance().j.x.b();
          String var4 = var2;
          thien_s var3 = var10000;
          int var5 = var10000.a.size() - 1;
@@ -46,7 +46,7 @@ final class thien_gk implements thien_ae {
             var2 = var8;
          }
 
-         var10000 = thien_di.b().j.x.b();
+         var10000 = thien_di.getInstance().j.x.b();
          var4 = var1;
          var3 = var10000;
          var5 = var10000.a.size() - 1;
@@ -70,11 +70,11 @@ final class thien_gk implements thien_ae {
          }
 
          if (var15) {
-            thien_di.b().b(TextConstant.thisIdAlreadyAdded());
+            thien_di.getInstance().b(TextConstant.thisIdAlreadyAdded());
          } else {
             MessageHandler.b(var1, var2, 1);
-            thien_di.b().c(this.c);
-            thien_di.b().d(thien_di.e);
+            thien_di.getInstance().c(this.c);
+            thien_di.getInstance().d(thien_di.e);
          }
       }
    }

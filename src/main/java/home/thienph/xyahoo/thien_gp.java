@@ -5,7 +5,7 @@ import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 
 public final class thien_gp
-extends thien_an {
+extends Screen {
     public thien_b w;
     public static String x;
     public static String y;
@@ -16,70 +16,70 @@ extends thien_an {
     private boolean F;
     private Vector G;
     thien_am B;
-    private thien_at H;
+    private TextField H;
     public boolean C;
     private thien_ai I;
-    private thien_at J;
+    private TextField J;
     private thien_ai K;
-    private thien_at L;
+    private TextField L;
     private thien_x M;
     private thien_ai N;
     private thien_z O;
     private int P;
     private int Q;
-    private thien_ab R;
-    private thien_ab S;
-    private thien_ab T;
+    private UIAction R;
+    private UIAction S;
+    private UIAction T;
     private int U;
-    private thien_ap V;
+    private FormScreen V;
     private thien_z W;
-    private thien_at X;
+    private TextField X;
 
     public thien_gp() {
         String string = Xuka.d();
         String string2 = Xuka.e();
-        this.g = "Yahoo!";
-        int n = thien_ca.D.H.a[0].getHeight();
-        this.P = thien_an.e - thien_ca.D.H.a[0].getWidth() >> 1;
+        this.title = "Yahoo!";
+        int n = thien_ca.D.H.images[0].getHeight();
+        this.P = Screen.e - thien_ca.D.H.images[0].getWidth() >> 1;
         int n2 = (thien_w.f + 6 << 2) + 28 + n + 5;
-        this.Q = n2 <= thien_an.f - thien_di.g ? thien_di.f - 10 + (thien_an.f - thien_di.g - n2 >> 1) : thien_di.f + 5;
+        this.Q = n2 <= Screen.formHeight - thien_di.g ? thien_di.f - 10 + (Screen.formHeight - thien_di.g - n2 >> 1) : thien_di.f + 5;
         n = this.Q + n - 3;
-        this.I = new thien_ai("Yahoo! ID:", thien_ap.z, n, thien_w.f);
-        this.I.s = thien_ap.B;
-        this.J = new thien_at();
-        this.J.a(thien_ap.A, n, thien_ap.C, thien_w.f + 6);
-        this.J.e(0);
-        this.K = new thien_ai(String.valueOf(TextConstant.password()) + ":", thien_ap.z, n += this.J.t + 7, thien_w.f);
-        this.K.s = thien_ap.B;
-        this.L = new thien_at();
-        this.L.a(thien_ap.A, n, thien_ap.C, thien_w.f + 6);
-        this.L.e(2);
-        this.L.a = true;
-        this.J.a(string);
-        this.J.g = -5;
-        this.L.a(string2);
-        this.L.g = -5;
-        this.N = new thien_ai("Domain:", thien_ap.z, n += this.L.t + 7, thien_w.f);
-        this.N.s = thien_ap.B;
-        this.O = new thien_z(new String[]{"@yahoo", "@ymail", "@rocketmail"}, thien_ap.A, n, thien_ap.C, thien_w.f + 6);
+        this.I = new thien_ai("Yahoo! ID:", FormScreen.formXOffset, n, thien_w.f);
+        this.I.width = FormScreen.formMarginLeft;
+        this.J = new TextField();
+        this.J.setBounds(FormScreen.formStartX, n, FormScreen.formWidth, thien_w.f + 6);
+        this.J.setInputType(0);
+        this.K = new thien_ai(String.valueOf(TextConstant.password()) + ":", FormScreen.formXOffset, n += this.J.height + 7, thien_w.f);
+        this.K.width = FormScreen.formMarginLeft;
+        this.L = new TextField();
+        this.L.setBounds(FormScreen.formStartX, n, FormScreen.formWidth, thien_w.f + 6);
+        this.L.setInputType(2);
+        this.L.isShiftMode = true;
+        this.J.setText(string);
+        this.J.lineSpacing = -5;
+        this.L.setText(string2);
+        this.L.lineSpacing = -5;
+        this.N = new thien_ai("Domain:", FormScreen.formXOffset, n += this.L.height + 7, thien_w.f);
+        this.N.width = FormScreen.formMarginLeft;
+        this.O = new thien_z(new String[]{"@yahoo", "@ymail", "@rocketmail"}, FormScreen.formStartX, n, FormScreen.formWidth, thien_w.f + 6);
         this.O.c(Xuka.readDomainYahoo());
-        int n3 = thien_an.e - (thien_w.a(TextConstant.invisible(), thien_w.j) + 13 + 4) >> 1;
-        this.M = new thien_x(TextConstant.invisible(), n3, n += 6 + this.O.t, thien_w.a(TextConstant.invisible(), thien_w.j) + 13 + 4, thien_w.f + 4);
+        int n3 = Screen.e - (thien_w.a(TextConstant.invisible(), thien_w.j) + 13 + 4) >> 1;
+        this.M = new thien_x(TextConstant.invisible(), n3, n += 6 + this.O.height, thien_w.a(TextConstant.invisible(), thien_w.j) + 13 + 4, thien_w.f + 4);
         this.M.a = Xuka.readFlag("statusYahoo", false);
-        int cfr_ignored_0 = this.M.t;
-        this.H = new thien_at();
-        this.H.a = true;
-        this.H.a(0, thien_an.f - thien_di.g - thien_w.f - 11, thien_an.e - 6, thien_w.f + 6);
-        this.w = new thien_b(1, 1, thien_an.e - 3, thien_an.f - 2 - thien_di.g, true);
-        this.a(this.w);
-        this.c(this.w);
+        int cfr_ignored_0 = this.M.height;
+        this.H = new TextField();
+        this.H.isShiftMode = true;
+        this.H.setBounds(0, Screen.formHeight - thien_di.g - thien_w.f - 11, Screen.e - 6, thien_w.f + 6);
+        this.w = new thien_b(1, 1, Screen.e - 3, Screen.formHeight - 2 - thien_di.g, true);
+        this.addControl(this.w);
+        this.selectControl(this.w);
         this.w.c = true;
         this.w.d = Xuka.readFlag("hideOffline", true);
         this.G = new Vector();
-        this.G.addElement(new thien_ab(TextConstant.showHideOffline(), new thien_gq(this)));
-        this.G.addElement(new thien_ab(TextConstant.status(), new thien_gv(this)));
-        this.G.addElement(new thien_ab(TextConstant.inviteYahoo(), new thien_gw(this)));
-        this.G.addElement(new thien_ab(TextConstant.signOutYahoo(), new thien_gx(this)));
+        this.G.addElement(new UIAction(TextConstant.showHideOffline(), new thien_gq(this)));
+        this.G.addElement(new UIAction(TextConstant.status(), new thien_gv(this)));
+        this.G.addElement(new UIAction(TextConstant.inviteYahoo(), new thien_gw(this)));
+        this.G.addElement(new UIAction(TextConstant.signOutYahoo(), new thien_gx(this)));
     }
 
     public final void e() {
@@ -88,7 +88,7 @@ extends thien_an {
             MessageHandler.b(x, 2);
             this.a(false);
         }
-        thien_di.c.c(this.V);
+        thien_di.instance.c(this.V);
         this.V = null;
     }
 
@@ -97,61 +97,61 @@ extends thien_an {
         if (bl) {
             if (this.B == null) {
                 this.B = new thien_am(this.G);
-                this.R = new thien_ab("Menu", new thien_gy(this));
+                this.R = new UIAction("Menu", new thien_gy(this));
             }
-            this.k = this.R;
-            this.m = null;
-            this.b(this.I);
-            this.b(this.J);
-            this.b(this.K);
-            this.b(this.L);
-            this.b(this.M);
-            this.b(this.N);
-            this.b(this.O);
-            this.a(this.w);
-            this.c(this.w);
+            this.leftCommand = this.R;
+            this.centerCommand = null;
+            this.removeControl(this.I);
+            this.removeControl(this.J);
+            this.removeControl(this.K);
+            this.removeControl(this.L);
+            this.removeControl(this.M);
+            this.removeControl(this.N);
+            this.removeControl(this.O);
+            this.addControl(this.w);
+            this.selectControl(this.w);
         } else {
             if (this.S == null) {
-                this.S = new thien_ab(TextConstant.signIn(), new thien_gz(this));
-                this.T = new thien_ab(TextConstant.close(), new thien_gr(this));
+                this.S = new UIAction(TextConstant.signIn(), new thien_gz(this));
+                this.T = new UIAction(TextConstant.close(), new thien_gr(this));
             }
-            this.m = this.S;
-            this.k = this.T;
+            this.centerCommand = this.S;
+            this.leftCommand = this.T;
             this.i();
-            this.b(this.w);
-            this.a(this.I);
-            this.a(this.J);
-            this.a(this.K);
-            this.a(this.L);
-            this.a(this.N);
-            this.a(this.O);
-            this.a(this.M);
-            this.c(this.J);
+            this.removeControl(this.w);
+            this.addControl(this.I);
+            this.addControl(this.J);
+            this.addControl(this.K);
+            this.addControl(this.L);
+            this.addControl(this.N);
+            this.addControl(this.O);
+            this.addControl(this.M);
+            this.selectControl(this.J);
         }
-        this.q = 0;
-        this.r = 0;
+        this.scrollTargetY = 0;
+        this.scrollY = 0;
         thien_gp thien_gp2 = this;
-        thien_gp2.w.f();
+        thien_gp2.w.handleFocus();
         System.gc();
     }
 
-    public final void b(Graphics graphics) {
+    public final void drawBackground(Graphics graphics) {
         if (!this.F) {
-            graphics.drawImage(thien_ca.D.H.a[0], this.P, this.Q, 0);
+            graphics.drawImage(thien_ca.D.H.images[0], this.P, this.Q, 0);
         }
-        super.b(graphics);
+        super.drawBackground(graphics);
     }
 
     protected final void f() {
-        this.J.a(this.J.c().trim().toLowerCase());
-        String string = this.J.c();
-        String string2 = this.L.c();
+        this.J.setText(this.J.getText().trim().toLowerCase());
+        String string = this.J.getText();
+        String string2 = this.L.getText();
         if (string.equals("")) {
-            this.c(this.J);
+            this.selectControl(this.J);
             return;
         }
         if (string2.equals("")) {
-            this.c(this.L);
+            this.selectControl(this.L);
             return;
         }
         x = string;
@@ -174,7 +174,7 @@ extends thien_an {
         if (thien_gp2.U != -1) {
             thien_s thien_s2 = thien_di.a(true, x);
             if (thien_s2 != null) {
-                thien_di.c.k.w.a(thien_s2, -1);
+                thien_di.instance.k.w.a(thien_s2, -1);
             } else {
                 thien_gp2.U = -1;
             }
@@ -182,12 +182,12 @@ extends thien_an {
         MessageHandler.a(string, string2, z, 2, this.U);
     }
 
-    public final void d() {
-        this.w.f();
+    public final void updateLayout() {
+        this.w.handleFocus();
     }
 
-    public final void d(Graphics graphics) {
-        this.w.c(graphics);
+    public final void drawOverlay(Graphics graphics) {
+        this.w.drawScrollbar(graphics);
     }
 
     public final void g() {
@@ -199,41 +199,41 @@ extends thien_an {
     }
 
     private void i() {
-        this.c(this.w);
-        this.b(this.H);
+        this.selectControl(this.w);
+        this.removeControl(this.H);
         this.E = false;
     }
 
-    public final boolean a(boolean[] blArray, boolean[] blArray2, int[] nArray) {
+    public final boolean handleInput(boolean[] blArray, boolean[] blArray2, int[] nArray) {
         Object object;
         if (nArray[0] > 32 && !this.E && this.F) {
             object = this;
-            ((thien_gp)object).H.a("");
-            ((thien_an)object).a(((thien_gp)object).H);
-            ((thien_an)object).c(((thien_gp)object).H);
+            ((thien_gp)object).H.setText("");
+            ((Screen)object).addControl(((thien_gp)object).H);
+            ((Screen)object).selectControl(((thien_gp)object).H);
             ((thien_gp)object).E = true;
         }
         object = "";
         if (this.E) {
             if (blArray[12]) {
                 blArray[12] = false;
-                this.w.b(12);
+                this.w.handleKeyInput(12);
             } else if (blArray[13]) {
                 blArray[13] = false;
-                this.w.b(13);
+                this.w.handleKeyInput(13);
             } else if (blArray[16]) {
                 blArray[16] = false;
-                this.w.b(16);
+                this.w.handleKeyInput(16);
             }
-            object = this.H.c();
+            object = this.H.getText();
         }
-        boolean bl = super.a(blArray, blArray2, nArray);
+        boolean bl = super.handleInput(blArray, blArray2, nArray);
         if (this.E) {
-            if (this.H.c().equals("")) {
+            if (this.H.getText().equals("")) {
                 this.i();
             }
-            if (!this.H.c().equals(object)) {
-                this.w.d(this.H.c());
+            if (!this.H.getText().equals(object)) {
+                this.w.d(this.H.getText());
             }
         }
         return bl;
@@ -241,38 +241,38 @@ extends thien_an {
 
     public final void h() {
         Xuka.setXpamFlag(x);
-        thien_di.b().a(String.valueOf(TextConstant.inviteYourYahoo()) + "?", new thien_gs(this));
+        thien_di.getInstance().a(String.valueOf(TextConstant.inviteYourYahoo()) + "?", new thien_gs(this));
     }
 
     static void a(thien_gp thien_gp2) {
         if (D) {
-            thien_di.c.a("Vui l\u00f2ng tho\u00e1t Yahoo! v\u00e0 b\u1ecf ch\u1ecdn \u0111\u0103ng nh\u1eadp \u1ea9n", (Image)null, 1);
+            thien_di.instance.a("Vui l\u00f2ng tho\u00e1t Yahoo! v\u00e0 b\u1ecf ch\u1ecdn \u0111\u0103ng nh\u1eadp \u1ea9n", (Image)null, 1);
             return;
         }
         if (thien_di.z) {
-            thien_di.c.a("Vui l\u00f2ng ch\u1edd 10s", (Image)null, 1);
+            thien_di.instance.a("Vui l\u00f2ng ch\u1edd 10s", (Image)null, 1);
             return;
         }
         if (thien_gp2.V == null) {
             System.gc();
-            thien_gp2.V = new thien_ap();
-            thien_gp2.V.g = TextConstant.status();
-            thien_ap cfr_ignored_0 = thien_gp2.V;
-            thien_ap.e(70, 150);
+            thien_gp2.V = new FormScreen();
+            thien_gp2.V.title = TextConstant.status();
+            FormScreen cfr_ignored_0 = thien_gp2.V;
+            FormScreen.calculateFormDimensions(70, 150);
             thien_gp2.V.x += 20;
             thien_gp2.W = thien_y.a(thien_gp2.V, TextConstant.status(), new String[]{TextConstant.available(), TextConstant.invisible2()});
             thien_gp2.X = thien_y.b(thien_gp2.V, TextConstant.statusMessage(), 0, -1);
-            thien_gp2.V.c(thien_gp2.W);
-            thien_gp2.V.m = new thien_ab("OK", new thien_gt(thien_gp2));
-            thien_gp2.V.k = new thien_ab(TextConstant.cancel(), new thien_gu(thien_gp2));
+            thien_gp2.V.selectControl(thien_gp2.W);
+            thien_gp2.V.centerCommand = new UIAction("OK", new thien_gt(thien_gp2));
+            thien_gp2.V.leftCommand = new UIAction(TextConstant.cancel(), new thien_gu(thien_gp2));
         }
         thien_gp2.W.c(z == 0 ? 0 : 1);
-        thien_di.b().b(thien_gp2.V);
-        thien_gp2.X.a(A);
-        thien_di.b().j();
+        thien_di.getInstance().b(thien_gp2.V);
+        thien_gp2.X.setText(A);
+        thien_di.getInstance().j();
     }
 
-    static thien_at b(thien_gp thien_gp2) {
+    static TextField b(thien_gp thien_gp2) {
         return thien_gp2.X;
     }
 
@@ -286,7 +286,7 @@ extends thien_an {
       Xuka.saveCustomStr(x, var1, true);
    }
 
-    static thien_ap d(thien_gp thien_gp2) {
+    static FormScreen d(thien_gp thien_gp2) {
         return thien_gp2.V;
     }
 }

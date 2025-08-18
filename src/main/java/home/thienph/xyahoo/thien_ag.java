@@ -4,12 +4,12 @@ import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 
 public final class thien_ag
-extends thien_ac {
+extends UIControlBase {
     private Image c;
     public byte[] a;
     private int d;
     private int e;
-    public thien_ae b;
+    public IAction b;
     private int[] f = null;
 
     static {
@@ -50,24 +50,24 @@ extends thien_ac {
     }
 
     public thien_ag() {
-        this.o = false;
-        this.y = new thien_ab(TextConstant.select(), new thien_ah(this));
+        this.isVisible = false;
+        this.actionTertiary = new UIAction(TextConstant.select(), new thien_ah(this));
     }
 
-    public final boolean b(int n) {
+    public final boolean handleKeyInput(int n) {
         return true;
     }
 
-    public final void b(int n, int n2) {
+    public final void handleKeyPress(int n, int n2) {
         if (this.b != null) {
-            this.b.a();
+            this.b.action();
             return;
         }
     }
 
-    public final void a(Graphics graphics) {
+    public final void draw(Graphics graphics) {
         if (this.c != null) {
-            graphics.drawImage(this.c, this.q, this.r, 0);
+            graphics.drawImage(this.c, this.baseX, this.baseY, 0);
         }
         if (this.f != null) {
             int n = 0;
@@ -77,29 +77,29 @@ extends thien_ac {
                 short s = (short)this.f[n];
                 Image image = thien_ck.a(s);
                 if (image != null) {
-                    graphics.drawImage(image, this.q + (this.s >> 1) + n2, this.r + (this.t >> 1) + n3, 0);
+                    graphics.drawImage(image, this.baseX + (this.width >> 1) + n2, this.baseY + (this.height >> 1) + n3, 0);
                 }
                 ++n;
             }
         }
     }
 
-    public final void b(Graphics graphics) {
-        super.b(graphics);
+    public final void drawBackground(Graphics graphics) {
+        super.drawBackground(graphics);
         graphics.setColor(UIColorPalette.getSecondaryColor());
-        graphics.drawRect(this.q, this.r, this.s, this.t);
+        graphics.drawRect(this.baseX, this.baseY, this.width, this.height);
         graphics.setColor(UIColorPalette.getHighlightColor());
-        graphics.drawRect(this.q - 1, this.r - 1, this.s + 2, this.t + 2);
+        graphics.drawRect(this.baseX - 1, this.baseY - 1, this.width + 2, this.height + 2);
     }
 
-    public final void e() {
+    public final void update() {
     }
 
     public final void a(int[] nArray) {
         this.f = nArray;
     }
 
-    public final boolean a(int n) {
+    public final boolean handleSoftKey(int n) {
         return true;
     }
 }

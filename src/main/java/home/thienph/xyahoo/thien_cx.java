@@ -1,12 +1,12 @@
 package home.thienph.xyahoo;
 
 final class thien_cx
-implements thien_ae {
+implements IAction {
     thien_cx(thien_cw thien_cw2) {
     }
 
-    public final void a() {
-        thien_di.c.c();
-        thien_di.c.b(TextConstant.youWillReceiveYourPassword());
+    public final void action() {
+        thien_di.instance.c();
+        thien_di.instance.b(TextConstant.youWillReceiveYourPassword());
     }
 }

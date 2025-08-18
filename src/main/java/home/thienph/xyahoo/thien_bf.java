@@ -1,19 +1,19 @@
 package home.thienph.xyahoo;
 
 final class thien_bf
-implements thien_ae {
+implements IAction {
     private thien_ba a;
 
     thien_bf(thien_ba thien_ba2) {
         this.a = thien_ba2;
     }
 
-    public final void a() {
-        if (this.a.m.a.equals(TextConstant.ready())) {
+    public final void action() {
+        if (this.a.centerCommand.label.equals(TextConstant.ready())) {
             int n = 0;
             while (n < this.a.F.length) {
                 if (this.a.F[n].a.equals(thien_ba.z)) {
-                    this.a.m.a = "";
+                    this.a.centerCommand.label = "";
                     MessageHandler.b(thien_ba.B, thien_ba.z);
                 }
                 ++n;

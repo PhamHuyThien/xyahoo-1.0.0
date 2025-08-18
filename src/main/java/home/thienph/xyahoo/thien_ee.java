@@ -1,7 +1,7 @@
 package home.thienph.xyahoo;
 
 final class thien_ee
-implements thien_ae {
+implements IAction {
     private thien_di a;
     private final String b;
     private final String c;
@@ -14,7 +14,7 @@ implements thien_ae {
         this.d = string3;
     }
 
-    public final void a() {
+    public final void action() {
         MessageHandler.a(this.b, true, "", this.c);
         this.a.a(this.b, (String[])null, this.d);
         this.a.c();

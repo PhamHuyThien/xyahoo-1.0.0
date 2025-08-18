@@ -1,7 +1,7 @@
 package home.thienph.xyahoo;
 
 final class thien_cv
-implements thien_ae {
+implements IAction {
     private final thien_x a;
     private final thien_x b;
     private final thien_z c;
@@ -16,9 +16,9 @@ implements thien_ae {
         this.e = thien_x5;
     }
 
-    public final void a() {
-        thien_di.b().l.a(1);
-        thien_di.b().c(thien_cq.i());
+    public final void action() {
+        thien_di.getInstance().l.startSlide(1);
+        thien_di.getInstance().c(LoginScreen.getSettingsScreen());
         if (thien_di.r != this.a.a) {
             thien_di.r = this.a.a;
             Xuka.saveFlag("atlog", thien_di.r);
@@ -27,9 +27,9 @@ implements thien_ae {
             thien_di.s = this.b.a;
             Xuka.saveFlag("atlogY", thien_di.s);
         }
-        if (thien_at.c != this.c.a()) {
-            thien_at.c = this.c.a();
-            Xuka.saveCaret(thien_at.c);
+        if (TextField.multiTapSpeedIndex != this.c.a()) {
+            TextField.multiTapSpeedIndex = this.c.a();
+            Xuka.saveCaret(TextField.multiTapSpeedIndex);
         }
         if (thien_di.q != this.d.a) {
             thien_di.q = this.d.a;

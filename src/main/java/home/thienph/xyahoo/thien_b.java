@@ -6,7 +6,7 @@ import javax.microedition.io.ConnectionNotFoundException;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 
-public final class thien_b extends thien_ac {
+public final class thien_b extends UIControlBase {
    public static Image[] a;
    public static Image[] b;
    public boolean c;
@@ -25,16 +25,16 @@ public final class thien_b extends thien_ac {
    private int J;
    private int K;
    public int h;
-   public thien_ab i = new thien_ab(TextConstant.select(), null);
-   private thien_ab L = new thien_ab("", null);
-   public thien_ab j = new thien_ab(TextConstant.mark(), null);
+   public UIAction i = new UIAction(TextConstant.select(), null);
+   private UIAction L = new UIAction("", null);
+   public UIAction j = new UIAction(TextConstant.mark(), null);
    private boolean M = false;
    public thien_s k;
    public Vector l;
    public String[] m = new String[]{TextConstant.pleaseWait()};
    public boolean n;
    private thien_u N;
-   private thien_ab O;
+   private UIAction O;
    private int P;
    private int Q;
    private int R;
@@ -76,13 +76,13 @@ public final class thien_b extends thien_ac {
       this.k = var1;
       this.h = -1;
       this.c();
-      this.f();
+      this.handleFocus();
    }
 
    public thien_b(int var1, int var2, int var3, int var4, boolean var5) {
       super(1, 1, var3, var4, true);
       System.currentTimeMillis();
-      super.p = true;
+      super.isEnabled = true;
       this.c = true;
       this.I = thien_w.f + 3;
       if (this.I < a[0].getHeight()) {
@@ -154,9 +154,9 @@ public final class thien_b extends thien_ac {
             this.h = this.l.size() - 1;
          }
 
-         this.K = super.t / this.I + 1;
-         this.H = this.l.size() * this.I - super.t + 3 + this.I;
-         this.D = this.h * this.I - (super.t >> 1);
+         this.K = super.height / this.I + 1;
+         this.H = this.l.size() * this.I - super.height + 3 + this.I;
+         this.D = this.h * this.I - (super.height >> 1);
          this.J = this.h - (this.K >> 1);
          if (this.l.size() - this.h < this.K >> 1) {
             this.J = this.l.size() - this.K;
@@ -167,11 +167,11 @@ public final class thien_b extends thien_ac {
          }
 
          if (((thien_u)this.l.elementAt(this.h)).a == 1) {
-            super.y = this.L;
+            super.actionTertiary = this.L;
          } else if (this.M) {
-            super.y = this.j;
+            super.actionTertiary = this.j;
          } else {
-            super.y = this.i;
+            super.actionTertiary = this.i;
          }
       } else {
          this.J = 0;
@@ -180,16 +180,16 @@ public final class thien_b extends thien_ac {
       }
    }
 
-   public final boolean a(int var1) {
+   public final boolean handleSoftKey(int var1) {
       if (var1 != 13 && var1 != 12) {
          return true;
       } else {
-         this.b(var1);
+         this.handleKeyInput(var1);
          return false;
       }
    }
 
-   public final boolean b(int var1) {
+   public final boolean handleKeyInput(int var1) {
       if (this.e) {
          return true;
       } else if (this.l != null && this.l.size() != 0) {
@@ -211,14 +211,14 @@ public final class thien_b extends thien_ac {
 
          if (var1 == 12 || var1 == 13) {
             if (((thien_u)this.l.elementAt(this.h)).a == 1) {
-               super.y = this.L;
+               super.actionTertiary = this.L;
             } else if (this.M) {
-               super.y = this.j;
+               super.actionTertiary = this.j;
             } else {
-               super.y = this.i;
+               super.actionTertiary = this.i;
             }
 
-            this.D = this.h * this.I - (super.t >> 1);
+            this.D = this.h * this.I - (super.height >> 1);
             this.J = this.h - (this.K >> 1);
             if (this.l.size() - this.h < this.K >> 1) {
                this.J = this.l.size() - this.K;
@@ -273,11 +273,11 @@ public final class thien_b extends thien_ac {
             }
 
             if (this.O == null) {
-               this.O = new thien_ab("Chat", new thien_c(this));
+               this.O = new UIAction("Chat", new thien_c(this));
             }
 
             if (this.c) {
-               this.O.b.a();
+               this.O.actionHandler.action();
                return;
             }
          } else {
@@ -292,13 +292,13 @@ public final class thien_b extends thien_ac {
       }
    }
 
-   public final void a(Graphics var1) {
-      this.T = super.s >> 1;
-      var1.setClip(super.q, super.r, super.s + 1, super.t);
+   public final void draw(Graphics var1) {
+      this.T = super.width >> 1;
+      var1.setClip(super.baseX, super.baseY, super.width + 1, super.height);
       if (this.e) {
          var1.setColor(16777215);
          thien_w.a(thien_w.d).a(TextConstant.pleaseWait(), this.T, 20, 2, var1, thien_w.j, thien_w.f);
-         thien_di.c.a(var1, this.T, thien_w.f + 35);
+         thien_di.instance.a(var1, this.T, thien_w.f + 35);
       } else if (this.K == 0) {
          var1.setColor(16777215);
          int var9 = this.m.length;
@@ -314,7 +314,7 @@ public final class thien_b extends thien_ac {
          this.U = this.l.size();
          this.V = this.I + 2;
          int var3 = 0;
-         int var4 = super.s - 3;
+         int var4 = super.width - 3;
 
          for (int var5 = this.J; var5 <= this.T && var5 < this.U; var5++) {
             thien_u var6 = (thien_u)this.l.elementAt(var5);
@@ -347,7 +347,7 @@ public final class thien_b extends thien_ac {
 
             String var11 = var6.d;
             if (var6.a == 1) {
-               var11 = thien_w.a(var11, super.s - 26, thien_w.j);
+               var11 = thien_w.a(var11, super.width - 26, thien_w.j);
                var1.setColor(16726823);
                thien_w.a(thien_w.b).a(var11, var7, var2 + 2, var1);
             } else {
@@ -357,13 +357,13 @@ public final class thien_b extends thien_ac {
                }
 
                if (!var6.e.equals("")) {
-                  var11 = thien_w.a(var11, super.s - 26, thien_w.j);
+                  var11 = thien_w.a(var11, super.width - 26, thien_w.j);
                }
 
                var1.setColor(var6.b);
                thien_w.a(var6.c).a(var11, var7, var2 + 3, var1);
                if (this.M && var6.g != 3) {
-                  var1.drawImage(thien_di.y[var6.h ? 1 : 0], super.s - 12, var2 + (this.I >> 1), 3);
+                  var1.drawImage(thien_di.y[var6.h ? 1 : 0], super.width - 12, var2 + (this.I >> 1), 3);
                }
             }
 
@@ -376,10 +376,10 @@ public final class thien_b extends thien_ac {
       }
    }
 
-   public final void b(Graphics var1) {
+   public final void drawBackground(Graphics var1) {
    }
 
-   public final void e() {
+   public final void update() {
       this.X++;
       if (this.X > 1000) {
          this.X = 0;
@@ -405,9 +405,9 @@ public final class thien_b extends thien_ac {
       }
    }
 
-   public final void f() {
+   public final void handleFocus() {
       if (this.l != null) {
-         if (super.r + this.l.size() * this.I >= super.t) {
+         if (super.baseY + this.l.size() * this.I >= super.height) {
             thien_ar.a = true;
             thien_ar.a(this.l.size());
          } else {
@@ -416,18 +416,18 @@ public final class thien_b extends thien_ac {
       }
    }
 
-   public final void c(Graphics var1) {
+   public final void drawScrollbar(Graphics var1) {
       if (thien_ar.a) {
          thien_ar.a(var1, this.h);
       }
    }
 
-   public final void a(int var1, int var2) {
+   public final void onDrag(int var1, int var2) {
       this.Z = var1;
       this.aa = var2;
    }
 
-   public final void b(int var1, int var2) {
+   public final void handleKeyPress(int var1, int var2) {
       if (this.Y) {
          this.Y = false;
          this.D = this.D - (var2 - this.aa) * 5;
@@ -480,7 +480,7 @@ public final class thien_b extends thien_ac {
       }
    }
 
-   public final void c(int var1, int var2) {
+   public final void handlePointerRelease(int var1, int var2) {
       if (c(var1 - this.Z) > 1 || c(var2 - this.aa) > 1) {
          this.Y = true;
          this.D = this.D - (var2 - this.aa);

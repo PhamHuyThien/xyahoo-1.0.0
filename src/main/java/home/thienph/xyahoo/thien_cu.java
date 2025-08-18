@@ -1,7 +1,7 @@
 package home.thienph.xyahoo;
 
 final class thien_cu
-implements thien_ae {
+implements IAction {
     private final thien_x a;
     private final boolean b;
     private final thien_x c;
@@ -26,8 +26,8 @@ implements thien_ae {
         this.j = n;
     }
 
-    public final void a() {
-        thien_di.c.c(thien_cq.i());
+    public final void action() {
+        thien_di.instance.c(LoginScreen.getSettingsScreen());
         this.a.a = this.b;
         this.c.a = this.d;
         this.e.a = this.f;

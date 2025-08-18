@@ -4,7 +4,7 @@ import java.util.Vector;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 
-public final class thien_ba extends thien_an {
+public final class thien_ba extends Screen {
    public String w;
    public static boolean x;
    static int y;
@@ -21,9 +21,9 @@ public final class thien_ba extends thien_an {
    public boolean E;
    public thien_bz[] F;
    public String[] G;
-   private static thien_at ap;
+   private static TextField ap;
    public static boolean H;
-   public static thien_at I;
+   public static TextField I;
    public static boolean J;
    public byte K;
    public int[] L;
@@ -54,29 +54,29 @@ public final class thien_ba extends thien_an {
    public int[] af;
    public Integer[] ag;
    public static int ah;
-   private thien_ac av;
+   private UIControlBase av;
    public static String ai;
-   private thien_ab aw;
+   private UIAction aw;
    private Vector ax;
    private thien_am ay;
    private Vector az;
    private thien_am aA;
-   private thien_ab aB;
+   private UIAction aB;
    private Vector aC;
    private thien_am aD;
    public static Image[] aj;
    private int aE = -1;
-   private thien_ab aF = new thien_ab(TextConstant.smileys(), new thien_bb(this));
-   private thien_ab aG = new thien_ab("Chat", new thien_bm(this));
-   private thien_ab aH = new thien_ab("Đặt cược", new thien_br(this));
+   private UIAction aF = new UIAction(TextConstant.smileys(), new thien_bb(this));
+   private UIAction aG = new UIAction("Chat", new thien_bm(this));
+   private UIAction aH = new UIAction("Đặt cược", new thien_br(this));
    private static int aI = -1;
    private thien_am aJ;
-   private thien_ab aK;
-   private thien_ab aL;
-   private thien_ab aM;
-   private thien_ab aN;
-   private thien_ab aO;
-   private thien_ab aP;
+   private UIAction aK;
+   private UIAction aL;
+   private UIAction aM;
+   private UIAction aN;
+   private UIAction aO;
+   private UIAction aP;
 
    public static thien_ba d(int var0) {
       if (S == null) {
@@ -92,15 +92,15 @@ public final class thien_ba extends thien_an {
       thien_ba var5 = this;
       byte var3 = 0;
 
-      thien_ab var10001;
+      UIAction var10001;
       while (true) {
          if (var3 >= var5.ax.size()) {
             var10001 = null;
             break;
          }
 
-         thien_ab var4;
-         if ((var4 = (thien_ab)var5.ax.elementAt(var3)).a.equals(var2)) {
+         UIAction var4;
+         if ((var4 = (UIAction)var5.ax.elementAt(var3)).label.equals(var2)) {
             var10001 = var4;
             break;
          }
@@ -112,49 +112,49 @@ public final class thien_ba extends thien_an {
    }
 
    private thien_ba(int var1) {
-      new thien_ab("Tài khoản", new thien_bs(this));
-      this.aO = new thien_ab(TextConstant.update(), new thien_bt(this));
-      this.aP = new thien_ab("Tìm bàn", new thien_bu(this));
+      new UIAction("Tài khoản", new thien_bs(this));
+      this.aO = new UIAction(TextConstant.update(), new thien_bt(this));
+      this.aP = new UIAction("Tìm bàn", new thien_bu(this));
       z = thien_ff.y;
       if (var1 == 1) {
-         super.g = TextConstant.bigTwo();
+         super.title = TextConstant.bigTwo();
       }
 
       this.az = new Vector();
       this.aA = new thien_am(this.az);
-      this.aB = new thien_ab("Menu", new thien_bv(this));
-      super.u = true;
+      this.aB = new UIAction("Menu", new thien_bv(this));
+      super.scrollLock = true;
       thien_di.f();
       this.R = false;
    }
 
-   public final void a(Graphics var1) {
-      super.a(var1);
+   public final void draw(Graphics var1) {
+      super.draw(var1);
    }
 
-   public final boolean a(boolean[] var1, boolean[] var2, int[] var3) {
+   public final boolean handleInput(boolean[] var1, boolean[] var2, int[] var3) {
       if (var3[0] > 32 && x && !H) {
-         this.a(I);
+         this.addControl(I);
          J = true;
-         this.c(I);
+         this.selectControl(I);
       }
 
-      return super.a(var1, var2, var3);
+      return super.handleInput(var1, var2, var3);
    }
 
-   public final void d() {
-      this.al.f();
+   public final void updateLayout() {
+      this.al.handleFocus();
    }
 
-   public final void d(Graphics var1) {
-      this.al.c(var1);
+   public final void drawOverlay(Graphics var1) {
+      this.al.drawScrollbar(var1);
    }
 
    public final void a(thien_aw[] var1, int var2) {
       ah = var2;
       J = false;
       x = false;
-      thien_di.c.c();
+      thien_di.instance.c();
       this.X = true;
       this.P = null;
       this.ak = null;
@@ -166,19 +166,19 @@ public final class thien_ba extends thien_an {
       }
 
       this.j();
-      super.p = true;
+      super.isLocked = true;
       thien_ay.c = this.ak;
-      this.a();
+      this.clearControls();
       System.gc();
-      this.al = new thien_ay(thien_an.e - 3, thien_an.f - 3 - thien_di.g, ah);
-      this.a(this.al);
-      this.c(this.al);
-      super.l = this.aP;
+      this.al = new thien_ay(Screen.e - 3, Screen.formHeight - 3 - thien_di.g, ah);
+      this.addControl(this.al);
+      this.selectControl(this.al);
+      super.rightCommand = this.aP;
       this.az.removeAllElements();
       this.az.addElement(this.aO);
       this.az.addElement(thien_em.z);
-      this.az.addElement(new thien_ab("Rời phòng", new thien_bw(this)));
-      super.k = this.aB;
+      this.az.addElement(new UIAction("Rời phòng", new thien_bw(this)));
+      super.leftCommand = this.aB;
       System.gc();
    }
 
@@ -206,8 +206,8 @@ public final class thien_ba extends thien_an {
    public final void a(byte var1, String[] var2, long[] var3, int[] var4, String[] var5, int[] var6, Integer[] var7, String var8) {
       x = true;
       ah = 1;
-      thien_di.c.c();
-      this.a();
+      thien_di.instance.c();
+      this.clearControls();
       J = false;
       thien_ay.c = null;
       this.P = null;
@@ -218,8 +218,8 @@ public final class thien_ba extends thien_an {
       if (this.aw == null) {
          this.ax = new Vector();
          this.ay = new thien_am(this.ax);
-         this.aw = new thien_ab(TextConstant.kick(), null);
-         this.aw.c = this.ay;
+         this.aw = new UIAction(TextConstant.kick(), null);
+         this.aw.icon = this.ay;
       }
 
       this.F = new thien_bz[var1];
@@ -270,7 +270,7 @@ public final class thien_ba extends thien_an {
          }
 
          if (this.F[var20] != null) {
-            this.a(this.F[var20]);
+            this.addControl(this.F[var20]);
          }
       }
 
@@ -306,7 +306,7 @@ public final class thien_ba extends thien_an {
 
          for (byte var22 = 0; var22 < this.F.length; var22++) {
             if (var22 != 0) {
-               thien_ab var15 = new thien_ab(this.F[var22].a, new thien_bx(this, var22));
+               UIAction var15 = new UIAction(this.F[var22].a, new thien_bx(this, var22));
                this.ax.addElement(var15);
             }
          }
@@ -321,45 +321,45 @@ public final class thien_ba extends thien_an {
       }
 
       this.aC.addElement(thien_em.z);
-      this.aC.addElement(new thien_ab("Rời bàn", new thien_bc(this)));
-      super.k = new thien_ab("Menu", new thien_bd(this));
-      super.l = null;
+      this.aC.addElement(new UIAction("Rời bàn", new thien_bc(this)));
+      super.leftCommand = new UIAction("Menu", new thien_bd(this));
+      super.rightCommand = null;
       if (z.equals(this.w)) {
-         super.m = new thien_ab(TextConstant.playNow(), new thien_be(this));
+         super.centerCommand = new UIAction(TextConstant.playNow(), new thien_be(this));
       } else if (!var10) {
-         super.m = new thien_ab(TextConstant.ready(), new thien_bf(this));
+         super.centerCommand = new UIAction(TextConstant.ready(), new thien_bf(this));
       }
 
       this.av = this.F[0];
       ap = null;
-      (ap = new thien_at("", 9, 1)).a(0, thien_an.f - thien_di.g - (thien_w.f << 1) - 10, thien_an.e - 1, thien_w.f + 6);
+      (ap = new TextField("", 9, 1)).setBounds(0, Screen.formHeight - thien_di.g - (thien_w.f << 1) - 10, Screen.e - 1, thien_w.f + 6);
       if (this.aM == null) {
-         this.aM = new thien_ab(TextConstant.close(), new thien_bp(this));
+         this.aM = new UIAction(TextConstant.close(), new thien_bp(this));
       }
 
-      ap.w = this.aM;
+      ap.actionPrimary = this.aM;
       if (this.aN == null) {
-         this.aN = new thien_ab(TextConstant.bet(), new thien_bq(this));
+         this.aN = new UIAction(TextConstant.bet(), new thien_bq(this));
       }
 
-      ap.y = this.aN;
+      ap.actionTertiary = this.aN;
       this.k();
-      this.c(this.av);
+      this.selectControl(this.av);
       this.j();
       System.gc();
    }
 
    private void j() {
-      if (aI != super.q) {
-         super.q = -thien_an.d + 2;
-         aI = super.q;
+      if (aI != super.scrollTargetY) {
+         super.scrollTargetY = -Screen.headerHeight + 2;
+         aI = super.scrollTargetY;
       }
    }
 
    public final void a(byte[] var1, String var2, boolean var3, boolean var4) {
       this.P = null;
       if (I != null) {
-         this.b(I);
+         this.removeControl(I);
       }
 
       J = false;
@@ -392,15 +392,15 @@ public final class thien_ba extends thien_an {
       if (var7 != null) {
          var7.e = var5.aq;
          var7.f = false;
-         var5.a(var7);
-         var5.c(var7);
+         var5.addControl(var7);
+         var5.selectControl(var7);
       }
 
       System.gc();
-      var5.l = new thien_ab(TextConstant.deny(), new thien_bg(var5, var7));
+      var5.rightCommand = new UIAction(TextConstant.deny(), new thien_bg(var5, var7));
       var5.av = var5.P;
       var5.k();
-      var5.k = new thien_ab("Menu", new thien_bh(var5));
+      var5.leftCommand = new UIAction("Menu", new thien_bh(var5));
       System.gc();
 
       for (byte var6 = 0; var6 < S.K; var6++) {
@@ -544,11 +544,11 @@ public final class thien_ba extends thien_an {
 
          var4 = var4 + var6 + thien_w.a(this.V[var5], 14) + " " + this.ar[var5] + " xuxu" + "\n";
          if (thien_ff.y.equals(this.V[var5]) && this.ar[var5] > 0L) {
-            thien_di.c.a("Chúc mừng " + thien_ff.y + " đã thắng số tiền " + this.ar[var5] + " xuxu", (Image) null, 1);
+            thien_di.instance.a("Chúc mừng " + thien_ff.y + " đã thắng số tiền " + this.ar[var5] + " xuxu", (Image) null, 1);
          }
       }
 
-      thien_di.c.a(var4, null, null, new thien_ab(TextConstant.close(), new thien_bk(this)));
+      thien_di.instance.a(var4, null, null, new UIAction(TextConstant.close(), new thien_bk(this)));
       boolean var8 = false;
 
       for (int var9 = 0; var9 < this.at; var9++) {
@@ -566,8 +566,8 @@ public final class thien_ba extends thien_an {
          }
       }
 
-      super.m.a = "";
-      super.l = new thien_ab(TextConstant.resume(), new thien_bl(this));
+      super.centerCommand.label = "";
+      super.rightCommand = new UIAction(TextConstant.resume(), new thien_bl(this));
    }
 
    public final void g() {
@@ -623,17 +623,17 @@ public final class thien_ba extends thien_an {
 
    private void k() {
       I = null;
-      (I = new thien_at("", 50, 0)).a(0, thien_an.f - thien_di.g - (thien_w.f << 1) - 10, thien_an.e - 1, thien_w.f + 6);
+      (I = new TextField("", 50, 0)).setBounds(0, Screen.formHeight - thien_di.g - (thien_w.f << 1) - 10, Screen.e - 1, thien_w.f + 6);
       if (this.aK == null) {
-         this.aK = new thien_ab(TextConstant.cancel(), new thien_bn(this));
+         this.aK = new UIAction(TextConstant.cancel(), new thien_bn(this));
       }
 
-      I.w = this.aK;
+      I.actionPrimary = this.aK;
       if (this.aL == null) {
-         this.aL = new thien_ab(TextConstant.send(), new thien_bo(this));
+         this.aL = new UIAction(TextConstant.send(), new thien_bo(this));
       }
 
-      I.y = this.aL;
+      I.actionTertiary = this.aL;
    }
 
    public static void e(int var0) {
@@ -645,7 +645,7 @@ public final class thien_ba extends thien_an {
       var0.j();
    }
 
-   static thien_at h() {
+   static TextField h() {
       return ap;
    }
 
@@ -669,15 +669,15 @@ public final class thien_ba extends thien_an {
       var0.aJ = var1;
    }
 
-   static thien_ab e(thien_ba var0) {
+   static UIAction e(thien_ba var0) {
       return var0.aG;
    }
 
-   static thien_ab f(thien_ba var0) {
+   static UIAction f(thien_ba var0) {
       return var0.aF;
    }
 
-   static thien_ac g(thien_ba var0) {
+   static UIControlBase g(thien_ba var0) {
       return var0.av;
    }
 }

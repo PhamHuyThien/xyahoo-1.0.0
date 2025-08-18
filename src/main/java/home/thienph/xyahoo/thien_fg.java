@@ -1,7 +1,7 @@
 package home.thienph.xyahoo;
 
 final class thien_fg
-implements thien_ae {
+implements IAction {
     private thien_ff a;
     private final thien_cl b;
     private final String c;
@@ -12,18 +12,18 @@ implements thien_ae {
         this.c = string;
     }
 
-    public final void a() {
+    public final void action() {
         GameCanvas.resetKeys();
-        String string = this.b.D.c().trim();
+        String string = this.b.D.getText().trim();
         if (string.equals("")) {
             return;
         }
         if (this.a.x.c(string)) {
-            thien_di.b().b(TextConstant.thisGroupNameAlreadyExist());
+            thien_di.getInstance().b(TextConstant.thisGroupNameAlreadyExist());
             return;
         }
         MessageHandler.h(this.c, string);
-        thien_di.b().c(this.b);
-        thien_di.c.l();
+        thien_di.getInstance().c(this.b);
+        thien_di.instance.l();
     }
 }

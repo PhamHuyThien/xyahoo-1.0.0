@@ -1,7 +1,7 @@
 package home.thienph.xyahoo;
 
 final class thien_l
-implements thien_ae {
+implements IAction {
     private final String a;
     private final String b;
 
@@ -10,9 +10,9 @@ implements thien_ae {
         this.b = string2;
     }
 
-    public final void a() {
-        thien_di.c.c();
-        thien_di.c.b(TextConstant.pleaseWait());
+    public final void action() {
+        thien_di.instance.c();
+        thien_di.instance.b(TextConstant.pleaseWait());
         Xuka.startThread(this.a, this.b, null, null, true);
     }
 }

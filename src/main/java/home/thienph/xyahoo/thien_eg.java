@@ -3,14 +3,14 @@ package home.thienph.xyahoo;
 import javax.microedition.io.ConnectionNotFoundException;
 
 final class thien_eg
-implements thien_ae {
+implements IAction {
     private final String a;
 
     thien_eg(thien_di thien_di2, String string) {
         this.a = string;
     }
 
-    public final void a() {
+    public final void action() {
         try {
             Xuka.instance.platformRequest(this.a);
         }

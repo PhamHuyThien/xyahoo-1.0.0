@@ -4,7 +4,7 @@ import java.util.Vector;
 import javax.microedition.lcdui.Graphics;
 
 public final class thien_al
-extends thien_ac {
+extends UIControlBase {
     private int e;
     private int f;
     private int g;
@@ -14,13 +14,13 @@ extends thien_ac {
     private int k;
     private int l;
     public int a;
-    public thien_ab b;
-    private thien_ab m;
+    public UIAction b;
+    private UIAction m;
     private int n;
     private thien_s B;
     public Vector c;
     private thien_u C;
-    public thien_ae d;
+    public IAction d;
     private int D;
     private int E;
     private int F;
@@ -37,18 +37,18 @@ extends thien_ac {
         this.B = thien_s2;
         this.a = 0;
         this.a();
-        this.f();
+        this.handleFocus();
     }
 
     public thien_al(int n, int n2, int n3, int n4, int n5) {
         super(1, 1, n3, n4, true);
         new Vector();
-        this.b = new thien_ab(TextConstant.select(), null);
-        this.m = new thien_ab("", null);
+        this.b = new UIAction(TextConstant.select(), null);
+        this.m = new UIAction("", null);
         (new String[1])[0] = TextConstant.pleaseWait();
         System.currentTimeMillis();
         this.n = 0;
-        this.p = true;
+        this.isEnabled = true;
         this.j = thien_w.f + 3;
         if (this.j < thien_b.a[0].getHeight()) {
             this.j = thien_b.a[0].getHeight();
@@ -114,9 +114,9 @@ extends thien_ac {
         if (this.a >= this.c.size()) {
             this.a = this.c.size() - 1;
         }
-        this.l = this.t / this.j + 1;
-        this.i = this.c.size() * this.j - this.t + 3 + this.j;
-        this.e = this.a * this.j - (this.t >> 1);
+        this.l = this.height / this.j + 1;
+        this.i = this.c.size() * this.j - this.height + 3 + this.j;
+        this.e = this.a * this.j - (this.height >> 1);
         this.k = this.a - (this.l >> 1);
         if (this.c.size() - this.a < this.l >> 1) {
             this.k = this.c.size() - this.l;
@@ -125,21 +125,21 @@ extends thien_ac {
             this.k = 0;
         }
         if (((thien_u)this.c.elementAt((int)this.a)).a == 1) {
-            this.y = this.m;
+            this.actionTertiary = this.m;
             return;
         }
-        this.y = this.b;
+        this.actionTertiary = this.b;
     }
 
-    public final boolean a(int n) {
+    public final boolean handleSoftKey(int n) {
         if (n == 13 || n == 12) {
-            this.b(n);
+            this.handleKeyInput(n);
             return false;
         }
         return true;
     }
 
-    public final boolean b(int n) {
+    public final boolean handleKeyInput(int n) {
         if (this.c == null || this.c.size() == 0) {
             return true;
         }
@@ -158,8 +158,8 @@ extends thien_ac {
             }
         }
         if (n == 12 || n == 13) {
-            this.y = ((thien_u)this.c.elementAt((int)this.a)).a == 1 ? this.m : this.b;
-            this.e = this.a * this.j - (this.t >> 1);
+            this.actionTertiary = ((thien_u)this.c.elementAt((int)this.a)).a == 1 ? this.m : this.b;
+            this.e = this.a * this.j - (this.height >> 1);
             this.k = this.a - (this.l >> 1);
             if (this.c.size() - this.a < this.l >> 1) {
                 this.k = this.c.size() - this.l;
@@ -186,7 +186,7 @@ extends thien_ac {
         this.C = (thien_u)this.c.elementAt(this.a);
         if (this.C.a == 0) {
             if (this.d != null) {
-                this.d.a();
+                this.d.action();
                 return;
             }
         } else {
@@ -199,9 +199,9 @@ extends thien_ac {
         }
     }
 
-    public final void a(Graphics graphics) {
-        this.H = this.s >> 1;
-        graphics.setClip(this.q, this.r, this.s + 1, this.t);
+    public final void draw(Graphics graphics) {
+        this.H = this.width >> 1;
+        graphics.setClip(this.baseX, this.baseY, this.width + 1, this.height);
         graphics.translate(2, 2);
         graphics.translate(0, -this.h);
         int n = this.k * this.j;
@@ -209,7 +209,7 @@ extends thien_ac {
         this.I = this.c.size();
         this.J = this.j + 2;
         int n2 = 0;
-        int n3 = this.s - 3;
+        int n3 = this.width - 3;
         int n4 = this.k;
         while (n4 <= this.H) {
             String string;
@@ -240,13 +240,13 @@ extends thien_ac {
             }
             if (thien_u2.a == 1) {
                 string = thien_u2.d;
-                string = thien_w.a(string, this.s - 26, thien_w.j);
+                string = thien_w.a(string, this.width - 26, thien_w.j);
                 graphics.setColor(16726823);
                 thien_w.a(thien_w.b).a(string, n5, n + 2, graphics);
             } else {
                 string = thien_u2.e;
                 if (string != null) {
-                    string = thien_w.a(string, this.s - 26, thien_w.j);
+                    string = thien_w.a(string, this.width - 26, thien_w.j);
                     graphics.setColor(thien_u2.b);
                     thien_w.a(thien_u2.c).a(string, n5, n + 3, graphics);
                 }
@@ -259,10 +259,10 @@ extends thien_ac {
         graphics.setClip(-1000, -1000, 2000, 2000);
     }
 
-    public final void b(Graphics graphics) {
+    public final void drawBackground(Graphics graphics) {
     }
 
-    public final void e() {
+    public final void update() {
         thien_al thien_al2 = this;
         if (thien_al2.h != thien_al2.e) {
             thien_al2.f = thien_al2.e - thien_al2.h << 2;
@@ -282,11 +282,11 @@ extends thien_ac {
         }
     }
 
-    public final void f() {
+    public final void handleFocus() {
         if (this.c == null) {
             return;
         }
-        if (this.r + this.c.size() * this.j >= this.t) {
+        if (this.baseY + this.c.size() * this.j >= this.height) {
             thien_ar.a = true;
             thien_ar.a(this.c.size());
             return;
@@ -294,18 +294,18 @@ extends thien_ac {
         thien_ar.a = false;
     }
 
-    public final void c(Graphics graphics) {
+    public final void drawScrollbar(Graphics graphics) {
         if (thien_ar.a) {
             thien_ar.a(graphics, this.a);
         }
     }
 
-    public final void a(int n, int n2) {
+    public final void onDrag(int n, int n2) {
         this.M = n;
         this.N = n2;
     }
 
-    public final void b(int n, int n2) {
+    public final void handleKeyPress(int n, int n2) {
         if (this.L) {
             this.L = false;
             this.e -= (n2 - this.N) * 5;
@@ -351,7 +351,7 @@ extends thien_ac {
         }
     }
 
-    public final void c(int n, int n2) {
+    public final void handlePointerRelease(int n, int n2) {
         if (thien_b.c(n - this.M) > 1 || thien_b.c(n2 - this.N) > 1) {
             this.L = true;
             this.e -= n2 - this.N;

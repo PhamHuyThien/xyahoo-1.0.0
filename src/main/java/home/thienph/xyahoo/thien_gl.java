@@ -1,15 +1,15 @@
 package home.thienph.xyahoo;
 
 final class thien_gl
-implements thien_ae {
-    private final thien_an a;
+implements IAction {
+    private final Screen a;
 
-    thien_gl(thien_ff thien_ff2, thien_an thien_an2) {
-        this.a = thien_an2;
+    thien_gl(thien_ff thien_ff2, Screen screen2) {
+        this.a = screen2;
     }
 
-    public final void a() {
-        thien_di.b().c(this.a);
-        thien_di.c.l();
+    public final void action() {
+        thien_di.getInstance().c(this.a);
+        thien_di.instance.l();
     }
 }

@@ -1,16 +1,16 @@
 package home.thienph.xyahoo;
 
 final class thien_do
-implements thien_ae {
+implements IAction {
     private thien_dm a;
-    private final thien_ae b;
+    private final IAction b;
 
-    thien_do(thien_dm thien_dm2, thien_ae thien_ae2) {
+    thien_do(thien_dm thien_dm2, IAction IAction2) {
         this.a = thien_dm2;
-        this.b = thien_ae2;
+        this.b = IAction2;
     }
 
-    public final void a() {
+    public final void action() {
         thien_dm thien_dm2 = this.a;
         thien_dm2.a.c();
         thien_dm2 = this.a;

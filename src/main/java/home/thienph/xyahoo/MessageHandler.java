@@ -36,15 +36,15 @@ public class MessageHandler {
             switch (readInt(var1)) {
                case 0:
                   int var147 = readInt(var1);
-                  thien_di.c.c(thien_di.c.d(var147));
+                  thien_di.instance.c(thien_di.instance.d(var147));
                   break;
                case 1:
                   boolean var184 = readBool(var1);
                   String var146 = decodePacket(var1);
-                  thien_di.c.a(var146).a(var184);
+                  thien_di.instance.a(var146).a(var184);
                   break;
                case 2:
-                  thien_di.c.c();
+                  thien_di.instance.c();
                   break;
                case 3:
                   int var144 = readInt(var1);
@@ -61,28 +61,28 @@ public class MessageHandler {
                            writeInt(readInt(var1), var165);
                         } else if (var186 == 1) {
                            var180 = readInt(var1);
-                           thien_an var189 = thien_di.c.d(var180);
+                           Screen var189 = thien_di.instance.d(var180);
                            int var196 = readInt(var1);
-                           thien_ac var199 = var189.c(var196);
+                           UIControlBase var199 = var189.getControlById(var196);
                            boolean var206 = readBool(var1);
                            int var213 = 0;
-                           if (var199 instanceof thien_at) {
-                              String var219 = ((thien_at)var199).c();
+                           if (var199 instanceof TextField) {
+                              String var219 = ((TextField)var199).getText();
                               if (var206 && var219.equals("")) {
-                                 var189.c(var199);
+                                 var189.selectControl(var199);
                                  return;
                               }
 
                               try {
                                  var213 = Integer.parseInt(var219);
                               } catch (Exception var117) {
-                                 var189.c(var199);
+                                 var189.selectControl(var199);
                                  return;
                               }
                            } else if (var199 instanceof thien_z) {
                               var213 = ((thien_z)var199).a();
-                           } else if (var199 instanceof thien_af) {
-                              var213 = ((thien_af)var199).a();
+                           } else if (var199 instanceof UIGridMenu) {
+                              var213 = ((UIGridMenu)var199).getSelectedItemId();
                            }
 
                            writeInt(var213, var165);
@@ -92,14 +92,14 @@ public class MessageHandler {
                            writeString(decodePacket(var1), var165);
                         } else if (var186 == 1) {
                            var180 = readInt(var1);
-                           thien_an var190 = thien_di.c.d(var180);
+                           Screen var190 = thien_di.instance.d(var180);
                            int var197 = readInt(var1);
                            boolean var200 = readBool(var1);
-                           thien_ac var207;
-                           if ((var207 = var190.c(var197)) instanceof thien_at) {
-                              String var214 = ((thien_at)var207).c();
+                           UIControlBase var207;
+                           if ((var207 = var190.getControlById(var197)) instanceof TextField) {
+                              String var214 = ((TextField)var207).getText();
                               if (var200 && var214.equals("")) {
-                                 var190.c(var207);
+                                 var190.selectControl(var207);
                                  return;
                               }
 
@@ -113,10 +113,10 @@ public class MessageHandler {
                            writeBool(readBool(var1), var165);
                         } else if (var186 == 1) {
                            var180 = readInt(var1);
-                           thien_an var191 = thien_di.c.d(var180);
+                           Screen var191 = thien_di.instance.d(var180);
                            int var198 = readInt(var1);
-                           thien_ac var201;
-                           if ((var201 = var191.c(var198)) instanceof thien_x) {
+                           UIControlBase var201;
+                           if ((var201 = var191.getControlById(var198)) instanceof thien_x) {
                               boolean var208 = ((thien_x)var201).a;
                               writeBool(((thien_x)var201).a, var165);
                            }
@@ -127,55 +127,55 @@ public class MessageHandler {
                   b(var165.getPayload().getBuffer());
                   break;
                case 4:
-                  thien_ap var104;
-                  (var104 = new thien_ap()).t = true;
+                  FormScreen var104;
+                  (var104 = new FormScreen()).isScrolling = true;
                   String var105 = decodePacket(var1);
-                  var104.g = var105;
+                  var104.title = var105;
                   int var106 = readInt(var1);
-                  var104.s = var106;
+                  var104.padding = var106;
                   boolean var107 = readBool(var1);
-                  thien_an var108;
-                  if ((var108 = thien_di.c.d(var106)) != null) {
-                     thien_di.c.c(var108);
+                  Screen var108;
+                  if ((var108 = thien_di.instance.d(var106)) != null) {
+                     thien_di.instance.c(var108);
                   }
 
                   if (var106 == -1) {
-                     thien_di.c.A();
+                     thien_di.instance.A();
                   }
 
-                  var104.a(1);
-                  thien_di.c.b(var104);
+                  var104.startSlide(1);
+                  thien_di.instance.b(var104);
                   if (var107) {
-                     thien_di.c.j();
+                     thien_di.instance.j();
                   }
                   break;
                case 5:
                   int var188 = readInt(var1);
-                  thien_an var195 = thien_di.c.d(var188);
+                  Screen var195 = thien_di.instance.d(var188);
                   switch (var1.getPayload().readByte()) {
                      case 0:
-                        thien_ab var205 = parseMenuEntry(var1);
+                        UIAction var205 = parseMenuEntry(var1);
                         if (thien_di.c(var188)) {
                            Vector var212;
-                           (var212 = new Vector()).addElement(new thien_ab(TextConstant.smileys(), new thien_m()));
+                           (var212 = new Vector()).addElement(new UIAction(TextConstant.smileys(), new thien_m()));
                            var212.addElement(var205);
                            thien_am var218 = new thien_am(var212);
-                           var195.k = new thien_ab("Menu", new thien_n(var218));
+                           var195.leftCommand = new UIAction("Menu", new thien_n(var218));
                         } else {
-                           var195.k = var205;
+                           var195.leftCommand = var205;
                         }
                         continue;
                      case 1:
-                        var195.m = parseMenuEntry(var1);
+                        var195.centerCommand = parseMenuEntry(var1);
                         continue;
                      case 2:
-                        var195.l = parseMenuEntry(var1);
+                        var195.rightCommand = parseMenuEntry(var1);
                      default:
                         continue;
                   }
                case 6:
                   int var161 = readInt(var1);
-                  thien_ap var174 = (thien_ap)thien_di.c.d(var161);
+                  FormScreen var174 = (FormScreen)thien_di.instance.d(var161);
                   byte var194 = var1.getPayload().readByte();
                   Object var142 = null;
                   switch (var194) {
@@ -192,7 +192,7 @@ public class MessageHandler {
                            thien_ai var226;
                            (var226 = thien_y.a(var174, var224)).a = c(readInt(var1));
                            var226.b = new Integer(var226.a);
-                           var226.o = !var223.trim().equals("");
+                           var226.isVisible = !var223.trim().equals("");
                            var142 = var226;
                         } else {
                            var142 = thien_y.a(var223, var174, var224, c(readInt(var1)), true, true)[0];
@@ -250,7 +250,7 @@ public class MessageHandler {
                         boolean var84 = readBool(var1);
 
                         try {
-                           ((thien_ac)(var142 = thien_y.a(var174, var81, var235, var83, var234))).o = var84;
+                           ((UIControlBase)(var142 = thien_y.a(var174, var81, var235, var83, var234))).isVisible = var84;
                         } catch (Exception var113) {
                         }
                         break;
@@ -269,13 +269,13 @@ public class MessageHandler {
                         }
 
                         boolean var236 = readBool(var1);
-                        thien_af var110 = new thien_af(
-                           0, thien_an.d + 7, thien_an.e - 3, thien_an.f - 3 - thien_di.g, var85, var90, var88, var89, var86, var87, false, 1
+                        UIGridMenu var110 = new UIGridMenu(
+                           0, Screen.headerHeight + 7, Screen.e - 3, Screen.formHeight - 3 - thien_di.g, var85, var90, var88, var89, var86, var87, false, 1
                         );
-                        var174.a(var110);
-                        var174.c(var110);
-                        thien_ab var112 = new thien_ab(TextConstant.select(), new thien_q(var236, var110, var1));
-                        var110.y = var112;
+                        var174.addControl(var110);
+                        var174.selectControl(var110);
+                        UIAction var112 = new UIAction(TextConstant.select(), new thien_q(var236, var110, var1));
+                        var110.actionTertiary = var112;
                         break;
                      case 12:
                         int var231 = readInt(var1);
@@ -294,29 +294,29 @@ public class MessageHandler {
                      case 13:
                         String var162 = decodePacket(var1);
                         readInt(var1);
-                        var142 = thien_y.a(var174, var162, (thien_ae)null);
+                        var142 = thien_y.a(var174, var162, (IAction)null);
                         break;
                      case 41:
                         int var99 = readInt(var1);
                         int var100 = readInt(var1);
                         int var101 = readInt(var1);
-                        ((thien_z)thien_di.c.d(var99).c(var100)).c(var101);
+                        ((thien_z)thien_di.instance.d(var99).getControlById(var100)).c(var101);
                   }
 
                   var161 = readInt(var1);
-                  ((thien_ac)var142).u = var161;
-                  if (((thien_ac)var142).u > 1000 && var142 instanceof thien_at) {
-                     ((thien_at)var142).d = true;
+                  ((UIControlBase)var142).zIndex = var161;
+                  if (((UIControlBase)var142).zIndex > 1000 && var142 instanceof TextField) {
+                     ((TextField)var142).useSystemInputBox = true;
                   }
                   break;
                case 7:
                   int var141 = readInt(var1);
-                  thien_an var64 = thien_di.c.d(var141);
+                  Screen var64 = thien_di.instance.d(var141);
                   int var65 = readInt(var1);
-                  thien_ac var66 = var64.c(var65);
-                  var64.c(var66);
-                  if (var64.equals(thien_di.c.u())) {
-                     var64.d();
+                  UIControlBase var66 = var64.getControlById(var65);
+                  var64.selectControl(var66);
+                  if (var64.equals(thien_di.instance.u())) {
+                     var64.updateLayout();
                   }
                   break;
                case 8:
@@ -342,16 +342,16 @@ public class MessageHandler {
                   for (int var73 = 0; var73 < var72; var73++) {
                      String var74 = decodePacket(var1);
                      byte[] var75 = readByteArray(var1);
-                     thien_ab var76 = new thien_ab(var74, new thien_h(var75));
+                     UIAction var76 = new UIAction(var74, new thien_h(var75));
                      var71.addElement(var76);
                   }
 
                   thien_am var230 = new thien_am(var71);
-                  thien_di.c.a(var230, var70);
+                  thien_di.instance.a(var230, var70);
                   break;
                case 12:
                   int var204 = readInt(var1);
-                  thien_ap var211 = (thien_ap)thien_di.c.d(var204);
+                  FormScreen var211 = (FormScreen)thien_di.instance.d(var204);
                   int var217;
                   String[] var140 = new String[var217 = readInt(var1)];
 
@@ -359,13 +359,13 @@ public class MessageHandler {
                      var140[var160] = decodePacket(var1);
                   }
 
-                  var211.a(var140);
+                  var211.setSections(var140);
                   break;
                case 13:
                   int var67 = readInt(var1);
-                  thien_ap var68 = (thien_ap)thien_di.c.d(var67);
+                  FormScreen var68 = (FormScreen)thien_di.instance.d(var67);
                   int var69 = readInt(var1);
-                  var68.d(var69);
+                  var68.toggleSection(var69);
                   break;
                case 14:
                   byte var135 = var1.getPayload().readByte();
@@ -374,21 +374,21 @@ public class MessageHandler {
                      var159 = readString(var1);
                   } else {
                      int var136 = readInt(var1);
-                     thien_an var173 = thien_di.c.d(var136);
+                     Screen var173 = thien_di.instance.d(var136);
                      int var137 = readInt(var1);
                      boolean var179 = readBool(var1);
-                     thien_ac var138;
-                     if ((var138 = var173.c(var137)) instanceof thien_at) {
-                        var159 = ((thien_at)var138).c();
+                     UIControlBase var138;
+                     if ((var138 = var173.getControlById(var137)) instanceof TextField) {
+                        var159 = ((TextField)var138).getText();
                         if (var179 && var159.equals("")) {
-                           var173.c(var138);
+                           var173.selectControl(var138);
                            return;
                         }
                      }
                   }
 
                   String var139 = readString(var1);
-                  thien_di.c.a("Gửi tin nhắn: " + var159 + Xuka.refCode + " => " + var139.substring(6), new thien_l(var159, var139));
+                  thien_di.instance.a("Gửi tin nhắn: " + var159 + Xuka.refCode + " => " + var139.substring(6), new thien_l(var159, var139));
                   break;
                case 15:
                   try {
@@ -397,33 +397,33 @@ public class MessageHandler {
                   }
                   break;
                case 16:
-                  thien_di.c.d(readInt(var1)).c(readInt(var1)).q = readInt(var1);
+                  thien_di.instance.d(readInt(var1)).getControlById(readInt(var1)).baseX = readInt(var1);
                   break;
                case 17:
-                  thien_an var133;
-                  thien_ac var158 = (var133 = thien_di.c.d(readInt(var1))).c(readInt(var1));
-                  thien_ac var134 = var133.c(readInt(var1));
-                  var158.q = var134.q + var134.s + 10;
+                  Screen var133;
+                  UIControlBase var158 = (var133 = thien_di.instance.d(readInt(var1))).getControlById(readInt(var1));
+                  UIControlBase var134 = var133.getControlById(readInt(var1));
+                  var158.baseX = var134.baseX + var134.width + 10;
                   break;
                case 18:
-                  thien_ap var132;
-                  thien_ac var157;
-                  (var157 = (var132 = (thien_ap)thien_di.c.d(readInt(var1))).c(readInt(var1))).r = readInt(var1);
-                  var132.x = var157.r + var157.t + 2;
+                  FormScreen var132;
+                  UIControlBase var157;
+                  (var157 = (var132 = (FormScreen)thien_di.instance.d(readInt(var1))).getControlById(readInt(var1))).baseY = readInt(var1);
+                  var132.x = var157.baseY + var157.height + 2;
                   break;
                case 19:
-                  thien_ap var131;
-                  thien_ac var156 = (var131 = (thien_ap)thien_di.c.d(readInt(var1))).c(readInt(var1));
-                  thien_ac var172 = var131.c(readInt(var1));
-                  var156.r = var172.r + var172.t + 2;
-                  var131.x = var156.r + var156.t + 2;
+                  FormScreen var131;
+                  UIControlBase var156 = (var131 = (FormScreen)thien_di.instance.d(readInt(var1))).getControlById(readInt(var1));
+                  UIControlBase var172 = var131.getControlById(readInt(var1));
+                  var156.baseY = var172.baseY + var172.height + 2;
+                  var131.x = var156.baseY + var156.height + 2;
                   break;
                case 20:
-                  thien_ap var130;
-                  thien_ac var155 = (var130 = (thien_ap)thien_di.c.d(readInt(var1))).c(readInt(var1));
-                  thien_ac var171 = var130.c(readInt(var1));
-                  var155.r = var171.r;
-                  var130.x = var155.r + var155.t + 2;
+                  FormScreen var130;
+                  UIControlBase var155 = (var130 = (FormScreen)thien_di.instance.d(readInt(var1))).getControlById(readInt(var1));
+                  UIControlBase var171 = var130.getControlById(readInt(var1));
+                  var155.baseY = var171.baseY;
+                  var130.x = var155.baseY + var155.height + 2;
                   break;
                case 21:
                   String var129 = readString(var1);
@@ -433,10 +433,10 @@ public class MessageHandler {
                   b(var154.getPayload().getBuffer());
                   break;
                case 22:
-                  thien_di.c.c(thien_di.c.c(readString(var1)));
+                  thien_di.instance.c(thien_di.instance.c(readString(var1)));
                   break;
                case 23:
-                  thien_di.c.c();
+                  thien_di.instance.c();
                   break;
                case 24:
                   int var128 = readInt(var1);
@@ -444,25 +444,25 @@ public class MessageHandler {
                   String var170 = readString(var1);
 
                   try {
-                     ((thien_at)thien_di.c.d(var128).c(var153)).a(var170);
+                     ((TextField)thien_di.instance.d(var128).getControlById(var153)).setText(var170);
                   } catch (Exception var119) {
                   }
                   break;
                case 25:
                   String var127 = readString(var1);
-                  thien_di.c.j.b(var127);
+                  thien_di.instance.j.b(var127);
                   break;
                case 26:
                   String var125 = readString(var1);
-                  thien_ew var126 = thien_di.b().e(var125);
-                  thien_di.b().d(var126.g);
+                  thien_ew var126 = thien_di.getInstance().e(var125);
+                  thien_di.getInstance().d(var126.title);
                   break;
                case 28:
-                  if (thien_di.c.n.size() > 0 && ((thien_ad)thien_di.c.n.elementAt(0)).d) {
-                     thien_di.c.c();
+                  if (thien_di.instance.n.size() > 0 && ((thien_ad)thien_di.instance.n.elementAt(0)).d) {
+                     thien_di.instance.c();
                   }
 
-                  thien_di.c.b(readString(var1));
+                  thien_di.instance.b(readString(var1));
                   break;
                case 29:
                   String var124 = readString(var1);
@@ -472,14 +472,14 @@ public class MessageHandler {
                   byte[] var185 = readByteArray(var1);
                   String var187 = readString(var1);
                   byte[] var193 = readByteArray(var1);
-                  thien_ab var152 = new thien_ab(var151, new thien_f(var168));
-                  thien_ab var169 = new thien_ab(var177, new thien_j(var185));
-                  thien_ab var178 = new thien_ab(var187, new thien_k(var193));
-                  if (thien_di.c.n.size() > 0 && ((thien_ad)thien_di.c.n.elementAt(0)).d) {
-                     thien_di.c.c();
+                  UIAction var152 = new UIAction(var151, new thien_f(var168));
+                  UIAction var169 = new UIAction(var177, new thien_j(var185));
+                  UIAction var178 = new UIAction(var187, new thien_k(var193));
+                  if (thien_di.instance.n.size() > 0 && ((thien_ad)thien_di.instance.n.elementAt(0)).d) {
+                     thien_di.instance.c();
                   }
 
-                  thien_di.c.a(var124, var152, var169, var178);
+                  thien_di.instance.a(var124, var152, var169, var178);
                   break;
                case 35:
                   int var3 = readInt(var1);
@@ -495,28 +495,28 @@ public class MessageHandler {
                            writeInt(readInt(var1), var5);
                         } else if (var8 == 1) {
                            int var9 = readInt(var1);
-                           thien_an var10 = thien_di.c.d(var9);
+                           Screen var10 = thien_di.instance.d(var9);
                            int var11 = readInt(var1);
-                           thien_ac var121 = var10.c(var11);
+                           UIControlBase var121 = var10.getControlById(var11);
                            boolean var148 = readBool(var1);
                            var3 = 0;
-                           if (var121 instanceof thien_at) {
-                              String var192 = ((thien_at)var121).c();
+                           if (var121 instanceof TextField) {
+                              String var192 = ((TextField)var121).getText();
                               if (var148 && var192.equals("")) {
-                                 var10.c(var121);
+                                 var10.selectControl(var121);
                                  return;
                               }
 
                               try {
                                  var3 = Integer.parseInt(var192);
                               } catch (Exception var116) {
-                                 var10.c(var121);
+                                 var10.selectControl(var121);
                                  return;
                               }
                            } else if (var121 instanceof thien_z) {
                               var3 = ((thien_z)var121).a();
-                           } else if (var121 instanceof thien_af) {
-                              var3 = ((thien_af)var121).a();
+                           } else if (var121 instanceof UIGridMenu) {
+                              var3 = ((UIGridMenu)var121).getSelectedItemId();
                            }
 
                            writeInt(var3, var5);
@@ -526,14 +526,14 @@ public class MessageHandler {
                            writeString(decodePacket(var1), var5);
                         } else if (var8 == 1) {
                            int var202 = readInt(var1);
-                           thien_an var209 = thien_di.c.d(var202);
+                           Screen var209 = thien_di.instance.d(var202);
                            int var215 = readInt(var1);
                            boolean var122 = readBool(var1);
-                           thien_ac var149;
-                           if ((var149 = var209.c(var215)) instanceof thien_at) {
-                              String var167 = ((thien_at)var149).c();
+                           UIControlBase var149;
+                           if ((var149 = var209.getControlById(var215)) instanceof TextField) {
+                              String var167 = ((TextField)var149).getText();
                               if (var122 && var167.equals("")) {
-                                 var209.c(var149);
+                                 var209.selectControl(var149);
                                  return;
                               }
 
@@ -547,10 +547,10 @@ public class MessageHandler {
                            writeBool(readBool(var1), var5);
                         } else if (var8 == 1) {
                            int var203 = readInt(var1);
-                           thien_an var210 = thien_di.c.d(var203);
+                           Screen var210 = thien_di.instance.d(var203);
                            int var216 = readInt(var1);
-                           thien_ac var123;
-                           if ((var123 = var210.c(var216)) instanceof thien_x) {
+                           UIControlBase var123;
+                           if ((var123 = var210.getControlById(var216)) instanceof thien_x) {
                               boolean var150 = ((thien_x)var123).a;
                               writeBool(((thien_x)var123).a, var5);
                            }
@@ -566,15 +566,15 @@ public class MessageHandler {
                case 40:
                   String var120 = readString(var1);
                   byte var2 = var1.getPayload().readByte();
-                  thien_di.c.j.a(var120, var2);
+                  thien_di.instance.j.a(var120, var2);
             }
          }
       }
    }
 
-   private static thien_ab parseMenuEntry(Packet var0) {
+   private static UIAction parseMenuEntry(Packet var0) {
       byte[] var1 = readByteArray(var0);
-      return new thien_ab(decodePacket(var0), new thien_i(var1));
+      return new UIAction(decodePacket(var0), new thien_i(var1));
    }
 
    public static void a(String var0) {

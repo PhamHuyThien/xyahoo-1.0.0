@@ -3,36 +3,36 @@ package home.thienph.xyahoo;
 import java.util.Vector;
 
 final class thien_cz
-implements thien_ae {
-    private thien_cq a;
+implements IAction {
+    private LoginScreen a;
 
-    thien_cz(thien_cq thien_cq2) {
-        this.a = thien_cq2;
+    thien_cz(LoginScreen loginScreen2) {
+        this.a = loginScreen2;
     }
 
-    public final void a() {
+    public final void action() {
         int n;
         System.gc();
-        this.a.D.a(this.a.D.c().toLowerCase());
-        thien_ff.A = thien_ff.y = this.a.D.c();
+        this.a.usernameField.setText(this.a.usernameField.getText().toLowerCase());
+        thien_ff.A = thien_ff.y = this.a.usernameField.getText();
         thien_ff.B = 1;
-        Xuka.saveUserID(this.a.D.c());
-        Xuka.savePassword(this.a.E.c());
+        Xuka.saveUserID(this.a.usernameField.getText());
+        Xuka.savePassword(this.a.passwordField.getText());
         Xuka.saveFlag("status", true);
-        if (thien_di.c.j == null) {
-            thien_di.c.j = new thien_ff();
-            thien_di.c.m = new thien_cn();
+        if (thien_di.instance.j == null) {
+            thien_di.instance.j = new thien_ff();
+            thien_di.instance.m = new thien_cn();
         }
         if ((n = thien_di.a(false)) != -1) {
             thien_s thien_s2 = thien_di.a(false, thien_ff.y);
             if (thien_s2 != null) {
-                thien_di.b().j.x.a(thien_s2, -1);
+                thien_di.getInstance().j.x.a(thien_s2, -1);
             } else {
                 n = -1;
             }
         }
-        thien_di.b().d = new Vector();
+        thien_di.getInstance().d = new Vector();
         GameCanvas.instance.connectToServer();
-        MessageHandler.a(this.a.D.c(), this.a.E.c(), thien_ff.B, 1, n);
+        MessageHandler.a(this.a.usernameField.getText(), this.a.passwordField.getText(), thien_ff.B, 1, n);
     }
 }

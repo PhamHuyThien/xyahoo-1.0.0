@@ -1,7 +1,7 @@
 package home.thienph.xyahoo;
 
 final class thien_fc
-implements thien_ae {
+implements IAction {
     private thien_ew a;
     private final boolean b;
 
@@ -10,10 +10,10 @@ implements thien_ae {
         this.b = bl;
     }
 
-    public final void a() {
+    public final void action() {
         if (this.b) {
-            MessageHandler.h(this.a.h);
+            MessageHandler.h(this.a.subtitle);
         }
-        thien_di.b().c(this.a);
+        thien_di.getInstance().c(this.a);
     }
 }

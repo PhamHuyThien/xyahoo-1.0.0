@@ -3,9 +3,9 @@ package home.thienph.xyahoo;
 import javax.microedition.lcdui.Graphics;
 
 public final class thien_ad {
-    public thien_ab a;
-    public thien_ab b;
-    public thien_ab c;
+    public UIAction a;
+    public UIAction b;
+    public UIAction c;
     private String[] e;
     public boolean d = false;
     private int f;
@@ -19,19 +19,19 @@ public final class thien_ad {
     private int n;
     private int o;
 
-    public thien_ad(String string, thien_ab thien_ab2, thien_ab thien_ab3, thien_ab thien_ab4) {
+    public thien_ad(String string, UIAction UIAction2, UIAction UIAction3, UIAction UIAction4) {
         this.e = thien_w.b(string, GameCanvas.screenWidth - 30, thien_w.j);
-        this.a = thien_ab2;
-        this.c = thien_ab4;
-        this.b = thien_ab3;
+        this.a = UIAction2;
+        this.c = UIAction4;
+        this.b = UIAction3;
         this.a();
     }
 
-    public thien_ad(String[] stringArray, thien_ab thien_ab2, thien_ab thien_ab3, thien_ab thien_ab4) {
+    public thien_ad(String[] stringArray, UIAction UIAction2, UIAction UIAction3, UIAction UIAction4) {
         this.e = stringArray;
-        this.a = thien_ab2;
-        this.c = thien_ab4;
-        this.b = thien_ab3;
+        this.a = UIAction2;
+        this.c = UIAction4;
+        this.b = UIAction3;
         this.a();
     }
 
@@ -106,19 +106,19 @@ public final class thien_ad {
             ++n2;
         }
         if (this.d) {
-            thien_di.c.a(graphics, this.g, this.o + this.f * thien_w.f + thien_w.f + 3);
+            thien_di.instance.a(graphics, this.g, this.o + this.f * thien_w.f + thien_w.f + 3);
         }
-        thien_an.c(graphics);
+        Screen.drawFooter(graphics);
         graphics.setColor(0xFFFFFF);
         n2 = GameCanvas.screenHeight - (thien_di.g >> 1) - (thien_w.f >> 1) + (thien_w.a ? 0 : 2);
         if (this.a != null) {
-            thien_w.a(thien_w.d).a(this.a.a, 4, n2, graphics);
+            thien_w.a(thien_w.d).a(this.a.label, 4, n2, graphics);
         }
         if (this.b != null) {
-            thien_w.a(thien_w.d).a(this.b.a, this.g, n2, 2, graphics, thien_w.j, thien_w.f);
+            thien_w.a(thien_w.d).a(this.b.label, this.g, n2, 2, graphics, thien_w.j, thien_w.f);
         }
         if (this.c != null) {
-            thien_w.a(thien_w.d).a(this.c.a, GameCanvas.screenWidth - 4, n2, 1, graphics, thien_w.j, thien_w.f);
+            thien_w.a(thien_w.d).a(this.c.label, GameCanvas.screenWidth - 4, n2, 1, graphics, thien_w.j, thien_w.f);
         }
     }
 }

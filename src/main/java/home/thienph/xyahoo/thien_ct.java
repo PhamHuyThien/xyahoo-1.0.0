@@ -4,11 +4,11 @@ import javax.microedition.lcdui.Image;
 import javax.microedition.rms.RecordStore;
 
 final class thien_ct
-implements thien_ae {
+implements IAction {
     thien_ct() {
     }
 
-    public final void a() {
+    public final void action() {
         String[] stringArray = RecordStore.listRecordStores();
         if (stringArray != null) {
             try {
@@ -19,6 +19,6 @@ implements thien_ae {
             }
             catch (Exception exception) {}
         }
-        thien_di.c.a("\u0110\u00e3 x\u00f3a d\u1eef li\u1ec7u c\u00e1 nh\u00e2n", (Image)null, 2);
+        thien_di.instance.a("\u0110\u00e3 x\u00f3a d\u1eef li\u1ec7u c\u00e1 nh\u00e2n", (Image)null, 2);
     }
 }

@@ -1,31 +1,31 @@
 package home.thienph.xyahoo;
 
 final class thien_fk
-implements thien_ae {
-    private final thien_at a;
-    private final thien_an b;
+implements IAction {
+    private final TextField a;
+    private final Screen b;
     private final String c;
     private final String d;
 
-    thien_fk(thien_ff thien_ff2, thien_at thien_at2, thien_an thien_an2, String string, String string2) {
-        this.a = thien_at2;
-        this.b = thien_an2;
+    thien_fk(thien_ff thien_ff2, TextField textField2, Screen screen2, String string, String string2) {
+        this.a = textField2;
+        this.b = screen2;
         this.c = string;
         this.d = string2;
     }
 
-    public final void a() {
-        String string = this.a.c().trim();
+    public final void action() {
+        String string = this.a.getText().trim();
         if (string.equals("")) {
-            this.b.c(this.a);
+            this.b.selectControl(this.a);
             return;
         }
-        thien_di.c.l();
+        thien_di.instance.l();
         if (string.equals(this.c)) {
-            thien_di.b().c(this.b);
+            thien_di.getInstance().c(this.b);
             return;
         }
         MessageHandler.g(this.d, string);
-        thien_di.b().c(this.b);
+        thien_di.getInstance().c(this.b);
     }
 }

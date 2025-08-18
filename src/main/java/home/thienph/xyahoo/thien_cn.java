@@ -3,12 +3,12 @@ package home.thienph.xyahoo;
 import java.util.Vector;
 import javax.microedition.lcdui.Graphics;
 
-public final class thien_cn extends thien_an {
-   private thien_b y = thien_di.b().j.x;
+public final class thien_cn extends Screen {
+   private thien_b y = thien_di.getInstance().j.x;
    String w;
    String x;
    private boolean z;
-   private final thien_at A = new thien_at();
+   private final TextField A = new TextField();
 
    public final String[] e() {
       Vector var1 = new Vector();
@@ -32,13 +32,13 @@ public final class thien_cn extends thien_an {
    }
 
    public thien_cn() {
-      this.A.a = true;
-      this.A.a(0, thien_an.f - thien_di.g - thien_w.f - 11, thien_an.e - 6, thien_w.f + 6);
-      super.g = TextConstant.inviteConference();
-      this.a(this.y);
-      this.c(this.y);
-      super.l = new thien_ab("OK", new thien_co(this));
-      super.k = new thien_ab(TextConstant.cancel(), new thien_cp(this));
+      this.A.isShiftMode = true;
+      this.A.setBounds(0, Screen.formHeight - thien_di.g - thien_w.f - 11, Screen.e - 6, thien_w.f + 6);
+      super.title = TextConstant.inviteConference();
+      this.addControl(this.y);
+      this.selectControl(this.y);
+      super.rightCommand = new UIAction("OK", new thien_co(this));
+      super.leftCommand = new UIAction(TextConstant.cancel(), new thien_cp(this));
    }
 
    public final void f() {
@@ -50,19 +50,19 @@ public final class thien_cn extends thien_an {
       this.y.k = null;
    }
 
-   public final void d() {
-      this.y.f();
+   public final void updateLayout() {
+      this.y.handleFocus();
    }
 
-   public final void d(Graphics var1) {
-      this.y.c(var1);
+   public final void drawOverlay(Graphics var1) {
+      this.y.drawScrollbar(var1);
    }
 
-   public final boolean a(boolean[] var1, boolean[] var2, int[] var3) {
+   public final boolean handleInput(boolean[] var1, boolean[] var2, int[] var3) {
       if (var3[0] > 32 && !this.z) {
-         this.A.a("");
-         this.a(this.A);
-         this.c(this.A);
+         this.A.setText("");
+         this.addControl(this.A);
+         this.selectControl(this.A);
          this.z = true;
       }
 
@@ -70,28 +70,28 @@ public final class thien_cn extends thien_an {
       if (this.z) {
          if (var1[12]) {
             var1[12] = false;
-            this.y.b(12);
+            this.y.handleKeyInput(12);
          } else if (var1[13]) {
             var1[13] = false;
-            this.y.b(13);
+            this.y.handleKeyInput(13);
          } else if (var1[16]) {
             var1[16] = false;
-            this.y.b(16);
+            this.y.handleKeyInput(16);
          }
 
-         var4 = this.A.c();
+         var4 = this.A.getText();
       }
 
-      super.a(var1, var2, var3);
+      super.handleInput(var1, var2, var3);
       if (this.z) {
-         if (this.A.c().equals("")) {
-            this.c(this.y);
-            this.b(this.A);
+         if (this.A.getText().equals("")) {
+            this.selectControl(this.y);
+            this.removeControl(this.A);
             this.z = false;
          }
 
-         if (!this.A.c().equals(var4)) {
-            this.y.d(this.A.c());
+         if (!this.A.getText().equals(var4)) {
+            this.y.d(this.A.getText());
          }
       }
 

@@ -1,15 +1,15 @@
 package home.thienph.xyahoo;
 
 final class thien_da
-        implements thien_ae {
-    private thien_cq a;
+        implements IAction {
+    private LoginScreen a;
 
-    thien_da(thien_cq thien_cq2) {
-        this.a = thien_cq2;
+    thien_da(LoginScreen loginScreen2) {
+        this.a = loginScreen2;
     }
 
-    public final void a() {
-        this.a.a(this.a.F);
-        this.a.c(this.a.F);
+    public final void action() {
+        this.a.addControl(this.a.chatBoxField);
+        this.a.selectControl(this.a.chatBoxField);
     }
 }

@@ -1,18 +1,18 @@
 package home.thienph.xyahoo;
 
 final class thien_dh
-implements thien_ae {
-    private thien_cq a;
-    private final thien_at b;
+implements IAction {
+    private LoginScreen a;
+    private final TextField b;
 
-    thien_dh(thien_cq thien_cq2, thien_at thien_at2) {
-        this.a = thien_cq2;
-        this.b = thien_at2;
+    thien_dh(LoginScreen loginScreen2, TextField textField2) {
+        this.a = loginScreen2;
+        this.b = textField2;
     }
 
-    public final void a() {
-        this.a.b(this.b);
-        this.a.c(this.a.D);
-        this.b.a("");
+    public final void action() {
+        this.a.removeControl(this.b);
+        this.a.selectControl(this.a.usernameField);
+        this.b.setText("");
     }
 }

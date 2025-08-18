@@ -1,11 +1,11 @@
 package home.thienph.xyahoo;
 
 final class thien_bb
-implements thien_ae {
+implements IAction {
     thien_bb(thien_ba thien_ba2) {
     }
 
-    public final void a() {
-        thien_di.b().a(0);
+    public final void action() {
+        thien_di.getInstance().a(0);
     }
 }

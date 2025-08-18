@@ -1,16 +1,16 @@
 package home.thienph.xyahoo;
 
 final class thien_dt
-implements thien_ae {
+implements IAction {
     private thien_di a;
-    private final thien_ap b;
+    private final FormScreen b;
 
-    thien_dt(thien_di thien_di2, thien_ap thien_ap2) {
+    thien_dt(thien_di thien_di2, FormScreen formScreen2) {
         this.a = thien_di2;
-        this.b = thien_ap2;
+        this.b = formScreen2;
     }
 
-    public final void a() {
+    public final void action() {
         this.a.c(this.b);
     }
 }

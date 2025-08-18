@@ -3,37 +3,37 @@ package home.thienph.xyahoo;
 import javax.microedition.lcdui.Image;
 
 final class thien_fp
-implements thien_ae {
+implements IAction {
     private thien_ff a;
-    private final thien_at b;
-    private final thien_at c;
-    private final thien_at d;
-    private final thien_an e;
+    private final TextField b;
+    private final TextField c;
+    private final TextField d;
+    private final Screen e;
 
-    thien_fp(thien_ff thien_ff2, thien_at thien_at2, thien_at thien_at3, thien_at thien_at4, thien_an thien_an2) {
+    thien_fp(thien_ff thien_ff2, TextField textField2, TextField textField3, TextField textField4, Screen screen2) {
         this.a = thien_ff2;
-        this.b = thien_at2;
-        this.c = thien_at3;
-        this.d = thien_at4;
-        this.e = thien_an2;
+        this.b = textField2;
+        this.c = textField3;
+        this.d = textField4;
+        this.e = screen2;
     }
 
-    public final void a() {
-        if (this.b.c().equals("")) {
+    public final void action() {
+        if (this.b.getText().equals("")) {
             return;
         }
-        if (this.c.c().length() < 6 || this.c.c().length() > 64) {
-            thien_di.b().a(String.valueOf(TextConstant.password()) + TextConstant.lengthMustBeFrom6To64(), (Image)null, 1);
-            this.a.c(this.c);
+        if (this.c.getText().length() < 6 || this.c.getText().length() > 64) {
+            thien_di.getInstance().a(String.valueOf(TextConstant.password()) + TextConstant.lengthMustBeFrom6To64(), (Image)null, 1);
+            this.a.selectControl(this.c);
             return;
         }
-        if (this.c.c().equals("") || this.d.c().equals("") || !this.c.c().equals(this.d.c())) {
-            thien_di.b().a(TextConstant.typePasswordAgain(), (Image)null, 1);
-            this.a.c(this.c);
+        if (this.c.getText().equals("") || this.d.getText().equals("") || !this.c.getText().equals(this.d.getText())) {
+            thien_di.getInstance().a(TextConstant.typePasswordAgain(), (Image)null, 1);
+            this.a.selectControl(this.c);
             return;
         }
-        MessageHandler.b("", this.b.c(), this.c.c());
-        thien_di.b().c(this.e);
-        thien_di.c.l();
+        MessageHandler.b("", this.b.getText(), this.c.getText());
+        thien_di.getInstance().c(this.e);
+        thien_di.instance.l();
     }
 }

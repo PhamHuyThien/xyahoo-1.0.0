@@ -1,21 +1,21 @@
 package home.thienph.xyahoo;
 
 final class thien_bq
-implements thien_ae {
+implements IAction {
     private thien_ba a;
 
     thien_bq(thien_ba thien_ba2) {
         this.a = thien_ba2;
     }
 
-    public final void a() {
-        if (!thien_ba.h().c().equals("")) {
+    public final void action() {
+        if (!thien_ba.h().getText().equals("")) {
             long l;
-            this.a.b(thien_ba.h());
+            this.a.removeControl(thien_ba.h());
             thien_ba.H = false;
-            this.a.c(thien_ba.g(this.a));
+            this.a.selectControl(thien_ba.g(this.a));
             try {
-                l = Long.parseLong(thien_ba.h().c());
+                l = Long.parseLong(thien_ba.h().getText());
             }
             catch (Exception exception) {
                 return;
@@ -27,6 +27,6 @@ implements thien_ae {
             }
         }
         thien_ba.a(this.a);
-        thien_ba.h().a("");
+        thien_ba.h().setText("");
     }
 }

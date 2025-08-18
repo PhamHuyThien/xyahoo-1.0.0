@@ -4,42 +4,42 @@ import java.util.Vector;
 import javax.microedition.io.ConnectionNotFoundException;
 import javax.microedition.lcdui.Graphics;
 
-public final class thien_ew extends thien_an {
+public final class thien_ew extends Screen {
    public boolean w;
    public String x;
    public String y;
    private String B;
    public thien_e z;
-   thien_at A;
+   TextField A;
    private boolean C;
    private final thien_am D;
    private final Vector E;
 
    public thien_ew(String var1, boolean var2, boolean var3, int[] var4) {
-      super.p = true;
+      super.isLocked = true;
       this.w = var2;
       this.C = var3;
-      super.g = var1;
-      this.A = new thien_at();
-      this.A.b = false;
-      this.A.a(1, thien_an.f - thien_di.g - 2, thien_an.e - 3, thien_w.f + 6);
-      this.z = new thien_e(1, 1, thien_an.e - 3, thien_an.f - thien_di.g - thien_w.f - 7);
-      this.a(this.z);
-      this.a(this.A);
-      this.c(this.A);
+      super.title = var1;
+      this.A = new TextField();
+      this.A.isEditable = false;
+      this.A.setBounds(1, Screen.formHeight - thien_di.g - 2, Screen.e - 3, thien_w.f + 6);
+      this.z = new thien_e(1, 1, Screen.e - 3, Screen.formHeight - thien_di.g - thien_w.f - 7);
+      this.addControl(this.z);
+      this.addControl(this.A);
+      this.selectControl(this.A);
       this.E = new Vector();
-      this.E.addElement(new thien_ab(TextConstant.smileys(), new thien_ex(this)));
-      this.E.addElement(new thien_ab(TextConstant.buzz(), new thien_ey(this, var2)));
+      this.E.addElement(new UIAction(TextConstant.smileys(), new thien_ex(this)));
+      this.E.addElement(new UIAction(TextConstant.buzz(), new thien_ey(this, var2)));
       if (var3) {
-         this.E.addElement(new thien_ab(TextConstant.invite(), new thien_ez(this)));
+         this.E.addElement(new UIAction(TextConstant.invite(), new thien_ez(this)));
       }
 
-      this.E.addElement(new thien_ab("Copy", new thien_fa(this)));
-      this.E.addElement(new thien_ab(TextConstant.paste(), new thien_fb(this)));
-      this.E.addElement(new thien_ab(TextConstant.close(), new thien_fc(this, var3)));
+      this.E.addElement(new UIAction("Copy", new thien_fa(this)));
+      this.E.addElement(new UIAction(TextConstant.paste(), new thien_fb(this)));
+      this.E.addElement(new UIAction(TextConstant.close(), new thien_fc(this, var3)));
       this.D = new thien_am(this.E);
-      super.k = new thien_ab("Menu", new thien_fd(this));
-      super.m = new thien_ab("Chat", null);
+      super.leftCommand = new UIAction("Menu", new thien_fd(this));
+      super.centerCommand = new UIAction("Chat", null);
       if (thien_di.E != null) {
          this.z.a(thien_di.E, 2);
       }
@@ -62,11 +62,11 @@ public final class thien_ew extends thien_an {
       }
    }
 
-   public final boolean a(boolean[] var1, boolean[] var2, int[] var3) {
+   public final boolean handleInput(boolean[] var1, boolean[] var2, int[] var3) {
       if (var1[16]) {
          var1[16] = false;
-         this.A.a(thien_fe.b(this.A.c()));
-         if (this.A.c().equals("")) {
+         this.A.setText(thien_fe.b(this.A.getText()));
+         if (this.A.getText().equals("")) {
             String var8;
             int var10;
             if ((var10 = (var8 = this.z.c()).indexOf("http://")) >= 0) {
@@ -79,54 +79,54 @@ public final class thien_ew extends thien_an {
 
                return false;
             } else {
-               this.A.a();
+               this.A.openSystemTextBox();
                return false;
             }
          } else {
-            if (this.A.c().equals("plf")) {
+            if (this.A.getText().equals("plf")) {
                this.z.a("", Xuka.platformName, 0);
             }
 
             Object var5 = null;
             if (this.C) {
-               thien_di.c.B = thien_ff.y;
-               thien_di.c.C++;
-               if (thien_di.c.C > 5) {
+               thien_di.instance.B = thien_ff.y;
+               thien_di.instance.C++;
+               if (thien_di.instance.C > 5) {
                   this.z.a("Bạn chỉ có thể chat 5 câu liên tục khi chat nhóm", 1);
                   return false;
                }
 
-               MessageHandler.f(super.h, this.A.c());
+               MessageHandler.f(super.subtitle, this.A.getText());
             } else if (this.w) {
-               MessageHandler.a((String)(var5 = thien_gp.x), this.x, this.A.c(), 2);
+               MessageHandler.a((String)(var5 = thien_gp.x), this.x, this.A.getText(), 2);
             } else {
-               MessageHandler.a((String)(var5 = thien_ff.y), super.g, this.A.c(), 1);
+               MessageHandler.a((String)(var5 = thien_ff.y), super.title, this.A.getText(), 1);
             }
 
-            this.z.a(this.w ? thien_gp.y : thien_ff.A, this.A.c(), 0);
+            this.z.a(this.w ? thien_gp.y : thien_ff.A, this.A.getText(), 0);
             this.z.b();
-            this.A.a("");
+            this.A.setText("");
             return false;
          }
       } else if (var1[12] || var2[12]) {
          var1[12] = false;
-         this.z.a(12);
+         this.z.handleSoftKey(12);
          return false;
       } else if (!var1[13] && !var2[13]) {
-         return super.a(var1, var2, var3);
+         return super.handleInput(var1, var2, var3);
       } else {
          var1[13] = false;
-         this.z.a(13);
+         this.z.handleSoftKey(13);
          return false;
       }
    }
 
-   public final void d() {
-      this.z.f();
+   public final void updateLayout() {
+      this.z.handleFocus();
    }
 
-   public final void d(Graphics var1) {
-      this.z.c(var1);
+   public final void drawOverlay(Graphics var1) {
+      this.z.drawScrollbar(var1);
    }
 
    static thien_am a(thien_ew var0) {

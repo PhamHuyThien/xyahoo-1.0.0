@@ -1,6 +1,6 @@
 package home.thienph.xyahoo;
 
-final class thien_bw implements thien_ae
+final class thien_bw implements IAction
 {
     private thien_ba a;
     
@@ -8,8 +8,8 @@ final class thien_bw implements thien_ae
         this.a = a;
     }
     
-    public final void a() {
-        thien_di.c.c(thien_ba.S);
+    public final void action() {
+        thien_di.instance.c(thien_ba.S);
         thien_ay.b = null;
         thien_ay.a = null;
         thien_ba.a(this.a, (thien_ay)null);

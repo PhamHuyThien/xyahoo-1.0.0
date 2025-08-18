@@ -1,12 +1,12 @@
 package home.thienph.xyahoo;
 
 final class thien_gs
-implements thien_ae {
+implements IAction {
     thien_gs(thien_gp thien_gp2) {
     }
 
-    public final void a() {
-        thien_di.b().c();
+    public final void action() {
+        thien_di.getInstance().c();
         Packet packet2 = new Packet(66, 12);
         thien_hc.a(packet2);
     }

@@ -477,7 +477,7 @@ public final class thien_es extends thien_hh {
             thien_ba var178 = thien_ba.S;
             String var307 = MessageHandler.readString(var1);
             String var309 = MessageHandler.readString(var1);
-            var178.a(var307 + " - " + var309);
+            var178.setWrappedText(var307 + " - " + var309);
             String[] var265 = new String[var3];
             int[] var266 = new int[var3];
             Integer[] var267 = new Integer[var3];
@@ -554,7 +554,7 @@ public final class thien_es extends thien_hh {
             }
 
             String var272 = MessageHandler.readString(var1);
-            thien_di.b().a(var272, (Image)null, 1);
+            thien_di.getInstance().a(var272, (Image)null, 1);
             MessageHandler.readInt(var1);
             MessageHandler.readByteArray(var1);
             if (thien_ba.B.equals(var75)) {
@@ -787,6 +787,6 @@ public final class thien_es extends thien_hh {
 
    private static void b(Packet var0) {
       String var1 = MessageHandler.readString(var0);
-      thien_di.c.a(var1, (Image)null, 1);
+      thien_di.instance.a(var1, (Image)null, 1);
    }
 }

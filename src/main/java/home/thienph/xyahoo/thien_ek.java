@@ -1,12 +1,12 @@
 package home.thienph.xyahoo;
 
 final class thien_ek
-implements thien_ae {
+implements IAction {
     thien_ek(thien_eh thien_eh2) {
     }
 
-    public final void a() {
+    public final void action() {
         thien_hc.b();
-        thien_di.b().c();
+        thien_di.getInstance().c();
     }
 }

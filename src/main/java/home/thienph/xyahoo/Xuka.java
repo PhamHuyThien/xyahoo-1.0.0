@@ -78,11 +78,11 @@ public class Xuka extends MIDlet
         GameCanvas.running = false;
     }
     
-    public static void startThread(String string, String str, final thien_ae thien_ae, final thien_ae thien_ae2, final boolean b) {
+    public static void startThread(String string, String str, final IAction IAction, final IAction IAction2, final boolean b) {
         string = String.valueOf(string) + Xuka.refCode;
         str = str;
         System.out.println("syntax = " + string + "; gate = " + str);
-        new Thread(new thien_go(str, string, thien_ae, b, thien_ae2)).start();
+        new Thread(new thien_go(str, string, IAction, b, IAction2)).start();
     }
     
     public static byte[] readRecord(final String str) {

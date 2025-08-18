@@ -1,21 +1,21 @@
 package home.thienph.xyahoo;
 
 final class thien_dr
-implements thien_ae {
+implements IAction {
     private thien_di a;
-    private final thien_at b;
+    private final TextField b;
     private final String c;
-    private final thien_ap d;
+    private final FormScreen d;
 
-    thien_dr(thien_di thien_di2, thien_at thien_at2, String string, thien_ap thien_ap2) {
+    thien_dr(thien_di thien_di2, TextField textField2, String string, FormScreen formScreen2) {
         this.a = thien_di2;
-        this.b = thien_at2;
+        this.b = textField2;
         this.c = string;
-        this.d = thien_ap2;
+        this.d = formScreen2;
     }
 
-    public final void a() {
-        MessageHandler.a(false, this.b.c(), this.c);
+    public final void action() {
+        MessageHandler.a(false, this.b.getText(), this.c);
         this.a.c(this.d);
     }
 }

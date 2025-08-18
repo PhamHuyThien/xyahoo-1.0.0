@@ -5,7 +5,7 @@ import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 
 public final class thien_ay
-extends thien_ac {
+extends UIControlBase {
     public static Image a;
     public static Image b;
     private static Image d;
@@ -32,9 +32,9 @@ extends thien_ac {
     private int K;
 
     public thien_ay(int n, int n2, int n3) {
-        this.s = n;
-        this.t = n2;
-        this.p = true;
+        this.width = n;
+        this.height = n2;
+        this.isEnabled = true;
         this.k = n3;
         if (b == null) {
             try {
@@ -50,11 +50,11 @@ extends thien_ac {
             }
             catch (IOException iOException) {}
         }
-        this.y = new thien_ab("V\u00e0o b\u00e0n", new thien_az(this));
+        this.actionTertiary = new UIAction("V\u00e0o b\u00e0n", new thien_az(this));
         this.J = c.length;
-        this.m = thien_an.e / (h + 20);
+        this.m = Screen.e / (h + 20);
         this.l = this.J % this.m == 0 ? this.J / this.m : this.J / this.m + 1;
-        this.C = (thien_an.e - this.m * 50) / (this.m + 1);
+        this.C = (Screen.e - this.m * 50) / (this.m + 1);
         this.D = this.C + 25;
         this.G = 50 + this.C;
         this.E = 25;
@@ -63,7 +63,7 @@ extends thien_ac {
         this.I = (this.E + this.l * this.H + (i + 15) - n2) / this.H;
         this.B = 0;
         this.n = 0;
-        this.f();
+        this.handleFocus();
     }
 
     private boolean d(int n, int n2) {
@@ -74,7 +74,7 @@ extends thien_ac {
         return n * this.m + n2 <= this.J - 1;
     }
 
-    public final void a(Graphics graphics) {
+    public final void draw(Graphics graphics) {
         int n = 0;
         int n2 = 0;
         int n3 = 0;
@@ -111,7 +111,7 @@ extends thien_ac {
         }
     }
 
-    public final boolean b(int n) {
+    public final boolean handleKeyInput(int n) {
         boolean bl = true;
         switch (n) {
             case 14: {
@@ -157,7 +157,7 @@ extends thien_ac {
                     if (this.e(this.n + 1, n)) {
                         ++this.n;
                         this.B = n;
-                        n = thien_an.f - thien_an.b - (i << 1);
+                        n = Screen.formHeight - Screen.topMargin - (i << 1);
                         if (this.E + this.n * this.H <= n) break;
                         this.F -= this.H;
                         break;
@@ -172,34 +172,34 @@ extends thien_ac {
         return bl;
     }
 
-    public final void e() {
+    public final void update() {
     }
 
-    public final boolean a(int n) {
+    public final boolean handleSoftKey(int n) {
         if (n == 13 || n == 12) {
-            this.b(n);
+            this.handleKeyInput(n);
             return false;
         }
         return true;
     }
 
-    public final void f() {
+    public final void handleFocus() {
         thien_ar.a = true;
         thien_ar.a(this.l);
     }
 
-    public final void c(Graphics graphics) {
+    public final void drawScrollbar(Graphics graphics) {
         if (thien_ar.a) {
             thien_ar.a(graphics, this.n);
         }
     }
 
-    public final void a(int n, int n2) {
+    public final void onDrag(int n, int n2) {
         this.K = n2;
     }
 
-    public final void b(int n, int n2) {
-        n2 += thien_an.d;
+    public final void handleKeyPress(int n, int n2) {
+        n2 += Screen.headerHeight;
         int n3 = 0;
         int n4 = 0;
         int n5 = 0;
@@ -212,7 +212,7 @@ extends thien_ac {
             n4 = this.E + n5 * this.H + this.F;
             if (n > n3 - 25 && n < n3 + h - 15 && n2 > n4 - 10 && n2 < n4 + i + 15) {
                 if (this.d(n5, n6)) {
-                    this.y.b.a();
+                    this.actionTertiary.actionHandler.action();
                     break;
                 }
                 this.n = n5;
@@ -226,7 +226,7 @@ extends thien_ac {
         }
     }
 
-    public final void c(int n, int n2) {
+    public final void handlePointerRelease(int n, int n2) {
         n = n2 - this.K;
         if (thien_b.c(n) > 10) {
             if (n > 0) {

@@ -3,11 +3,11 @@ package home.thienph.xyahoo;
 import javax.microedition.lcdui.Graphics;
 
 public final class thien_aj
-extends thien_ac {
+extends UIControlBase {
     private String[] c;
     public Integer a;
     private int d;
-    public thien_ae b;
+    public IAction b;
     private int e;
     private int f;
     private int g;
@@ -17,7 +17,7 @@ extends thien_ac {
 
     public thien_aj(final String s, final int q, final int r, final int s2, final int e) {
         this.d = 0;
-        this.c = thien_w.c(s, thien_an.e - q, thien_w.j);
+        this.c = thien_w.c(s, Screen.e - q, thien_w.j);
         this.a = thien_w.e;
         String[] c;
         for (int a = thien_w.a((c = this.c)[0], thien_w.j), i = 1; i < c.length; ++i) {
@@ -26,17 +26,17 @@ extends thien_ac {
                 a = a2;
             }
         }
-        super.q = q;
-        super.r = r;
-        super.s = s2;
+        super.baseX = q;
+        super.baseY = r;
+        super.width = s2;
         this.e = e;
-        super.t = e * this.c.length;
-        super.y = new thien_ab(TextConstant.select(), null);
+        super.height = e * this.c.length;
+        super.actionTertiary = new UIAction(TextConstant.select(), null);
         this.f = (e >> 1) + 2;
         this.g = (e - thien_w.f >> 1) + 1;
     }
 
-    public final boolean b(int n) {
+    public final boolean handleKeyInput(int n) {
         if (n == 16) {
             this.d = 2;
             return false;
@@ -44,42 +44,42 @@ extends thien_ac {
         return true;
     }
 
-    public final void b(int n, int n2) {
-        if (this.j()) {
-            this.b.a();
+    public final void handleKeyPress(int n, int n2) {
+        if (this.isSelected()) {
+            this.b.action();
             return;
         }
-        this.v.c(this);
+        this.parentScreen.selectControl(this);
     }
 
-    public final void a(Graphics graphics) {
-        boolean bl = this.j();
-        int n = this.q;
+    public final void draw(Graphics graphics) {
+        boolean bl = this.isSelected();
+        int n = this.baseX;
         graphics.setColor(this.a.intValue());
         int n2 = 0;
         while (n2 < this.c.length) {
-            thien_w.a(this.a).a(this.c[n2], n + 2, this.r + this.e * n2 + this.g, graphics);
+            thien_w.a(this.a).a(this.c[n2], n + 2, this.baseY + this.e * n2 + this.g, graphics);
             if (bl) {
                 graphics.setColor(8111862);
-                graphics.fillRect(n + 2, this.r + this.e * n2 + this.e - (thien_w.a ? 1 : 3), thien_w.a(this.c[n2], thien_w.j) + 2, 1);
+                graphics.fillRect(n + 2, this.baseY + this.e * n2 + this.e - (thien_w.a ? 1 : 3), thien_w.a(this.c[n2], thien_w.j) + 2, 1);
             }
             ++n2;
         }
     }
 
-    public final void e() {
+    public final void update() {
         if (this.d > 0) {
             --this.d;
             if (this.d == 0 && this.b != null) {
-                this.b.a();
+                this.b.action();
             }
         }
     }
 
-    public final void b(Graphics graphics) {
+    public final void drawBackground(Graphics graphics) {
     }
 
-    public final boolean a(int n) {
+    public final boolean handleSoftKey(int n) {
         return true;
     }
 }

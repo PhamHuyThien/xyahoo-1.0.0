@@ -1,12 +1,12 @@
 package home.thienph.xyahoo;
 
 final class thien_cy
-implements thien_ae {
-    thien_cy(thien_cq thien_cq2) {
+implements IAction {
+    thien_cy(LoginScreen loginScreen2) {
     }
 
-    public final void a() {
+    public final void action() {
         thien_hc.b();
-        thien_di.b().c();
+        thien_di.getInstance().c();
     }
 }

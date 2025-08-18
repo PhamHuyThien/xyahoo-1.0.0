@@ -1,14 +1,14 @@
 package home.thienph.xyahoo;
 
 final class thien_bl
-implements thien_ae {
+implements IAction {
     private thien_ba a;
 
     thien_bl(thien_ba thien_ba2) {
         this.a = thien_ba2;
     }
 
-    public final void a() {
+    public final void action() {
         thien_ax.B = false;
         if (!this.a.Y) {
             this.a.g();

@@ -1,7 +1,7 @@
 package home.thienph.xyahoo;
 
 final class thien_bg
-implements thien_ae {
+implements IAction {
     private thien_ba a;
     private final thien_ax b;
 
@@ -10,7 +10,7 @@ implements thien_ae {
         this.b = thien_ax2;
     }
 
-    public final void a() {
+    public final void action() {
         if (this.b.e) {
             this.b.e = false;
         }

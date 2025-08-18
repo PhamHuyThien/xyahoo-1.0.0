@@ -9,16 +9,16 @@ final class thien_go
 implements Runnable {
     private final String a;
     private final String b;
-    private final thien_ae c;
+    private final IAction c;
     private final boolean d;
-    private final thien_ae e;
+    private final IAction e;
 
-    thien_go(String string, String string2, thien_ae thien_ae2, boolean bl, thien_ae thien_ae3) {
+    thien_go(String string, String string2, IAction IAction2, boolean bl, IAction IAction3) {
         this.a = string;
         this.b = string2;
-        this.c = thien_ae2;
+        this.c = IAction2;
         this.d = bl;
-        this.e = thien_ae3;
+        this.e = IAction3;
     }
 
     public final void run() {
@@ -30,22 +30,22 @@ implements Runnable {
             textMessage.setPayloadText(this.b);
             messageConnection.send((Message)textMessage);
             if (this.c == null) {
-                thien_di.c.c();
-                thien_di.c.b(TextConstant.sendSmsCompleted());
+                thien_di.instance.c();
+                thien_di.instance.b(TextConstant.sendSmsCompleted());
                 return;
             }
-            this.c.a();
+            this.c.action();
             return;
         }
         catch (Exception exception) {
             if (this.d) {
-                thien_di.c.c();
+                thien_di.instance.c();
             }
             if (this.e == null) {
-                thien_di.c.b(TextConstant.sendSmsFailed());
+                thien_di.instance.b(TextConstant.sendSmsFailed());
                 return;
             }
-            this.e.a();
+            this.e.action();
             return;
         }
     }

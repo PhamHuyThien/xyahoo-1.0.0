@@ -1,23 +1,23 @@
 package home.thienph.xyahoo;
 
 final class thien_gb
-implements thien_ae {
-    private final thien_at a;
-    private final thien_an b;
+implements IAction {
+    private final TextField a;
+    private final Screen b;
 
-    thien_gb(thien_ff thien_ff2, thien_at thien_at2, thien_an thien_an2) {
-        this.a = thien_at2;
-        this.b = thien_an2;
+    thien_gb(thien_ff thien_ff2, TextField textField2, Screen screen2) {
+        this.a = textField2;
+        this.b = screen2;
     }
 
-    public final void a() {
+    public final void action() {
         GameCanvas.resetKeys();
-        String string = this.a.c().trim();
+        String string = this.a.getText().trim();
         if (string.equals("")) {
             return;
         }
-        thien_di.b().c(this.b);
+        thien_di.getInstance().c(this.b);
         MessageHandler.g(string);
-        thien_di.c.l();
+        thien_di.instance.l();
     }
 }

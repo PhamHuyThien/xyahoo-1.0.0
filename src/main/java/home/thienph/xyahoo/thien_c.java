@@ -1,19 +1,19 @@
 package home.thienph.xyahoo;
 
 final class thien_c
-implements thien_ae {
+implements IAction {
     private thien_b a;
 
     thien_c(thien_b thien_b2) {
         this.a = thien_b2;
     }
 
-    public final void a() {
+    public final void action() {
         Object object = this.a.c ? "Y! " + thien_b.a((thien_b)this.a).d : thien_b.a((thien_b)this.a).d;
-        thien_ew thien_ew2 = (thien_ew)thien_di.c.c((String)object);
+        thien_ew thien_ew2 = (thien_ew)thien_di.instance.c((String)object);
         if (thien_ew2 != null) {
-            thien_ew2.a(1);
-            thien_di.c.d((String)object);
+            thien_ew2.startSlide(1);
+            thien_di.instance.d((String)object);
             return;
         }
         if (this.a.c) {
@@ -27,8 +27,8 @@ implements thien_ae {
                 thien_ew2.b(Integer.toString(((thien_r)object).i));
             }
         }
-        thien_ew2.a(1);
-        thien_di.c.b(thien_ew2);
-        thien_di.c.d(thien_ew2.g);
+        thien_ew2.startSlide(1);
+        thien_di.instance.b(thien_ew2);
+        thien_di.instance.d(thien_ew2.title);
     }
 }

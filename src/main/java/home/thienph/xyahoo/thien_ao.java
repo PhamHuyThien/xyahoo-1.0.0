@@ -3,10 +3,10 @@ package home.thienph.xyahoo;
 import javax.microedition.lcdui.Graphics;
 
 public final class thien_ao
-extends thien_ac {
+extends UIControlBase {
     private String d;
     private int e;
-    public thien_ap a;
+    public FormScreen a;
     public int b;
     private int f;
     public boolean c;
@@ -18,13 +18,13 @@ extends thien_ac {
         this();
         this.e = 0;
         this.d = string;
-        this.q = 0;
-        this.r = 0;
-        this.s = n3;
-        this.t = n4 < 19 ? n4 : 19;
+        this.baseX = 0;
+        this.baseY = 0;
+        this.width = n3;
+        this.height = n4 < 19 ? n4 : 19;
     }
 
-    public final boolean b(int n) {
+    public final boolean handleKeyInput(int n) {
         if (n == 16) {
             this.e = 2;
             return false;
@@ -32,35 +32,35 @@ extends thien_ac {
         return true;
     }
 
-    public final void b(int n, int n2) {
-        this.a.d(this.b);
+    public final void handleKeyPress(int n, int n2) {
+        this.a.toggleSection(this.b);
     }
 
-    public final void a(Graphics graphics) {
-        boolean bl = this.j();
+    public final void draw(Graphics graphics) {
+        boolean bl = this.isSelected();
         if (bl) {
             this.f = thien_w.a(this.d, thien_w.j);
             graphics.setColor(2580);
-            graphics.fillRoundRect(this.q + 19, this.r, this.f + 10, this.t, 8, 8);
+            graphics.fillRoundRect(this.baseX + 19, this.baseY, this.f + 10, this.height, 8, 8);
         }
         graphics.setColor(3981823);
-        thien_w.a(thien_w.e).a(this.d, this.q + 23, this.r + (this.t - thien_w.f >> 1), graphics);
-        graphics.drawImage(thien_b.b[this.c ? 0 : 1], this.q + 10, this.r + (this.t >> 1), 3);
+        thien_w.a(thien_w.e).a(this.d, this.baseX + 23, this.baseY + (this.height - thien_w.f >> 1), graphics);
+        graphics.drawImage(thien_b.b[this.c ? 0 : 1], this.baseX + 10, this.baseY + (this.height >> 1), 3);
     }
 
-    public final void e() {
+    public final void update() {
         if (this.e > 0) {
             --this.e;
             if (this.e == 0) {
-                this.a.d(this.b);
+                this.a.toggleSection(this.b);
             }
         }
     }
 
-    public final void b(Graphics graphics) {
+    public final void drawBackground(Graphics graphics) {
     }
 
-    public final boolean a(int n) {
+    public final boolean handleSoftKey(int n) {
         return true;
     }
 }

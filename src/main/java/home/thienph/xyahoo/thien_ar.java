@@ -5,7 +5,7 @@ import javax.microedition.lcdui.Graphics;
 public final class thien_ar {
     private static int b = 15;
     public static boolean a = false;
-    private static final int c = thien_an.f - thien_an.b;
+    private static final int c = Screen.formHeight - Screen.topMargin;
     private static int d;
     private static int e;
     private static int f;
@@ -14,8 +14,8 @@ public final class thien_ar {
     private static int i;
 
     static {
-        f = thien_an.e - 3 - 1;
-        g = thien_an.b + 2;
+        f = Screen.e - 3 - 1;
+        g = Screen.topMargin + 2;
         h = false;
         i = 0;
     }

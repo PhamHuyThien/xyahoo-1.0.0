@@ -1,25 +1,25 @@
 package home.thienph.xyahoo;
 
 final class thien_ce
-implements thien_ae {
+implements IAction {
     final thien_ca a;
 
     thien_ce(thien_ca thien_ca2) {
         this.a = thien_ca2;
     }
 
-    public final void a() {
+    public final void action() {
         this.a.G = true;
         if (this.a.F == null) {
-            this.a.F = new thien_at("", 250, 0);
-            this.a.F.b = false;
-            this.a.F.a(0, thien_an.f - (thien_w.f << 1) + 8, thien_an.e - 1, thien_w.f + 6);
-            this.a.F.w = new thien_ab(TextConstant.exit(), new thien_cf(this));
-            this.a.F.y = new thien_ab(TextConstant.send(), new thien_cg(this));
+            this.a.F = new TextField("", 250, 0);
+            this.a.F.isEditable = false;
+            this.a.F.setBounds(0, Screen.formHeight - (thien_w.f << 1) + 8, Screen.e - 1, thien_w.f + 6);
+            this.a.F.actionPrimary = new UIAction(TextConstant.exit(), new thien_cf(this));
+            this.a.F.actionTertiary = new UIAction(TextConstant.send(), new thien_cg(this));
         } else {
-            this.a.F.a("");
+            this.a.F.setText("");
         }
-        this.a.a(this.a.F);
-        this.a.c(this.a.F);
+        this.a.addControl(this.a.F);
+        this.a.selectControl(this.a.F);
     }
 }

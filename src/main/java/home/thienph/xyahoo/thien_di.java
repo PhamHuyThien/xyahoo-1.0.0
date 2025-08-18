@@ -15,10 +15,10 @@ public final class thien_di implements thien_et {
    private String I;
    private String J;
    private static String K = "";
-   public static thien_di c = new thien_di();
+   public static thien_di instance = new thien_di();
    public Vector d;
    private Vector L;
-   public static thien_an e;
+   public static Screen e;
    private int M;
    public static int f;
    private static int N;
@@ -32,11 +32,11 @@ public final class thien_di implements thien_et {
    private int T;
    private int U;
    private int V;
-   public thien_ae i;
+   public IAction i;
    private int W;
    public thien_ff j;
    public thien_gp k;
-   public thien_cq l;
+   public LoginScreen l;
    private thien_eh X;
    public thien_cn m;
    private boolean Y;
@@ -78,11 +78,11 @@ public final class thien_di implements thien_et {
    public static Image x;
    public static Image[] y;
    private static Image ay;
-   private thien_ab az;
-   private thien_ab aA;
-   private thien_ae aB;
+   private UIAction az;
+   private UIAction aA;
+   private IAction aB;
    private int aC;
-   private thien_an aD;
+   private Screen aD;
    private int aE;
    private int aF = 0;
    private int aG = 0;
@@ -108,10 +108,10 @@ public final class thien_di implements thien_et {
       aJ = new byte[1];
    }
 
-   private void e(thien_an var1) {
+   private void e(Screen var1) {
       this.L.addElement(var1);
       this.aE = this.L.size();
-      var1.b(this.U - 30);
+      var1.wrapTitle(this.U - 30);
       if (this.aE == 1) {
          this.W = 0;
          this.D();
@@ -119,23 +119,23 @@ public final class thien_di implements thien_et {
    }
 
    private void D() {
-      this.aD = (thien_an)this.L.elementAt(this.W);
-      if (this.aD.t) {
-         this.aD.t = false;
+      this.aD = (Screen)this.L.elementAt(this.W);
+      if (this.aD.isScrolling) {
+         this.aD.isScrolling = false;
          this.aF = 0;
          this.aG = 0;
       }
 
       thien_ar.a = false;
-      this.aD.d();
+      this.aD.updateLayout();
    }
 
-   public final void a(thien_an var1) {
+   public final void a(Screen var1) {
       this.e(var1);
    }
 
-   public final void b(thien_an var1) {
-      thien_an var3 = var1;
+   public final void b(Screen var1) {
+      Screen var3 = var1;
       thien_di var2 = this;
       int var4 = this.aE;
 
@@ -146,7 +146,7 @@ public final class thien_di implements thien_et {
             break;
          }
 
-         if (((thien_an)var2.L.elementAt(var4)).g.equals(var3.g)) {
+         if (((Screen)var2.L.elementAt(var4)).title.equals(var3.title)) {
             var10000 = true;
             break;
          }
@@ -192,7 +192,7 @@ public final class thien_di implements thien_et {
 
          var1.translate(-var1.getTranslateX(), -var1.getTranslateY());
          var1.setClip(-1000, -1000, 2000, 2000);
-         thien_an.c(var1);
+         Screen.drawFooter(var1);
          var1.setColor(16777215);
          thien_w.a(thien_w.d).a(TextConstant.select(), 4, GameCanvas.screenHeight - (g >> 1) - (thien_w.f >> 1), var1);
          thien_w.a(thien_w.d).a(TextConstant.cancel(), this.U - 4, GameCanvas.screenHeight - (g >> 1) - (thien_w.f >> 1), 1, var1, thien_w.j, thien_w.f);
@@ -244,11 +244,11 @@ public final class thien_di implements thien_et {
       }
    }
 
-   public static thien_di b() {
-      return c;
+   public static thien_di getInstance() {
+      return instance;
    }
 
-   public final thien_ad a(String var1, thien_ab var2, thien_ab var3, thien_ab var4) {
+   public final thien_ad a(String var1, UIAction var2, UIAction var3, UIAction var4) {
       this.ai = false;
       thien_ad var5 = new thien_ad(var1, var2, var3, var4);
       this.n.addElement(var5);
@@ -256,7 +256,7 @@ public final class thien_di implements thien_et {
       return var5;
    }
 
-   private thien_ad a(String[] var1, thien_ab var2, thien_ab var3, thien_ab var4) {
+   private thien_ad a(String[] var1, UIAction var2, UIAction var3, UIAction var4) {
       this.ai = false;
       thien_ad var5 = new thien_ad(var1, var2, var3, var4);
       this.n.addElement(var5);
@@ -307,7 +307,7 @@ public final class thien_di implements thien_et {
       N = 1;
       O = 1;
       g = thien_w.a ? v.getHeight() : thien_w.f + 3;
-      thien_an.b = f = g = thien_w.a ? 18 : thien_w.f + 3;
+      Screen.topMargin = f = g = thien_w.a ? 18 : thien_w.f + 3;
       P = g + 1;
       this.ad[0] = GameCanvas.screenHeight - g - thien_w.f - 8;
       this.ad[1] = this.ad[2] = O + g + 1;
@@ -352,36 +352,36 @@ public final class thien_di implements thien_et {
       ax.getHeight();
       this.R = g;
       this.S = g - 7 >> 1;
-      thien_an.c = 0;
-      thien_an.d = P;
-      thien_an.e = var1;
-      thien_an.f = var2 - P;
-      thien_an.v = P + thien_an.f - (g >> 1) - (thien_w.f >> 1) + (thien_w.a ? 0 : 1);
-      this.l = new thien_cq();
-      this.l.a(1);
+      Screen.leftMargin = 0;
+      Screen.headerHeight = P;
+      Screen.e = var1;
+      Screen.formHeight = var2 - P;
+      Screen.footerY = P + Screen.formHeight - (g >> 1) - (thien_w.f >> 1) + (thien_w.a ? 0 : 1);
+      this.l = new LoginScreen();
+      this.l.startSlide(1);
       this.b(this.l);
       this.W = 0;
       this.D();
       if (GameCanvas.isNokiaMapping) {
-         thien_at.c(1);
+         TextField.setKeyMappingStyle(1);
       } else if (Xuka.platformName != null && Xuka.platformName.toLowerCase().indexOf("nokia") != -1) {
-         thien_at.c(0);
+         TextField.setKeyMappingStyle(0);
       } else {
-         thien_at.c(2);
+         TextField.setKeyMappingStyle(2);
       }
 
-      thien_at.e = GameCanvas.instance;
-      thien_at.f = Xuka.instance;
-      thien_at.c = Xuka.readCaret();
+      TextField.uiCanvas = GameCanvas.instance;
+      TextField.mainMidlet = Xuka.instance;
+      TextField.multiTapSpeedIndex = Xuka.readCaret();
       GameCanvas.isGameStarted = true;
    }
 
    public final void d() {
       if (thien_hc.d) {
-         this.a(TextConstant.checkingConnection(), null, null, new thien_ab(TextConstant.close(), new thien_dj(this))).a(true);
+         this.a(TextConstant.checkingConnection(), null, null, new UIAction(TextConstant.close(), new thien_dj(this))).a(true);
       } else if (this.aK) {
          this.c();
-         this.a(TextConstant.connectionError(), null, null, new thien_ab(TextConstant.close(), new thien_du(this)));
+         this.a(TextConstant.connectionError(), null, null, new UIAction(TextConstant.close(), new thien_du(this)));
       }
    }
 
@@ -393,7 +393,7 @@ public final class thien_di implements thien_et {
       this.X.b((String[]) null);
       this.b(this.X);
       this.d(this.X);
-      this.X.a(-1);
+      this.X.startSlide(-1);
       this.c(this.l);
    }
 
@@ -416,23 +416,23 @@ public final class thien_di implements thien_et {
       } else {
          int var5 = g >> 1;
          var1.setColor(1404853);
-         var1.fillRect(0, 0, thien_an.e, var5);
+         var1.fillRect(0, 0, Screen.e, var5);
          var1.setColor(1334695);
-         var1.fillRect(0, var5 + 0, thien_an.e, var5);
+         var1.fillRect(0, var5 + 0, Screen.e, var5);
          var1.setColor(537185);
-         var1.fillRect(0, 2 * var5, thien_an.e, 1);
+         var1.fillRect(0, 2 * var5, Screen.e, 1);
          var1.setColor(6796786);
-         var1.fillRect(0, 1, thien_an.e, 1);
+         var1.fillRect(0, 1, Screen.e, 1);
       }
 
       var1.setColor(16777215);
       thien_w var10000 = thien_w.a(thien_w.d);
-      int var10002 = thien_an.e >> 1;
+      int var10002 = Screen.e >> 1;
       int var10003 = thien_w.a ? 1 : O + 1;
-      var10000.a(((thien_an)this.L.elementAt(this.W)).i, var10002, var10003, 2, var1, thien_w.j, thien_w.f);
+      var10000.a(((Screen)this.L.elementAt(this.W)).wrappedText, var10002, var10003, 2, var1, thien_w.j, thien_w.f);
       if (this.aE > 1) {
          for (int var4 = 0; var4 < var2.aE; var4++) {
-            if (((thien_an)var2.L.elementAt(var4)).t) {
+            if (((Screen)var2.L.elementAt(var4)).isScrolling) {
                if (var4 < var2.W) {
                   if (var2.aF++ > 20) {
                      var2.aF = 0;
@@ -452,7 +452,7 @@ public final class thien_di implements thien_et {
          }
       }
 
-      if (this.aD.u) {
+      if (this.aD.scrollLock) {
          var1.setClip(0, g + 1, this.U, this.V);
          var1.setColor(396304);
          var1.fillRect(0, 0, this.U, this.V);
@@ -466,11 +466,11 @@ public final class thien_di implements thien_et {
          var1.drawImage(ax, 0, this.R, 0);
       }
 
-      if (this.aD.n) {
-         var1.translate(-this.aD.o, 0);
+      if (this.aD.isSliding) {
+         var1.translate(-this.aD.slideOffset, 0);
       }
 
-      this.aD.a(var1);
+      this.aD.draw(var1);
       var1.translate(-var1.getTranslateX(), -var1.getTranslateY());
       Graphics var15 = var1;
       var2 = this;
@@ -532,8 +532,8 @@ public final class thien_di implements thien_et {
 
             for (int var27 = 0; var27 < var8; var27++) {
                var20 = 2 + var27 * var2.M + (thien_w.a ? 0 : 1);
-               String var10 = ((thien_ab)var7.a.elementAt(var27)).a;
-               if (((thien_ab)var7.a.elementAt(var27)).c != null) {
+               String var10 = ((UIAction)var7.a.elementAt(var27)).label;
+               if (((UIAction)var7.a.elementAt(var27)).icon != null) {
                   var10 = var10 + " >";
                }
 
@@ -552,7 +552,7 @@ public final class thien_di implements thien_et {
          }
 
          var15.setClip(-1000, -1000, 5000, 5000);
-         thien_an.c(var15);
+         Screen.drawFooter(var15);
          var15.setColor(16777215);
          var20 = GameCanvas.screenHeight - (g >> 1) - (thien_w.f >> 1) + (thien_w.a ? 0 : 1);
          thien_w.a(thien_w.d).a(TextConstant.select(), 4, var20, var15);
@@ -588,7 +588,7 @@ public final class thien_di implements thien_et {
       thien_ff.e();
       this.F();
       this.b(this.l);
-      this.l.a(-1);
+      this.l.startSlide(-1);
       this.m.f();
       this.j.o();
       if (this.k != null) {
@@ -623,23 +623,23 @@ public final class thien_di implements thien_et {
    }
 
    public final void h() {
-      this.m.b(this.U - 30);
+      this.m.wrapTitle(this.U - 30);
       this.b(this.m);
       this.c(this.j);
       this.j.x.a(true);
-      this.j.x.y = this.j.x.j;
+      this.j.x.actionTertiary = this.j.x.j;
       this.d(this.m);
    }
 
    public final void i() {
-      this.j.b(this.U - 30);
+      this.j.wrapTitle(this.U - 30);
       this.c(this.m);
       this.b(this.j);
       this.j.x.a(false);
-      this.j.x.y = this.j.x.i;
+      this.j.x.actionTertiary = this.j.x.i;
    }
 
-   private thien_ae E() {
+   private IAction E() {
       if (this.aB == null) {
          this.aB = new thien_ea(this);
       }
@@ -647,12 +647,12 @@ public final class thien_di implements thien_et {
       return this.aB;
    }
 
-   private thien_ab m(String var1) {
+   private UIAction m(String var1) {
       if (this.az == null) {
-         this.az = new thien_ab("", this.E());
+         this.az = new UIAction("", this.E());
       }
 
-      this.az.a = var1;
+      this.az.label = var1;
       return this.az;
    }
 
@@ -660,12 +660,12 @@ public final class thien_di implements thien_et {
       return this.a(var1, null, this.m(TextConstant.cancel()), null);
    }
 
-   public final thien_ad a(String var1, thien_ae var2) {
-      return this.a(thien_w.b(var1, GameCanvas.screenWidth - 30, thien_w.j), new thien_ab("OK", var2), new thien_ab("", var2), this.m(TextConstant.cancel()));
+   public final thien_ad a(String var1, IAction var2) {
+      return this.a(thien_w.b(var1, GameCanvas.screenWidth - 30, thien_w.j), new UIAction("OK", var2), new UIAction("", var2), this.m(TextConstant.cancel()));
    }
 
-   public final void b(String var1, thien_ae var2) {
-      this.a(var1, null, new thien_ab("OK", var2), null);
+   public final void b(String var1, IAction var2) {
+      this.a(var1, null, new UIAction("OK", var2), null);
    }
 
    public final void b(String var1) {
@@ -674,13 +674,13 @@ public final class thien_di implements thien_et {
 
    public final void a(String[] var1) {
       if (this.aA == null) {
-         this.aA = new thien_ab("", this.E());
+         this.aA = new UIAction("", this.E());
       }
 
       this.a(var1, this.aA, this.m("OK"), null);
    }
 
-   public final void c(thien_an var1) {
+   public final void c(Screen var1) {
       int var2 = this.L.size();
 
       while (--var2 >= 0) {
@@ -708,12 +708,12 @@ public final class thien_di implements thien_et {
       this.aD = null;
    }
 
-   public final thien_an c(String var1) {
+   public final Screen c(String var1) {
       int var2 = this.aE;
 
       while (--var2 >= 0) {
-         if (((thien_an)this.L.elementAt(var2)).g.equals(var1)) {
-            return (thien_an)this.L.elementAt(var2);
+         if (((Screen)this.L.elementAt(var2)).title.equals(var1)) {
+            return (Screen)this.L.elementAt(var2);
          }
       }
 
@@ -827,7 +827,7 @@ public final class thien_di implements thien_et {
       }
 
       if (this.i != null) {
-         this.i.a();
+         this.i.action();
          this.i = null;
       }
 
@@ -930,7 +930,7 @@ public final class thien_di implements thien_et {
          this.av -= var20;
       }
 
-      this.aD.c();
+      this.aD.updateSlideAnimation();
       if (GameCanvas.isTouchReleased) {
          if (GameCanvas.touchY > GameCanvas.screenHeight - g) {
             if (GameCanvas.touchX < GameCanvas.screenWidth / 3) {
@@ -988,7 +988,7 @@ public final class thien_di implements thien_et {
                   this.ao = false;
                }
             } else if (GameCanvas.touchY <= 0 || GameCanvas.touchY >= g) {
-               this.aD.a(GameCanvas.touchX, GameCanvas.touchY - thien_an.d);
+               this.aD.onTouchPress(GameCanvas.touchX, GameCanvas.touchY - Screen.headerHeight);
             } else if (GameCanvas.touchX < Q) {
                this.H();
                var1[14] = false;
@@ -1002,31 +1002,31 @@ public final class thien_di implements thien_et {
       }
 
       if (GameCanvas.isTouchPressed && !this.Y) {
-         this.aD.c(GameCanvas.touchX, GameCanvas.touchY - thien_an.d);
+         this.aD.onTouchRelease(GameCanvas.touchX, GameCanvas.touchY - Screen.headerHeight);
          GameCanvas.isTouchPressed = false;
       }
 
       if (GameCanvas.isTouchActive && !this.Y) {
-         this.aD.b(GameCanvas.touchX, GameCanvas.touchY - thien_an.d);
+         this.aD.onTouchDrag(GameCanvas.touchX, GameCanvas.touchY - Screen.headerHeight);
       }
 
       if (GameCanvas.isTouchDragged && !this.Y) {
-         this.aD.d(GameCanvas.touchX, GameCanvas.touchY - thien_an.d);
+         this.aD.onTouchMove(GameCanvas.touchX, GameCanvas.touchY - Screen.headerHeight);
          GameCanvas.isTouchDragged = false;
       }
 
       if (this.Y) {
          thien_ad var17 = (thien_ad)this.n.elementAt(0);
          if (var1[17] && var17.a != null) {
-            var17.a.b.a();
+            var17.a.actionHandler.action();
          }
 
          if (var1[18] && var17.c != null) {
-            var17.c.b.a();
+            var17.c.actionHandler.action();
          }
 
          if (var1[16] && var17.b != null) {
-            var17.b.b.a();
+            var17.b.actionHandler.action();
          }
 
          GameCanvas.resetKeys();
@@ -1047,20 +1047,20 @@ public final class thien_di implements thien_et {
             this.c(false);
          } else if (var1[15]) {
             thien_am var13;
-            thien_ab var26;
-            if ((var26 = (thien_ab)(var13 = (thien_am)this.aj.lastElement()).a.elementAt(var13.c)).c != null) {
-               this.a(var26.c, -1);
+            UIAction var26;
+            if ((var26 = (UIAction)(var13 = (thien_am)this.aj.lastElement()).a.elementAt(var13.c)).icon != null) {
+               this.a(var26.icon, -1);
             }
          } else if (var1[16] || var1[17]) {
             thien_am var14;
-            thien_ab var27;
-            if ((var27 = (thien_ab)(var14 = (thien_am)this.aj.lastElement()).a.elementAt(var14.c)).c == null) {
-               if (var27.b != null) {
-                  var27.b.a();
+            UIAction var27;
+            if ((var27 = (UIAction)(var14 = (thien_am)this.aj.lastElement()).a.elementAt(var14.c)).icon == null) {
+               if (var27.actionHandler != null) {
+                  var27.actionHandler.action();
                   this.c(true);
                }
             } else {
-               this.a(var27.c, -1);
+               this.a(var27.icon, -1);
             }
          } else if (var1[18]) {
             this.c(true);
@@ -1070,8 +1070,8 @@ public final class thien_di implements thien_et {
       } else if (!this.ao) {
          boolean var12 = var1[14];
          boolean var25 = var1[15];
-         this.aD.a = false;
-         if (this.aD.a(var1, var2, var3)) {
+         this.aD.isVisible = false;
+         if (this.aD.handleInput(var1, var2, var3)) {
             if (var12) {
                var1[14] = false;
                this.H();
@@ -1088,7 +1088,7 @@ public final class thien_di implements thien_et {
             this.ao = false;
 
             try {
-               thien_an var11 = this.aD;
+               Screen var11 = this.aD;
                if (this.aD == thien_ba.S && thien_ba.x) {
                   String var23 = thien_w.g[this.aq * 6 + this.ap];
                   if (thien_ba.ah == 1) {
@@ -1096,11 +1096,11 @@ public final class thien_di implements thien_et {
                   }
                }
 
-               if (c(var11.s)) {
-                  ((thien_at)var11.c(2)).b(thien_w.g[this.aq * 6 + this.ap]);
+               if (c(var11.padding)) {
+                  ((TextField)var11.getControlById(2)).insertText(thien_w.g[this.aq * 6 + this.ap]);
                } else {
                   thien_ew var24;
-                  (var24 = (thien_ew)this.aD).A.b(thien_w.g[this.aq * 6 + this.ap]);
+                  (var24 = (thien_ew)this.aD).A.insertText(thien_w.g[this.aq * 6 + this.ap]);
                }
             } catch (Exception var7) {
             }
@@ -1172,7 +1172,7 @@ public final class thien_di implements thien_et {
          }
 
          this.D();
-         this.aD.a(1);
+         this.aD.startSlide(1);
       }
    }
 
@@ -1184,7 +1184,7 @@ public final class thien_di implements thien_et {
          }
 
          this.D();
-         this.aD.a(-1);
+         this.aD.startSlide(-1);
       }
    }
 
@@ -1202,7 +1202,7 @@ public final class thien_di implements thien_et {
    }
 
    public static void l() {
-      c.d(c.j);
+      instance.d(instance.j);
    }
 
    public final void d(String var1) {
@@ -1210,13 +1210,13 @@ public final class thien_di implements thien_et {
 
       do {
          var2--;
-      } while (var2 >= 0 && !((thien_an)this.L.elementAt(var2)).g.equals(var1));
+      } while (var2 >= 0 && !((Screen)this.L.elementAt(var2)).title.equals(var1));
 
       this.W = var2;
       this.D();
    }
 
-   public final void d(thien_an var1) {
+   public final void d(Screen var1) {
       if (var1 == null) {
          this.e(0);
       } else {
@@ -1224,7 +1224,7 @@ public final class thien_di implements thien_et {
 
          do {
             var2--;
-         } while (var2 >= 0 && !((thien_an)this.L.elementAt(var2)).equals(var1));
+         } while (var2 >= 0 && !((Screen)this.L.elementAt(var2)).equals(var1));
 
          if (var2 == -1) {
             this.e(0);
@@ -1235,11 +1235,11 @@ public final class thien_di implements thien_et {
       }
    }
 
-   private boolean f(thien_an var1) {
+   private boolean f(Screen var1) {
       int var2 = this.aE;
 
       while (--var2 >= 0) {
-         if (((thien_an)this.L.elementAt(var2)).equals(var1)) {
+         if (((Screen)this.L.elementAt(var2)).equals(var1)) {
             return true;
          }
       }
@@ -1364,25 +1364,25 @@ public final class thien_di implements thien_et {
          this.b(var5);
       }
 
-      if (!var5.g.equals(this.aD.g)) {
+      if (!var5.title.equals(this.aD.title)) {
          this.a();
       }
 
       var5.z.a(var1 + " (" + var3 + ")", var2, 1);
       var5.z.b();
-      var5.a = true;
+      var5.isVisible = true;
    }
 
    public final void b(String var1, String var2, String var3) {
       if (!n(var1)) {
          thien_ew var4;
-         if (!(var4 = this.e(var1)).g.equals(this.aD.g)) {
+         if (!(var4 = this.e(var1)).title.equals(this.aD.title)) {
             this.a();
          }
 
          var4.z.a(var4.y + " (" + var3 + ")", var2, 1);
          var4.z.b();
-         var4.a = true;
+         var4.isVisible = true;
       }
    }
 
@@ -1411,10 +1411,10 @@ public final class thien_di implements thien_et {
    public final void a(String var1, String var2) {
       if (!n(var1)) {
          thien_ew var3;
-         if (!(var3 = this.e(var1)).g.equals(this.aD.g)) {
+         if (!(var3 = this.e(var1)).title.equals(this.aD.title)) {
             String var4 = thien_w.a(var2, GameCanvas.screenWidth - GameCanvas.screenWidth / 3, thien_w.j);
             this.a(var1 + " chat: " + var4 + "...", (Image) null, 1);
-            var3.t = true;
+            var3.isScrolling = true;
             this.a();
          }
 
@@ -1424,7 +1424,7 @@ public final class thien_di implements thien_et {
             var3.z.b();
          }
 
-         var3.a = true;
+         var3.isVisible = true;
       }
    }
 
@@ -1437,10 +1437,10 @@ public final class thien_di implements thien_et {
          this.b(var4);
       }
 
-      if (!var4.g.equals(this.aD.g)) {
+      if (!var4.title.equals(this.aD.title)) {
          var3 = thien_w.a(var2, GameCanvas.screenWidth - GameCanvas.screenWidth / 3, thien_w.j);
          this.a(var1 + " chat: " + var3 + "...", (Image)null, 1);
-         var4.t = true;
+         var4.isScrolling = true;
          this.a();
       }
 
@@ -1450,22 +1450,22 @@ public final class thien_di implements thien_et {
          var4.z.b();
       }
 
-      var4.a = true;
+      var4.isVisible = true;
    }
 
    public final void m() {
       this.c();
-      this.a(TextConstant.registrationError(), null, new thien_ab("OK", new thien_eb(this)), null);
+      this.a(TextConstant.registrationError(), null, new UIAction("OK", new thien_eb(this)), null);
    }
 
    public final void n() {
       this.c();
-      this.l.D.a(this.X.G);
-      this.l.E.a(this.X.F);
+      this.l.usernameField.setText(this.X.G);
+      this.l.passwordField.setText(this.X.F);
       Xuka.saveUserID(this.X.G);
       Xuka.savePassword(this.X.F);
       this.b(this.l);
-      this.l.c(this.l.D);
+      this.l.selectControl(this.l.usernameField);
       this.c(this.X);
    }
 
@@ -1478,7 +1478,7 @@ public final class thien_di implements thien_et {
       this.aK = true;
       if (GameCanvas.gameState == 1) {
          this.c();
-         this.a(TextConstant.connectionError(), null, null, new thien_ab(TextConstant.close(), new thien_ec(this)));
+         this.a(TextConstant.connectionError(), null, null, new UIAction(TextConstant.close(), new thien_ec(this)));
       }
    }
 
@@ -1593,12 +1593,12 @@ public final class thien_di implements thien_et {
    public final void a(String var1, String[] var2, String var3) {
       var3 = var3 + " " + var1;
       thien_ew var4;
-      (var4 = new thien_ew(var3, false, true, null)).h = var1;
+      (var4 = new thien_ew(var3, false, true, null)).subtitle = var1;
       int var5 = this.aE;
 
       while (--var5 >= 0) {
-         thien_an var6;
-         if ((var6 = (thien_an)this.L.elementAt(var5)).h == var1) {
+         Screen var6;
+         if ((var6 = (Screen)this.L.elementAt(var5)).subtitle == var1) {
             var4 = (thien_ew)var6;
          }
       }
@@ -1621,9 +1621,9 @@ public final class thien_di implements thien_et {
       if (!n(var1)) {
          this.a(
             new String[]{var1 + TextConstant.inviteConference2(), var3},
-            new thien_ab(TextConstant.cancel(), new thien_ed(this)),
-            new thien_ab("OK", new thien_ee(this, var2, var1, var3)),
-            new thien_ab(TextConstant.cancel(), new thien_ef(this, var2, var1))
+            new UIAction(TextConstant.cancel(), new thien_ed(this)),
+            new UIAction("OK", new thien_ee(this, var2, var1, var3)),
+            new UIAction(TextConstant.cancel(), new thien_ef(this, var2, var1))
          );
       }
    }
@@ -1632,8 +1632,8 @@ public final class thien_di implements thien_et {
       int var3 = this.aE;
 
       while (--var3 >= 0) {
-         thien_an var4;
-         if ((var4 = (thien_an)this.L.elementAt(var3)).h.equals(var2)) {
+         Screen var4;
+         if ((var4 = (Screen)this.L.elementAt(var3)).subtitle.equals(var2)) {
             thien_ew var5;
             (var5 = (thien_ew)var4).z.a(var1 + TextConstant.hasJoined(), 2);
             var5.z.b();
@@ -1645,8 +1645,8 @@ public final class thien_di implements thien_et {
       int var3 = this.aE;
 
       while (--var3 >= 0) {
-         thien_an var4;
-         if ((var4 = (thien_an)this.L.elementAt(var3)).h.equals(var2)) {
+         Screen var4;
+         if ((var4 = (Screen)this.L.elementAt(var3)).subtitle.equals(var2)) {
             thien_ew var5;
             (var5 = (thien_ew)var4).z.a(var1 + TextConstant.hasRefused(), 2);
             var5.z.b();
@@ -1658,8 +1658,8 @@ public final class thien_di implements thien_et {
       int var3 = this.aE;
 
       while (--var3 >= 0) {
-         thien_an var4;
-         if ((var4 = (thien_an)this.L.elementAt(var3)).h.equals(var2)) {
+         Screen var4;
+         if ((var4 = (Screen)this.L.elementAt(var3)).subtitle.equals(var2)) {
             thien_ew var5;
             (var5 = (thien_ew)var4).z.a(var1 + TextConstant.hasLeft(), 2);
             var5.z.b();
@@ -1681,8 +1681,8 @@ public final class thien_di implements thien_et {
       int var4 = this.aE;
 
       while (--var4 >= 0) {
-         thien_an var5;
-         if ((var5 = (thien_an)this.L.elementAt(var4)).h.equals(var2)) {
+         Screen var5;
+         if ((var5 = (Screen)this.L.elementAt(var4)).subtitle.equals(var2)) {
             thien_ew var6 = (thien_ew)var5;
             if (var3.length() > 100) {
                var3 = var3.substring(0, 99) + "...";
@@ -1690,7 +1690,7 @@ public final class thien_di implements thien_et {
 
             var6.z.a(var1, var3, 1);
             var6.z.b();
-            var6.a = true;
+            var6.isVisible = true;
          }
       }
    }
@@ -1699,8 +1699,8 @@ public final class thien_di implements thien_et {
       int var3 = this.aE;
 
       while (--var3 >= 0) {
-         thien_an var4;
-         if ((var4 = (thien_an)this.L.elementAt(var3)).h.equals(var1)) {
+         Screen var4;
+         if ((var4 = (Screen)this.L.elementAt(var3)).subtitle.equals(var1)) {
             thien_ew var5 = (thien_ew)var4;
             this.aC = var2.length;
 
@@ -1730,7 +1730,7 @@ public final class thien_di implements thien_et {
       this.a();
    }
 
-   public final thien_an u() {
+   public final Screen u() {
       return this.aD;
    }
 
@@ -1740,7 +1740,7 @@ public final class thien_di implements thien_et {
    }
 
    public final void g(String var1, String var2) {
-      this.a(TextConstant.updateNewVersionXYahoo() + var1, new thien_ab(TextConstant.download(), new thien_eg(this, var2)), null, new thien_ab(TextConstant.cancel(), new thien_dk(this)));
+      this.a(TextConstant.updateNewVersionXYahoo() + var1, new UIAction(TextConstant.download(), new thien_eg(this, var2)), null, new UIAction(TextConstant.cancel(), new thien_dk(this)));
    }
 
    public final String v() {
@@ -1759,9 +1759,9 @@ public final class thien_di implements thien_et {
       String var7 = var3 + Xuka.refCode;
       this.a(
          thien_w.b(var1 + TextConstant.syntax() + var7 + " => " + var2.substring(6), GameCanvas.screenWidth - 30, thien_w.j),
-         new thien_ab("OK", var5),
+         new UIAction("OK", var5),
          null,
-         new thien_ab(TextConstant.cancel(), var4)
+         new UIAction(TextConstant.cancel(), var4)
       );
    }
 
@@ -1769,7 +1769,7 @@ public final class thien_di implements thien_et {
       this.I = var1;
       D = var2;
       if (this.l != null) {
-         this.l.g();
+         this.l.recoverPassword();
       }
    }
 
@@ -1800,7 +1800,7 @@ public final class thien_di implements thien_et {
 
    public final void x() {
       if (G != null && this.f(G)) {
-         G.a(1);
+         G.startSlide(1);
          this.d(G);
       } else {
          MessageHandler.a();
@@ -1823,7 +1823,7 @@ public final class thien_di implements thien_et {
          this.k = new thien_gp();
       }
 
-      this.k.a(1);
+      this.k.startSlide(1);
    }
 
    public final void z() {
@@ -1895,33 +1895,33 @@ public final class thien_di implements thien_et {
    public final void a(thien_s var1) {
       a(var1, true, thien_gp.x);
       this.k.w.a(var1, -1);
-      this.k.a = true;
+      this.k.isVisible = true;
       this.k.w.e = false;
    }
 
    public final void k(String var1) {
-      thien_ap var2;
-      (var2 = new thien_ap()).g = TextConstant.addFriend();
+      FormScreen var2;
+      (var2 = new FormScreen()).title = TextConstant.addFriend();
       thien_y.a(var2, var1 + TextConstant.wantToAddYou());
-      thien_at var3 = thien_y.a(var2, TextConstant.toNewGroup(), 0);
+      TextField var3 = thien_y.a(var2, TextConstant.toNewGroup(), 0);
       thien_z var4;
       (var4 = thien_y.a(var2, TextConstant.orExisting(), this.j.x.i())).a(new thien_dq(this, var4, var3));
       if (var4.a != null && var4.a.length != 0) {
-         var3.a(var4.b());
+         var3.setText(var4.b());
       } else {
-         var3.a("Friends");
+         var3.setText("Friends");
       }
 
-      var2.k = new thien_ab(TextConstant.cancel(), new thien_dr(this, var3, var1, var2));
-      var2.m = new thien_ab("OK", new thien_ds(this, var3, var1, var2));
-      var2.l = new thien_ab(TextConstant.close(), new thien_dt(this, var2));
-      var2.c((thien_ac)var2.j.elementAt(0));
+      var2.leftCommand = new UIAction(TextConstant.cancel(), new thien_dr(this, var3, var1, var2));
+      var2.centerCommand = new UIAction("OK", new thien_ds(this, var3, var1, var2));
+      var2.rightCommand = new UIAction(TextConstant.close(), new thien_dt(this, var2));
+      var2.selectControl((UIControlBase)var2.controls.elementAt(0));
       this.e(var2);
    }
 
    public final void a(Vector var1) {
-      thien_an var2;
-      (var2 = new thien_an()).g = TextConstant.ignoreList();
+      Screen var2;
+      (var2 = new Screen()).title = TextConstant.ignoreList();
       int var3;
       if ((var3 = GameCanvas.screenWidth - 30) > 150) {
          var3 = 180;
@@ -1933,7 +1933,7 @@ public final class thien_di implements thien_et {
 
       int var4 = GameCanvas.screenWidth - var3 >> 1;
       thien_ai var6 = new thien_ai(TextConstant.ignoreList(), var4, 10, thien_w.f);
-      int var5 = 10 + 1 + var6.t;
+      int var5 = 10 + 1 + var6.height;
       String[] var7;
       if (var1.size() == 0) {
          (var7 = new String[1])[0] = "---";
@@ -1946,27 +1946,27 @@ public final class thien_di implements thien_et {
       }
 
       thien_z var16 = new thien_z(var7, var4, var5, var3, thien_w.f + 6);
-      var5 += 8 + var16.t;
+      var5 += 8 + var16.height;
       thien_ai var9 = new thien_ai(TextConstant.typeIdToAddDelete(), var4, var5, thien_w.f);
-      var5 += 3 + var6.t;
-      thien_at var15;
-      (var15 = new thien_at()).a(var4, var5, var3, thien_w.f + 6);
-      var5 += 10 + var15.t;
+      var5 += 3 + var6.height;
+      TextField var15;
+      (var15 = new TextField()).setBounds(var4, var5, var3, thien_w.f + 6);
+      var5 += 10 + var15.height;
       thien_v var10 = new thien_v(TextConstant.add() + "/" + TextConstant.delete(), var4, var5, var3, thien_w.f + 6);
       var16.b = new thien_dv(this, var16, var15);
       String var11;
       if (!(var11 = var16.b()).equals("---")) {
-         var15.a(var11);
+         var15.setText(var11);
       }
 
       var10.a = new thien_dw(this, var15, var2, var16);
-      var2.a(var6);
-      var2.a(var16);
-      var2.a(var9);
-      var2.a(var15);
-      var2.a(var10);
-      var2.c(var16);
-      var2.k = new thien_ab(TextConstant.cancel(), new thien_dx(this, var2));
+      var2.addControl(var6);
+      var2.addControl(var16);
+      var2.addControl(var9);
+      var2.addControl(var15);
+      var2.addControl(var10);
+      var2.selectControl(var16);
+      var2.leftCommand = new UIAction(TextConstant.cancel(), new thien_dx(this, var2));
       this.b(var2);
       this.j();
       this.c();
@@ -2015,7 +2015,7 @@ public final class thien_di implements thien_et {
    }
 
    public final void l(String var1) {
-      this.a(var1 + TextConstant.addYouHisFriendlist(), new thien_ab("OK", new thien_dy(this, var1)), null, new thien_ab(TextConstant.cancel(), new thien_dz(this, var1)));
+      this.a(var1 + TextConstant.addYouHisFriendlist(), new UIAction("OK", new thien_dy(this, var1)), null, new UIAction(TextConstant.cancel(), new thien_dz(this, var1)));
    }
 
    public final void a(String[] var1, int[] var2) {
@@ -2033,12 +2033,12 @@ public final class thien_di implements thien_et {
       MessageHandler.b();
    }
 
-   public final thien_an d(int var1) {
+   public final Screen d(int var1) {
       int var2 = this.aE;
 
       while (--var2 >= 0) {
-         thien_an var3;
-         if ((var3 = (thien_an)this.L.elementAt(var2)).s == var1) {
+         Screen var3;
+         if ((var3 = (Screen)this.L.elementAt(var2)).padding == var1) {
             return var3;
          }
       }
@@ -2095,7 +2095,7 @@ public final class thien_di implements thien_et {
    }
 
    public final void b(String[] var1) {
-      thien_an var2 = this.aD;
+      Screen var2 = this.aD;
       if (this.aD != null && var2 instanceof thien_eh) {
          thien_eh var3;
          (var3 = (thien_eh)var2).b(var1);
@@ -2320,8 +2320,8 @@ public final class thien_di implements thien_et {
          this.b(TextConstant.pleaseQuitYourCurrentGame());
       } else {
          thien_ba.ai = var1;
-         thien_ba.S.g = var4;
-         thien_ba.S.a(var4);
+         thien_ba.S.title = var4;
+         thien_ba.S.setWrappedText(var4);
          thien_ba var6 = thien_ba.S;
          this.e(var6);
          thien_ba.S.a(var2, 1);
@@ -2436,14 +2436,14 @@ public final class thien_di implements thien_et {
    public final void b(thien_s var1) {
       if (G == null) {
          (G = new thien_em()).w.d = new thien_dp(this);
-         G.w.b.a = "Vào phòng";
-         G.g = "Tiến Lên Miền Nam";
+         G.w.b.label = "Vào phòng";
+         G.title = "Tiến Lên Miền Nam";
          G.x = 0;
-         G.a(G.g);
+         G.setWrappedText(G.title);
       }
 
       G.w.a(var1, 0);
-      G.a(1);
+      G.startSlide(1);
       if (!this.f(G)) {
          this.b(G);
       }

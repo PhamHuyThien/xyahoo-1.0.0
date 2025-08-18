@@ -2,7 +2,7 @@ package home.thienph.xyahoo;
 
 import javax.microedition.lcdui.Graphics;
 
-public final class thien_ax extends thien_ac
+public final class thien_ax extends UIControlBase
 {
     private static int C;
     private static int D;
@@ -54,9 +54,9 @@ public final class thien_ax extends thien_ac
     
     public thien_ax(final byte[] h) {
         thien_by.a();
-        this.K = thien_an.f - 60;
-        if (thien_an.e > 130) {
-            thien_ax.S = thien_an.e - thien_by.a - (thien_by.a >> 2) * 12 >> 1;
+        this.K = Screen.formHeight - 60;
+        if (Screen.e > 130) {
+            thien_ax.S = Screen.e - thien_by.a - (thien_by.a >> 2) * 12 >> 1;
         }
         else {
             thien_ax.S = 0;
@@ -78,7 +78,7 @@ public final class thien_ax extends thien_ac
         this.d = new thien_by[thien_ax.C];
         this.M = new thien_by[3];
         for (int i = 0; i < this.M.length; ++i) {
-            (this.M[i] = new thien_by()).b((thien_an.e >> 1) - 30 + i * 10, thien_an.f - 130 >> 1);
+            (this.M[i] = new thien_by()).b((Screen.e >> 1) - 30 + i * 10, Screen.formHeight - 130 >> 1);
         }
         for (int j = 0; j < thien_ax.C; ++j) {
             this.d[j] = new thien_by();
@@ -91,7 +91,7 @@ public final class thien_ax extends thien_ac
             thien_ax.F[k].c = this.H[k];
             thien_ax.F[k].d = (byte)(this.H[k] >> 2);
             thien_ax.F[k].e = (byte)(this.H[k] % 4);
-            thien_ax.F[k].b(50 + k * 14, thien_an.f - 100);
+            thien_ax.F[k].b(50 + k * 14, Screen.formHeight - 100);
             if (k == thien_ax.D - 1) {
                 thien_ax.F[k].f = true;
             }
@@ -102,14 +102,14 @@ public final class thien_ax extends thien_ac
         this.P = 0;
         this.Q = 10L;
         this.R = System.currentTimeMillis();
-        super.q = 0;
-        super.r = 0;
-        super.s = thien_an.e;
-        super.t = thien_an.f;
-        super.p = true;
+        super.baseX = 0;
+        super.baseY = 0;
+        super.width = Screen.e;
+        super.height = Screen.formHeight;
+        super.isEnabled = true;
     }
     
-    public final void b(final int n, final int n2) {
+    public final void handleKeyPress(final int n, final int n2) {
         if (!thien_ax.B && thien_ax.D > 0) {
             int i = 0;
             while (true) {
@@ -125,16 +125,16 @@ public final class thien_ax extends thien_ac
                         }
                         this.J = l;
                         if (!thien_ax.F[this.J].g) {
-                            this.b(12);
+                            this.handleKeyInput(12);
                         }
                         else {
-                            this.b(13);
+                            this.handleKeyInput(13);
                         }
-                        final int a = thien_w.a(thien_ba.S.m.a, thien_w.j);
-                        final int n5 = (super.s >> 1) - (a >> 1);
-                        final int t = super.t;
-                        if (n > n5 && n < n5 + a && n2 > t && n2 < t + thien_an.b) {
-                            this.b(16);
+                        final int a = thien_w.a(thien_ba.S.centerCommand.label, thien_w.j);
+                        final int n5 = (super.width >> 1) - (a >> 1);
+                        final int t = super.height;
+                        if (n > n5 && n < n5 + a && n2 > t && n2 < t + Screen.topMargin) {
+                            this.handleKeyInput(16);
                         }
                         return;
                     }
@@ -149,7 +149,7 @@ public final class thien_ax extends thien_ac
         }
     }
     
-    public final boolean b(int i) {
+    public final boolean handleKeyInput(int i) {
         if (thien_ax.l) {
             return false;
         }
@@ -359,7 +359,7 @@ public final class thien_ax extends thien_ac
         thien_ax.D -= array.length;
         c();
         for (int l = 0; l < thien_ax.C; ++l) {
-            thien_ax.E[l].b((thien_an.e >> 1) - 30 + l * 10, thien_an.f - 130 >> 1);
+            thien_ax.E[l].b((Screen.e >> 1) - 30 + l * 10, Screen.formHeight - 130 >> 1);
             if (l == thien_ax.C - 1) {
                 thien_ax.E[l].f = true;
             }
@@ -368,11 +368,11 @@ public final class thien_ax extends thien_ac
         this.J = 0;
     }
     
-    public final void a(final Graphics graphics) {
-        graphics.setClip(0, -5, thien_an.e, thien_an.f);
+    public final void draw(final Graphics graphics) {
+        graphics.setClip(0, -5, Screen.e, Screen.formHeight);
         if (thien_ax.l) {
-            final int n = (thien_an.e >> 1) - 50;
-            final int n2 = thien_an.f - 140 >> 1;
+            final int n = (Screen.e >> 1) - 50;
+            final int n2 = Screen.formHeight - 140 >> 1;
             thien_by.a(graphics, n, n2);
             if (this.O < thien_ax.D) {
                 thien_by.a(graphics, n + (thien_ax.F[this.O].i - n) * (this.P + 1) / 3, n2 + (thien_ax.F[this.O].j - n2) * (this.P + 1) / 3);
@@ -448,14 +448,14 @@ public final class thien_ax extends thien_ac
             this.d[i].c = array[i];
             this.d[i].d = (byte)(array[i] >> 2);
             this.d[i].e = (byte)(array[i] % 4);
-            this.d[i].i = (thien_an.e >> 1) - 50 + i * 14;
-            this.d[i].j = thien_an.f - 140 >> 1;
+            this.d[i].i = (Screen.e >> 1) - 50 + i * 14;
+            this.d[i].j = Screen.formHeight - 140 >> 1;
             if (i == array.length - 1) {
                 this.d[i].f = true;
             }
         }
-        this.V = thien_an.e / 3;
-        this.W = thien_an.f - 140 >> 1;
+        this.V = Screen.e / 3;
+        this.W = Screen.formHeight - 140 >> 1;
         this.X = (this.V - z) / 5;
         this.Y = (this.W - aa) / 5;
         this.Z = z;
@@ -481,7 +481,7 @@ public final class thien_ax extends thien_ac
         }
     }
     
-    public final void e() {
+    public final void update() {
         final long currentTimeMillis;
         if (thien_ax.l && (currentTimeMillis = System.currentTimeMillis()) - this.R >= this.Q) {
             this.R = currentTimeMillis;
@@ -529,7 +529,7 @@ public final class thien_ax extends thien_ac
     
     private static void c() {
         for (int i = 0; i < thien_ax.D; ++i) {
-            thien_ax.F[i].b(thien_ax.S + i * 11, thien_an.f - thien_ax.T);
+            thien_ax.F[i].b(thien_ax.S + i * 11, Screen.formHeight - thien_ax.T);
         }
     }
     
@@ -549,11 +549,11 @@ public final class thien_ax extends thien_ac
                     int j = 0;
                     if (k == 0) {
                         n = thien_ax.S;
-                        j = thien_an.f - thien_ax.T;
+                        j = Screen.formHeight - thien_ax.T;
                     }
                     else if (k == 1) {
-                        n = thien_an.e - this.ab[b].length * 10 - 20;
-                        j = (thien_an.f >> 1) - 5;
+                        n = Screen.e - this.ab[b].length * 10 - 20;
+                        j = (Screen.formHeight >> 1) - 5;
                     }
                     else if (k == 2) {
                         n = thien_ax.S;
@@ -561,7 +561,7 @@ public final class thien_ax extends thien_ac
                     }
                     else if (k == 3) {
                         n = 0;
-                        j = (thien_an.f >> 1) - 15;
+                        j = (Screen.formHeight >> 1) - 15;
                     }
                     this.ad = this.ab[b].length;
                     for (int l = 0; l < this.ad; ++l) {
@@ -748,7 +748,7 @@ public final class thien_ax extends thien_ac
         return b;
     }
     
-    public final boolean a(final int n) {
+    public final boolean handleSoftKey(final int n) {
         return false;
     }
 }

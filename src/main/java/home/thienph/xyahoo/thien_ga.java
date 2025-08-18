@@ -1,14 +1,14 @@
 package home.thienph.xyahoo;
 
 final class thien_ga
-implements thien_ae {
+implements IAction {
     private thien_ff a;
 
     thien_ga(thien_ff thien_ff2) {
         this.a = thien_ff2;
     }
 
-    public final void a() {
+    public final void action() {
         boolean bl;
         thien_u thien_u2;
         block6: {
@@ -39,9 +39,9 @@ implements thien_ae {
         }
         if (bl) {
             MessageHandler.e(thien_u2.d);
-            thien_di.b().j.x.a(thien_u2.d);
+            thien_di.getInstance().j.x.a(thien_u2.d);
             return;
         }
-        thien_di.b().b(TextConstant.youCanDeleteEmptyGroup());
+        thien_di.getInstance().b(TextConstant.youCanDeleteEmptyGroup());
     }
 }

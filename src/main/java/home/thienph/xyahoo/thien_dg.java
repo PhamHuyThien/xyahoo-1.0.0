@@ -1,15 +1,15 @@
 package home.thienph.xyahoo;
 
 final class thien_dg
-implements thien_ae {
-    private thien_cq a;
+implements IAction {
+    private LoginScreen a;
 
-    thien_dg(thien_cq thien_cq2) {
-        this.a = thien_cq2;
+    thien_dg(LoginScreen loginScreen2) {
+        this.a = loginScreen2;
     }
 
-    public final void a() {
-        thien_cq.a(this.a);
-        thien_di.b().a(this.a.G, 0);
+    public final void action() {
+        LoginScreen.closeChatBox(this.a);
+        thien_di.getInstance().a(this.a.mainMenu, 0);
     }
 }

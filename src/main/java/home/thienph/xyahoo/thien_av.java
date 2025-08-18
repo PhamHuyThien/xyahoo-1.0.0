@@ -1,14 +1,14 @@
 package home.thienph.xyahoo;
 
 final class thien_av
-implements thien_ae {
-    private thien_at a;
+implements IAction {
+    private TextField a;
 
-    thien_av(thien_at thien_at2) {
-        this.a = thien_at2;
+    thien_av(TextField textField2) {
+        this.a = textField2;
     }
 
-    public final void a() {
-        this.a.b();
+    public final void action() {
+        this.a.deleteCharBeforeCursor();
     }
 }

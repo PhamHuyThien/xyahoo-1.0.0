@@ -3,19 +3,19 @@ package home.thienph.xyahoo;
 import javax.microedition.lcdui.Graphics;
 
 public final class thien_z
-extends thien_ac {
+extends UIControlBase {
     public String[] a;
     private int c;
     private int d = 0;
-    public thien_ae b;
+    public IAction b;
     private String e = "";
 
     public thien_z(String[] stringArray, int n, int n2, int n3, int n4) {
         this.a = stringArray;
-        this.q = n;
-        this.r = n2;
-        this.s = n3;
-        this.t = n4;
+        this.baseX = n;
+        this.baseY = n2;
+        this.width = n3;
+        this.height = n4;
         this.g();
     }
 
@@ -28,7 +28,7 @@ extends thien_ac {
         this.g();
     }
 
-    public final boolean a(int n) {
+    public final boolean handleSoftKey(int n) {
         if (n == 14) {
             this.c();
             return false;
@@ -46,7 +46,7 @@ extends thien_ac {
             this.c = this.a.length - 1;
         }
         if (this.b != null) {
-            this.b.a();
+            this.b.action();
         }
         this.g();
     }
@@ -57,12 +57,12 @@ extends thien_ac {
             this.c = 0;
         }
         if (this.b != null) {
-            this.b.a();
+            this.b.action();
         }
         this.g();
     }
 
-    public final boolean b(int n) {
+    public final boolean handleKeyInput(int n) {
         if (this.a.length == 0) {
             return true;
         }
@@ -77,63 +77,63 @@ extends thien_ac {
         return true;
     }
 
-    public final void b(int n, int n2) {
-        this.v.c(this);
+    public final void handleKeyPress(int n, int n2) {
+        this.parentScreen.selectControl(this);
         ++this.c;
         if (this.c >= this.a.length) {
             this.c = 0;
         }
         if (this.b != null) {
-            this.b.a();
+            this.b.action();
         }
         this.g();
     }
 
     private void g() {
         if (this.a.length != 0) {
-            this.e = thien_w.a(this.a[this.c], this.s - 35, thien_w.j);
+            this.e = thien_w.a(this.a[this.c], this.width - 35, thien_w.j);
         }
     }
 
-    public final void a(Graphics graphics) {
-        boolean bl = this.j();
+    public final void draw(Graphics graphics) {
+        boolean bl = this.isSelected();
         if (bl) {
             graphics.setColor(2580);
-            graphics.fillRect(this.q + 2, this.r + 2, this.s - 3, this.t - 3);
+            graphics.fillRect(this.baseX + 2, this.baseY + 2, this.width - 3, this.height - 3);
         }
-        int n = this.r + 3 + (thien_w.a ? 0 : 1);
+        int n = this.baseY + 3 + (thien_w.a ? 0 : 1);
         graphics.setColor(0xFFFFFF);
         if (this.a.length == 0) {
-            thien_w.a(thien_w.d).a(TextConstant.noItem(), this.q + (this.s >> 1), n, 2, graphics, thien_w.j, thien_w.f);
+            thien_w.a(thien_w.d).a(TextConstant.noItem(), this.baseX + (this.width >> 1), n, 2, graphics, thien_w.j, thien_w.f);
         } else {
-            thien_w.a(thien_w.d).a(this.e, this.q + (this.s >> 1), n, 2, graphics, thien_w.j, thien_w.f);
+            thien_w.a(thien_w.d).a(this.e, this.baseX + (this.width >> 1), n, 2, graphics, thien_w.j, thien_w.f);
         }
-        n = this.t - 2;
-        int n2 = this.r + 1;
+        n = this.height - 2;
+        int n2 = this.baseY + 1;
         graphics.setColor(bl ? 14675958 : 9478569);
-        thien_v.a(graphics, this.q + 1, n2, this.s - 2, n);
-        n = this.r + (this.t >> 1);
-        graphics.drawImage(thien_b.b[2], this.q + 9, n, 3);
-        graphics.drawImage(thien_b.b[3], this.q + this.s - 9, n, 3);
+        thien_v.a(graphics, this.baseX + 1, n2, this.width - 2, n);
+        n = this.baseY + (this.height >> 1);
+        graphics.drawImage(thien_b.b[2], this.baseX + 9, n, 3);
+        graphics.drawImage(thien_b.b[3], this.baseX + this.width - 9, n, 3);
     }
 
-    public final void a(thien_ae thien_ae2) {
-        this.b = thien_ae2;
-        if (this.y != null) {
-            this.y.b = thien_ae2;
+    public final void a(IAction IAction2) {
+        this.b = IAction2;
+        if (this.actionTertiary != null) {
+            this.actionTertiary.actionHandler = IAction2;
         }
     }
 
-    public final void e() {
+    public final void update() {
         if (this.d > 0) {
             --this.d;
             if (this.d == 0 && this.b != null) {
-                this.b.a();
+                this.b.action();
             }
         }
     }
 
-    public final void b(Graphics graphics) {
+    public final void drawBackground(Graphics graphics) {
     }
 
     public final String b() {

@@ -4,7 +4,7 @@ import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 import java.util.Vector;
 
-public final class thien_bz extends thien_ac
+public final class thien_bz extends UIControlBase
 {
     public String a;
     public long b;
@@ -38,9 +38,9 @@ public final class thien_bz extends thien_ac
     private long Q;
     
     static {
-        final int e = thien_an.e;
-        final int f = thien_an.f;
-        final int b = thien_an.b;
+        final int e = Screen.e;
+        final int f = Screen.formHeight;
+        final int b = Screen.topMargin;
         final int f2 = thien_di.f;
     }
     
@@ -74,16 +74,16 @@ public final class thien_bz extends thien_ac
         if (this.c == -1) {
             final Image[] a2 = thien_b.a;
         }
-        final int n2 = thien_an.f - thien_di.f - 40 - ((32 > thien_w.f << 1) ? 32 : (thien_w.f << 1)) - 5;
+        final int n2 = Screen.formHeight - thien_di.f - 40 - ((32 > thien_w.f << 1) ? 32 : (thien_w.f << 1)) - 5;
         if (n % 2 == 0) {
-            this.e = (thien_an.e >> 1) - 10;
+            this.e = (Screen.e >> 1) - 10;
             this.L = 6;
             this.f = ((n == 0) ? n2 : thien_w.f);
         }
         else {
             this.f = n2 >> 1;
             this.L = 20;
-            this.e = ((n == 1) ? (thien_an.e - thien_w.a("100000 " + a(), thien_w.j)) : 10);
+            this.e = ((n == 1) ? (Screen.e - thien_w.a("100000 " + a(), thien_w.j)) : 10);
         }
         this.I = thien_w.a(this.a, 9);
         this.C = c2;
@@ -126,7 +126,7 @@ public final class thien_bz extends thien_ac
         }
     }
     
-    public final void a(final Graphics graphics) {
+    public final void draw(final Graphics graphics) {
         if (this.a != null && !this.j) {
             graphics.drawImage(thien_ba.aj[this.F], this.e, this.f, this.L);
             graphics.setColor(16777215);
@@ -177,19 +177,19 @@ public final class thien_bz extends thien_ac
             if (this.G && this.P >= 0) {
                 graphics.setColor(16726823);
                 if (this.k == 1 || this.k == 3) {
-                    thien_ba.S.l.a = "";
-                    thien_ba.S.m.a = "";
+                    thien_ba.S.rightCommand.label = "";
+                    thien_ba.S.centerCommand.label = "";
                     thien_w.a(thien_w.b).a(new StringBuffer(String.valueOf(this.P)).toString(), this.e + 2, this.f - 15, graphics);
                     return;
                 }
                 if (this.k == 2) {
-                    thien_ba.S.l.a = "";
-                    thien_ba.S.m.a = "";
+                    thien_ba.S.rightCommand.label = "";
+                    thien_ba.S.centerCommand.label = "";
                     thien_w.a(thien_w.b).a(new StringBuffer(String.valueOf(this.P)).toString(), this.e - 17, this.f - 5, graphics);
                     return;
                 }
-                thien_ba.S.l.a = TextConstant.deny();
-                thien_ba.S.m.a = TextConstant.dropCard();
+                thien_ba.S.rightCommand.label = TextConstant.deny();
+                thien_ba.S.centerCommand.label = TextConstant.dropCard();
                 thien_w.a(thien_w.b).a(new StringBuffer(String.valueOf(this.P)).toString(), this.e - 17, this.f - 5, graphics);
             }
         }
@@ -206,11 +206,11 @@ public final class thien_bz extends thien_ac
         this.Q = System.currentTimeMillis();
     }
     
-    public final boolean b(final int n) {
+    public final boolean handleKeyInput(final int n) {
         return true;
     }
     
-    public final void e() {
+    public final void update() {
         if (this.G) {
             this.P = (int)(this.O - (int)((System.currentTimeMillis() - this.Q) / 1000L));
             if (this.P == 0) {
@@ -219,7 +219,7 @@ public final class thien_bz extends thien_ac
         }
     }
     
-    public final boolean a(final int n) {
+    public final boolean handleSoftKey(final int n) {
         return false;
     }
 }

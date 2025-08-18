@@ -1,11 +1,11 @@
 package home.thienph.xyahoo;
 
 final class thien_bs
-implements thien_ae {
+implements IAction {
     thien_bs(thien_ba thien_ba2) {
     }
 
-    public final void a() {
+    public final void action() {
         Packet packet2 = new Packet(3416, 39);
         thien_hc.a(packet2);
     }

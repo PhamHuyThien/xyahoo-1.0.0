@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.Vector;
 import javax.microedition.lcdui.Graphics;
 
-public final class thien_e extends thien_ac {
+public final class thien_e extends UIControlBase {
    private int a;
    private int b;
    private int c;
@@ -33,11 +33,11 @@ public final class thien_e extends thien_ac {
 
    public thien_e(int var1, int var2, int var3, int var4) {
       super(1, 1, var3, var4, true);
-      super.p = true;
-      super.o = false;
+      super.isEnabled = true;
+      super.isVisible = false;
       this.g = var4 / thien_w.h + 2;
       this.f = new Vector();
-      super.y = new thien_ab("Chat", null);
+      super.actionTertiary = new UIAction("Chat", null);
    }
 
    public final void a(String var1, int var2) {
@@ -53,7 +53,7 @@ public final class thien_e extends thien_ac {
       }
 
       if (!var1.startsWith("http://") && !var1.startsWith("vtp://")) {
-         String[] var8 = thien_w.b(var1, super.s - 100, thien_w.j);
+         String[] var8 = thien_w.b(var1, super.width - 100, thien_w.j);
          this.j = var8.length;
 
          for (int var5 = 0; var5 < this.j; var5++) {
@@ -66,7 +66,7 @@ public final class thien_e extends thien_ac {
 
          this.l = this.f.size();
          this.e = (this.l - this.g + 2) * thien_w.h + 8;
-         this.f();
+         this.handleFocus();
       } else {
          var1 = '祼' + var1;
          this.f.addElement(var1);
@@ -82,7 +82,7 @@ public final class thien_e extends thien_ac {
          this.l = this.f.size();
       } else {
          var2 = thien_w.a(var2, true);
-         String[] var4 = thien_w.b((char)(var3 + 31000) + var1 + ": 紀" + var2, super.s - 8, thien_w.j);
+         String[] var4 = thien_w.b((char)(var3 + 31000) + var1 + ": 紀" + var2, super.width - 8, thien_w.j);
          this.j = var4.length;
 
          for (int var7 = 0; var7 < this.j; var7++) {
@@ -91,11 +91,11 @@ public final class thien_e extends thien_ac {
 
          this.l = this.f.size();
          this.e = (this.l - this.g + 2) * thien_w.h + 8;
-         this.f();
+         this.handleFocus();
       }
    }
 
-   public final boolean b(int var1) {
+   public final boolean handleKeyInput(int var1) {
       if (var1 == 12) {
          if (this.i > 0) {
             this.i--;
@@ -127,17 +127,17 @@ public final class thien_e extends thien_ac {
       return true;
    }
 
-   public final boolean a(int var1) {
-      this.b(var1);
+   public final boolean handleSoftKey(int var1) {
+      this.handleKeyInput(var1);
       return true;
    }
 
-   public final void a(Graphics var1) {
-      var1.setClip(super.q, super.r + 33, super.s, super.t);
+   public final void draw(Graphics var1) {
+      var1.setClip(super.baseX, super.baseY + 33, super.width, super.height);
       var1.translate(0, 6);
       var1.translate(0, -this.d);
       if (this.i != -1) {
-         int var4 = super.s - 3;
+         int var4 = super.width - 3;
          this.m = thien_w.d;
          this.n = 16777215;
          var1.setColor(2580);
@@ -212,7 +212,7 @@ public final class thien_e extends thien_ac {
       var1.setClip(-1000, -1000, 2000, 2000);
    }
 
-   public final void e() {
+   public final void update() {
       if (this.d != this.a) {
          this.b = this.a - this.d << 2;
          this.c = this.c + this.b;
@@ -233,8 +233,8 @@ public final class thien_e extends thien_ac {
       }
    }
 
-   public final void f() {
-      if (super.r + this.f.size() * (thien_w.h + 2) >= super.t) {
+   public final void handleFocus() {
+      if (super.baseY + this.f.size() * (thien_w.h + 2) >= super.height) {
          thien_ar.a = true;
          thien_ar.a(this.f.size());
       } else {
@@ -242,18 +242,18 @@ public final class thien_e extends thien_ac {
       }
    }
 
-   public final void c(Graphics var1) {
+   public final void drawScrollbar(Graphics var1) {
       if (thien_ar.a) {
          thien_ar.a(var1, this.i);
       }
    }
 
-   public final void a(int var1, int var2) {
+   public final void onDrag(int var1, int var2) {
       this.C = var1;
       this.D = var2;
    }
 
-   public final void b(int var1, int var2) {
+   public final void handleKeyPress(int var1, int var2) {
       if (this.B) {
          this.B = false;
          this.a = this.a - (var2 - this.D << 3);
@@ -269,7 +269,7 @@ public final class thien_e extends thien_ac {
       }
    }
 
-   public final void c(int var1, int var2) {
+   public final void handlePointerRelease(int var1, int var2) {
       if (thien_b.c(var1 - this.C) > 1 || thien_b.c(var2 - this.D) > 1) {
          this.B = true;
          this.a = this.a - (var2 - this.D);
@@ -294,7 +294,7 @@ public final class thien_e extends thien_ac {
       }
    }
 
-   public final void b(Graphics var1) {
+   public final void drawBackground(Graphics var1) {
    }
 
    public final void b() {

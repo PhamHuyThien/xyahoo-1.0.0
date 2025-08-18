@@ -1,16 +1,16 @@
 package home.thienph.xyahoo;
 
 final class thien_gt
-implements thien_ae {
+implements IAction {
     private thien_gp a;
 
     thien_gt(thien_gp thien_gp2) {
         this.a = thien_gp2;
     }
 
-    public final void a() {
+    public final void action() {
         int n;
-        String string = thien_fe.b(thien_gp.b(this.a).c().trim());
+        String string = thien_fe.b(thien_gp.b(this.a).getText().trim());
         int n2 = n = thien_gp.c(this.a).a() == 0 ? 0 : 12;
         if (string != null && !string.equals(thien_gp.A)) {
             thien_gp.a(this.a, string);
@@ -31,6 +31,6 @@ implements thien_ae {
                 thien_di.z = true;
             }
         }
-        thien_di.b().c(thien_gp.d(this.a));
+        thien_di.getInstance().c(thien_gp.d(this.a));
     }
 }
