@@ -29,14 +29,14 @@ extends FormScreen {
         FormScreen.calculateFormDimensions(70, 150);
         this.initLayout();
         this.x = Screen.formHeight - (thien_w.i * 3 + thien_aq.a + (GameCanvas.screenHeight > 170 ? 55 : 20) + thien_di.g) >> 1;
-        thien_y.a((FormScreen)this, thien_aq.c(), false);
+        UIFormBuilder.addImage((FormScreen)this, thien_aq.c(), false);
         this.x += GameCanvas.screenHeight > 170 ? 18 : 7;
-        this.D = thien_y.a((FormScreen)this, "T\u00ean: ", 0, -1);
+        this.D = UIFormBuilder.addTextField((FormScreen)this, "T\u00ean: ", 0, -1);
         this.x += 5;
-        this.I = stringArray != null ? thien_y.a((FormScreen)this, TextConstant.suggestedId(), stringArray) : null;
-        this.E = thien_y.a((FormScreen)this, String.valueOf(TextConstant.password()) + ":", 2, -1);
+        this.I = stringArray != null ? UIFormBuilder.addDropdown((FormScreen)this, TextConstant.suggestedId(), stringArray) : null;
+        this.E = UIFormBuilder.addTextField((FormScreen)this, String.valueOf(TextConstant.password()) + ":", 2, -1);
         this.x += 5;
-        this.J = thien_y.a((FormScreen)this, String.valueOf(TextConstant.retype()) + ":", 2, -1);
+        this.J = UIFormBuilder.addTextField((FormScreen)this, String.valueOf(TextConstant.retype()) + ":", 2, -1);
         if (stringArray != null) {
             this.D.setText(this.K);
             this.E.setText(this.F);

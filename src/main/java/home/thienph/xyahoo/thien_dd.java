@@ -17,7 +17,7 @@ implements IAction {
         GameCanvas.instance.connectToServer();
         MessageHandler.b();
         Packet packet2 = new Packet(269, 13);
-        thien_hc.a(packet2);
+        ConnectionManager.sendPacket(packet2);
         thien_di.getInstance().b(TextConstant.pleaseWait());
     }
 }

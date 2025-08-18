@@ -260,8 +260,8 @@ extends Screen {
             FormScreen cfr_ignored_0 = thien_gp2.V;
             FormScreen.calculateFormDimensions(70, 150);
             thien_gp2.V.x += 20;
-            thien_gp2.W = thien_y.a(thien_gp2.V, TextConstant.status(), new String[]{TextConstant.available(), TextConstant.invisible2()});
-            thien_gp2.X = thien_y.b(thien_gp2.V, TextConstant.statusMessage(), 0, -1);
+            thien_gp2.W = UIFormBuilder.addDropdown(thien_gp2.V, TextConstant.status(), new String[]{TextConstant.available(), TextConstant.invisible2()});
+            thien_gp2.X = UIFormBuilder.addTextFieldWithLabel(thien_gp2.V, TextConstant.statusMessage(), 0, -1);
             thien_gp2.V.selectControl(thien_gp2.W);
             thien_gp2.V.centerCommand = new UIAction("OK", new thien_gt(thien_gp2));
             thien_gp2.V.leftCommand = new UIAction(TextConstant.cancel(), new thien_gu(thien_gp2));

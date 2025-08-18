@@ -377,7 +377,7 @@ public final class thien_di implements thien_et {
    }
 
    public final void d() {
-      if (thien_hc.d) {
+      if (ConnectionManager.isConnecting) {
          this.a(TextConstant.checkingConnection(), null, null, new UIAction(TextConstant.close(), new thien_dj(this))).a(true);
       } else if (this.aK) {
          this.c();
@@ -595,12 +595,12 @@ public final class thien_di implements thien_et {
          this.k.g();
       }
 
-      int var1 = thien_hc.g;
-      int var2 = thien_hc.h;
-      int var3 = thien_hc.h + var1;
+      int var1 = ConnectionManager.reconnectCount;
+      int var2 = ConnectionManager.connectionId;
+      int var3 = ConnectionManager.connectionId + var1;
       Packet var4 = new Packet(42, 2);
       MessageHandler.writeInt(var3, var4);
-      thien_hc.a(var4);
+      ConnectionManager.sendPacket(var4);
       if (var1 > 0) {
          var1 = var1 / 1024 + 1;
       }
@@ -610,9 +610,9 @@ public final class thien_di implements thien_et {
       }
 
       this.a(new String[]{"Dung lượng internet", var1 + var2 + " Kb"});
-      thien_hc.g = 0;
-      thien_hc.h = 0;
-      thien_hc.b();
+      ConnectionManager.reconnectCount = 0;
+      ConnectionManager.connectionId = 0;
+      ConnectionManager.disconnect();
 
       try {
          Thread.sleep(50L);
@@ -822,7 +822,7 @@ public final class thien_di implements thien_et {
          this.h = 0;
       }
 
-      if (this.h % 500 == 0 && thien_hc.c) {
+      if (this.h % 500 == 0 && ConnectionManager.isConnected) {
          MessageHandler.c();
       }
 
@@ -1846,7 +1846,7 @@ public final class thien_di implements thien_et {
       int var1 = TextConstant.languageId;
       Packet var3 = new Packet(59, 14);
       MessageHandler.writeInt(var1, var3);
-      thien_hc.a(var3);
+      ConnectionManager.sendPacket(var3);
       this.A();
    }
 
@@ -1902,10 +1902,10 @@ public final class thien_di implements thien_et {
    public final void k(String var1) {
       FormScreen var2;
       (var2 = new FormScreen()).title = TextConstant.addFriend();
-      thien_y.a(var2, var1 + TextConstant.wantToAddYou());
-      TextField var3 = thien_y.a(var2, TextConstant.toNewGroup(), 0);
+      UIFormBuilder.addLabelsAuto(var2, var1 + TextConstant.wantToAddYou());
+      TextField var3 = UIFormBuilder.addTextField(var2, TextConstant.toNewGroup(), 0);
       thien_z var4;
-      (var4 = thien_y.a(var2, TextConstant.orExisting(), this.j.x.i())).a(new thien_dq(this, var4, var3));
+      (var4 = UIFormBuilder.addDropdown(var2, TextConstant.orExisting(), this.j.x.i())).a(new thien_dq(this, var4, var3));
       if (var4.a != null && var4.a.length != 0) {
          var3.setText(var4.b());
       } else {
@@ -2424,7 +2424,7 @@ public final class thien_di implements thien_et {
       boolean var5 = false;
       Packet var8 = new Packet(123, 2);
       MessageHandler.writeInt(var1, var8);
-      thien_hc.a(var8);
+      ConnectionManager.sendPacket(var8);
    }
 
    public final void a(int var1, int var2, byte[] var3) {

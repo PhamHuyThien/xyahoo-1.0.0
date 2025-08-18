@@ -6,7 +6,7 @@ implements IAction {
     }
 
     public final void action() {
-        thien_hc.b();
+        ConnectionManager.disconnect();
         thien_di.getInstance().c();
     }
 }

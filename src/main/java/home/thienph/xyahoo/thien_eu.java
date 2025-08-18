@@ -1,18 +1,18 @@
 package home.thienph.xyahoo;
 
-public final class thien_eu extends thien_hh {
+public final class thien_eu extends PacketHandler {
    private static thien_eu a = null;
    private static thien_et b;
 
-   public final void b() {
+   public final void onConnect() {
       b.p();
    }
 
-   public final void c() {
+   public final void onDisconnect() {
       b.q();
    }
 
-   protected final void a(Packet var1, int var2) {
+   protected final void handle(Packet var1, int var2) {
       switch (var2) {
          case -5:
             b.B();
@@ -108,6 +108,6 @@ public final class thien_eu extends thien_hh {
       b = var0;
    }
 
-   public final void d() {
+   public final void shutdown() {
    }
 }

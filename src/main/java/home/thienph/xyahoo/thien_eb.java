@@ -9,7 +9,7 @@ implements IAction {
     }
 
     public final void action() {
-        thien_hc.b();
+        ConnectionManager.disconnect();
         this.a.c();
     }
 }

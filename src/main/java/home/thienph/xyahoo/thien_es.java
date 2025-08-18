@@ -3,7 +3,7 @@ package home.thienph.xyahoo;
 import java.util.Vector;
 import javax.microedition.lcdui.Image;
 
-public final class thien_es extends thien_hh {
+public final class thien_es extends PacketHandler {
    private static thien_et b;
    private static thien_es c = null;
    public static String a;
@@ -23,18 +23,18 @@ public final class thien_es extends thien_hh {
       b = var0;
    }
 
-   public final void b() {
+   public final void onConnect() {
       b.p();
    }
 
-   public final void c() {
+   public final void onDisconnect() {
       b.q();
    }
 
-   public final void d() {
+   public final void shutdown() {
    }
 
-   public final void a(Packet var1, int var2) {
+   public final void handle(Packet var1, int var2) {
       int var3 = var1.getType();
       switch (var2) {
          case -6:

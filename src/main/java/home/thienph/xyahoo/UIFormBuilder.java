@@ -2,24 +2,24 @@ package home.thienph.xyahoo;
 
 import javax.microedition.lcdui.Image;
 
-public class thien_y implements IAction {
-   private final IAction a;
+public class UIFormBuilder implements IAction {
+   private final IAction action;
 
-   thien_y(thien_x var1, IAction var2) {
-      this.a = var2;
+   UIFormBuilder(thien_x var1, IAction var2) {
+      this.action = var2;
    }
 
    public final void action() {
-      if (this.a != null) {
-         this.a.action();
+      if (this.action != null) {
+         this.action.action();
       }
    }
 
-   public static TextField a(FormScreen var0, String var1, int var2) {
-      return b(var0, var1, 0, -1);
+   public static TextField addTextField(FormScreen var0, String var1, int var2) {
+      return addTextFieldWithLabel(var0, var1, 0, -1);
    }
 
-   public static TextField a(FormScreen var0, String var1, int var2, int var3) {
+   public static TextField addTextField(FormScreen var0, String var1, int var2, int var3) {
       thien_ai var4;
       (var4 = new thien_ai(var1, FormScreen.formXOffset, var0.x, thien_w.f, -1)).width = FormScreen.formMarginLeft;
       var0.addControl(var4, false);
@@ -31,7 +31,7 @@ public class thien_y implements IAction {
       return var5;
    }
 
-   public static TextField b(FormScreen var0, String var1, int var2, int var3) {
+   public static TextField addTextFieldWithLabel(FormScreen var0, String var1, int var2, int var3) {
       var0.addControl(new thien_ai(var1, var0.w, var0.x, thien_w.f, var3));
       var0.x += 2;
       TextField var4;
@@ -42,11 +42,11 @@ public class thien_y implements IAction {
       return var4;
    }
 
-   public static thien_z a(FormScreen var0, String var1, String[] var2) {
-      return a(var0, var1, var2, -1);
+   public static thien_z addDropdown(FormScreen var0, String var1, String[] var2) {
+      return addDropdown(var0, var1, var2, -1);
    }
 
-   public static thien_z a(FormScreen var0, String var1, String[] var2, int var3) {
+   public static thien_z addDropdown(FormScreen var0, String var1, String[] var2, int var3) {
       var0.addControl(new thien_ai(var1, var0.w, var0.x, thien_w.f, var3));
       var0.x += 2;
       thien_z var4;
@@ -55,14 +55,14 @@ public class thien_y implements IAction {
       return var4;
    }
 
-   public static thien_ai a(FormScreen var0, int var1) {
+   public static thien_ai addLabel(FormScreen var0, int var1) {
       thien_ai var2;
       (var2 = new thien_ai("", 5, var0.x, 10)).selectedIndex = var1;
       var0.addControl(var2);
       return var2;
    }
 
-   public static thien_ai[] a(String var0, FormScreen var1, int var2, int var3, boolean var4, boolean var5) {
+   public static thien_ai[] addWrappedLabels(String var0, FormScreen var1, int var2, int var3, boolean var4, boolean var5) {
       String[] var6;
       thien_ai[] var7 = new thien_ai[(var6 = thien_w.b(var0, Screen.e - (var5 ? 10 : var1.w + 10), thien_w.j)).length];
 
@@ -79,7 +79,7 @@ public class thien_y implements IAction {
       return var7;
    }
 
-   public static thien_v a(FormScreen var0, String var1, int var2, IAction var3, int var4, int var5, int var6) {
+   public static thien_v addButton(FormScreen var0, String var1, int var2, IAction var3, int var4, int var5, int var6) {
       var2 = thien_w.a(var1, thien_w.j) + 20;
       if (var2 > 0) {
          var6 = var2;
@@ -96,7 +96,7 @@ public class thien_y implements IAction {
       return var7;
    }
 
-   public static thien_aj b(FormScreen var0, String var1, int var2, IAction var3, int var4, int var5, int var6) {
+   public static thien_aj addCheckBox(FormScreen var0, String var1, int var2, IAction var3, int var4, int var5, int var6) {
       int var7;
       if ((var7 = thien_w.a(var1, thien_w.j)) < var6) {
          var6 = var7;
@@ -113,14 +113,14 @@ public class thien_y implements IAction {
       return var8;
    }
 
-   public static thien_x a(FormScreen var0, String var1, IAction var2) {
+   public static thien_x addLink(FormScreen var0, String var1, IAction var2) {
       int var5 = thien_w.a(var1, thien_w.j) + 13 + 4;
       thien_x var4;
       thien_x var10000 = var4 = new thien_x(var1, var0.w, var0.x, var5, thien_w.f + 4);
       Object var3 = null;
       thien_x var6 = var10000;
       var10000.b = (IAction)var3;
-      var6.actionSecondary.actionHandler = new thien_y(var6, (IAction)var3);
+      var6.actionSecondary.actionHandler = new UIFormBuilder(var6, (IAction)var3);
       if (var0 != null) {
          var0.addControl(var4);
       }
@@ -128,11 +128,11 @@ public class thien_y implements IAction {
       return var4;
    }
 
-   public static thien_ai[] a(FormScreen var0, String var1) {
-      return a(var1, var0, -1, 16777215, true, true);
+   public static thien_ai[] addLabelsAuto(FormScreen var0, String var1) {
+      return addWrappedLabels(var1, var0, -1, 16777215, true, true);
    }
 
-   public static thien_ag a(FormScreen var0, byte[] var1, int var2) {
+   public static thien_ag addImage(FormScreen var0, byte[] var1, int var2) {
       Image var3 = Image.createImage(var1, 0, var1.length);
       thien_ag var4;
       (var4 = new thien_ag()).a = var1;
@@ -145,7 +145,7 @@ public class thien_y implements IAction {
       return var4;
    }
 
-   public static thien_ag a(FormScreen var0, int[] var1, int var2, int var3, int var4) {
+   public static thien_ag addImage(FormScreen var0, int[] var1, int var2, int var3, int var4) {
       thien_ag var5;
       (var5 = new thien_ag()).setBounds(Screen.e - var2 >> 1, var0.x, var2, var3);
       var5.d(var2, var3);
@@ -156,7 +156,7 @@ public class thien_y implements IAction {
       return var5;
    }
 
-   public static thien_ag a(FormScreen var0, Image var1, boolean var2) {
+   public static thien_ag addImage(FormScreen var0, Image var1, boolean var2) {
       thien_ag var3;
       (var3 = new thien_ag()).setBounds(Screen.e - var1.getWidth() >> 1, var0.x, var1.getWidth(), var1.getHeight());
       var3.d(var1.getWidth(), var1.getHeight());

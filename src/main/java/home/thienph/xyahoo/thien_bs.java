@@ -7,6 +7,6 @@ implements IAction {
 
     public final void action() {
         Packet packet2 = new Packet(3416, 39);
-        thien_hc.a(packet2);
+        ConnectionManager.sendPacket(packet2);
     }
 }

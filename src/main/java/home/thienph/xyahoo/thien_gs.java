@@ -8,6 +8,6 @@ implements IAction {
     public final void action() {
         thien_di.getInstance().c();
         Packet packet2 = new Packet(66, 12);
-        thien_hc.a(packet2);
+        ConnectionManager.sendPacket(packet2);
     }
 }

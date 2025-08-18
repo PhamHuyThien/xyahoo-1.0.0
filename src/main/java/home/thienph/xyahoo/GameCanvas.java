@@ -36,30 +36,30 @@ public final class GameCanvas extends Canvas implements Runnable {
       gameState = 0;
       thien_w.a();
       thien_es var1 = thien_es.a();
-      thien_hc.a(1, var1);
-      thien_hc.a(1001, var1);
-      thien_hc.a(1000, var1);
-      thien_hc.a(39, var1);
-      thien_hc.a(2, thien_eu.a());
-      thien_hc.a(48, var1);
-      thien_hc.a(1001, var1);
-      thien_hc.b = var1;
+      ConnectionManager.registerCallback(1, var1);
+      ConnectionManager.registerCallback(1001, var1);
+      ConnectionManager.registerCallback(1000, var1);
+      ConnectionManager.registerCallback(39, var1);
+      ConnectionManager.registerCallback(2, thien_eu.a());
+      ConnectionManager.registerCallback(48, var1);
+      ConnectionManager.registerCallback(1001, var1);
+      ConnectionManager.ConnectionListener = var1;
       thien_di var2;
       thien_es.a(var2 = thien_di.getInstance());
       thien_eu.a(var2);
-      thien_hc.a(new Packet(-2, -1));
+      ConnectionManager.sendPacket(new Packet(-2, -1));
       new Thread(this).start();
    }
 
    public final void connectToServer() {
-      if (!thien_hc.c && !thien_hc.d) {
+      if (!ConnectionManager.isConnected && !ConnectionManager.isConnecting) {
          Xuka.readAllIPs();
          Xuka.readAllPorts();
          String[] var1 = Xuka.serverIPs;
          int[] var2 = Xuka.DEFAULT_PORTS;
          int var3 = (int)(System.currentTimeMillis() % (long)var1.length);
          int var4 = (int)(System.currentTimeMillis() % (long)Xuka.serverIPs.length);
-         thien_hc.a(var1[var3], Xuka.serverIPs[var4], var2[var3], Xuka.DEFAULT_PORTS[var4]);
+         ConnectionManager.connect(var1[var3], Xuka.serverIPs[var4], var2[var3], Xuka.DEFAULT_PORTS[var4]);
       }
    }
 

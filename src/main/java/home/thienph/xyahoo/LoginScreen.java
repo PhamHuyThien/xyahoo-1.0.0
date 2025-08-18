@@ -43,17 +43,17 @@ public final class LoginScreen extends FormScreen
         super.title = " X Yahoo! ";
         FormScreen.calculateFormDimensions(70, 150);
         super.x = Screen.formHeight - (thien_w.i * 3 + thien_aq.a + ((GameCanvas.screenHeight > 170) ? 55 : 20) + thien_di.g) >> 1;
-        thien_y.a(this, thien_aq.c(), false);
+        UIFormBuilder.addImage(this, thien_aq.c(), false);
         super.x += ((GameCanvas.screenHeight > 170) ? 18 : 7);
-        this.usernameField = thien_y.a(this, "Tên: ", 0, -1);
+        this.usernameField = UIFormBuilder.addTextField(this, "Tên: ", 0, -1);
         super.x += 5;
-        this.passwordField = thien_y.a(this, String.valueOf(TextConstant.password()) + ":", 2, -1);
+        this.passwordField = UIFormBuilder.addTextField(this, String.valueOf(TextConstant.password()) + ":", 2, -1);
         this.usernameField.lineSpacing = -5;
         this.passwordField.lineSpacing = -5;
         if (GameCanvas.screenHeight > 170) {
             super.x += 10;
             super.w = FormScreen.formXOffset;
-            thien_y.a(TextConstant.socialNetworkLicenseNo(), this, -1, 16777215, false, false);
+            UIFormBuilder.addWrappedLabels(TextConstant.socialNetworkLicenseNo(), this, -1, 16777215, false, false);
         }
         this.selectControl(this.usernameField);
         (this.menuItems = new Vector()).addElement(new UIAction(TextConstant.register(), new thien_dc(this)));
@@ -80,12 +80,12 @@ public final class LoginScreen extends FormScreen
             (LoginScreen.settingsScreen = new FormScreen()).title = TextConstant.settings();
             final FormScreen k = LoginScreen.settingsScreen;
             k.x += 20;
-            final thien_z a = thien_y.a(LoginScreen.settingsScreen, TextConstant.typingSpeed(), new String[] { "1", "2", "3", "4", "5", "6", "7" });
-            final thien_x a2 = thien_y.a(LoginScreen.settingsScreen, TextConstant.sound(), (IAction)null);
-            final thien_x a3 = thien_y.a(LoginScreen.settingsScreen, TextConstant.vibrate(), (IAction)null);
-            final thien_x a4 = thien_y.a(LoginScreen.settingsScreen, TextConstant.autoLogin(), (IAction)null);
-            final thien_x a5 = thien_y.a(LoginScreen.settingsScreen, String.valueOf(TextConstant.autoLogin()) + " Yahoo!", (IAction)null);
-            final thien_v a6 = thien_y.a(LoginScreen.settingsScreen, "Xóa dữ liệu cá nhân", 0, new thien_ct(), LoginScreen.settingsScreen.w, LoginScreen.settingsScreen.x + 5, 0);
+            final thien_z a = UIFormBuilder.addDropdown(LoginScreen.settingsScreen, TextConstant.typingSpeed(), new String[] { "1", "2", "3", "4", "5", "6", "7" });
+            final thien_x a2 = UIFormBuilder.addLink(LoginScreen.settingsScreen, TextConstant.sound(), (IAction)null);
+            final thien_x a3 = UIFormBuilder.addLink(LoginScreen.settingsScreen, TextConstant.vibrate(), (IAction)null);
+            final thien_x a4 = UIFormBuilder.addLink(LoginScreen.settingsScreen, TextConstant.autoLogin(), (IAction)null);
+            final thien_x a5 = UIFormBuilder.addLink(LoginScreen.settingsScreen, String.valueOf(TextConstant.autoLogin()) + " Yahoo!", (IAction)null);
+            final thien_v a6 = UIFormBuilder.addButton(LoginScreen.settingsScreen, "Xóa dữ liệu cá nhân", 0, new thien_ct(), LoginScreen.settingsScreen.w, LoginScreen.settingsScreen.x + 5, 0);
             a6.baseX = Screen.e - a6.width >> 1;
             a3.a = thien_di.q;
             a2.a = !thien_di.p;

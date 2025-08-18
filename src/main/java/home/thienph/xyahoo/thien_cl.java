@@ -7,7 +7,7 @@ extends FormScreen {
     public thien_cl(String string, String string2) {
         this.isLocked = true;
         this.title = string;
-        this.D = thien_y.b(this, string2, 0, -1);
+        this.D = UIFormBuilder.addTextFieldWithLabel(this, string2, 0, -1);
         this.leftCommand = new UIAction(TextConstant.close(), new thien_cm(this));
         this.selectControl(this.D);
     }

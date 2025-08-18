@@ -183,19 +183,19 @@ public class MessageHandler {
                         String var220 = decodePacket(var1);
                         int var221 = readInt(var1);
                         int var222 = readInt(var1);
-                        var142 = thien_y.b(var174, var220, var221, var222);
+                        var142 = UIFormBuilder.addTextFieldWithLabel(var174, var220, var221, var222);
                         break;
                      case 1:
                         String var223 = decodePacket(var1);
                         int var224 = readInt(var1);
                         if (var223.equals("")) {
                            thien_ai var226;
-                           (var226 = thien_y.a(var174, var224)).a = c(readInt(var1));
+                           (var226 = UIFormBuilder.addLabel(var174, var224)).a = c(readInt(var1));
                            var226.b = new Integer(var226.a);
                            var226.isVisible = !var223.trim().equals("");
                            var142 = var226;
                         } else {
-                           var142 = thien_y.a(var223, var174, var224, c(readInt(var1)), true, true)[0];
+                           var142 = UIFormBuilder.addWrappedLabels(var223, var174, var224, c(readInt(var1)), true, true)[0];
                         }
                         break;
                      case 4:
@@ -204,20 +204,20 @@ public class MessageHandler {
                         int var225 = c(readInt(var1));
                         byte[] var227 = readByteArray(var1);
                         thien_aj var228;
-                        (var228 = thien_y.b(var174, var163, var143, new thien_o(var227), var174.w, var174.x, var174.y)).a = new Integer(var225);
+                        (var228 = UIFormBuilder.addCheckBox(var174, var163, var143, new thien_o(var227), var174.w, var174.x, var174.y)).a = new Integer(var225);
                         var142 = var228;
                         break;
                      case 5:
                         String var229 = decodePacket(var1);
                         readInt(var1);
-                        var142 = thien_y.a(var174, var229)[0];
+                        var142 = UIFormBuilder.addLabelsAuto(var174, var229)[0];
                         break;
                      case 6:
                         int var232 = readInt(var1);
                         byte[] var233 = readByteArray(var1);
 
                         try {
-                           var142 = thien_y.a(var174, var233, var232);
+                           var142 = UIFormBuilder.addImage(var174, var233, var232);
                         } catch (Exception var115) {
                         }
                         break;
@@ -233,7 +233,7 @@ public class MessageHandler {
 
                         byte[] var237 = readByteArray(var1);
                         thien_z var98;
-                        (var98 = thien_y.a(var174, var93, var96, var94)).a(new thien_g(var237));
+                        (var98 = UIFormBuilder.addDropdown(var174, var93, var96, var94)).a(new thien_g(var237));
                         var142 = var98;
                         break;
                      case 8:
@@ -250,7 +250,7 @@ public class MessageHandler {
                         boolean var84 = readBool(var1);
 
                         try {
-                           ((UIControlBase)(var142 = thien_y.a(var174, var81, var235, var83, var234))).isVisible = var84;
+                           ((UIControlBase)(var142 = UIFormBuilder.addImage(var174, var81, var235, var83, var234))).isVisible = var84;
                         } catch (Exception var113) {
                         }
                         break;
@@ -283,7 +283,7 @@ public class MessageHandler {
                         thien_ag var78 = null;
 
                         try {
-                           var78 = thien_y.a(var174, var77, var231);
+                           var78 = UIFormBuilder.addImage(var174, var77, var231);
                            byte[] var79 = readByteArray(var1);
                            var78.b = new thien_p(var79);
                         } catch (Exception var114) {
@@ -294,7 +294,7 @@ public class MessageHandler {
                      case 13:
                         String var162 = decodePacket(var1);
                         readInt(var1);
-                        var142 = thien_y.a(var174, var162, (IAction)null);
+                        var142 = UIFormBuilder.addLink(var174, var162, (IAction)null);
                         break;
                      case 41:
                         int var99 = readInt(var1);
@@ -558,7 +558,7 @@ public class MessageHandler {
                      }
                   }
 
-                  thien_hc.a(var5);
+                  ConnectionManager.sendPacket(var5);
                   break;
                case 39:
                   processRawPacket(readByteArray(var1));
@@ -580,23 +580,23 @@ public class MessageHandler {
    public static void a(String var0) {
       Packet var1 = new Packet(6000000, 48);
       writeString(var0, var1);
-      thien_hc.a(var1);
+      ConnectionManager.sendPacket(var1);
    }
 
    public static void a() {
-      thien_hc.a(new Packet(5000009, 39));
+      ConnectionManager.sendPacket(new Packet(5000009, 39));
    }
 
    public static void b(String var0) {
       Packet var1 = new Packet(thien_di.a ? 5000011 : 3402, 39);
       writeString(var0, var1);
-      thien_hc.a(var1);
+      ConnectionManager.sendPacket(var1);
    }
 
    public static void c(String var0) {
       Packet var1 = new Packet(5023, 2);
       writeString(var0, var1);
-      thien_hc.a(var1);
+      ConnectionManager.sendPacket(var1);
    }
 
    public static void a(int var0) {
@@ -607,7 +607,7 @@ public class MessageHandler {
          writeString(thien_ff.y, var1);
       }
 
-      thien_hc.a(var1);
+      ConnectionManager.sendPacket(var1);
    }
 
    public static void a(int var0, String var1, long var2) {
@@ -618,41 +618,41 @@ public class MessageHandler {
 
       writeString(var1, var4);
       writeLong(var2, var4);
-      thien_hc.a(var4);
+      ConnectionManager.sendPacket(var4);
    }
 
    public static void a(String var0, String var1) {
       Packet var2 = new Packet(3403, 39);
       writeString(var0, var2);
       writeString(var1, var2);
-      thien_hc.a(var2);
+      ConnectionManager.sendPacket(var2);
    }
 
    public static void d(String var0) {
       Packet var1 = new Packet(3404, 39);
       writeString(var0, var1);
-      thien_hc.a(var1);
+      ConnectionManager.sendPacket(var1);
    }
 
    public static void b(String var0, String var1) {
       Packet var2 = new Packet(3405, 39);
       writeString(var0, var2);
       writeString(var1, var2);
-      thien_hc.a(var2);
+      ConnectionManager.sendPacket(var2);
    }
 
    public static void c(String var0, String var1) {
       Packet var2 = new Packet(3406, 39);
       writeString(var0, var2);
       writeString(var1, var2);
-      thien_hc.a(var2);
+      ConnectionManager.sendPacket(var2);
    }
 
    public static void d(String var0, String var1) {
       Packet var2 = new Packet(3407, 39);
       writeString(var0, var2);
       writeString(var1, var2);
-      thien_hc.a(var2);
+      ConnectionManager.sendPacket(var2);
    }
 
    public static void a(String var0, String var1, int var2, byte[] var3) {
@@ -669,7 +669,7 @@ public class MessageHandler {
          var4.getPayload().writeByte(var9);
       }
 
-      thien_hc.a(var4);
+      ConnectionManager.sendPacket(var4);
    }
 
    public static void a(String var0, String var1, String var2) {
@@ -677,7 +677,7 @@ public class MessageHandler {
       writeString(var0, var3);
       writeString(var1, var3);
       writeString(var2, var3);
-      thien_hc.a(var3);
+      ConnectionManager.sendPacket(var3);
    }
 
    public static void a(int var0, String var1, String var2, boolean var3) {
@@ -694,7 +694,7 @@ public class MessageHandler {
       }
 
       writeBool(var3, var4);
-      thien_hc.a(var4);
+      ConnectionManager.sendPacket(var4);
    }
 
    public static void a(int var0, String var1, String var2, String var3) {
@@ -711,7 +711,7 @@ public class MessageHandler {
       }
 
       writeString(var3, var4);
-      thien_hc.a(var4);
+      ConnectionManager.sendPacket(var4);
    }
 
    public static void a(int var0, String var1) {
@@ -723,7 +723,7 @@ public class MessageHandler {
       }
 
       writeString(var1, var2);
-      thien_hc.a(var2);
+      ConnectionManager.sendPacket(var2);
    }
 
    public static void a(int var0, int var1, String var2) {
@@ -736,7 +736,7 @@ public class MessageHandler {
       }
 
       writeString(var2, var3);
-      thien_hc.a(var3);
+      ConnectionManager.sendPacket(var3);
    }
 
    public static void a(int var0, String var1, String var2, long var3) {
@@ -748,31 +748,31 @@ public class MessageHandler {
       writeString(var1, var5);
       writeString(var2, var5);
       writeLong(var3, var5);
-      thien_hc.a(var5);
+      ConnectionManager.sendPacket(var5);
    }
 
    public static void b() {
       Packet var0 = new Packet(324, 13);
       writeInt(Xuka.partnerId, var0);
       writeInt(Xuka.appId, var0);
-      thien_hc.a(var0);
+      ConnectionManager.sendPacket(var0);
       var0 = new Packet(5030, 2);
       writeInt(1, var0);
-      thien_hc.a(var0);
+      ConnectionManager.sendPacket(var0);
    }
 
    public static void a(String var0, String var1, int var2) {
       Packet var3 = new Packet(27, var2 == 2 ? 7 : 2);
       writeString(var0, var3);
       writeString(var1, var3);
-      thien_hc.a(var3);
+      ConnectionManager.sendPacket(var3);
    }
 
    public static void b(String var0, String var1, int var2) {
       Packet var3 = new Packet(1009, 1002);
       writeString(var0, var3);
       writeString(var1, var3);
-      thien_hc.a(var3);
+      ConnectionManager.sendPacket(var3);
    }
 
    public static void a(boolean var0, String var1, String var2) {
@@ -780,7 +780,7 @@ public class MessageHandler {
       writeBool(var0, var3);
       writeString(var2, var3);
       writeString(var1, var3);
-      thien_hc.a(var3);
+      ConnectionManager.sendPacket(var3);
    }
 
    public static void e(String var0, String var1) {
@@ -789,13 +789,13 @@ public class MessageHandler {
       writeString(thien_hj.a(var1), var2);
       writeInt(Xuka.partnerId, var2);
       writeInt(Xuka.appId, var2);
-      thien_hc.a(var2);
+      ConnectionManager.sendPacket(var2);
    }
 
    public static void a(int var0, int var1) {
       Packet var2 = new Packet(var1 == 1 ? 15 : 5000016, var1 == 1 ? 2 : 20);
       writeInt(var0, var2);
-      thien_hc.a(var2);
+      ConnectionManager.sendPacket(var2);
    }
 
    public static void a(String var0, int var1) {
@@ -806,7 +806,7 @@ public class MessageHandler {
       }
 
       writeString(var0, var2);
-      thien_hc.a(var2);
+      ConnectionManager.sendPacket(var2);
    }
 
    public static void a(String var0, String var1, int var2, int var3, int var4) {
@@ -819,7 +819,7 @@ public class MessageHandler {
             writeInt(TextConstant.languageId, var5);
          }
 
-         thien_hc.a(var5);
+         ConnectionManager.sendPacket(var5);
          var6 = new Packet(5000007, 13);
       } else {
          var6 = new Packet(61, 20);
@@ -830,7 +830,7 @@ public class MessageHandler {
       writeInt(var2, var6);
       writeString("", var6);
       writeInt(var4, var6);
-      thien_hc.a(var6);
+      ConnectionManager.sendPacket(var6);
    }
 
    public static void a(String var0, String var1, String var2, int var3) {
@@ -844,19 +844,19 @@ public class MessageHandler {
       writeString(var0, var4);
       writeString(var1, var4);
       writeString(var2, var4);
-      thien_hc.a(var4);
+      ConnectionManager.sendPacket(var4);
    }
 
    public static void e(String var0) {
       Packet var1 = new Packet(13, 2);
       writeString(var0, var1);
-      thien_hc.a(var1);
+      ConnectionManager.sendPacket(var1);
    }
 
    public static void f(String var0) {
       Packet var1 = new Packet(1020, 1002);
       writeString(var0, var1);
-      thien_hc.a(var1);
+      ConnectionManager.sendPacket(var1);
    }
 
    public static void g(String var0) {
@@ -864,7 +864,7 @@ public class MessageHandler {
       writeString(var0, var1);
       writeBool(false, var1);
       writeString("", var1);
-      thien_hc.a(var1);
+      ConnectionManager.sendPacket(var1);
    }
 
    public static void a(String var0, String[] var1) {
@@ -876,13 +876,13 @@ public class MessageHandler {
          writeString(var1[var3], var2);
       }
 
-      thien_hc.a(var2);
+      ConnectionManager.sendPacket(var2);
    }
 
    public static void h(String var0) {
       Packet var1 = new Packet(1008, 1000);
       writeString(var0, var1);
-      thien_hc.a(var1);
+      ConnectionManager.sendPacket(var1);
    }
 
    public static void a(String var0, boolean var1, String var2, String var3) {
@@ -891,47 +891,47 @@ public class MessageHandler {
       writeBool(var1, var4);
       writeString(var2, var4);
       writeString(var3, var4);
-      thien_hc.a(var4);
+      ConnectionManager.sendPacket(var4);
    }
 
    public static void f(String var0, String var1) {
       Packet var2 = new Packet(1005, 1000);
       writeString(var0, var2);
       writeString(var1, var2);
-      thien_hc.a(var2);
+      ConnectionManager.sendPacket(var2);
    }
 
    public static void i(String var0) {
       Packet var1 = new Packet(37, 10);
       writeString(var0, var1);
-      thien_hc.a(var1);
+      ConnectionManager.sendPacket(var1);
    }
 
    public static void b(String var0, int var1) {
       Packet var2 = new Packet(28, 20);
       writeString(var0, var2);
-      thien_hc.a(var2);
+      ConnectionManager.sendPacket(var2);
    }
 
    public static void g(String var0, String var1) {
       Packet var2 = new Packet(1021, 1002);
       writeString(var0, var2);
       writeString(var1, var2);
-      thien_hc.a(var2);
+      ConnectionManager.sendPacket(var2);
    }
 
    public static void h(String var0, String var1) {
       Packet var2 = new Packet(1022, 1002);
       writeString(var0, var2);
       writeString(var1, var2);
-      thien_hc.a(var2);
+      ConnectionManager.sendPacket(var2);
    }
 
    public static void c() {
       if (thien_es.a != null) {
          Packet var0 = new Packet(50, 2);
          writeString(thien_es.a, var0);
-         thien_hc.a(var0);
+         ConnectionManager.sendPacket(var0);
       }
    }
 
@@ -940,25 +940,25 @@ public class MessageHandler {
       writeString(var0, var3);
       writeString(var1, var3);
       writeString(var2, var3);
-      thien_hc.a(var3);
+      ConnectionManager.sendPacket(var3);
    }
 
    public static void i(String var0, String var1) {
       Packet var2 = new Packet(62, 2);
       writeString(var0, var2);
       writeString(var1, var2);
-      thien_hc.a(var2);
+      ConnectionManager.sendPacket(var2);
    }
 
    public static void d() {
-      thien_hc.a(new Packet(63, 2));
+      ConnectionManager.sendPacket(new Packet(63, 2));
    }
 
    public static void j(String var0, String var1) {
       Packet var2 = new Packet(79, 2);
       writeString(var0, var2);
       writeString(var1, var2);
-      thien_hc.a(var2);
+      ConnectionManager.sendPacket(var2);
    }
 
    public static void c(String var0, String var1, int var2) {
@@ -966,7 +966,7 @@ public class MessageHandler {
       writeString(var0, var3);
       writeString(var1, var3);
       writeInt(var2, var3);
-      thien_hc.a(var3);
+      ConnectionManager.sendPacket(var3);
    }
 
    public static void a(int var0, String var1, int var2, String var3) {
@@ -975,7 +975,7 @@ public class MessageHandler {
       writeString(var1, var4);
       writeInt(var2, var4);
       writeString(var3, var4);
-      thien_hc.a(var4);
+      ConnectionManager.sendPacket(var4);
    }
 
    public static void b(byte[] var0) {
@@ -985,13 +985,13 @@ public class MessageHandler {
       var1.getPayload().ensureCapacity(var2 + 4);
       writeIntToBuffer(var2, var1);
       var1.getPayload().writeBytes(var0, 0, var2);
-      thien_hc.a(var1);
+      ConnectionManager.sendPacket(var1);
    }
 
    public static void b(int var0) {
       Packet var1 = new Packet(119, 2);
       writeInt(var0, var1);
-      thien_hc.a(var1);
+      ConnectionManager.sendPacket(var1);
    }
 
    public static int c(int var0) {
