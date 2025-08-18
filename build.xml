@@ -1,83 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- You may freely edit this file. See commented blocks below for -->
-<!-- some examples of how to customize the build. -->
-<!-- (If you delete it and reopen the project it will be recreated.) -->
+
 <project name="X-Yahoo-100" default="jar" basedir=".">
     <description>Builds, tests, and runs the project .</description>
+
+    <!--    build để run project trên netbeans-->
     <import file="nbproject/build-impl.xml"/>
-    <!--
 
-            There exist several targets which are by default empty and which can be
-            used for execution of your tasks. These targets are usually executed
-            before and after some main targets. They are:
+    <!--    build project trên intellij-->
+    <property name="src.dir" value="src/main/java"/>
+    <property name="res.dir" value="src/main/resources"/>
+    <property name="bin.dir" value="build"/>
+    <property name="lib.dir" value="libs"/>
+    <property name="dist.dir" value="dist"/>
 
-            pre-init:                 called before initialization of project properties
-            post-init:                called after initialization of project properties
-            pre-preprocess:           called before text preprocessing of sources
-            post-preprocess:          called after text preprocessing of sources
-            pre-compile:              called before source compilation
-            post-compile:             called after source compilation
-            pre-obfuscate:            called before obfuscation 
-            post-obfuscate:           called after obfuscation
-            pre-preverify:            called before preverification
-            post-preverify:           called after preverification
-            pre-jar:                  called before jar building
-            post-jar:                 called after jar building
-            pre-build:                called before final distribution building
-            post-build:               called after final distribution building
-            pre-clean:                called before cleaning build products
-            post-clean:               called after cleaning build products
+    <target name="compile">
+        <mkdir dir="${bin.dir}"/>
+        <javac srcdir="${src.dir}" destdir="${bin.dir}"
+               bootclasspath="${lib.dir}/jsr-120.jar;${lib.dir}/cldc.jar;${lib.dir}/midp.jar;${java.home}/lib/rt.jar"/>
+    </target>
 
-            Example of pluging a my-special-task after the compilation could look like
+    <target name="copy-resources">
+        <mkdir dir="${bin.dir}"/>
+        <copy todir="${bin.dir}">
+            <fileset dir="${res.dir}"/>
+        </copy>
+    </target>
 
-            <target name="post-compile">
-            <my-special-task>
-            <fileset dir="${build.classes.dir}"/>
-            </my-special-task>
-            </target>
+    <!--    <target name="preverify">-->
+    <!--        <exec executable="preverify">-->
+    <!--            <arg value="-classpath"/>-->
+    <!--            <arg value="${lib.dir}/cldc.jar"/>-->
+    <!--            <arg value="-d"/>-->
+    <!--            <arg value="${bin.dir}"/>-->
+    <!--            <arg value="${bin.dir}"/>-->
+    <!--        </exec>-->
+    <!--    </target>-->
 
-            For list of available properties check the imported
-            nbproject/build-impl.xml file.
-
-            Other way how to customize the build is by overriding existing main targets.
-            The target of interest are:
-
-            preprocess:               preprocessing
-            extract-libs:             extraction of libraries and resources
-            compile:                  compilation
-            create-jad:               construction of jad and jar manifest source
-            obfuscate:                obfuscation
-            preverify:                preverification
-            jar:                      jar archive building
-            run:                      execution
-            debug:                    execution in debug mode
-            build:                    building of the final distribution
-            javadoc:                  javadoc generation
-
-            Example of overriding the target for project execution could look like
-
-            <target name="run" depends="init,jar">
-            <my-special-exec jadfile="${dist.dir}/${dist.jad}"/>
-            </target>
-
-            Be careful about correct dependencies when overriding original target. 
-            Again, for list of available properties which you can use check the target 
-            you are overriding in nbproject/build-impl.xml file.
-
-            A special target for-all-configs can be used to run some specific targets for
-            all project configurations in a sequence. File nbproject/build-impl.xml 
-            already contains some "for-all" targets:
-    
-            jar-all
-            javadoc-all
-            clean-all
-      
-            Example of definition of target iterating over all project configurations:
-    
-            <target name="jar-all">
-            <property name="target.to.call" value="jar"/>
-            <antcall target="for-all-configs"/>
-            </target>
-
-            -->
+    <target name="jar" depends="compile,copy-resources">
+        <mkdir dir="${dist.dir}"/>
+        <jar destfile="${dist.dir}/ninja-school-231.jar" basedir="${bin.dir}">
+            <manifest>
+                <attribute name="MIDlet-Name" value="Ninja School Online"/>
+                <attribute name="MIDlet-Version" value="1.0"/>
+                <attribute name="MIDlet-Vendor" value="ThienDz"/>
+                <attribute name="MicroEdition-Profile" value="MIDP-2.0"/>
+                <attribute name="MicroEdition-Configuration" value="CLDC-1.1"/>
+            </manifest>
+        </jar>
+    </target>
 </project>
