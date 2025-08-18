@@ -21,7 +21,7 @@ final class thien_gk implements IAction {
       } else if (var2.equals("")) {
          this.c.selectControl(this.b);
       } else {
-         thien_s var10000 = thien_di.getInstance().j.x.b();
+         thien_s var10000 = GameManager.getInstance().j.x.b();
          String var4 = var2;
          thien_s var3 = var10000;
          int var5 = var10000.a.size() - 1;
@@ -46,7 +46,7 @@ final class thien_gk implements IAction {
             var2 = var8;
          }
 
-         var10000 = thien_di.getInstance().j.x.b();
+         var10000 = GameManager.getInstance().j.x.b();
          var4 = var1;
          var3 = var10000;
          var5 = var10000.a.size() - 1;
@@ -70,11 +70,11 @@ final class thien_gk implements IAction {
          }
 
          if (var15) {
-            thien_di.getInstance().b(TextConstant.thisIdAlreadyAdded());
+            GameManager.getInstance().b(TextConstant.thisIdAlreadyAdded());
          } else {
             MessageHandler.b(var1, var2, 1);
-            thien_di.getInstance().c(this.c);
-            thien_di.getInstance().d(thien_di.e);
+            GameManager.getInstance().c(this.c);
+            GameManager.getInstance().d(GameManager.e);
          }
       }
    }

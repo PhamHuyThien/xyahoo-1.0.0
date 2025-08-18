@@ -7,13 +7,13 @@ implements IAction {
 
     public final void action() {
         try {
-            thien_di.instance.j.x.f.removeAllElements();
+            GameManager.instance.j.x.f.removeAllElements();
         }
         catch (Exception exception) {}
-        if (thien_di.instance.k != null) {
-            thien_di.instance.k.e();
+        if (GameManager.instance.k != null) {
+            GameManager.instance.k.e();
         }
-        thien_di.getInstance().c();
-        thien_di.getInstance().g();
+        GameManager.getInstance().c();
+        GameManager.getInstance().g();
     }
 }

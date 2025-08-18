@@ -31,7 +31,7 @@ public class Xuka extends MIDlet
         System.out.println("VERSION = " + Xuka.version + "\nIP = " + appProperty + "\nPARTNER_ID = " + appProperty3 + "\nAPP_ID = " + appProperty2 + "\nREF_CODE = " + Xuka.refCode);
         Xuka.serverIPs = new String[] { (appProperty == null || appProperty.length() == 0) ? "112.78.10.113" : appProperty };
         Xuka.version = ((Xuka.version == null || Xuka.version.length() == 0) ? "1.0.0" : Xuka.version);
-        thien_di.b = String.valueOf(Xuka.version) + " Beta";
+        GameManager.b = String.valueOf(Xuka.version) + " Beta";
         Xuka.refCode = ((Xuka.refCode == null || Xuka.refCode.equalsIgnoreCase("200487")) ? "" : (" " + Xuka.refCode));
         if (appProperty3 == null || appProperty3.length() == 0) {
             appProperty3 = "1";
@@ -236,7 +236,7 @@ public class Xuka extends MIDlet
         if ((b = readRecord(s)) == null || b.length != 4) {
             return -1;
         }
-        return thien_di.a(b[0], b[1], b[2], b[3]);
+        return GameManager.a(b[0], b[1], b[2], b[3]);
     }
     
     public static String[] readAllIPs() {

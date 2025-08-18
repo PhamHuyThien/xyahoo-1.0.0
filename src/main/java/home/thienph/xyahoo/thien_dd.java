@@ -11,13 +11,13 @@ implements IAction {
     public final void action() {
         LoginScreen.closeChatBox(this.a);
         if (this.a.usernameField.getText().equals("")) {
-            thien_di.getInstance().b(TextConstant.enterYourYahooId());
+            GameManager.getInstance().b(TextConstant.enterYourYahooId());
             return;
         }
         GameCanvas.instance.connectToServer();
         MessageHandler.b();
         Packet packet2 = new Packet(269, 13);
         ConnectionManager.sendPacket(packet2);
-        thien_di.getInstance().b(TextConstant.pleaseWait());
+        GameManager.getInstance().b(TextConstant.pleaseWait());
     }
 }

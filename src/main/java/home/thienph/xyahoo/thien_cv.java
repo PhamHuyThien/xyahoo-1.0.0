@@ -17,27 +17,27 @@ implements IAction {
     }
 
     public final void action() {
-        thien_di.getInstance().l.startSlide(1);
-        thien_di.getInstance().c(LoginScreen.getSettingsScreen());
-        if (thien_di.r != this.a.a) {
-            thien_di.r = this.a.a;
-            Xuka.saveFlag("atlog", thien_di.r);
+        GameManager.getInstance().l.startSlide(1);
+        GameManager.getInstance().c(LoginScreen.getSettingsScreen());
+        if (GameManager.r != this.a.a) {
+            GameManager.r = this.a.a;
+            Xuka.saveFlag("atlog", GameManager.r);
         }
-        if (thien_di.s != this.b.a) {
-            thien_di.s = this.b.a;
-            Xuka.saveFlag("atlogY", thien_di.s);
+        if (GameManager.s != this.b.a) {
+            GameManager.s = this.b.a;
+            Xuka.saveFlag("atlogY", GameManager.s);
         }
         if (TextField.multiTapSpeedIndex != this.c.a()) {
             TextField.multiTapSpeedIndex = this.c.a();
             Xuka.saveCaret(TextField.multiTapSpeedIndex);
         }
-        if (thien_di.q != this.d.a) {
-            thien_di.q = this.d.a;
-            Xuka.saveFlag("vibrate", thien_di.q);
+        if (GameManager.q != this.d.a) {
+            GameManager.q = this.d.a;
+            Xuka.saveFlag("vibrate", GameManager.q);
         }
-        if (thien_di.p != !this.e.a) {
-            thien_di.p = !this.e.a;
-            Xuka.saveFlag("sound", thien_di.p);
+        if (GameManager.p != !this.e.a) {
+            GameManager.p = !this.e.a;
+            Xuka.saveFlag("sound", GameManager.p);
         }
     }
 }

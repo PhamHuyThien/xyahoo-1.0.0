@@ -2,10 +2,10 @@ package home.thienph.xyahoo;
 
 final class thien_ec
 implements IAction {
-    private thien_di a;
+    private GameManager a;
 
-    thien_ec(thien_di thien_di2) {
-        this.a = thien_di2;
+    thien_ec(GameManager gameManager2) {
+        this.a = gameManager2;
     }
 
     public final void action() {

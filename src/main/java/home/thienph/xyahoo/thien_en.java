@@ -6,7 +6,7 @@ implements IAction {
     }
 
     public final void action() {
-        thien_ca cfr_ignored_0 = thien_di.instance.F;
+        thien_ca cfr_ignored_0 = GameManager.instance.F;
         thien_ca.f(5000, 5018);
     }
 }

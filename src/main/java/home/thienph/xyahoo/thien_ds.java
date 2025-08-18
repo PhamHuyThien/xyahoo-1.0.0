@@ -2,13 +2,13 @@ package home.thienph.xyahoo;
 
 final class thien_ds
 implements IAction {
-    private thien_di a;
+    private GameManager a;
     private final TextField b;
     private final String c;
     private final FormScreen d;
 
-    thien_ds(thien_di thien_di2, TextField textField2, String string, FormScreen formScreen2) {
-        this.a = thien_di2;
+    thien_ds(GameManager gameManager2, TextField textField2, String string, FormScreen formScreen2) {
+        this.a = gameManager2;
         this.b = textField2;
         this.c = string;
         this.d = formScreen2;

@@ -16,7 +16,7 @@ implements IAction {
         if (string.equals("")) {
             return;
         }
-        thien_di.getInstance().c(this.b);
+        GameManager.getInstance().c(this.b);
         this.a.a(string, 0);
     }
 }

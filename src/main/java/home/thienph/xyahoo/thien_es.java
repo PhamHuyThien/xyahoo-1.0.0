@@ -118,7 +118,7 @@ public final class thien_es extends PacketHandler {
             String var202 = MessageHandler.readString(var1);
             String var216 = MessageHandler.readString(var1);
             String var225 = "";
-            if (thien_di.a) {
+            if (GameManager.a) {
                var225 = MessageHandler.readString(var1);
             }
 
@@ -148,7 +148,7 @@ public final class thien_es extends PacketHandler {
                var223.addElement(var241);
             }
 
-            thien_di.t = var223;
+            GameManager.t = var223;
             return;
          case 64:
             boolean var232 = MessageHandler.readBool(var1);
@@ -554,7 +554,7 @@ public final class thien_es extends PacketHandler {
             }
 
             String var272 = MessageHandler.readString(var1);
-            thien_di.getInstance().a(var272, (Image)null, 1);
+            GameManager.getInstance().a(var272, (Image)null, 1);
             MessageHandler.readInt(var1);
             MessageHandler.readByteArray(var1);
             if (thien_ba.B.equals(var75)) {
@@ -787,6 +787,6 @@ public final class thien_es extends PacketHandler {
 
    private static void b(Packet var0) {
       String var1 = MessageHandler.readString(var0);
-      thien_di.instance.a(var1, (Image)null, 1);
+      GameManager.instance.a(var1, (Image)null, 1);
    }
 }

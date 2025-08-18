@@ -15,7 +15,7 @@ implements IAction {
         if (string != null && !string.equals(thien_gp.A)) {
             thien_gp.a(this.a, string);
             thien_gp.z = 0;
-            thien_di.z = true;
+            GameManager.z = true;
         } else if (n != thien_gp.z) {
             if (n == 0) {
                 if (string != null && string.length() > 0) {
@@ -24,13 +24,13 @@ implements IAction {
                     MessageHandler.a(0, 2);
                 }
                 thien_gp.z = 0;
-                thien_di.z = true;
+                GameManager.z = true;
             } else {
                 MessageHandler.a(12, 2);
                 thien_gp.z = 12;
-                thien_di.z = true;
+                GameManager.z = true;
             }
         }
-        thien_di.getInstance().c(thien_gp.d(this.a));
+        GameManager.getInstance().c(thien_gp.d(this.a));
     }
 }

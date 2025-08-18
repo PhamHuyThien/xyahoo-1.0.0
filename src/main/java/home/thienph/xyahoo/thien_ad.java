@@ -80,16 +80,16 @@ public final class thien_ad {
         while (--n2 >= 0) {
             n = this.l / 50 + 1;
             while (--n >= 0) {
-                graphics.drawImage(thien_di.w, this.g + n2 * 50, this.h + n * 50, 0);
+                graphics.drawImage(GameManager.w, this.g + n2 * 50, this.h + n * 50, 0);
             }
         }
         if (this.m > 110) {
-            graphics.drawRegion(thien_di.x, 0, 0, 55, 20, 0, this.g, this.h, 0);
-            graphics.drawRegion(thien_di.x, 87, 0, 55, 20, 0, this.g + this.i - 55, this.h, 0);
+            graphics.drawRegion(GameManager.x, 0, 0, 55, 20, 0, this.g, this.h, 0);
+            graphics.drawRegion(GameManager.x, 87, 0, 55, 20, 0, this.g + this.i - 55, this.h, 0);
             graphics.setClip(this.g + 55, this.h, this.i - 110, 20);
             n = n2 = (this.i - 110 >> 5) + 1;
             while (--n >= 0) {
-                graphics.drawRegion(thien_di.x, 55, 0, 32, 20, 0, this.g + 55 + n * 32, this.h, 0);
+                graphics.drawRegion(GameManager.x, 55, 0, 32, 20, 0, this.g + 55 + n * 32, this.h, 0);
             }
         }
         graphics.setClip(-1000, -1000, 5000, 5000);
@@ -106,11 +106,11 @@ public final class thien_ad {
             ++n2;
         }
         if (this.d) {
-            thien_di.instance.a(graphics, this.g, this.o + this.f * thien_w.f + thien_w.f + 3);
+            GameManager.instance.a(graphics, this.g, this.o + this.f * thien_w.f + thien_w.f + 3);
         }
         Screen.drawFooter(graphics);
         graphics.setColor(0xFFFFFF);
-        n2 = GameCanvas.screenHeight - (thien_di.g >> 1) - (thien_w.f >> 1) + (thien_w.a ? 0 : 2);
+        n2 = GameCanvas.screenHeight - (GameManager.g >> 1) - (thien_w.f >> 1) + (thien_w.a ? 0 : 2);
         if (this.a != null) {
             thien_w.a(thien_w.d).a(this.a.label, 4, n2, graphics);
         }

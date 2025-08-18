@@ -10,6 +10,6 @@ implements IAction {
 
     public final void action() {
         LoginScreen.closeChatBox(this.a);
-        thien_di.getInstance().a(this.a.mainMenu, 0);
+        GameManager.getInstance().a(this.a.mainMenu, 0);
     }
 }

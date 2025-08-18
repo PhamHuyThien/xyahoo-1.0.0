@@ -9,8 +9,8 @@ implements IAction {
     }
 
     public final void action() {
-        if (!thien_di.o.equals("")) {
-            this.a.A.insertText(thien_di.o);
+        if (!GameManager.o.equals("")) {
+            this.a.A.insertText(GameManager.o);
         }
     }
 }

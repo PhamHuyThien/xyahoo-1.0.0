@@ -11,7 +11,7 @@ implements IAction {
     public final void action() {
         String[] stringArray = this.a.e();
         MessageHandler.a(this.a.w, stringArray);
-        thien_di.getInstance().i();
-        thien_di.getInstance().a(this.a.w, stringArray, this.a.x);
+        GameManager.getInstance().i();
+        GameManager.getInstance().a(this.a.w, stringArray, this.a.x);
     }
 }

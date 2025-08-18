@@ -18,6 +18,6 @@ final class thien_bh implements IAction
             vector.addElement(thien_ba.f(this.a));
             vector.addElement(new UIAction("R\u1eddi b\u00e0n", new thien_bi(this)));
         }
-        thien_di.getInstance().a(thien_ba.d(this.a), 0);
+        GameManager.getInstance().a(thien_ba.d(this.a), 0);
     }
 }

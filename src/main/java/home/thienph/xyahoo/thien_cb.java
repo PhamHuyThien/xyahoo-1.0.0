@@ -6,6 +6,6 @@ implements IAction {
     }
 
     public final void action() {
-        thien_di.getInstance().a(new String[]{"X Yahoo! " + thien_di.b, "Build ID: 2012-08-9-PM", "Website: mxuka.com", "hotro.xyahoo@gmail.com", "Phone: 0969728701"});
+        GameManager.getInstance().a(new String[]{"X Yahoo! " + GameManager.b, "Build ID: 2012-08-9-PM", "Website: mxuka.com", "hotro.xyahoo@gmail.com", "Phone: 0969728701"});
     }
 }

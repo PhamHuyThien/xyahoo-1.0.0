@@ -9,6 +9,6 @@ implements IAction {
     }
 
     public final void action() {
-        thien_di.instance.c(this.a);
+        GameManager.instance.c(this.a);
     }
 }

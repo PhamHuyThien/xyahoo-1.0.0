@@ -124,7 +124,7 @@ public final class thien_ba extends Screen {
       this.aA = new thien_am(this.az);
       this.aB = new UIAction("Menu", new thien_bv(this));
       super.scrollLock = true;
-      thien_di.f();
+      GameManager.f();
       this.R = false;
    }
 
@@ -154,7 +154,7 @@ public final class thien_ba extends Screen {
       ah = var2;
       J = false;
       x = false;
-      thien_di.instance.c();
+      GameManager.instance.c();
       this.X = true;
       this.P = null;
       this.ak = null;
@@ -170,7 +170,7 @@ public final class thien_ba extends Screen {
       thien_ay.c = this.ak;
       this.clearControls();
       System.gc();
-      this.al = new thien_ay(Screen.e - 3, Screen.formHeight - 3 - thien_di.g, ah);
+      this.al = new thien_ay(Screen.e - 3, Screen.formHeight - 3 - GameManager.g, ah);
       this.addControl(this.al);
       this.selectControl(this.al);
       super.rightCommand = this.aP;
@@ -206,7 +206,7 @@ public final class thien_ba extends Screen {
    public final void a(byte var1, String[] var2, long[] var3, int[] var4, String[] var5, int[] var6, Integer[] var7, String var8) {
       x = true;
       ah = 1;
-      thien_di.instance.c();
+      GameManager.instance.c();
       this.clearControls();
       J = false;
       thien_ay.c = null;
@@ -332,7 +332,7 @@ public final class thien_ba extends Screen {
 
       this.av = this.F[0];
       ap = null;
-      (ap = new TextField("", 9, 1)).setBounds(0, Screen.formHeight - thien_di.g - (thien_w.f << 1) - 10, Screen.e - 1, thien_w.f + 6);
+      (ap = new TextField("", 9, 1)).setBounds(0, Screen.formHeight - GameManager.g - (thien_w.f << 1) - 10, Screen.e - 1, thien_w.f + 6);
       if (this.aM == null) {
          this.aM = new UIAction(TextConstant.close(), new thien_bp(this));
       }
@@ -544,11 +544,11 @@ public final class thien_ba extends Screen {
 
          var4 = var4 + var6 + thien_w.a(this.V[var5], 14) + " " + this.ar[var5] + " xuxu" + "\n";
          if (thien_ff.y.equals(this.V[var5]) && this.ar[var5] > 0L) {
-            thien_di.instance.a("Chúc mừng " + thien_ff.y + " đã thắng số tiền " + this.ar[var5] + " xuxu", (Image) null, 1);
+            GameManager.instance.a("Chúc mừng " + thien_ff.y + " đã thắng số tiền " + this.ar[var5] + " xuxu", (Image) null, 1);
          }
       }
 
-      thien_di.instance.a(var4, null, null, new UIAction(TextConstant.close(), new thien_bk(this)));
+      GameManager.instance.a(var4, null, null, new UIAction(TextConstant.close(), new thien_bk(this)));
       boolean var8 = false;
 
       for (int var9 = 0; var9 < this.at; var9++) {
@@ -581,7 +581,7 @@ public final class thien_ba extends Screen {
 
       String[] var4 = new String[var1.size()];
       var1.copyInto(var4);
-      this.F = thien_di.c(var4);
+      this.F = GameManager.c(var4);
       this.Z = var4.length;
 
       for (int var3 = 0; var3 < var4.length; var3++) {
@@ -623,7 +623,7 @@ public final class thien_ba extends Screen {
 
    private void k() {
       I = null;
-      (I = new TextField("", 50, 0)).setBounds(0, Screen.formHeight - thien_di.g - (thien_w.f << 1) - 10, Screen.e - 1, thien_w.f + 6);
+      (I = new TextField("", 50, 0)).setBounds(0, Screen.formHeight - GameManager.g - (thien_w.f << 1) - 10, Screen.e - 1, thien_w.f + 6);
       if (this.aK == null) {
          this.aK = new UIAction(TextConstant.cancel(), new thien_bn(this));
       }

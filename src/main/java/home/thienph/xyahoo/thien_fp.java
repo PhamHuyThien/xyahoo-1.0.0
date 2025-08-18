@@ -23,17 +23,17 @@ implements IAction {
             return;
         }
         if (this.c.getText().length() < 6 || this.c.getText().length() > 64) {
-            thien_di.getInstance().a(String.valueOf(TextConstant.password()) + TextConstant.lengthMustBeFrom6To64(), (Image)null, 1);
+            GameManager.getInstance().a(String.valueOf(TextConstant.password()) + TextConstant.lengthMustBeFrom6To64(), (Image)null, 1);
             this.a.selectControl(this.c);
             return;
         }
         if (this.c.getText().equals("") || this.d.getText().equals("") || !this.c.getText().equals(this.d.getText())) {
-            thien_di.getInstance().a(TextConstant.typePasswordAgain(), (Image)null, 1);
+            GameManager.getInstance().a(TextConstant.typePasswordAgain(), (Image)null, 1);
             this.a.selectControl(this.c);
             return;
         }
         MessageHandler.b("", this.b.getText(), this.c.getText());
-        thien_di.getInstance().c(this.e);
-        thien_di.instance.l();
+        GameManager.getInstance().c(this.e);
+        GameManager.instance.l();
     }
 }

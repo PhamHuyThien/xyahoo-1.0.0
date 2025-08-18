@@ -14,10 +14,10 @@ implements IAction {
         if (string.trim().equals("")) {
             return;
         }
-        thien_di.getInstance().c(this.a);
+        GameManager.getInstance().c(this.a);
         thien_ff.z = string;
         thien_ff.A = thien_ff.z.equals("") ? thien_ff.y : thien_ff.z;
         MessageHandler.b(string, "", "");
-        thien_di.instance.l();
+        GameManager.instance.l();
     }
 }

@@ -53,7 +53,7 @@ extends UIControlBase {
 
     public final void draw(Graphics graphics) {
         boolean bl = this.isSelected();
-        graphics.drawImage(this.a ? thien_di.y[1] : thien_di.y[0], this.baseX + 8, this.baseY + (this.height >> 1) + 1, 3);
+        graphics.drawImage(this.a ? GameManager.y[1] : GameManager.y[0], this.baseX + 8, this.baseY + (this.height >> 1) + 1, 3);
         if (bl) {
             graphics.setColor(14675958);
             graphics.drawRoundRect(this.baseX + 13 + 4, this.baseY + 1, this.width - 13, this.height, 5, 5);

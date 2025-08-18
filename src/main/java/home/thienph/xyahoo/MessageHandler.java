@@ -36,15 +36,15 @@ public class MessageHandler {
             switch (readInt(var1)) {
                case 0:
                   int var147 = readInt(var1);
-                  thien_di.instance.c(thien_di.instance.d(var147));
+                  GameManager.instance.c(GameManager.instance.d(var147));
                   break;
                case 1:
                   boolean var184 = readBool(var1);
                   String var146 = decodePacket(var1);
-                  thien_di.instance.a(var146).a(var184);
+                  GameManager.instance.a(var146).a(var184);
                   break;
                case 2:
-                  thien_di.instance.c();
+                  GameManager.instance.c();
                   break;
                case 3:
                   int var144 = readInt(var1);
@@ -61,7 +61,7 @@ public class MessageHandler {
                            writeInt(readInt(var1), var165);
                         } else if (var186 == 1) {
                            var180 = readInt(var1);
-                           Screen var189 = thien_di.instance.d(var180);
+                           Screen var189 = GameManager.instance.d(var180);
                            int var196 = readInt(var1);
                            UIControlBase var199 = var189.getControlById(var196);
                            boolean var206 = readBool(var1);
@@ -92,7 +92,7 @@ public class MessageHandler {
                            writeString(decodePacket(var1), var165);
                         } else if (var186 == 1) {
                            var180 = readInt(var1);
-                           Screen var190 = thien_di.instance.d(var180);
+                           Screen var190 = GameManager.instance.d(var180);
                            int var197 = readInt(var1);
                            boolean var200 = readBool(var1);
                            UIControlBase var207;
@@ -113,7 +113,7 @@ public class MessageHandler {
                            writeBool(readBool(var1), var165);
                         } else if (var186 == 1) {
                            var180 = readInt(var1);
-                           Screen var191 = thien_di.instance.d(var180);
+                           Screen var191 = GameManager.instance.d(var180);
                            int var198 = readInt(var1);
                            UIControlBase var201;
                            if ((var201 = var191.getControlById(var198)) instanceof thien_x) {
@@ -135,27 +135,27 @@ public class MessageHandler {
                   var104.padding = var106;
                   boolean var107 = readBool(var1);
                   Screen var108;
-                  if ((var108 = thien_di.instance.d(var106)) != null) {
-                     thien_di.instance.c(var108);
+                  if ((var108 = GameManager.instance.d(var106)) != null) {
+                     GameManager.instance.c(var108);
                   }
 
                   if (var106 == -1) {
-                     thien_di.instance.A();
+                     GameManager.instance.A();
                   }
 
                   var104.startSlide(1);
-                  thien_di.instance.b(var104);
+                  GameManager.instance.b(var104);
                   if (var107) {
-                     thien_di.instance.j();
+                     GameManager.instance.j();
                   }
                   break;
                case 5:
                   int var188 = readInt(var1);
-                  Screen var195 = thien_di.instance.d(var188);
+                  Screen var195 = GameManager.instance.d(var188);
                   switch (var1.getPayload().readByte()) {
                      case 0:
                         UIAction var205 = parseMenuEntry(var1);
-                        if (thien_di.c(var188)) {
+                        if (GameManager.c(var188)) {
                            Vector var212;
                            (var212 = new Vector()).addElement(new UIAction(TextConstant.smileys(), new thien_m()));
                            var212.addElement(var205);
@@ -175,7 +175,7 @@ public class MessageHandler {
                   }
                case 6:
                   int var161 = readInt(var1);
-                  FormScreen var174 = (FormScreen)thien_di.instance.d(var161);
+                  FormScreen var174 = (FormScreen) GameManager.instance.d(var161);
                   byte var194 = var1.getPayload().readByte();
                   Object var142 = null;
                   switch (var194) {
@@ -270,7 +270,7 @@ public class MessageHandler {
 
                         boolean var236 = readBool(var1);
                         UIGridMenu var110 = new UIGridMenu(
-                           0, Screen.headerHeight + 7, Screen.e - 3, Screen.formHeight - 3 - thien_di.g, var85, var90, var88, var89, var86, var87, false, 1
+                           0, Screen.headerHeight + 7, Screen.e - 3, Screen.formHeight - 3 - GameManager.g, var85, var90, var88, var89, var86, var87, false, 1
                         );
                         var174.addControl(var110);
                         var174.selectControl(var110);
@@ -300,7 +300,7 @@ public class MessageHandler {
                         int var99 = readInt(var1);
                         int var100 = readInt(var1);
                         int var101 = readInt(var1);
-                        ((thien_z)thien_di.instance.d(var99).getControlById(var100)).c(var101);
+                        ((thien_z) GameManager.instance.d(var99).getControlById(var100)).c(var101);
                   }
 
                   var161 = readInt(var1);
@@ -311,11 +311,11 @@ public class MessageHandler {
                   break;
                case 7:
                   int var141 = readInt(var1);
-                  Screen var64 = thien_di.instance.d(var141);
+                  Screen var64 = GameManager.instance.d(var141);
                   int var65 = readInt(var1);
                   UIControlBase var66 = var64.getControlById(var65);
                   var64.selectControl(var66);
-                  if (var64.equals(thien_di.instance.u())) {
+                  if (var64.equals(GameManager.instance.u())) {
                      var64.updateLayout();
                   }
                   break;
@@ -347,11 +347,11 @@ public class MessageHandler {
                   }
 
                   thien_am var230 = new thien_am(var71);
-                  thien_di.instance.a(var230, var70);
+                  GameManager.instance.a(var230, var70);
                   break;
                case 12:
                   int var204 = readInt(var1);
-                  FormScreen var211 = (FormScreen)thien_di.instance.d(var204);
+                  FormScreen var211 = (FormScreen) GameManager.instance.d(var204);
                   int var217;
                   String[] var140 = new String[var217 = readInt(var1)];
 
@@ -363,7 +363,7 @@ public class MessageHandler {
                   break;
                case 13:
                   int var67 = readInt(var1);
-                  FormScreen var68 = (FormScreen)thien_di.instance.d(var67);
+                  FormScreen var68 = (FormScreen) GameManager.instance.d(var67);
                   int var69 = readInt(var1);
                   var68.toggleSection(var69);
                   break;
@@ -374,7 +374,7 @@ public class MessageHandler {
                      var159 = readString(var1);
                   } else {
                      int var136 = readInt(var1);
-                     Screen var173 = thien_di.instance.d(var136);
+                     Screen var173 = GameManager.instance.d(var136);
                      int var137 = readInt(var1);
                      boolean var179 = readBool(var1);
                      UIControlBase var138;
@@ -388,7 +388,7 @@ public class MessageHandler {
                   }
 
                   String var139 = readString(var1);
-                  thien_di.instance.a("Gửi tin nhắn: " + var159 + Xuka.refCode + " => " + var139.substring(6), new thien_l(var159, var139));
+                  GameManager.instance.a("Gửi tin nhắn: " + var159 + Xuka.refCode + " => " + var139.substring(6), new thien_l(var159, var139));
                   break;
                case 15:
                   try {
@@ -397,30 +397,30 @@ public class MessageHandler {
                   }
                   break;
                case 16:
-                  thien_di.instance.d(readInt(var1)).getControlById(readInt(var1)).baseX = readInt(var1);
+                  GameManager.instance.d(readInt(var1)).getControlById(readInt(var1)).baseX = readInt(var1);
                   break;
                case 17:
                   Screen var133;
-                  UIControlBase var158 = (var133 = thien_di.instance.d(readInt(var1))).getControlById(readInt(var1));
+                  UIControlBase var158 = (var133 = GameManager.instance.d(readInt(var1))).getControlById(readInt(var1));
                   UIControlBase var134 = var133.getControlById(readInt(var1));
                   var158.baseX = var134.baseX + var134.width + 10;
                   break;
                case 18:
                   FormScreen var132;
                   UIControlBase var157;
-                  (var157 = (var132 = (FormScreen)thien_di.instance.d(readInt(var1))).getControlById(readInt(var1))).baseY = readInt(var1);
+                  (var157 = (var132 = (FormScreen) GameManager.instance.d(readInt(var1))).getControlById(readInt(var1))).baseY = readInt(var1);
                   var132.x = var157.baseY + var157.height + 2;
                   break;
                case 19:
                   FormScreen var131;
-                  UIControlBase var156 = (var131 = (FormScreen)thien_di.instance.d(readInt(var1))).getControlById(readInt(var1));
+                  UIControlBase var156 = (var131 = (FormScreen) GameManager.instance.d(readInt(var1))).getControlById(readInt(var1));
                   UIControlBase var172 = var131.getControlById(readInt(var1));
                   var156.baseY = var172.baseY + var172.height + 2;
                   var131.x = var156.baseY + var156.height + 2;
                   break;
                case 20:
                   FormScreen var130;
-                  UIControlBase var155 = (var130 = (FormScreen)thien_di.instance.d(readInt(var1))).getControlById(readInt(var1));
+                  UIControlBase var155 = (var130 = (FormScreen) GameManager.instance.d(readInt(var1))).getControlById(readInt(var1));
                   UIControlBase var171 = var130.getControlById(readInt(var1));
                   var155.baseY = var171.baseY;
                   var130.x = var155.baseY + var155.height + 2;
@@ -433,10 +433,10 @@ public class MessageHandler {
                   b(var154.getPayload().getBuffer());
                   break;
                case 22:
-                  thien_di.instance.c(thien_di.instance.c(readString(var1)));
+                  GameManager.instance.c(GameManager.instance.c(readString(var1)));
                   break;
                case 23:
-                  thien_di.instance.c();
+                  GameManager.instance.c();
                   break;
                case 24:
                   int var128 = readInt(var1);
@@ -444,25 +444,25 @@ public class MessageHandler {
                   String var170 = readString(var1);
 
                   try {
-                     ((TextField)thien_di.instance.d(var128).getControlById(var153)).setText(var170);
+                     ((TextField) GameManager.instance.d(var128).getControlById(var153)).setText(var170);
                   } catch (Exception var119) {
                   }
                   break;
                case 25:
                   String var127 = readString(var1);
-                  thien_di.instance.j.b(var127);
+                  GameManager.instance.j.b(var127);
                   break;
                case 26:
                   String var125 = readString(var1);
-                  thien_ew var126 = thien_di.getInstance().e(var125);
-                  thien_di.getInstance().d(var126.title);
+                  thien_ew var126 = GameManager.getInstance().e(var125);
+                  GameManager.getInstance().d(var126.title);
                   break;
                case 28:
-                  if (thien_di.instance.n.size() > 0 && ((thien_ad)thien_di.instance.n.elementAt(0)).d) {
-                     thien_di.instance.c();
+                  if (GameManager.instance.n.size() > 0 && ((thien_ad) GameManager.instance.n.elementAt(0)).d) {
+                     GameManager.instance.c();
                   }
 
-                  thien_di.instance.b(readString(var1));
+                  GameManager.instance.b(readString(var1));
                   break;
                case 29:
                   String var124 = readString(var1);
@@ -475,11 +475,11 @@ public class MessageHandler {
                   UIAction var152 = new UIAction(var151, new thien_f(var168));
                   UIAction var169 = new UIAction(var177, new thien_j(var185));
                   UIAction var178 = new UIAction(var187, new thien_k(var193));
-                  if (thien_di.instance.n.size() > 0 && ((thien_ad)thien_di.instance.n.elementAt(0)).d) {
-                     thien_di.instance.c();
+                  if (GameManager.instance.n.size() > 0 && ((thien_ad) GameManager.instance.n.elementAt(0)).d) {
+                     GameManager.instance.c();
                   }
 
-                  thien_di.instance.a(var124, var152, var169, var178);
+                  GameManager.instance.a(var124, var152, var169, var178);
                   break;
                case 35:
                   int var3 = readInt(var1);
@@ -495,7 +495,7 @@ public class MessageHandler {
                            writeInt(readInt(var1), var5);
                         } else if (var8 == 1) {
                            int var9 = readInt(var1);
-                           Screen var10 = thien_di.instance.d(var9);
+                           Screen var10 = GameManager.instance.d(var9);
                            int var11 = readInt(var1);
                            UIControlBase var121 = var10.getControlById(var11);
                            boolean var148 = readBool(var1);
@@ -526,7 +526,7 @@ public class MessageHandler {
                            writeString(decodePacket(var1), var5);
                         } else if (var8 == 1) {
                            int var202 = readInt(var1);
-                           Screen var209 = thien_di.instance.d(var202);
+                           Screen var209 = GameManager.instance.d(var202);
                            int var215 = readInt(var1);
                            boolean var122 = readBool(var1);
                            UIControlBase var149;
@@ -547,7 +547,7 @@ public class MessageHandler {
                            writeBool(readBool(var1), var5);
                         } else if (var8 == 1) {
                            int var203 = readInt(var1);
-                           Screen var210 = thien_di.instance.d(var203);
+                           Screen var210 = GameManager.instance.d(var203);
                            int var216 = readInt(var1);
                            UIControlBase var123;
                            if ((var123 = var210.getControlById(var216)) instanceof thien_x) {
@@ -566,7 +566,7 @@ public class MessageHandler {
                case 40:
                   String var120 = readString(var1);
                   byte var2 = var1.getPayload().readByte();
-                  thien_di.instance.j.a(var120, var2);
+                  GameManager.instance.j.a(var120, var2);
             }
          }
       }
@@ -588,7 +588,7 @@ public class MessageHandler {
    }
 
    public static void b(String var0) {
-      Packet var1 = new Packet(thien_di.a ? 5000011 : 3402, 39);
+      Packet var1 = new Packet(GameManager.a ? 5000011 : 3402, 39);
       writeString(var0, var1);
       ConnectionManager.sendPacket(var1);
    }
@@ -809,7 +809,7 @@ public class MessageHandler {
       ConnectionManager.sendPacket(var2);
    }
 
-   public static void a(String var0, String var1, int var2, int var3, int var4) {
+   public static void login(String username, String password, int var2, int var3, int var4) {
       Packet var6;
       if (var3 == 1) {
          Packet var5 = new Packet(1016, 13);
@@ -825,8 +825,8 @@ public class MessageHandler {
          var6 = new Packet(61, 20);
       }
 
-      writeString(thien_hj.a(var0), var6);
-      writeString(thien_hj.a(var1), var6);
+      writeString(thien_hj.a(username), var6);
+      writeString(thien_hj.a(password), var6);
       writeInt(var2, var6);
       writeString("", var6);
       writeInt(var4, var6);
@@ -1097,15 +1097,15 @@ public class MessageHandler {
       }
    }
 
-   public static void writeString(String var0, Packet var1) {
-      ByteBuffer var2 = var1.getPayload();
-      int var3 = var0.length();
-      var2.ensureCapacity(4 + 2 * var3);
-      writeIntToBuffer(var3, var1);
+   public static void writeString(String value, Packet packet) {
+      ByteBuffer byteBuffer = packet.getPayload();
+      int valueLength = value.length();
+      byteBuffer.ensureCapacity(4 + 2 * valueLength);
+      writeIntToBuffer(valueLength, packet);
 
-      for (int var7 = 0; var7 < var3; var7++) {
-         short var10000 = (short)var0.charAt(var7);
-         Packet var5 = var1;
+      for (int var7 = 0; var7 < valueLength; var7++) {
+         short var10000 = (short) value.charAt(var7);
+         Packet var5 = packet;
          short var4 = var10000;
 
          for (int var6 = 1; var6 >= 0; var6--) {

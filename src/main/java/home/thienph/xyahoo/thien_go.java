@@ -30,8 +30,8 @@ implements Runnable {
             textMessage.setPayloadText(this.b);
             messageConnection.send((Message)textMessage);
             if (this.c == null) {
-                thien_di.instance.c();
-                thien_di.instance.b(TextConstant.sendSmsCompleted());
+                GameManager.instance.c();
+                GameManager.instance.b(TextConstant.sendSmsCompleted());
                 return;
             }
             this.c.action();
@@ -39,10 +39,10 @@ implements Runnable {
         }
         catch (Exception exception) {
             if (this.d) {
-                thien_di.instance.c();
+                GameManager.instance.c();
             }
             if (this.e == null) {
-                thien_di.instance.b(TextConstant.sendSmsFailed());
+                GameManager.instance.b(TextConstant.sendSmsFailed());
                 return;
             }
             this.e.action();

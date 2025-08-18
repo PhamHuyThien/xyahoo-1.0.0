@@ -2,13 +2,13 @@ package home.thienph.xyahoo;
 
 final class thien_dw
 implements IAction {
-    private thien_di a;
+    private GameManager a;
     private final TextField b;
     private final Screen c;
     private final thien_z d;
 
-    thien_dw(thien_di thien_di2, TextField textField2, Screen screen2, thien_z thien_z2) {
-        this.a = thien_di2;
+    thien_dw(GameManager gameManager2, TextField textField2, Screen screen2, thien_z thien_z2) {
+        this.a = gameManager2;
         this.b = textField2;
         this.c = screen2;
         this.d = thien_z2;
@@ -20,7 +20,7 @@ implements IAction {
             this.c.selectControl(this.b);
             return;
         }
-        thien_di.t.addElement(string);
+        GameManager.t.addElement(string);
         MessageHandler.i(thien_ff.y, string);
         int n = 0;
         while (n < this.d.a.length) {

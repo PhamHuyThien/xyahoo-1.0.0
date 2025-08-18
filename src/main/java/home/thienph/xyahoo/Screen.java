@@ -417,7 +417,7 @@ public class Screen {
 
     public static void drawFooter(Graphics graphics) {
         if (thien_w.a) {
-            graphics.drawImage(thien_di.v, 0, formHeight + 2, 20);
+            graphics.drawImage(GameManager.v, 0, formHeight + 2, 20);
             return;
         }
         int n = formHeight + 3;

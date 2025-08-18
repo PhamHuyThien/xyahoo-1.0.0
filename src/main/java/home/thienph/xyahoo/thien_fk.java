@@ -20,12 +20,12 @@ implements IAction {
             this.b.selectControl(this.a);
             return;
         }
-        thien_di.instance.l();
+        GameManager.instance.l();
         if (string.equals(this.c)) {
-            thien_di.getInstance().c(this.b);
+            GameManager.getInstance().c(this.b);
             return;
         }
         MessageHandler.g(this.d, string);
-        thien_di.getInstance().c(this.b);
+        GameManager.getInstance().c(this.b);
     }
 }

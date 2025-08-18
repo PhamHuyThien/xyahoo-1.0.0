@@ -5,7 +5,7 @@ implements IAction {
     private final thien_z a;
     private final TextField b;
 
-    thien_dq(thien_di thien_di2, thien_z thien_z2, TextField textField2) {
+    thien_dq(GameManager gameManager2, thien_z thien_z2, TextField textField2) {
         this.a = thien_z2;
         this.b = textField2;
     }

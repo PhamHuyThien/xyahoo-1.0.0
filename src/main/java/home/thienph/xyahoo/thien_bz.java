@@ -41,7 +41,7 @@ public final class thien_bz extends UIControlBase
         final int e = Screen.e;
         final int f = Screen.formHeight;
         final int b = Screen.topMargin;
-        final int f2 = thien_di.f;
+        final int f2 = GameManager.f;
     }
     
     public thien_bz() {
@@ -74,7 +74,7 @@ public final class thien_bz extends UIControlBase
         if (this.c == -1) {
             final Image[] a2 = thien_b.a;
         }
-        final int n2 = Screen.formHeight - thien_di.f - 40 - ((32 > thien_w.f << 1) ? 32 : (thien_w.f << 1)) - 5;
+        final int n2 = Screen.formHeight - GameManager.f - 40 - ((32 > thien_w.f << 1) ? 32 : (thien_w.f << 1)) - 5;
         if (n % 2 == 0) {
             this.e = (Screen.e >> 1) - 10;
             this.L = 6;
@@ -111,7 +111,7 @@ public final class thien_bz extends UIControlBase
             graphics.drawLine(n2 + 10, n3 + 30, n2 + 13, n3 - 3);
             graphics.setColor(872315);
             graphics.fillRoundRect(n2 - 3, n3 - 3, 25, 25, 5, 5);
-            graphics.drawRegion(thien_di.u, this.B * 18, 0, 18, 18, 0, n2, n3, 20);
+            graphics.drawRegion(GameManager.u, this.B * 18, 0, 18, 18, 0, n2, n3, 20);
             graphics.setColor(0);
             return;
         }

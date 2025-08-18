@@ -19,11 +19,11 @@ implements IAction {
             return;
         }
         if (this.a.x.c(string)) {
-            thien_di.getInstance().b(TextConstant.thisGroupNameAlreadyExist());
+            GameManager.getInstance().b(TextConstant.thisGroupNameAlreadyExist());
             return;
         }
         MessageHandler.h(this.c, string);
-        thien_di.getInstance().c(this.b);
-        thien_di.instance.l();
+        GameManager.getInstance().c(this.b);
+        GameManager.instance.l();
     }
 }

@@ -31,22 +31,22 @@ public final class thien_ff extends Screen {
          thien_cl var2;
          (var2 = new thien_cl(TextConstant.rename(), TextConstant.typeNewNameForGroup() + "\"" + this.x.g() + "\"")).D.setText(var1);
          var2.a(new thien_fg(this, var2, var1));
-         thien_di.getInstance().b(var2);
-         thien_di.getInstance().j();
+         GameManager.getInstance().b(var2);
+         GameManager.getInstance().j();
       }
    }
 
    public final void g() {
       thien_cl var1;
       (var1 = new thien_cl(TextConstant.chatTo(), TextConstant.enterTheIdYouWantToChat())).a(new thien_fq(this, var1));
-      thien_di.getInstance().b(var1);
-      thien_di.getInstance().j();
+      GameManager.getInstance().b(var1);
+      GameManager.getInstance().j();
    }
 
    public final void a(String var1, int var2) {
       if (var2 == 0) {
-         thien_ew var3 = thien_di.getInstance().e(var1);
-         thien_di.getInstance().d(var3.title);
+         thien_ew var3 = GameManager.getInstance().e(var1);
+         GameManager.getInstance().d(var3.title);
       } else {
          if (var2 == 1) {
             this.b(var1);
@@ -78,12 +78,12 @@ public final class thien_ff extends Screen {
       var1.selectControl(var6);
       var1.centerCommand = new UIAction("OK", new thien_gb(this, var6, var1));
       var1.leftCommand = new UIAction(TextConstant.cancel(), new thien_gi(this, var1));
-      thien_di.getInstance().b(var1);
-      thien_di.getInstance().j();
+      GameManager.getInstance().b(var1);
+      GameManager.getInstance().j();
    }
 
    public final void b(String var1) {
-      thien_di.e = thien_di.getInstance().u();
+      GameManager.e = GameManager.getInstance().u();
       Screen var2;
       (var2 = new Screen()).title = TextConstant.addFriend();
       int var3;
@@ -127,8 +127,8 @@ public final class thien_ff extends Screen {
       var2.selectControl(var7);
       var2.centerCommand = new UIAction("OK", new thien_gk(this, var7, var8, var2));
       var2.leftCommand = new UIAction(TextConstant.cancel(), new thien_gl(this, var2));
-      thien_di.instance.a(var2);
-      thien_di.getInstance().j();
+      GameManager.instance.a(var2);
+      GameManager.getInstance().j();
    }
 
    public final void i() {
@@ -164,8 +164,8 @@ public final class thien_ff extends Screen {
       var9.addElement(new UIAction(TextConstant.cancel(), new thien_fh(this, var1)));
       thien_am var10 = new thien_am(var9);
       var1.leftCommand = new UIAction("Menu", new thien_fi(this, var10));
-      thien_di.getInstance().b(var1);
-      thien_di.getInstance().j();
+      GameManager.getInstance().b(var1);
+      GameManager.getInstance().j();
    }
 
    public final void j() {
@@ -209,8 +209,8 @@ public final class thien_ff extends Screen {
          var2.selectControl(var8);
          var2.centerCommand = new UIAction("OK", new thien_fk(this, var8, var2, var9, var1));
          var2.leftCommand = new UIAction(TextConstant.cancel(), new thien_fl(this, var2));
-         thien_di.getInstance().b(var2);
-         thien_di.getInstance().j();
+         GameManager.getInstance().b(var2);
+         GameManager.getInstance().j();
       }
    }
 
@@ -246,8 +246,8 @@ public final class thien_ff extends Screen {
       var1.selectControl(var6);
       var1.centerCommand = new UIAction("OK", new thien_fn(this, var6, var8, var1));
       var1.leftCommand = new UIAction(TextConstant.cancel(), new thien_fo(this, var1));
-      thien_di.getInstance().b(var1);
-      thien_di.getInstance().j();
+      GameManager.getInstance().b(var1);
+      GameManager.getInstance().j();
    }
 
    protected final void l() {
@@ -289,16 +289,16 @@ public final class thien_ff extends Screen {
       var1.selectControl(var6);
       var1.centerCommand = new UIAction("OK", new thien_fp(this, var6, var8, var10, var1));
       var1.leftCommand = new UIAction(TextConstant.cancel(), new thien_fr(this, var1));
-      thien_di.getInstance().b(var1);
-      thien_di.getInstance().j();
+      GameManager.getInstance().b(var1);
+      GameManager.getInstance().j();
    }
 
    protected final void m() {
       thien_cl var1;
       (var1 = new thien_cl(TextConstant.changeFullname(), TextConstant.changeFullname())).D.setText(z);
       var1.a(new thien_fs(this, var1));
-      thien_di.getInstance().b(var1);
-      thien_di.getInstance().j();
+      GameManager.getInstance().b(var1);
+      GameManager.getInstance().j();
    }
 
    public thien_ff() {
@@ -307,8 +307,8 @@ public final class thien_ff extends Screen {
       super.title = TextConstant.buddies();
       this.L = new TextField();
       this.L.isShiftMode = true;
-      this.L.setBounds(0, Screen.formHeight - thien_di.g - thien_w.f - 11, Screen.e - 6, thien_w.f + 6);
-      this.x = new thien_b(1, 1, Screen.e - 3, Screen.formHeight - 2 - thien_di.g, true);
+      this.L.setBounds(0, Screen.formHeight - GameManager.g - thien_w.f - 11, Screen.e - 6, thien_w.f + 6);
+      this.x = new thien_b(1, 1, Screen.e - 3, Screen.formHeight - 2 - GameManager.g, true);
       this.x.c = false;
       this.x.n = true;
       this.addControl(this.x);
@@ -341,7 +341,7 @@ public final class thien_ff extends Screen {
 
    public static void n() {
       MessageHandler.d();
-      thien_di.instance.a(thien_di.t);
+      GameManager.instance.a(GameManager.t);
    }
 
    public final void o() {

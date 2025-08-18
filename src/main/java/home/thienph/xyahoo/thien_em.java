@@ -13,7 +13,7 @@ extends Screen {
 
     public thien_em() {
         this.isLocked = true;
-        this.w = new thien_al(1, 1, Screen.e - 3, Screen.formHeight - 2 - thien_di.g, 0);
+        this.w = new thien_al(1, 1, Screen.e - 3, Screen.formHeight - 2 - GameManager.g, 0);
         this.addControl(this.w);
         this.selectControl(this.w);
         this.rightCommand = new UIAction("T\u00ecm ph\u00f2ng", new thien_eo(this));

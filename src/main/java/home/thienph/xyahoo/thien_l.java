@@ -11,8 +11,8 @@ implements IAction {
     }
 
     public final void action() {
-        thien_di.instance.c();
-        thien_di.instance.b(TextConstant.pleaseWait());
+        GameManager.instance.c();
+        GameManager.instance.b(TextConstant.pleaseWait());
         Xuka.startThread(this.a, this.b, null, null, true);
     }
 }

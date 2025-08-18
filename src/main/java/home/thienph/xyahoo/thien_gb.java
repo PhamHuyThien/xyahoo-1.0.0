@@ -16,8 +16,8 @@ implements IAction {
         if (string.equals("")) {
             return;
         }
-        thien_di.getInstance().c(this.b);
+        GameManager.getInstance().c(this.b);
         MessageHandler.g(string);
-        thien_di.instance.l();
+        GameManager.instance.l();
     }
 }

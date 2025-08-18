@@ -2,11 +2,11 @@ package home.thienph.xyahoo;
 
 final class thien_dz
 implements IAction {
-    private thien_di a;
+    private GameManager a;
     private final String b;
 
-    thien_dz(thien_di thien_di2, String string) {
-        this.a = thien_di2;
+    thien_dz(GameManager gameManager2, String string) {
+        this.a = gameManager2;
         this.b = string;
     }
 

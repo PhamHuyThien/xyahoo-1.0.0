@@ -29,16 +29,16 @@ final class PacketWriter implements Runnable {
             try {
                 while (this.outgoingQueue.size() > 0) {
                     long var1 = System.currentTimeMillis();
-                    Packet var3 = (Packet) this.outgoingQueue.elementAt(0);
+                    Packet packet = (Packet) this.outgoingQueue.elementAt(0);
                     this.outgoingQueue.removeElementAt(0);
-                    ByteBuffer var4 = var3.getPayload();
-                    int var5;
-                    byte[] var6 = intToByteArray(var5 = 8 + var4.getLength());
-                    ConnectionManager.getOutputStream().write(var6, 0, 4);
-                    ConnectionManager.getOutputStream().write(intToByteArray(var3.getCommandId()), 0, 4);
-                    ConnectionManager.getOutputStream().write(intToByteArray(var3.getType()), 0, 4);
-                    ConnectionManager.getOutputStream().write(var4.getBuffer(), 0, var5 - 8);
-                    ConnectionManager.reconnectCount += var5 + 4;
+                    ByteBuffer payload = packet.getPayload();
+                    int packetLength = 8 + payload.getLength();
+                    byte[] packetByteLength = intToByteArray(packetLength);
+                    ConnectionManager.getOutputStream().write(packetByteLength, 0, 4);
+                    ConnectionManager.getOutputStream().write(intToByteArray(packet.getCommandId()), 0, 4);
+                    ConnectionManager.getOutputStream().write(intToByteArray(packet.getType()), 0, 4);
+                    ConnectionManager.getOutputStream().write(payload.getBuffer(), 0, packetLength - 8);
+                    ConnectionManager.reconnectCount += packetLength + 4;
                     ConnectionManager.getOutputStream().flush();
                     long var7;
                     if ((var7 = 100L - (System.currentTimeMillis() - var1)) > 0L) {

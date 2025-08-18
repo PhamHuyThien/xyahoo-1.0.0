@@ -9,7 +9,7 @@ final class thien_bw implements IAction
     }
     
     public final void action() {
-        thien_di.instance.c(thien_ba.S);
+        GameManager.instance.c(thien_ba.S);
         thien_ay.b = null;
         thien_ay.a = null;
         thien_ba.a(this.a, (thien_ay)null);

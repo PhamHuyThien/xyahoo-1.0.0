@@ -22,8 +22,8 @@ public final class thien_ew extends Screen {
       super.title = var1;
       this.A = new TextField();
       this.A.isEditable = false;
-      this.A.setBounds(1, Screen.formHeight - thien_di.g - 2, Screen.e - 3, thien_w.f + 6);
-      this.z = new thien_e(1, 1, Screen.e - 3, Screen.formHeight - thien_di.g - thien_w.f - 7);
+      this.A.setBounds(1, Screen.formHeight - GameManager.g - 2, Screen.e - 3, thien_w.f + 6);
+      this.z = new thien_e(1, 1, Screen.e - 3, Screen.formHeight - GameManager.g - thien_w.f - 7);
       this.addControl(this.z);
       this.addControl(this.A);
       this.selectControl(this.A);
@@ -40,8 +40,8 @@ public final class thien_ew extends Screen {
       this.D = new thien_am(this.E);
       super.leftCommand = new UIAction("Menu", new thien_fd(this));
       super.centerCommand = new UIAction("Chat", null);
-      if (thien_di.E != null) {
-         this.z.a(thien_di.E, 2);
+      if (GameManager.E != null) {
+         this.z.a(GameManager.E, 2);
       }
    }
 
@@ -89,9 +89,9 @@ public final class thien_ew extends Screen {
 
             Object var5 = null;
             if (this.C) {
-               thien_di.instance.B = thien_ff.y;
-               thien_di.instance.C++;
-               if (thien_di.instance.C > 5) {
+               GameManager.instance.B = thien_ff.y;
+               GameManager.instance.C++;
+               if (GameManager.instance.C > 5) {
                   this.z.a("Bạn chỉ có thể chat 5 câu liên tục khi chat nhóm", 1);
                   return false;
                }

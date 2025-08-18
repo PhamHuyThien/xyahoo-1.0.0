@@ -9,9 +9,9 @@ public final class Packet {
         this.payload = new ByteBuffer();
     }
 
-    public Packet(int n, int n2) {
-        this.commandId = n;
-        this.type = n2;
+    public Packet(int commandId, int type) {
+        this.commandId = commandId;
+        this.type = type;
         this.payload = new ByteBuffer();
     }
 

@@ -28,7 +28,7 @@ extends FormScreen {
         System.gc();
         FormScreen.calculateFormDimensions(70, 150);
         this.initLayout();
-        this.x = Screen.formHeight - (thien_w.i * 3 + thien_aq.a + (GameCanvas.screenHeight > 170 ? 55 : 20) + thien_di.g) >> 1;
+        this.x = Screen.formHeight - (thien_w.i * 3 + thien_aq.a + (GameCanvas.screenHeight > 170 ? 55 : 20) + GameManager.g) >> 1;
         UIFormBuilder.addImage((FormScreen)this, thien_aq.c(), false);
         this.x += GameCanvas.screenHeight > 170 ? 18 : 7;
         this.D = UIFormBuilder.addTextField((FormScreen)this, "T\u00ean: ", 0, -1);
@@ -46,34 +46,34 @@ extends FormScreen {
     }
 
     protected final void f() {
-        thien_di thien_di2 = thien_di.getInstance();
-        thien_di2.b(thien_di2.l);
-        thien_di2.d(thien_di2.l);
-        thien_di2.l.startSlide(1);
-        thien_di2.c(this);
+        GameManager gameManager2 = GameManager.getInstance();
+        gameManager2.b(gameManager2.l);
+        gameManager2.d(gameManager2.l);
+        gameManager2.l.startSlide(1);
+        gameManager2.c(this);
     }
 
     public final void g() {
         int n = thien_fe.a(this.D.getText());
         if (n == 1) {
-            thien_di.getInstance().a("ID" + TextConstant.lengthMustBeFrom6To64(), (Image)null, 1);
+            GameManager.getInstance().a("ID" + TextConstant.lengthMustBeFrom6To64(), (Image)null, 1);
             this.selectControl(this.D);
             return;
         }
         if (n == 2) {
-            thien_di.getInstance().a(TextConstant.idCantStartWithNumber(), (Image)null, 1);
+            GameManager.getInstance().a(TextConstant.idCantStartWithNumber(), (Image)null, 1);
             this.selectControl(this.D);
             return;
         }
         if (n == 3) {
-            thien_di.getInstance().a(TextConstant.getIdCantStartWithNumber(), (Image)null, 1);
+            GameManager.getInstance().a(TextConstant.getIdCantStartWithNumber(), (Image)null, 1);
             this.selectControl(this.D);
             return;
         }
         n = 0;
         while (n < H.length) {
             if (H[n].equals(this.D.getText())) {
-                thien_di.getInstance().a(TextConstant.cannotUseThisName(), (Image)null, 1);
+                GameManager.getInstance().a(TextConstant.cannotUseThisName(), (Image)null, 1);
                 this.D.setText("");
                 this.selectControl(this.D);
                 return;
@@ -81,12 +81,12 @@ extends FormScreen {
             ++n;
         }
         if (this.E.getText().length() < 6 || this.E.getText().length() > 64) {
-            thien_di.getInstance().a(String.valueOf(TextConstant.password()) + TextConstant.lengthMustBeFrom6To64(), (Image)null, 1);
+            GameManager.getInstance().a(String.valueOf(TextConstant.password()) + TextConstant.lengthMustBeFrom6To64(), (Image)null, 1);
             this.selectControl(this.E);
             return;
         }
         if (this.J.getText().equals("") || !this.E.getText().equals(this.J.getText())) {
-            thien_di.getInstance().a(TextConstant.typePasswordAgain(), (Image)null, 1);
+            GameManager.getInstance().a(TextConstant.typePasswordAgain(), (Image)null, 1);
             this.selectControl(this.J);
             return;
         }
@@ -103,8 +103,8 @@ extends FormScreen {
         } else {
             this.G = this.D.getText();
         }
-        thien_di.getInstance().a(TextConstant.registering(), null, new UIAction(TextConstant.cancel(), new thien_ek(this)), null).a(true);
-        thien_di.getInstance().i = new thien_el(this);
+        GameManager.getInstance().a(TextConstant.registering(), null, new UIAction(TextConstant.cancel(), new thien_ek(this)), null).a(true);
+        GameManager.getInstance().i = new thien_el(this);
     }
 
     static void a(thien_eh thien_eh2, String string) {

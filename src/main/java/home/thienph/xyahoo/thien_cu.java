@@ -27,7 +27,7 @@ implements IAction {
     }
 
     public final void action() {
-        thien_di.instance.c(LoginScreen.getSettingsScreen());
+        GameManager.instance.c(LoginScreen.getSettingsScreen());
         this.a.a = this.b;
         this.c.a = this.d;
         this.e.a = this.f;

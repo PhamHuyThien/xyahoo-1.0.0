@@ -39,9 +39,9 @@ implements IAction {
         }
         if (bl) {
             MessageHandler.e(thien_u2.d);
-            thien_di.getInstance().j.x.a(thien_u2.d);
+            GameManager.getInstance().j.x.a(thien_u2.d);
             return;
         }
-        thien_di.getInstance().b(TextConstant.youCanDeleteEmptyGroup());
+        GameManager.getInstance().b(TextConstant.youCanDeleteEmptyGroup());
     }
 }

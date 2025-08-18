@@ -6,7 +6,7 @@ final class thien_eg
 implements IAction {
     private final String a;
 
-    thien_eg(thien_di thien_di2, String string) {
+    thien_eg(GameManager gameManager2, String string) {
         this.a = string;
     }
 

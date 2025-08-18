@@ -6,6 +6,6 @@ implements IAction {
     }
 
     public final void action() {
-        thien_di.getInstance().a(TextConstant.areYouSure(), new thien_ci(this));
+        GameManager.getInstance().a(TextConstant.areYouSure(), new thien_ci(this));
     }
 }

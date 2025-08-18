@@ -8,14 +8,14 @@ import javax.microedition.lcdui.Display;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 
-public final class thien_di implements thien_et {
+public final class GameManager implements thien_et {
    private static boolean H;
    public static boolean a;
    public static String b;
    private String I;
    private String J;
    private static String K = "";
-   public static thien_di instance = new thien_di();
+   public static GameManager instance = new GameManager();
    public Vector d;
    private Vector L;
    public static Screen e;
@@ -136,7 +136,7 @@ public final class thien_di implements thien_et {
 
    public final void b(Screen var1) {
       Screen var3 = var1;
-      thien_di var2 = this;
+      GameManager var2 = this;
       int var4 = this.aE;
 
       boolean var10000;
@@ -244,7 +244,7 @@ public final class thien_di implements thien_et {
       }
    }
 
-   public static thien_di getInstance() {
+   public static GameManager getInstance() {
       return instance;
    }
 
@@ -274,7 +274,7 @@ public final class thien_di implements thien_et {
       }
    }
 
-   protected thien_di() {
+   protected GameManager() {
    }
 
    public final void a(int var1, int var2) {
@@ -410,7 +410,7 @@ public final class thien_di implements thien_et {
    public final void a(Graphics var1) {
       var1.setColor(0);
       var1.fillRect(0, 0, this.U, this.V);
-      thien_di var2 = this;
+      GameManager var2 = this;
       if (thien_w.a) {
          var1.drawImage(v, 0, 0, 20);
       } else {
@@ -836,7 +836,7 @@ public final class thien_di implements thien_et {
          z = false;
       }
 
-      thien_di var4 = this;
+      GameManager var4 = this;
       if (this.ak) {
          this.an--;
          if (this.an <= 0) {

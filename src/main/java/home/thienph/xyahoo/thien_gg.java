@@ -6,6 +6,6 @@ implements IAction {
     }
 
     public final void action() {
-        thien_di.getInstance().c(thien_di.instance.j);
+        GameManager.getInstance().c(GameManager.instance.j);
     }
 }

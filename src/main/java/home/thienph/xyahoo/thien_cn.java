@@ -4,7 +4,7 @@ import java.util.Vector;
 import javax.microedition.lcdui.Graphics;
 
 public final class thien_cn extends Screen {
-   private thien_b y = thien_di.getInstance().j.x;
+   private thien_b y = GameManager.getInstance().j.x;
    String w;
    String x;
    private boolean z;
@@ -33,7 +33,7 @@ public final class thien_cn extends Screen {
 
    public thien_cn() {
       this.A.isShiftMode = true;
-      this.A.setBounds(0, Screen.formHeight - thien_di.g - thien_w.f - 11, Screen.e - 6, thien_w.f + 6);
+      this.A.setBounds(0, Screen.formHeight - GameManager.g - thien_w.f - 11, Screen.e - 6, thien_w.f + 6);
       super.title = TextConstant.inviteConference();
       this.addControl(this.y);
       this.selectControl(this.y);

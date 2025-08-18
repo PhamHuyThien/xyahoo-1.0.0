@@ -9,8 +9,8 @@ final class thien_cw
     }
 
     public final void action() {
-        thien_di.instance.c();
-        thien_di.instance.b(TextConstant.pleaseWait());
-        Xuka.startThread(String.valueOf(thien_di.D) + this.a.usernameField.getText(), thien_di.instance.w(), new thien_cx(this), null, true);
+        GameManager.instance.c();
+        GameManager.instance.b(TextConstant.pleaseWait());
+        Xuka.startThread(String.valueOf(GameManager.D) + this.a.usernameField.getText(), GameManager.instance.w(), new thien_cx(this), null, true);
     }
 }

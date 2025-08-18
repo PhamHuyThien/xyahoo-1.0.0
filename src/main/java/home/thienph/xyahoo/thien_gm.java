@@ -19,7 +19,7 @@ implements IAction {
         }
         String string2 = this.b.b();
         MessageHandler.j(string2, string);
-        thien_di.getInstance().c(this.c);
-        thien_di.instance.l();
+        GameManager.getInstance().c(this.c);
+        GameManager.instance.l();
     }
 }

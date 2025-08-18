@@ -26,7 +26,7 @@ public final class thien_ca extends FormScreen {
          }
 
          this.H = new UIGridMenu(
-            0, Screen.headerHeight + 7, Screen.e - 3, Screen.formHeight - 3 - thien_di.g, var2, var1, null, null, var3[0].getWidth(), var3[0].getHeight(), true, 1
+            0, Screen.headerHeight + 7, Screen.e - 3, Screen.formHeight - 3 - GameManager.g, var2, var1, null, null, var3[0].getWidth(), var3[0].getHeight(), true, 1
          );
          UIGridMenu var6 = this.H;
          this.H.images = var3;
@@ -75,24 +75,24 @@ public final class thien_ca extends FormScreen {
 
    public static void f(int var0, int var1) {
       Screen var2;
-      if ((var2 = thien_di.instance.d(var0)) != null) {
-         thien_di.instance.c();
+      if ((var2 = GameManager.instance.d(var0)) != null) {
+         GameManager.instance.c();
          var2.startSlide(1);
-         thien_di.instance.d(var2);
+         GameManager.instance.d(var2);
       } else {
          MessageHandler.a(var1);
       }
    }
 
    public final void e(int var1) {
-      thien_di var2 = thien_di.instance;
+      GameManager var2 = GameManager.instance;
       System.gc();
       switch (var1) {
          case 0:
             var2.y();
             return;
          case 1:
-            if (thien_di.a) {
+            if (GameManager.a) {
                var2.x();
                return;
             }

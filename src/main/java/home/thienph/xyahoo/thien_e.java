@@ -192,7 +192,7 @@ public final class thien_e extends UIControlBase {
                      var3 += thien_w.a(var10, thien_w.j);
                      var10 = "";
                      var7 -= 30000;
-                     var1.drawRegion(thien_di.u, var7 * 18, 0, 18, 18, 0, var3 + 10, var12 * thien_w.h + (thien_w.h >> 1) + 34, 3);
+                     var1.drawRegion(GameManager.u, var7 * 18, 0, 18, 18, 0, var3 + 10, var12 * thien_w.h + (thien_w.h >> 1) + 34, 3);
                      var3 += 20;
                   } else {
                      var10 = var10 + var7;

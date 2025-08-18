@@ -24,7 +24,7 @@ implements IAction {
             thien_ff.D = string;
             Xuka.saveCustomStr(thien_ff.y, thien_ff.D, false);
         }
-        thien_di.getInstance().c(this.c);
-        thien_di.instance.l();
+        GameManager.getInstance().c(this.c);
+        GameManager.instance.l();
     }
 }

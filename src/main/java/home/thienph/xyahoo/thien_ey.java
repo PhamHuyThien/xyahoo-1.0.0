@@ -19,7 +19,7 @@ implements IAction {
             MessageHandler.a(string, this.a.title, 1);
         }
         this.a.z.a(this.b ? thien_gp.y : thien_ff.A, this.b ? TextConstant.buzz[0] : TextConstant.buzz(), 0);
-        thien_di.getInstance().a();
+        GameManager.getInstance().a();
         this.a.z.b();
     }
 }

@@ -5,7 +5,7 @@ final class thien_dv
     private final thien_z a;
     private final TextField b;
 
-    thien_dv(thien_di thien_di2, thien_z thien_z2, TextField textField2) {
+    thien_dv(GameManager gameManager2, thien_z thien_z2, TextField textField2) {
         this.a = thien_z2;
         this.b = textField2;
     }

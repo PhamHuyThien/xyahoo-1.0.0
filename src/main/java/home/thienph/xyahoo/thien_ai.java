@@ -78,7 +78,7 @@ extends UIControlBase {
             if (n4 >= 30000) {
                 this.a(graphics, string, this.baseX + 2 + n, n2);
                 string = "";
-                graphics.drawRegion(thien_di.u, (n4 -= 30000) * 18, 0, 18, 18, 0, this.baseX + 2 + (n += thien_w.a(string, thien_w.j)) + 10, this.baseY + (thien_w.f >> 1), 3);
+                graphics.drawRegion(GameManager.u, (n4 -= 30000) * 18, 0, 18, 18, 0, this.baseX + 2 + (n += thien_w.a(string, thien_w.j)) + 10, this.baseY + (thien_w.f >> 1), 3);
                 n += 20;
             } else {
                 string = String.valueOf(string) + (char)n4;

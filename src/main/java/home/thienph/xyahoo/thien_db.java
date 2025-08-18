@@ -10,7 +10,7 @@ implements IAction {
 
     public final void action() {
         LoginScreen.closeChatBox(this.a);
-        thien_di.instance.A = false;
+        GameManager.instance.A = false;
         this.a.login();
     }
 }

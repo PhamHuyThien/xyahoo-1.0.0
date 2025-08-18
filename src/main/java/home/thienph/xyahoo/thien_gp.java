@@ -42,7 +42,7 @@ extends Screen {
         int n = thien_ca.D.H.images[0].getHeight();
         this.P = Screen.e - thien_ca.D.H.images[0].getWidth() >> 1;
         int n2 = (thien_w.f + 6 << 2) + 28 + n + 5;
-        this.Q = n2 <= Screen.formHeight - thien_di.g ? thien_di.f - 10 + (Screen.formHeight - thien_di.g - n2 >> 1) : thien_di.f + 5;
+        this.Q = n2 <= Screen.formHeight - GameManager.g ? GameManager.f - 10 + (Screen.formHeight - GameManager.g - n2 >> 1) : GameManager.f + 5;
         n = this.Q + n - 3;
         this.I = new thien_ai("Yahoo! ID:", FormScreen.formXOffset, n, thien_w.f);
         this.I.width = FormScreen.formMarginLeft;
@@ -69,8 +69,8 @@ extends Screen {
         int cfr_ignored_0 = this.M.height;
         this.H = new TextField();
         this.H.isShiftMode = true;
-        this.H.setBounds(0, Screen.formHeight - thien_di.g - thien_w.f - 11, Screen.e - 6, thien_w.f + 6);
-        this.w = new thien_b(1, 1, Screen.e - 3, Screen.formHeight - 2 - thien_di.g, true);
+        this.H.setBounds(0, Screen.formHeight - GameManager.g - thien_w.f - 11, Screen.e - 6, thien_w.f + 6);
+        this.w = new thien_b(1, 1, Screen.e - 3, Screen.formHeight - 2 - GameManager.g, true);
         this.addControl(this.w);
         this.selectControl(this.w);
         this.w.c = true;
@@ -88,7 +88,7 @@ extends Screen {
             MessageHandler.b(x, 2);
             this.a(false);
         }
-        thien_di.instance.c(this.V);
+        GameManager.instance.c(this.V);
         this.V = null;
     }
 
@@ -170,16 +170,16 @@ extends Screen {
         this.w.e = true;
         this.a(true);
         thien_gp thien_gp2 = this;
-        this.U = thien_di.a(true);
+        this.U = GameManager.a(true);
         if (thien_gp2.U != -1) {
-            thien_s thien_s2 = thien_di.a(true, x);
+            thien_s thien_s2 = GameManager.a(true, x);
             if (thien_s2 != null) {
-                thien_di.instance.k.w.a(thien_s2, -1);
+                GameManager.instance.k.w.a(thien_s2, -1);
             } else {
                 thien_gp2.U = -1;
             }
         }
-        MessageHandler.a(string, string2, z, 2, this.U);
+        MessageHandler.login(string, string2, z, 2, this.U);
     }
 
     public final void updateLayout() {
@@ -241,16 +241,16 @@ extends Screen {
 
     public final void h() {
         Xuka.setXpamFlag(x);
-        thien_di.getInstance().a(String.valueOf(TextConstant.inviteYourYahoo()) + "?", new thien_gs(this));
+        GameManager.getInstance().a(String.valueOf(TextConstant.inviteYourYahoo()) + "?", new thien_gs(this));
     }
 
     static void a(thien_gp thien_gp2) {
         if (D) {
-            thien_di.instance.a("Vui l\u00f2ng tho\u00e1t Yahoo! v\u00e0 b\u1ecf ch\u1ecdn \u0111\u0103ng nh\u1eadp \u1ea9n", (Image)null, 1);
+            GameManager.instance.a("Vui l\u00f2ng tho\u00e1t Yahoo! v\u00e0 b\u1ecf ch\u1ecdn \u0111\u0103ng nh\u1eadp \u1ea9n", (Image)null, 1);
             return;
         }
-        if (thien_di.z) {
-            thien_di.instance.a("Vui l\u00f2ng ch\u1edd 10s", (Image)null, 1);
+        if (GameManager.z) {
+            GameManager.instance.a("Vui l\u00f2ng ch\u1edd 10s", (Image)null, 1);
             return;
         }
         if (thien_gp2.V == null) {
@@ -267,9 +267,9 @@ extends Screen {
             thien_gp2.V.leftCommand = new UIAction(TextConstant.cancel(), new thien_gu(thien_gp2));
         }
         thien_gp2.W.c(z == 0 ? 0 : 1);
-        thien_di.getInstance().b(thien_gp2.V);
+        GameManager.getInstance().b(thien_gp2.V);
         thien_gp2.X.setText(A);
-        thien_di.getInstance().j();
+        GameManager.getInstance().j();
     }
 
     static TextField b(thien_gp thien_gp2) {

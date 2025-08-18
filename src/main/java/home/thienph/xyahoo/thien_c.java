@@ -10,10 +10,10 @@ implements IAction {
 
     public final void action() {
         Object object = this.a.c ? "Y! " + thien_b.a((thien_b)this.a).d : thien_b.a((thien_b)this.a).d;
-        thien_ew thien_ew2 = (thien_ew)thien_di.instance.c((String)object);
+        thien_ew thien_ew2 = (thien_ew) GameManager.instance.c((String)object);
         if (thien_ew2 != null) {
             thien_ew2.startSlide(1);
-            thien_di.instance.d((String)object);
+            GameManager.instance.d((String)object);
             return;
         }
         if (this.a.c) {
@@ -28,7 +28,7 @@ implements IAction {
             }
         }
         thien_ew2.startSlide(1);
-        thien_di.instance.b(thien_ew2);
-        thien_di.instance.d(thien_ew2.title);
+        GameManager.instance.b(thien_ew2);
+        GameManager.instance.d(thien_ew2.title);
     }
 }

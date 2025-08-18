@@ -298,7 +298,7 @@ public final class thien_b extends UIControlBase {
       if (this.e) {
          var1.setColor(16777215);
          thien_w.a(thien_w.d).a(TextConstant.pleaseWait(), this.T, 20, 2, var1, thien_w.j, thien_w.f);
-         thien_di.instance.a(var1, this.T, thien_w.f + 35);
+         GameManager.instance.a(var1, this.T, thien_w.f + 35);
       } else if (this.K == 0) {
          var1.setColor(16777215);
          int var9 = this.m.length;
@@ -363,7 +363,7 @@ public final class thien_b extends UIControlBase {
                var1.setColor(var6.b);
                thien_w.a(var6.c).a(var11, var7, var2 + 3, var1);
                if (this.M && var6.g != 3) {
-                  var1.drawImage(thien_di.y[var6.h ? 1 : 0], super.width - 12, var2 + (this.I >> 1), 3);
+                  var1.drawImage(GameManager.y[var6.h ? 1 : 0], super.width - 12, var2 + (this.I >> 1), 3);
                }
             }
 

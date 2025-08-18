@@ -9,7 +9,7 @@ implements IAction {
     }
 
     public final void action() {
-        thien_di.getInstance().c();
-        thien_di.instance.a("B\u1ea1n c\u00f3 mu\u1ed1n r\u1eddi b\u00e0n?", new thien_bj(this));
+        GameManager.getInstance().c();
+        GameManager.instance.a("B\u1ea1n c\u00f3 mu\u1ed1n r\u1eddi b\u00e0n?", new thien_bj(this));
     }
 }

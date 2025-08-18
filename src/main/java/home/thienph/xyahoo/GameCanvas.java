@@ -44,8 +44,8 @@ public final class GameCanvas extends Canvas implements Runnable {
       ConnectionManager.registerCallback(48, var1);
       ConnectionManager.registerCallback(1001, var1);
       ConnectionManager.ConnectionListener = var1;
-      thien_di var2;
-      thien_es.a(var2 = thien_di.getInstance());
+      GameManager var2;
+      thien_es.a(var2 = GameManager.getInstance());
       thien_eu.a(var2);
       ConnectionManager.sendPacket(new Packet(-2, -1));
       new Thread(this).start();
@@ -75,7 +75,7 @@ public final class GameCanvas extends Canvas implements Runnable {
                   screenWidth = instance.getWidth();
                   screenHeight = instance.getHeight();
                   if (thien_ev.a == 35) {
-                     thien_di.getInstance().a(screenWidth, screenHeight);
+                     GameManager.getInstance().a(screenWidth, screenHeight);
                   }
 
                   if (isGameStarted) {
@@ -86,7 +86,7 @@ public final class GameCanvas extends Canvas implements Runnable {
                   thien_ev.a++;
                   break;
                case 1:
-                  thien_di.instance.a(keyPressedState, keyRepeatedState, lastKeyCode);
+                  GameManager.instance.a(keyPressedState, keyRepeatedState, lastKeyCode);
             }
          } catch (Exception var5) {
             var5.printStackTrace();
@@ -408,14 +408,14 @@ public final class GameCanvas extends Canvas implements Runnable {
                if (!isGameStarted) {
                   var1.drawImage(thien_aq.c(), screenWidth >> 1, (screenHeight >> 1) - 15, 3);
                   var1.setColor(16777215);
-                  thien_di.instance.a(var1, screenWidth >> 1, (screenHeight + thien_aq.a >> 1) + 3);
-                  thien_w.a(thien_w.d).a(thien_di.b, screenWidth - 8, screenHeight - thien_w.f - 8, 1, var1, thien_w.j, thien_w.f);
-                  thien_di.instance.h++;
+                  GameManager.instance.a(var1, screenWidth >> 1, (screenHeight + thien_aq.a >> 1) + 3);
+                  thien_w.a(thien_w.d).a(GameManager.b, screenWidth - 8, screenHeight - thien_w.f - 8, 1, var1, thien_w.j, thien_w.f);
+                  GameManager.instance.h++;
                }
             default:
                return;
             case 1:
-               thien_di.instance.a(var1);
+               GameManager.instance.a(var1);
          }
       } catch (Exception var2) {
          var2.printStackTrace();
