@@ -3,14 +3,14 @@ package home.thienph.xyahoo;
 public abstract class PacketHandler {
    protected abstract void handle(Packet var1, int commandId);
 
-   public final void dispatch(Packet var1) {
-      int var2 = var1.getCommandId();
+   public final void dispatch(Packet packet) {
+      int commandId = packet.getCommandId();
 
       try {
-         this.handle(var1, var2);
-      } catch (Exception var3) {
-         var3.printStackTrace();
-         System.out.println("oops = " + var3.toString());
+         this.handle(packet, commandId);
+      } catch (Exception e) {
+         System.err.println("PacketHandler.dispatch Exception: " + e);
+         e.printStackTrace();
       }
    }
 

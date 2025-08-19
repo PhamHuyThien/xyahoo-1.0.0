@@ -28,7 +28,7 @@ final class PacketWriter implements Runnable {
         while (ConnectionManager.isConnected()) {
             try {
                 while (this.outgoingQueue.size() > 0) {
-                    long var1 = System.currentTimeMillis();
+                    long currentTimeMillis = System.currentTimeMillis();
                     Packet packet = (Packet) this.outgoingQueue.elementAt(0);
                     this.outgoingQueue.removeElementAt(0);
                     ByteBuffer payload = packet.getPayload();
@@ -38,19 +38,21 @@ final class PacketWriter implements Runnable {
                     ConnectionManager.getOutputStream().write(intToByteArray(packet.getCommandId()), 0, 4);
                     ConnectionManager.getOutputStream().write(intToByteArray(packet.getType()), 0, 4);
                     ConnectionManager.getOutputStream().write(payload.getBuffer(), 0, packetLength - 8);
-                    ConnectionManager.reconnectCount += packetLength + 4;
+                    ConnectionManager.dataUsage += packetLength + 4;
                     ConnectionManager.getOutputStream().flush();
-                    long var7;
-                    if ((var7 = 100L - (System.currentTimeMillis() - var1)) > 0L) {
-                        Thread.sleep(var7);
+                    long totalTime = 100L - (System.currentTimeMillis() - currentTimeMillis);
+                    if (totalTime > 0L) {
+                        Thread.sleep(totalTime);
                     }
                 }
-
                 Thread.sleep(50L);
-            } catch (IOException var9) {
-                var9.printStackTrace();
+            } catch (IOException e) {
+                System.err.println("PacketWriter.run IOException: " + e);
+                e.printStackTrace();
                 ConnectionManager.disconnect();
-            } catch (Exception var10) {
+            } catch (Exception e) {
+                System.err.println("PacketWriter.run Exception: " + e);
+                e.printStackTrace();
             }
         }
 

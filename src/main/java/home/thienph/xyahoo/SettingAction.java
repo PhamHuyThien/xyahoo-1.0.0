@@ -1,16 +1,15 @@
 package home.thienph.xyahoo;
 
-final class thien_db
+final class SettingAction
 implements IAction {
     private LoginScreen loginScreen;
 
-    thien_db(LoginScreen loginScreen2) {
+    SettingAction(LoginScreen loginScreen2) {
         this.loginScreen = loginScreen2;
     }
 
     public final void action() {
         LoginScreen.removeCommentField(this.loginScreen);
-        GameManager.instance.A = false;
-        this.loginScreen.login();
+        LoginScreen.openSettings();
     }
 }

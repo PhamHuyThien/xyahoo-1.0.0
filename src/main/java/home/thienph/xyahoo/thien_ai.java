@@ -7,7 +7,7 @@ extends UIControlBase {
     private String c;
     private boolean d;
     public int a = 0xFFFFFF;
-    public Integer b = thien_w.d;
+    public Integer b = TextRenderer.colorWhite;
     private int e;
     private boolean f;
 
@@ -17,7 +17,7 @@ extends UIControlBase {
 
     private thien_ai(String string) {
         this.isVisible = false;
-        this.c = thien_w.a(string, false);
+        this.c = TextRenderer.replaceEmoticons(string, false);
         if (this.c == null) {
             this.d = false;
             this.c = string;
@@ -31,7 +31,7 @@ extends UIControlBase {
         this(string);
         this.baseX = n;
         this.baseY = n2;
-        this.width = thien_w.a(string, thien_w.j);
+        this.width = TextRenderer.computeTextWidth(string, TextRenderer.charWidth);
         this.height = n3;
         this.selectedIndex = n4;
         this.e = this.c.length();
@@ -58,7 +58,7 @@ extends UIControlBase {
             this.a(graphics, this.c, this.baseX + 2, this.baseY + 2);
         }
         if (this.e == 0) {
-            graphics.setColor(UIColorPalette.getPrimaryColor());
+            graphics.setColor(UIColorConstant.getPrimaryColor());
             graphics.fillRect(this.baseX, this.baseY + (this.height >> 1), Screen.e - this.baseX - 5, 1);
             return;
         }
@@ -78,7 +78,7 @@ extends UIControlBase {
             if (n4 >= 30000) {
                 this.a(graphics, string, this.baseX + 2 + n, n2);
                 string = "";
-                graphics.drawRegion(GameManager.u, (n4 -= 30000) * 18, 0, 18, 18, 0, this.baseX + 2 + (n += thien_w.a(string, thien_w.j)) + 10, this.baseY + (thien_w.f >> 1), 3);
+                graphics.drawRegion(GameManager.u, (n4 -= 30000) * 18, 0, 18, 18, 0, this.baseX + 2 + (n += TextRenderer.computeTextWidth(string, TextRenderer.charWidth)) + 10, this.baseY + (TextRenderer.fontHeight >> 1), 3);
                 n += 20;
             } else {
                 string = String.valueOf(string) + (char)n4;
@@ -90,7 +90,7 @@ extends UIControlBase {
 
     private void a(Graphics graphics, String string, int n, int n2) {
         graphics.setColor(this.a);
-        thien_w.a(this.b).a(string, n, n2, graphics);
+        TextRenderer.getFontRenderer(this.b).drawText(string, n, n2, graphics);
     }
 
     public final void drawBackground(Graphics graphics) {

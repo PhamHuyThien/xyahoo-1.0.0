@@ -5,17 +5,17 @@ import java.util.Vector;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 
-public final class thien_w {
-   public static boolean a = true;
-   private static Hashtable k;
-   public static Integer b = new Integer(16726823);
-   public static Integer c = new Integer(0);
-   public static Integer d = new Integer(16777215);
-   public static Integer e = new Integer(3981823);
-   public static int f;
-   public static String[] g;
-   private static int l = (
-      g = new String[]{
+public final class TextRenderer {
+   public static boolean useCustomFont = true;
+   private static Hashtable fontCache;
+   public static Integer colorPrimary = new Integer(16726823);
+   public static Integer colorSecondary = new Integer(0);
+   public static Integer colorWhite = new Integer(16777215);
+   public static Integer colorHighlight = new Integer(3981823);
+   public static int fontHeight;
+   public static String[] emoticons;
+   private static int emoticonCount = (
+      emoticons = new String[]{
          ":-BD",
          ":D",
          ">:)",
@@ -60,10 +60,10 @@ public final class thien_w {
          "(*)"
       }
    ).length;
-   public static int h;
-   public static int i;
-   private Image m;
-   public static byte[] j = new byte[]{
+   public static int lineSpacing;
+   public static int extraSpacing;
+   private Image fontImage;
+   public static byte[] charWidth = new byte[]{
       3,
       7,
       5,
@@ -221,19 +221,19 @@ public final class thien_w {
       9,
       7
    };
-   private static String n = " 0123456789.':!?()+-*/#$%Đ_=[];,^&@><abcdefghijklmnopqrstuvwxyzáàảãạăắằẳẵặâấầẩẫậéèẻẽẹêếềểễệíìỉĩịóòỏõọôốồổỗộơớờởỡợúùủũụưứừửữựýỳỷỹỵđABCDEFGHIJKLMNOPQRSTUVWXYZÁÀẢÃẠĂẮẰẲẴẶÂẤẦẨẪẬÉÈẺẼẸÊẾỀỂỄỆÍÌỈĨỊÓÒỎÕỌÔỐỒỔỖỘƠỚỜỞỠỢÚÙỦŨỤƯỨỪỬỮỰÝỲỶỸỴ|\"/";
-   private static String o = " 0123456789.':!?()+-*/#$%Đ_=[];,^&@><abcdefghijklmnopqrstuvwxyzáàảãạăắằẳẵặâấầẩẫậéèẻẽẹêếềểễệíìỉĩịóòỏõọôốồổỗộơớờởỡợúùủũụưứừửữựýỳỷỹỵđABCDEFGHIJKLMNOPQRSTUVWXYZAAAAAAAAAAAAAAAAAEEEEEEEEEEEIIIIIOOOOOOOOOOOOOOOOOUUUUUUUUUUUYYYYY '";
-   private static thien_w p;
-   private static int q;
-   private int r;
+   private static String allChars = " 0123456789.':!?()+-*/#$%Đ_=[];,^&@><abcdefghijklmnopqrstuvwxyzáàảãạăắằẳẵặâấầẩẫậéèẻẽẹêếềểễệíìỉĩịóòỏõọôốồổỗộơớờởỡợúùủũụưứừửữựýỳỷỹỵđABCDEFGHIJKLMNOPQRSTUVWXYZÁÀẢÃẠĂẮẰẲẴẶÂẤẦẨẪẬÉÈẺẼẸÊẾỀỂỄỆÍÌỈĨỊÓÒỎÕỌÔỐỒỔỖỘƠỚỜỞỠỢÚÙỦŨỤƯỨỪỬỮỰÝỲỶỸỴ|\"/";
+   private static String charMap = " 0123456789.':!?()+-*/#$%Đ_=[];,^&@><abcdefghijklmnopqrstuvwxyzáàảãạăắằẳẵặâấầẩẫậéèẻẽẹêếềểễệíìỉĩịóòỏõọôốồổỗộơớờởỡợúùủũụưứừửữựýỳỷỹỵđABCDEFGHIJKLMNOPQRSTUVWXYZAAAAAAAAAAAAAAAAAEEEEEEEEEEEIIIIIOOOOOOOOOOOOOOOOOUUUUUUUUUUUYYYYY '";
+   private static TextRenderer instance;
+   private static int charIndex;
+   private int lineWidthCache;
 
-   public static String a(String var0, int var1) {
+   public static String truncate(String var0, int var1) {
       return var0.length() > var1 ? var0.substring(0, var1) + ".." : var0;
    }
 
-   public static int a(String var0) {
-      for (int var1 = 0; var1 < l; var1++) {
-         if (var0.toUpperCase().indexOf(g[var1]) != -1) {
+   public static int findEmoticonIndex(String var0) {
+      for (int var1 = 0; var1 < emoticonCount; var1++) {
+         if (var0.toUpperCase().indexOf(emoticons[var1]) != -1) {
             return var1;
          }
       }
@@ -241,15 +241,15 @@ public final class thien_w {
       return 100;
    }
 
-   public static String a(String var0, boolean var1) {
+   public static String replaceEmoticons(String var0, boolean var1) {
       int var2 = 0;
       int var4 = 10;
 
-      for (int var5 = 0; var5 < l; var5++) {
+      for (int var5 = 0; var5 < emoticonCount; var5++) {
          int var3;
-         while ((var3 = var0.toUpperCase().indexOf(g[var5])) != -1) {
+         while ((var3 = var0.toUpperCase().indexOf(emoticons[var5])) != -1) {
             var2 = var5 + 30000;
-            var0 = var0.substring(0, var3) + (char)var2 + var0.substring(var3 + g[var5].length());
+            var0 = var0.substring(0, var3) + (char)var2 + var0.substring(var3 + emoticons[var5].length());
             if (--var4 <= 0) {
                break;
             }
@@ -263,35 +263,35 @@ public final class thien_w {
       return var4 == 10 && !var1 ? null : var0;
    }
 
-   public static void a() {
+   public static void initFont() {
       try {
          Image.createImage("/Numbers.png");
       } catch (Exception var0) {
       }
 
-      if (a) {
-         f = 14;
-         k = new Hashtable();
-         a(b);
-         a(c);
-         a(d);
+      if (useCustomFont) {
+         fontHeight = 14;
+         fontCache = new Hashtable();
+         getFontRenderer(colorPrimary);
+         getFontRenderer(colorSecondary);
+         getFontRenderer(colorWhite);
       } else {
-         f = thien_aq.a();
+         fontHeight = thien_aq.a();
       }
 
-      h = f + 2;
-      i = f + 6;
+      lineSpacing = fontHeight + 2;
+      extraSpacing = fontHeight + 6;
    }
 
-   private thien_w(String var1, int var2) {
-      if (a) {
+   private TextRenderer(String var1, int var2) {
+      if (useCustomFont) {
          try {
-            if (this.m == null) {
-               this.m = Image.createImage(var1);
+            if (this.fontImage == null) {
+               this.fontImage = Image.createImage(var1);
             }
 
             if (var2 != 16777215) {
-               this.m = a(this.m, var2);
+               this.fontImage = createImage(this.fontImage, var2);
                return;
             }
          } catch (Exception var3) {
@@ -299,28 +299,28 @@ public final class thien_w {
       }
    }
 
-   public static thien_w a(Integer var0) {
-      if (!a) {
-         return p != null ? p : (p = new thien_w(null, 0));
+   public static TextRenderer getFontRenderer(Integer var0) {
+      if (!useCustomFont) {
+         return instance != null ? instance : (instance = new TextRenderer(null, 0));
       } else {
-         thien_w var1;
-         if ((var1 = (thien_w)k.get(var0)) != null) {
+         TextRenderer var1;
+         if ((var1 = (TextRenderer) fontCache.get(var0)) != null) {
             return var1;
          } else {
-            if (k.size() < 10) {
-               k.put(var0, new thien_w("/Font.png", var0.intValue()));
+            if (fontCache.size() < 10) {
+               fontCache.put(var0, new TextRenderer("/Font.png", var0.intValue()));
             }
 
-            return (thien_w)k.get(d);
+            return (TextRenderer) fontCache.get(colorWhite);
          }
       }
    }
 
-   public static int a(String var0, byte[] var1) {
-      return a ? a(var0, 0, var0.length(), var1) : thien_aq.a(var0);
+   public static int computeTextWidth(String var0, byte[] var1) {
+      return useCustomFont ? computeTextWidth(var0, 0, var0.length(), var1) : thien_aq.a(var0);
    }
 
-   private static int a(String var0, int var1, int var2, byte[] var3) {
+   private static int computeTextWidth(String var0, int var1, int var2, byte[] var3) {
       byte var4 = 0;
       var2 = var1 + var2;
       if (var1 != 0 && var2 > var0.length()) {
@@ -329,14 +329,14 @@ public final class thien_w {
 
       char var5;
       for (int var6 = var1; var6 < var2 && (var5 = var0.charAt(var6)) != '\n'; var6++) {
-         var4 += var3[a(var5)];
+         var4 += var3[mapChar(var5)];
       }
 
       return var4;
    }
 
-   public final void a(String var1, int var2, int var3, Graphics var4) {
-      if (!a) {
+   public final void drawText(String var1, int var2, int var3, Graphics var4) {
+      if (!useCustomFont) {
          thien_aq.a(var4, var1, var2, var3, 0);
       } else {
          int var5 = var2;
@@ -347,28 +347,28 @@ public final class thien_w {
             char var6;
             if ((var6 = var1.charAt(var8)) == 10) {
                var5 = var2;
-               var3 += f;
-            } else if ((var6 = (char) a((char)var6)) >= 0) {
-               var4.drawRegion(this.m, 0, var6 * f, 15, f, 0, var5, var3, 0);
-               var5 += j[var6];
+               var3 += fontHeight;
+            } else if ((var6 = (char) mapChar((char)var6)) >= 0) {
+               var4.drawRegion(this.fontImage, 0, var6 * fontHeight, 15, fontHeight, 0, var5, var3, 0);
+               var5 += charWidth[var6];
             }
          }
       }
    }
 
-   public final void a(String var1, int var2, int var3, int var4, Graphics var5, byte[] var6, int var7) {
-      if (!a) {
+   public final void drawText(String var1, int var2, int var3, int var4, Graphics var5, byte[] var6, int var7) {
+      if (!useCustomFont) {
          thien_aq.a(var5, var1, var2, var3, var4 == 1 ? 2 : 1);
       } else {
          int var8 = var2;
          var3 = var3;
          int var10 = var1.length();
          if (var4 != 0) {
-            this.r = a(var1, 0, var10, var6);
+            this.lineWidthCache = computeTextWidth(var1, 0, var10, var6);
             if (var4 == 1) {
-               var8 = var2 - this.r;
+               var8 = var2 - this.lineWidthCache;
             } else {
-               var8 = var2 - (this.r >> 1);
+               var8 = var2 - (this.lineWidthCache >> 1);
             }
          }
 
@@ -378,33 +378,33 @@ public final class thien_w {
                if (var4 == 0) {
                   var8 = var2;
                } else {
-                  this.r = a(var1, var11 + 1, this.r - var11 - 1, var6);
+                  this.lineWidthCache = computeTextWidth(var1, var11 + 1, this.lineWidthCache - var11 - 1, var6);
                   if (var4 == 1) {
-                     var8 = var2 - this.r;
+                     var8 = var2 - this.lineWidthCache;
                   } else {
-                     var8 = var2 - (this.r >> 1);
+                     var8 = var2 - (this.lineWidthCache >> 1);
                   }
                }
 
                var3 += var7;
-            } else if ((var9 = (char) a((char)var9)) >= 0) {
-               var5.drawRegion(this.m, 0, var9 * var7, 15, var7, 0, var8, var3, 0);
+            } else if ((var9 = (char) mapChar((char)var9)) >= 0) {
+               var5.drawRegion(this.fontImage, 0, var9 * var7, 15, var7, 0, var8, var3, 0);
                var8 += var6[var9];
             }
          }
       }
    }
 
-   private static int a(char var0) {
+   private static int mapChar(char var0) {
       int var1;
-      if ((var1 = o.indexOf(var0)) != -1) {
+      if ((var1 = charMap.indexOf(var0)) != -1) {
          return var1;
       } else {
-         return (var1 = o.indexOf((q = n.indexOf(var0)) != -1 ? o.charAt(q) : 32)) != -1 ? var1 : 0;
+         return (var1 = charMap.indexOf((charIndex = allChars.indexOf(var0)) != -1 ? charMap.charAt(charIndex) : 32)) != -1 ? var1 : 0;
       }
    }
 
-   public static String a(String var0, int var1, byte[] var2) {
+   public static String wrapText(String var0, int var1, byte[] var2) {
       if (var0.length() == 0) {
          return "...";
       } else {
@@ -420,7 +420,7 @@ public final class thien_w {
                var7 = var4;
             }
 
-            if ((var6 += var2[a(var8)]) <= var1 && var8 != '\n') {
+            if ((var6 += var2[mapChar(var8)]) <= var1 && var8 != '\n') {
                var4++;
             } else {
                if (var8 != '\n' && var7 != -1) {
@@ -452,7 +452,7 @@ public final class thien_w {
       }
    }
 
-   private static Image a(Image var0, int var1) {
+   private static Image createImage(Image var0, int var1) {
       int[] var2 = new int[var0.getWidth() * var0.getHeight()];
       Image var4 = Image.createRGBImage(new int[]{var1}, 1, 1, false);
       int[] var3 = new int[1];
@@ -469,16 +469,16 @@ public final class thien_w {
       return Image.createRGBImage(var2, var0.getWidth(), var0.getHeight(), true);
    }
 
-   public static String[] b(String var0, int var1, byte[] var2) {
+   public static String[] splitText(String var0, int var1, byte[] var2) {
       Vector var3 = new Vector();
       String[] var9;
-      int var4 = (var9 = a(var0, '\n')).length;
+      int var4 = (var9 = splitString(var0, '\n')).length;
 
       for (int var5 = 0; var5 < var4; var5++) {
          String var6;
          if ((var6 = var9[var5]).length() > 0) {
             String[] var11;
-            int var7 = (var11 = c(var6, var1, var2)).length;
+            int var7 = (var11 = wrapLine(var6, var1, var2)).length;
 
             for (int var8 = 0; var8 < var7; var8++) {
                var3.addElement(var11[var8]);
@@ -493,7 +493,7 @@ public final class thien_w {
       return var10;
    }
 
-   public static String[] c(String var0, int var1, byte[] var2) {
+   public static String[] wrapLine(String var0, int var1, byte[] var2) {
       Vector var3 = new Vector();
       String var4 = "";
       int var5 = 0;
@@ -501,7 +501,7 @@ public final class thien_w {
       int var6;
       for (var6 = var0.indexOf(32); var6 >= 0; var6 = var0.indexOf(32, var5)) {
          String var7 = var0.substring(var5, var6 + 1);
-         if (a(var4 + var7, var2) >= var1) {
+         if (computeTextWidth(var4 + var7, var2) >= var1) {
             var3.addElement(var4);
             var4 = "";
          }
@@ -512,7 +512,7 @@ public final class thien_w {
 
       if (var6 == -1) {
          String var8 = var0.substring(var5);
-         if (a(var4 + var8, var2) >= var1) {
+         if (computeTextWidth(var4 + var8, var2) >= var1) {
             var3.addElement(var4);
             var4 = "";
          }
@@ -525,7 +525,7 @@ public final class thien_w {
       return var9;
    }
 
-   public static String[] a(String var0, char var1) {
+   public static String[] splitString(String var0, char var1) {
       int var2 = 0;
       int var3 = var0.indexOf(var1);
 

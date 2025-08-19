@@ -9,6 +9,6 @@ implements IAction {
     }
 
     public final void action() {
-        GameManager.getInstance().a(this.a.I, 0);
+        GameManager.getInstance().showPopupSideLayout(this.a.I, 0);
     }
 }

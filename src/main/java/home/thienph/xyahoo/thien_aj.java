@@ -17,11 +17,11 @@ extends UIControlBase {
 
     public thien_aj(final String s, final int q, final int r, final int s2, final int e) {
         this.d = 0;
-        this.c = thien_w.c(s, Screen.e - q, thien_w.j);
-        this.a = thien_w.e;
+        this.c = TextRenderer.wrapLine(s, Screen.e - q, TextRenderer.charWidth);
+        this.a = TextRenderer.colorHighlight;
         String[] c;
-        for (int a = thien_w.a((c = this.c)[0], thien_w.j), i = 1; i < c.length; ++i) {
-            final int a2 = thien_w.a(c[i], thien_w.j);
+        for (int a = TextRenderer.computeTextWidth((c = this.c)[0], TextRenderer.charWidth), i = 1; i < c.length; ++i) {
+            final int a2 = TextRenderer.computeTextWidth(c[i], TextRenderer.charWidth);
             if (a < a2) {
                 a = a2;
             }
@@ -33,7 +33,7 @@ extends UIControlBase {
         super.height = e * this.c.length;
         super.actionTertiary = new UIAction(TextConstant.select(), null);
         this.f = (e >> 1) + 2;
-        this.g = (e - thien_w.f >> 1) + 1;
+        this.g = (e - TextRenderer.fontHeight >> 1) + 1;
     }
 
     public final boolean handleKeyInput(int n) {
@@ -58,10 +58,10 @@ extends UIControlBase {
         graphics.setColor(this.a.intValue());
         int n2 = 0;
         while (n2 < this.c.length) {
-            thien_w.a(this.a).a(this.c[n2], n + 2, this.baseY + this.e * n2 + this.g, graphics);
+            TextRenderer.getFontRenderer(this.a).drawText(this.c[n2], n + 2, this.baseY + this.e * n2 + this.g, graphics);
             if (bl) {
                 graphics.setColor(8111862);
-                graphics.fillRect(n + 2, this.baseY + this.e * n2 + this.e - (thien_w.a ? 1 : 3), thien_w.a(this.c[n2], thien_w.j) + 2, 1);
+                graphics.fillRect(n + 2, this.baseY + this.e * n2 + this.e - (TextRenderer.useCustomFont ? 1 : 3), TextRenderer.computeTextWidth(this.c[n2], TextRenderer.charWidth) + 2, 1);
             }
             ++n2;
         }

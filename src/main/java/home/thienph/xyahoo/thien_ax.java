@@ -130,7 +130,7 @@ public final class thien_ax extends UIControlBase
                         else {
                             this.handleKeyInput(13);
                         }
-                        final int a = thien_w.a(thien_ba.S.centerCommand.label, thien_w.j);
+                        final int a = TextRenderer.computeTextWidth(thien_ba.S.centerCommand.label, TextRenderer.charWidth);
                         final int n5 = (super.width >> 1) - (a >> 1);
                         final int t = super.height;
                         if (n > n5 && n < n5 + a && n2 > t && n2 < t + Screen.topMargin) {

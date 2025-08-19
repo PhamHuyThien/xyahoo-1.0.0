@@ -86,7 +86,7 @@ extends UIControlBase {
             n = this.D + n4 * this.G;
             n2 = this.E + n3 * this.H + this.F;
             if (this.d(n3, n4)) {
-                thien_v.a(graphics, n - 35, n2 - 27, h + 22, i + 31, 8);
+                UIButton.a(graphics, n - 35, n2 - 27, h + 22, i + 31, 8);
             }
             graphics.drawImage(a, n, n2, 3);
             if (c[n5].a() > 0) {
@@ -106,7 +106,7 @@ extends UIControlBase {
                 graphics.drawImage(b, n, n2, 3);
             }
             graphics.setColor(0xFFFFFF);
-            thien_w.a(thien_w.d).a(thien_ay.c[n5].c, n - 1, n2 + j + 5, 2, graphics, thien_w.j, thien_w.f);
+            TextRenderer.getFontRenderer(TextRenderer.colorWhite).drawText(thien_ay.c[n5].c, n - 1, n2 + j + 5, 2, graphics, TextRenderer.charWidth, TextRenderer.fontHeight);
             ++n5;
         }
     }

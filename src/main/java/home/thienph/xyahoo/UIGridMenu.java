@@ -40,7 +40,7 @@ extends UIControlBase {
         n = 0;
         n2 = stringArray.length;
         while (n < n2) {
-            String[] stringArray2 = thien_w.a(stringArray[n], '-');
+            String[] stringArray2 = TextRenderer.splitString(stringArray[n], '-');
             this.labels.addElement(stringArray2);
             ++n;
         }
@@ -86,7 +86,7 @@ extends UIControlBase {
         int n4 = this.iconWidth - image.getWidth() >> 1;
         if (bl) {
             String[] stringArray = (String[])this.labels.elementAt(n3);
-            thien_v.a(graphics, n - 10, n2 - 6, this.iconWidth + 20, this.iconHeight + 24 + (stringArray.length > 1 ? thien_w.f - 3 : 0), 8);
+            UIButton.a(graphics, n - 10, n2 - 6, this.iconWidth + 20, this.iconHeight + 24 + (stringArray.length > 1 ? TextRenderer.fontHeight - 3 : 0), 8);
         }
         graphics.drawImage(image, n + n4, n2, 20);
     }
@@ -214,8 +214,8 @@ extends UIControlBase {
                   int var12 = var10003;
                   String var11 = var10002;
                   var2.setColor(16777215);
-                  thien_w.a(thien_w.d).a(var11, var12 + (var15.iconWidth - thien_w.a(var11, thien_w.j) >> 1), var13, var2);
-                  var4 += thien_w.f - 2;
+                  TextRenderer.getFontRenderer(TextRenderer.colorWhite).drawText(var11, var12 + (var15.iconWidth - TextRenderer.computeTextWidth(var11, TextRenderer.charWidth) >> 1), var13, var2);
+                  var4 += TextRenderer.fontHeight - 2;
                }
             }
          }

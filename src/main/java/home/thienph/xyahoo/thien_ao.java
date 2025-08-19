@@ -39,12 +39,12 @@ extends UIControlBase {
     public final void draw(Graphics graphics) {
         boolean bl = this.isSelected();
         if (bl) {
-            this.f = thien_w.a(this.d, thien_w.j);
+            this.f = TextRenderer.computeTextWidth(this.d, TextRenderer.charWidth);
             graphics.setColor(2580);
             graphics.fillRoundRect(this.baseX + 19, this.baseY, this.f + 10, this.height, 8, 8);
         }
         graphics.setColor(3981823);
-        thien_w.a(thien_w.e).a(this.d, this.baseX + 23, this.baseY + (this.height - thien_w.f >> 1), graphics);
+        TextRenderer.getFontRenderer(TextRenderer.colorHighlight).drawText(this.d, this.baseX + 23, this.baseY + (this.height - TextRenderer.fontHeight >> 1), graphics);
         graphics.drawImage(thien_b.b[this.c ? 0 : 1], this.baseX + 10, this.baseY + (this.height >> 1), 3);
     }
 

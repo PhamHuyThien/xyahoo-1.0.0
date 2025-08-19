@@ -42,6 +42,6 @@ implements IAction {
             GameManager.getInstance().j.x.a(thien_u2.d);
             return;
         }
-        GameManager.getInstance().b(TextConstant.youCanDeleteEmptyGroup());
+        GameManager.getInstance().showCenterPopup(TextConstant.youCanDeleteEmptyGroup());
     }
 }

@@ -15,16 +15,16 @@ extends Screen {
     private boolean E;
     private boolean F;
     private Vector G;
-    thien_am B;
+    PopupSideElementData B;
     private TextField H;
     public boolean C;
     private thien_ai I;
     private TextField J;
     private thien_ai K;
     private TextField L;
-    private thien_x M;
+    private UICheckBox M;
     private thien_ai N;
-    private thien_z O;
+    private UIDropdown O;
     private int P;
     private int Q;
     private UIAction R;
@@ -32,7 +32,7 @@ extends Screen {
     private UIAction T;
     private int U;
     private FormScreen V;
-    private thien_z W;
+    private UIDropdown W;
     private TextField X;
 
     public thien_gp() {
@@ -41,35 +41,35 @@ extends Screen {
         this.title = "Yahoo!";
         int n = thien_ca.D.H.images[0].getHeight();
         this.P = Screen.e - thien_ca.D.H.images[0].getWidth() >> 1;
-        int n2 = (thien_w.f + 6 << 2) + 28 + n + 5;
+        int n2 = (TextRenderer.fontHeight + 6 << 2) + 28 + n + 5;
         this.Q = n2 <= Screen.formHeight - GameManager.g ? GameManager.f - 10 + (Screen.formHeight - GameManager.g - n2 >> 1) : GameManager.f + 5;
         n = this.Q + n - 3;
-        this.I = new thien_ai("Yahoo! ID:", FormScreen.formXOffset, n, thien_w.f);
+        this.I = new thien_ai("Yahoo! ID:", FormScreen.formXOffset, n, TextRenderer.fontHeight);
         this.I.width = FormScreen.formMarginLeft;
         this.J = new TextField();
-        this.J.setBounds(FormScreen.formStartX, n, FormScreen.formWidth, thien_w.f + 6);
+        this.J.setBounds(FormScreen.formStartX, n, FormScreen.formWidth, TextRenderer.fontHeight + 6);
         this.J.setInputType(0);
-        this.K = new thien_ai(String.valueOf(TextConstant.password()) + ":", FormScreen.formXOffset, n += this.J.height + 7, thien_w.f);
+        this.K = new thien_ai(String.valueOf(TextConstant.password()) + ":", FormScreen.formXOffset, n += this.J.height + 7, TextRenderer.fontHeight);
         this.K.width = FormScreen.formMarginLeft;
         this.L = new TextField();
-        this.L.setBounds(FormScreen.formStartX, n, FormScreen.formWidth, thien_w.f + 6);
+        this.L.setBounds(FormScreen.formStartX, n, FormScreen.formWidth, TextRenderer.fontHeight + 6);
         this.L.setInputType(2);
         this.L.isShiftMode = true;
         this.J.setText(string);
         this.J.lineSpacing = -5;
         this.L.setText(string2);
         this.L.lineSpacing = -5;
-        this.N = new thien_ai("Domain:", FormScreen.formXOffset, n += this.L.height + 7, thien_w.f);
+        this.N = new thien_ai("Domain:", FormScreen.formXOffset, n += this.L.height + 7, TextRenderer.fontHeight);
         this.N.width = FormScreen.formMarginLeft;
-        this.O = new thien_z(new String[]{"@yahoo", "@ymail", "@rocketmail"}, FormScreen.formStartX, n, FormScreen.formWidth, thien_w.f + 6);
+        this.O = new UIDropdown(new String[]{"@yahoo", "@ymail", "@rocketmail"}, FormScreen.formStartX, n, FormScreen.formWidth, TextRenderer.fontHeight + 6);
         this.O.c(Xuka.readDomainYahoo());
-        int n3 = Screen.e - (thien_w.a(TextConstant.invisible(), thien_w.j) + 13 + 4) >> 1;
-        this.M = new thien_x(TextConstant.invisible(), n3, n += 6 + this.O.height, thien_w.a(TextConstant.invisible(), thien_w.j) + 13 + 4, thien_w.f + 4);
+        int n3 = Screen.e - (TextRenderer.computeTextWidth(TextConstant.invisible(), TextRenderer.charWidth) + 13 + 4) >> 1;
+        this.M = new UICheckBox(TextConstant.invisible(), n3, n += 6 + this.O.height, TextRenderer.computeTextWidth(TextConstant.invisible(), TextRenderer.charWidth) + 13 + 4, TextRenderer.fontHeight + 4);
         this.M.a = Xuka.readFlag("statusYahoo", false);
         int cfr_ignored_0 = this.M.height;
         this.H = new TextField();
         this.H.isShiftMode = true;
-        this.H.setBounds(0, Screen.formHeight - GameManager.g - thien_w.f - 11, Screen.e - 6, thien_w.f + 6);
+        this.H.setBounds(0, Screen.formHeight - GameManager.g - TextRenderer.fontHeight - 11, Screen.e - 6, TextRenderer.fontHeight + 6);
         this.w = new thien_b(1, 1, Screen.e - 3, Screen.formHeight - 2 - GameManager.g, true);
         this.addControl(this.w);
         this.selectControl(this.w);
@@ -96,7 +96,7 @@ extends Screen {
         this.F = bl;
         if (bl) {
             if (this.B == null) {
-                this.B = new thien_am(this.G);
+                this.B = new PopupSideElementData(this.G);
                 this.R = new UIAction("Menu", new thien_gy(this));
             }
             this.leftCommand = this.R;
@@ -267,7 +267,7 @@ extends Screen {
             thien_gp2.V.leftCommand = new UIAction(TextConstant.cancel(), new thien_gu(thien_gp2));
         }
         thien_gp2.W.c(z == 0 ? 0 : 1);
-        GameManager.getInstance().b(thien_gp2.V);
+        GameManager.getInstance().displayScreen(thien_gp2.V);
         thien_gp2.X.setText(A);
         GameManager.getInstance().j();
     }
@@ -276,7 +276,7 @@ extends Screen {
         return thien_gp2.X;
     }
 
-    static thien_z c(thien_gp thien_gp2) {
+    static UIDropdown c(thien_gp thien_gp2) {
         return thien_gp2.W;
     }
 

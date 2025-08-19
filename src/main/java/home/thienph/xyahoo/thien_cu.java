@@ -2,27 +2,27 @@ package home.thienph.xyahoo;
 
 final class thien_cu
 implements IAction {
-    private final thien_x a;
+    private final UICheckBox a;
     private final boolean b;
-    private final thien_x c;
+    private final UICheckBox c;
     private final boolean d;
-    private final thien_x e;
+    private final UICheckBox e;
     private final boolean f;
-    private final thien_x g;
+    private final UICheckBox g;
     private final boolean h;
-    private final thien_z i;
+    private final UIDropdown i;
     private final int j;
 
-    thien_cu(thien_x thien_x2, boolean bl, thien_x thien_x3, boolean bl2, thien_x thien_x4, boolean bl3, thien_x thien_x5, boolean bl4, thien_z thien_z2, int n) {
-        this.a = thien_x2;
+    thien_cu(UICheckBox UICheckBox2, boolean bl, UICheckBox UICheckBox3, boolean bl2, UICheckBox UICheckBox4, boolean bl3, UICheckBox UICheckBox5, boolean bl4, UIDropdown UIDropdown2, int n) {
+        this.a = UICheckBox2;
         this.b = bl;
-        this.c = thien_x3;
+        this.c = UICheckBox3;
         this.d = bl2;
-        this.e = thien_x4;
+        this.e = UICheckBox4;
         this.f = bl3;
-        this.g = thien_x5;
+        this.g = UICheckBox5;
         this.h = bl4;
-        this.i = thien_z2;
+        this.i = UIDropdown2;
         this.j = n;
     }
 

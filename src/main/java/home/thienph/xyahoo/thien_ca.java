@@ -8,11 +8,11 @@ import javax.microedition.lcdui.Image;
 public final class thien_ca extends FormScreen {
    public static thien_ca D;
    private Vector J;
-   thien_am E;
+   PopupSideElementData E;
    TextField F = null;
    boolean G;
    public UIGridMenu H;
-   static UIAction I = new UIAction(TextConstant.info(), new thien_cb());
+   static UIAction uiActionInfo = new UIAction(TextConstant.info(), new AppInfoAction());
 
    private void f() {
       String[] var1;
@@ -48,15 +48,15 @@ public final class thien_ca extends FormScreen {
       UIAction var2 = new UIAction(TextConstant.comment(), new thien_ce(this));
       UIAction var3 = new UIAction(TextConstant.signOut(), new thien_ch(this));
       Vector var4;
-      (var4 = new Vector()).addElement(I);
+      (var4 = new Vector()).addElement(uiActionInfo);
       var4.addElement(var2);
       var4.addElement(LoginScreen.callButton);
-      (var2 = new UIAction(TextConstant.support(), null)).icon = new thien_am(var4);
+      (var2 = new UIAction(TextConstant.support(), null)).popupSideElementData = new PopupSideElementData(var4);
       this.J = new Vector();
       this.J.addElement(var2);
       this.J.addElement(var1);
       this.J.addElement(var3);
-      this.E = new thien_am(this.J);
+      this.E = new PopupSideElementData(this.J);
       super.leftCommand = new UIAction("Menu", new thien_cj(this));
       this.f();
    }

@@ -1,8 +1,8 @@
 package home.thienph.xyahoo;
 
-import java.util.Vector;
 import javax.microedition.io.ConnectionNotFoundException;
 import javax.microedition.lcdui.Image;
+import java.util.Vector;
 
 public class MessageHandler {
    public String a;
@@ -29,9 +29,8 @@ public class MessageHandler {
 
    public static void processRawPacket(byte[] var0) {
       if (var0 != null) {
-         Packet var1;
-         (var1 = new Packet(0, 0)).setPayload(new ByteBuffer(var0));
-
+         Packet var1 = new Packet(0, 0);
+         var1.setPayload(new ByteBuffer(var0));
          while (true) {
             switch (readInt(var1)) {
                case 0:
@@ -41,7 +40,7 @@ public class MessageHandler {
                case 1:
                   boolean var184 = readBool(var1);
                   String var146 = decodePacket(var1);
-                  GameManager.instance.a(var146).a(var184);
+                  GameManager.instance.a(var146).setExtraOption(var184);
                   break;
                case 2:
                   GameManager.instance.c();
@@ -79,8 +78,8 @@ public class MessageHandler {
                                  var189.selectControl(var199);
                                  return;
                               }
-                           } else if (var199 instanceof thien_z) {
-                              var213 = ((thien_z)var199).a();
+                           } else if (var199 instanceof UIDropdown) {
+                              var213 = ((UIDropdown)var199).a();
                            } else if (var199 instanceof UIGridMenu) {
                               var213 = ((UIGridMenu)var199).getSelectedItemId();
                            }
@@ -104,8 +103,8 @@ public class MessageHandler {
                               }
 
                               writeString(var214, var165);
-                           } else if (var207 instanceof thien_z) {
-                              writeString(((thien_z)var207).b(), var165);
+                           } else if (var207 instanceof UIDropdown) {
+                              writeString(((UIDropdown)var207).b(), var165);
                            }
                         }
                      } else if (var180 == 2) {
@@ -116,9 +115,9 @@ public class MessageHandler {
                            Screen var191 = GameManager.instance.d(var180);
                            int var198 = readInt(var1);
                            UIControlBase var201;
-                           if ((var201 = var191.getControlById(var198)) instanceof thien_x) {
-                              boolean var208 = ((thien_x)var201).a;
-                              writeBool(((thien_x)var201).a, var165);
+                           if ((var201 = var191.getControlById(var198)) instanceof UICheckBox) {
+                              boolean var208 = ((UICheckBox)var201).a;
+                              writeBool(((UICheckBox)var201).a, var165);
                            }
                         }
                      }
@@ -144,7 +143,7 @@ public class MessageHandler {
                   }
 
                   var104.startSlide(1);
-                  GameManager.instance.b(var104);
+                  GameManager.instance.displayScreen(var104);
                   if (var107) {
                      GameManager.instance.j();
                   }
@@ -159,7 +158,7 @@ public class MessageHandler {
                            Vector var212;
                            (var212 = new Vector()).addElement(new UIAction(TextConstant.smileys(), new thien_m()));
                            var212.addElement(var205);
-                           thien_am var218 = new thien_am(var212);
+                           PopupSideElementData var218 = new PopupSideElementData(var212);
                            var195.leftCommand = new UIAction("Menu", new thien_n(var218));
                         } else {
                            var195.leftCommand = var205;
@@ -232,7 +231,7 @@ public class MessageHandler {
                         }
 
                         byte[] var237 = readByteArray(var1);
-                        thien_z var98;
+                        UIDropdown var98;
                         (var98 = UIFormBuilder.addDropdown(var174, var93, var96, var94)).a(new thien_g(var237));
                         var142 = var98;
                         break;
@@ -294,13 +293,13 @@ public class MessageHandler {
                      case 13:
                         String var162 = decodePacket(var1);
                         readInt(var1);
-                        var142 = UIFormBuilder.addLink(var174, var162, (IAction)null);
+                        var142 = UIFormBuilder.addCheckBox(var174, var162, (IAction)null);
                         break;
                      case 41:
                         int var99 = readInt(var1);
                         int var100 = readInt(var1);
                         int var101 = readInt(var1);
-                        ((thien_z) GameManager.instance.d(var99).getControlById(var100)).c(var101);
+                        ((UIDropdown) GameManager.instance.d(var99).getControlById(var100)).c(var101);
                   }
 
                   var161 = readInt(var1);
@@ -346,8 +345,8 @@ public class MessageHandler {
                      var71.addElement(var76);
                   }
 
-                  thien_am var230 = new thien_am(var71);
-                  GameManager.instance.a(var230, var70);
+                  PopupSideElementData var230 = new PopupSideElementData(var71);
+                  GameManager.instance.showPopupSideLayout(var230, var70);
                   break;
                case 12:
                   int var204 = readInt(var1);
@@ -458,11 +457,11 @@ public class MessageHandler {
                   GameManager.getInstance().d(var126.title);
                   break;
                case 28:
-                  if (GameManager.instance.n.size() > 0 && ((thien_ad) GameManager.instance.n.elementAt(0)).d) {
+                  if (GameManager.instance.n.size() > 0 && ((PopupDialogLayout) GameManager.instance.n.elementAt(0)).showExtraOption) {
                      GameManager.instance.c();
                   }
 
-                  GameManager.instance.b(readString(var1));
+                  GameManager.instance.showCenterPopup(readString(var1));
                   break;
                case 29:
                   String var124 = readString(var1);
@@ -475,7 +474,7 @@ public class MessageHandler {
                   UIAction var152 = new UIAction(var151, new thien_f(var168));
                   UIAction var169 = new UIAction(var177, new thien_j(var185));
                   UIAction var178 = new UIAction(var187, new thien_k(var193));
-                  if (GameManager.instance.n.size() > 0 && ((thien_ad) GameManager.instance.n.elementAt(0)).d) {
+                  if (GameManager.instance.n.size() > 0 && ((PopupDialogLayout) GameManager.instance.n.elementAt(0)).showExtraOption) {
                      GameManager.instance.c();
                   }
 
@@ -513,8 +512,8 @@ public class MessageHandler {
                                  var10.selectControl(var121);
                                  return;
                               }
-                           } else if (var121 instanceof thien_z) {
-                              var3 = ((thien_z)var121).a();
+                           } else if (var121 instanceof UIDropdown) {
+                              var3 = ((UIDropdown)var121).a();
                            } else if (var121 instanceof UIGridMenu) {
                               var3 = ((UIGridMenu)var121).getSelectedItemId();
                            }
@@ -538,8 +537,8 @@ public class MessageHandler {
                               }
 
                               writeString(var167, var5);
-                           } else if (var149 instanceof thien_z) {
-                              writeString(((thien_z)var149).b(), var5);
+                           } else if (var149 instanceof UIDropdown) {
+                              writeString(((UIDropdown)var149).b(), var5);
                            }
                         }
                      } else if (var7 == 2) {
@@ -550,9 +549,9 @@ public class MessageHandler {
                            Screen var210 = GameManager.instance.d(var203);
                            int var216 = readInt(var1);
                            UIControlBase var123;
-                           if ((var123 = var210.getControlById(var216)) instanceof thien_x) {
-                              boolean var150 = ((thien_x)var123).a;
-                              writeBool(((thien_x)var123).a, var5);
+                           if ((var123 = var210.getControlById(var216)) instanceof UICheckBox) {
+                              boolean var150 = ((UICheckBox)var123).a;
+                              writeBool(((UICheckBox)var123).a, var5);
                            }
                         }
                      }

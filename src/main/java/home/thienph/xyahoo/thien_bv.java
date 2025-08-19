@@ -9,7 +9,7 @@ implements IAction {
     }
 
     public final void action() {
-        GameManager.getInstance().a(thien_ba.b(this.a), 0);
+        GameManager.getInstance().showPopupSideLayout(thien_ba.b(this.a), 0);
         thien_ba.a(this.a);
     }
 }

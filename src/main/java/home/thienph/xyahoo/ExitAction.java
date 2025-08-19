@@ -1,8 +1,8 @@
 package home.thienph.xyahoo;
 
-final class thien_df
+final class ExitAction
 implements IAction {
-    thien_df(LoginScreen loginScreen2) {
+    ExitAction(LoginScreen loginScreen2) {
     }
 
     public final void action() {

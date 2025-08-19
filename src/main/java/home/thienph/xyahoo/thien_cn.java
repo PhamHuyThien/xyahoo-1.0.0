@@ -33,7 +33,7 @@ public final class thien_cn extends Screen {
 
    public thien_cn() {
       this.A.isShiftMode = true;
-      this.A.setBounds(0, Screen.formHeight - GameManager.g - thien_w.f - 11, Screen.e - 6, thien_w.f + 6);
+      this.A.setBounds(0, Screen.formHeight - GameManager.g - TextRenderer.fontHeight - 11, Screen.e - 6, TextRenderer.fontHeight + 6);
       super.title = TextConstant.inviteConference();
       this.addControl(this.y);
       this.selectControl(this.y);

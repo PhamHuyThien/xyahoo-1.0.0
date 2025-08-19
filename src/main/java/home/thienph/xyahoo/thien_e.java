@@ -35,7 +35,7 @@ public final class thien_e extends UIControlBase {
       super(1, 1, var3, var4, true);
       super.isEnabled = true;
       super.isVisible = false;
-      this.g = var4 / thien_w.h + 2;
+      this.g = var4 / TextRenderer.lineSpacing + 2;
       this.f = new Vector();
       super.actionTertiary = new UIAction("Chat", null);
    }
@@ -53,7 +53,7 @@ public final class thien_e extends UIControlBase {
       }
 
       if (!var1.startsWith("http://") && !var1.startsWith("vtp://")) {
-         String[] var8 = thien_w.b(var1, super.width - 100, thien_w.j);
+         String[] var8 = TextRenderer.splitText(var1, super.width - 100, TextRenderer.charWidth);
          this.j = var8.length;
 
          for (int var5 = 0; var5 < this.j; var5++) {
@@ -65,7 +65,7 @@ public final class thien_e extends UIControlBase {
          }
 
          this.l = this.f.size();
-         this.e = (this.l - this.g + 2) * thien_w.h + 8;
+         this.e = (this.l - this.g + 2) * TextRenderer.lineSpacing + 8;
          this.handleFocus();
       } else {
          var1 = '祼' + var1;
@@ -81,8 +81,8 @@ public final class thien_e extends UIControlBase {
          this.f.addElement(var2);
          this.l = this.f.size();
       } else {
-         var2 = thien_w.a(var2, true);
-         String[] var4 = thien_w.b((char)(var3 + 31000) + var1 + ": 紀" + var2, super.width - 8, thien_w.j);
+         var2 = TextRenderer.replaceEmoticons(var2, true);
+         String[] var4 = TextRenderer.splitText((char)(var3 + 31000) + var1 + ": 紀" + var2, super.width - 8, TextRenderer.charWidth);
          this.j = var4.length;
 
          for (int var7 = 0; var7 < this.j; var7++) {
@@ -90,7 +90,7 @@ public final class thien_e extends UIControlBase {
          }
 
          this.l = this.f.size();
-         this.e = (this.l - this.g + 2) * thien_w.h + 8;
+         this.e = (this.l - this.g + 2) * TextRenderer.lineSpacing + 8;
          this.handleFocus();
       }
    }
@@ -101,9 +101,9 @@ public final class thien_e extends UIControlBase {
             this.i--;
          }
 
-         this.a = this.a - thien_w.h;
-         if (this.a < -thien_w.h) {
-            this.a = -thien_w.h;
+         this.a = this.a - TextRenderer.lineSpacing;
+         if (this.a < -TextRenderer.lineSpacing) {
+            this.a = -TextRenderer.lineSpacing;
          }
 
          if (thien_ar.a) {
@@ -114,7 +114,7 @@ public final class thien_e extends UIControlBase {
             this.i++;
          }
 
-         this.a = this.a + thien_w.h;
+         this.a = this.a + TextRenderer.lineSpacing;
          if (this.a > this.e) {
             this.a = this.e;
          }
@@ -138,10 +138,10 @@ public final class thien_e extends UIControlBase {
       var1.translate(0, -this.d);
       if (this.i != -1) {
          int var4 = super.width - 3;
-         this.m = thien_w.d;
+         this.m = TextRenderer.colorWhite;
          this.n = 16777215;
          var1.setColor(2580);
-         var1.fillRoundRect(3, this.i * thien_w.h + 34, var4, thien_w.h, 5, 5);
+         var1.fillRoundRect(3, this.i * TextRenderer.lineSpacing + 34, var4, TextRenderer.lineSpacing, 5, 5);
       }
 
       this.j = this.h + this.g;
@@ -156,17 +156,17 @@ public final class thien_e extends UIControlBase {
                String var5 = (String)this.f.elementAt(var12);
                byte var6 = 0;
                this.n = 16777215;
-               this.m = thien_w.d;
+               this.m = TextRenderer.colorWhite;
                int var2 = 0;
                if (var5.charAt(0) >= 31000) {
                   if ((var2 = var5.charAt(0) - 31000) == 0 || var2 == 100) {
-                     this.m = thien_w.e;
+                     this.m = TextRenderer.colorHighlight;
                      this.n = 3981823;
                   } else if (var2 == 1) {
-                     this.m = thien_w.b;
+                     this.m = TextRenderer.colorPrimary;
                      this.n = 16726823;
                   } else if (var2 == 2) {
-                     this.m = thien_w.d;
+                     this.m = TextRenderer.colorWhite;
                      this.n = 16777215;
                   }
 
@@ -181,18 +181,18 @@ public final class thien_e extends UIControlBase {
                   char var7;
                   if ((var7 = var5.charAt(var13)) == 32000) {
                      var1.setColor(this.n);
-                     thien_w.a(this.m).a(var10, var3, var12 * thien_w.h + 34, var1);
-                     var3 += thien_w.a(var10, thien_w.j);
+                     TextRenderer.getFontRenderer(this.m).drawText(var10, var3, var12 * TextRenderer.lineSpacing + 34, var1);
+                     var3 += TextRenderer.computeTextWidth(var10, TextRenderer.charWidth);
                      var10 = "";
                      this.n = 16777215;
-                     this.m = thien_w.d;
+                     this.m = TextRenderer.colorWhite;
                   } else if (var7 >= 30000) {
                      var1.setColor(((Integer)this.m).intValue());
-                     thien_w.a(this.m).a(var10, var3, var12 * thien_w.h + 34, var1);
-                     var3 += thien_w.a(var10, thien_w.j);
+                     TextRenderer.getFontRenderer(this.m).drawText(var10, var3, var12 * TextRenderer.lineSpacing + 34, var1);
+                     var3 += TextRenderer.computeTextWidth(var10, TextRenderer.charWidth);
                      var10 = "";
                      var7 -= 30000;
-                     var1.drawRegion(GameManager.u, var7 * 18, 0, 18, 18, 0, var3 + 10, var12 * thien_w.h + (thien_w.h >> 1) + 34, 3);
+                     var1.drawRegion(GameManager.u, var7 * 18, 0, 18, 18, 0, var3 + 10, var12 * TextRenderer.lineSpacing + (TextRenderer.lineSpacing >> 1) + 34, 3);
                      var3 += 20;
                   } else {
                      var10 = var10 + var7;
@@ -200,7 +200,7 @@ public final class thien_e extends UIControlBase {
                }
 
                var1.setColor(this.n);
-               thien_w.a(this.m).a(var10, var3, var12 * thien_w.h + 34, var1);
+               TextRenderer.getFontRenderer(this.m).drawText(var10, var3, var12 * TextRenderer.lineSpacing + 34, var1);
             } catch (Exception var8) {
             }
          }
@@ -226,7 +226,7 @@ public final class thien_e extends UIControlBase {
             this.d = 0;
          }
 
-         this.h = this.d / thien_w.h - 1;
+         this.h = this.d / TextRenderer.lineSpacing - 1;
          if (this.h < 0) {
             this.h = 0;
          }
@@ -234,7 +234,7 @@ public final class thien_e extends UIControlBase {
    }
 
    public final void handleFocus() {
-      if (super.baseY + this.f.size() * (thien_w.h + 2) >= super.height) {
+      if (super.baseY + this.f.size() * (TextRenderer.lineSpacing + 2) >= super.height) {
          thien_ar.a = true;
          thien_ar.a(this.f.size());
       } else {
@@ -280,7 +280,7 @@ public final class thien_e extends UIControlBase {
          }
 
          this.d = this.a;
-         this.h = this.d / thien_w.h - 1;
+         this.h = this.d / TextRenderer.lineSpacing - 1;
          if (this.h < 0) {
             this.h = 0;
          }
@@ -356,7 +356,7 @@ public final class thien_e extends UIControlBase {
          try {
             for (int var9 = 0; var9 < var3.length(); var9++) {
                if (var3.charAt(var9) >= 30000) {
-                  var3 = var3.substring(0, var9) + thien_w.g[var3.charAt(var9) - 30000] + var3.substring(var9 + 1);
+                  var3 = var3.substring(0, var9) + TextRenderer.emoticons[var3.charAt(var9) - 30000] + var3.substring(var9 + 1);
                }
             }
          } catch (Exception var4) {

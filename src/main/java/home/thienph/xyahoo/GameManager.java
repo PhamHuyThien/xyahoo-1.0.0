@@ -36,7 +36,7 @@ public final class GameManager implements thien_et {
    private int W;
    public thien_ff j;
    public thien_gp k;
-   public LoginScreen l;
+   public LoginScreen loginScreen;
    private thien_eh X;
    public thien_cn m;
    private boolean Y;
@@ -67,7 +67,7 @@ public final class GameManager implements thien_et {
    private int av;
    public static boolean p = false;
    public static boolean q = true;
-   public static boolean r = true;
+   public static boolean autoLogin = true;
    public static boolean s = false;
    private static Image aw;
    private static Image ax;
@@ -134,7 +134,7 @@ public final class GameManager implements thien_et {
       this.e(var1);
    }
 
-   public final void b(Screen var1) {
+   public final void displayScreen(Screen var1) {
       Screen var3 = var1;
       GameManager var2 = this;
       int var4 = this.aE;
@@ -177,7 +177,7 @@ public final class GameManager implements thien_et {
 
          var1.setClip(this.ar - 1, this.as, this.at + 2, this.au + 2);
          var1.setColor(14545919);
-         thien_v.a(var1, this.ar, this.av, this.at, this.au);
+         UIButton.a(var1, this.ar, this.av, this.at, this.au);
          var1.setColor(10278388);
          var1.fillRoundRect(5 + this.ar + this.ap * 20, 5 + this.av + this.aq * 20, 20, 20, 5, 5);
          int var5 = 7;
@@ -194,8 +194,8 @@ public final class GameManager implements thien_et {
          var1.setClip(-1000, -1000, 2000, 2000);
          Screen.drawFooter(var1);
          var1.setColor(16777215);
-         thien_w.a(thien_w.d).a(TextConstant.select(), 4, GameCanvas.screenHeight - (g >> 1) - (thien_w.f >> 1), var1);
-         thien_w.a(thien_w.d).a(TextConstant.cancel(), this.U - 4, GameCanvas.screenHeight - (g >> 1) - (thien_w.f >> 1), 1, var1, thien_w.j, thien_w.f);
+         TextRenderer.getFontRenderer(TextRenderer.colorWhite).drawText(TextConstant.select(), 4, GameCanvas.screenHeight - (g >> 1) - (TextRenderer.fontHeight >> 1), var1);
+         TextRenderer.getFontRenderer(TextRenderer.colorWhite).drawText(TextConstant.cancel(), this.U - 4, GameCanvas.screenHeight - (g >> 1) - (TextRenderer.fontHeight >> 1), 1, var1, TextRenderer.charWidth, TextRenderer.fontHeight);
       }
    }
 
@@ -204,12 +204,12 @@ public final class GameManager implements thien_et {
          this.ah[var3] = var2;
          int var4 = this.ah[var3] != null ? this.ah[var3].getWidth() : 0;
          this.aa[var3] = var1;
-         this.ab[var3] = thien_w.a(var1, thien_w.j) + 15 + var4;
+         this.ab[var3] = TextRenderer.computeTextWidth(var1, TextRenderer.charWidth) + 15 + var4;
          if (this.Z[var3] == 0) {
             this.Z[var3] = 1;
          }
 
-         this.ae[var3] = thien_w.f + 6;
+         this.ae[var3] = TextRenderer.fontHeight + 6;
          if (this.ah[var3] != null && this.ae[var3] < this.ah[var3].getHeight() + 6) {
             this.ae[var3] = this.ah[var3].getHeight() + 6;
          }
@@ -248,17 +248,17 @@ public final class GameManager implements thien_et {
       return instance;
    }
 
-   public final thien_ad a(String var1, UIAction var2, UIAction var3, UIAction var4) {
+   public final PopupDialogLayout a(String var1, UIAction var2, UIAction var3, UIAction var4) {
       this.ai = false;
-      thien_ad var5 = new thien_ad(var1, var2, var3, var4);
+      PopupDialogLayout var5 = new PopupDialogLayout(var1, var2, var3, var4);
       this.n.addElement(var5);
       this.Y = true;
       return var5;
    }
 
-   private thien_ad a(String[] var1, UIAction var2, UIAction var3, UIAction var4) {
+   private PopupDialogLayout showCenterPopup(String[] contents, UIAction leftBtn, UIAction centerBtn, UIAction rightBtn) {
       this.ai = false;
-      thien_ad var5 = new thien_ad(var1, var2, var3, var4);
+      PopupDialogLayout var5 = new PopupDialogLayout(contents, leftBtn, centerBtn, rightBtn);
       this.n.addElement(var5);
       this.Y = true;
       return var5;
@@ -303,20 +303,20 @@ public final class GameManager implements thien_et {
       } catch (Exception var11) {
       }
 
-      this.M = thien_w.f + 3;
+      this.M = TextRenderer.fontHeight + 3;
       N = 1;
       O = 1;
-      g = thien_w.a ? v.getHeight() : thien_w.f + 3;
-      Screen.topMargin = f = g = thien_w.a ? 18 : thien_w.f + 3;
+      g = TextRenderer.useCustomFont ? v.getHeight() : TextRenderer.fontHeight + 3;
+      Screen.topMargin = f = g = TextRenderer.useCustomFont ? 18 : TextRenderer.fontHeight + 3;
       P = g + 1;
-      this.ad[0] = GameCanvas.screenHeight - g - thien_w.f - 8;
+      this.ad[0] = GameCanvas.screenHeight - g - TextRenderer.fontHeight - 8;
       this.ad[1] = this.ad[2] = O + g + 1;
       this.ag[0] = 1;
       this.ag[1] = 2;
       this.ag[2] = 1;
       p = Xuka.readFlag("sound", false);
       q = Xuka.readFlag("vibrate", true);
-      r = Xuka.readFlag("atlog", true);
+      autoLogin = Xuka.readFlag("atlog", true);
       s = Xuka.readFlag("atlogY", false);
 
       try {
@@ -356,10 +356,10 @@ public final class GameManager implements thien_et {
       Screen.headerHeight = P;
       Screen.e = var1;
       Screen.formHeight = var2 - P;
-      Screen.footerY = P + Screen.formHeight - (g >> 1) - (thien_w.f >> 1) + (thien_w.a ? 0 : 1);
-      this.l = new LoginScreen();
-      this.l.startSlide(1);
-      this.b(this.l);
+      Screen.footerY = P + Screen.formHeight - (g >> 1) - (TextRenderer.fontHeight >> 1) + (TextRenderer.useCustomFont ? 0 : 1);
+      this.loginScreen = new LoginScreen();
+      this.loginScreen.startSlide(1);
+      this.displayScreen(this.loginScreen);
       this.W = 0;
       this.D();
       if (GameCanvas.isNokiaMapping) {
@@ -378,7 +378,7 @@ public final class GameManager implements thien_et {
 
    public final void d() {
       if (ConnectionManager.isConnecting) {
-         this.a(TextConstant.checkingConnection(), null, null, new UIAction(TextConstant.close(), new thien_dj(this))).a(true);
+         this.a(TextConstant.checkingConnection(), null, null, new UIAction(TextConstant.close(), new thien_dj(this))).setExtraOption(true);
       } else if (this.aK) {
          this.c();
          this.a(TextConstant.connectionError(), null, null, new UIAction(TextConstant.close(), new thien_du(this)));
@@ -391,10 +391,10 @@ public final class GameManager implements thien_et {
       }
 
       this.X.b((String[]) null);
-      this.b(this.X);
+      this.displayScreen(this.X);
       this.d(this.X);
       this.X.startSlide(-1);
-      this.c(this.l);
+      this.c(this.loginScreen);
    }
 
    public static void f() {
@@ -411,7 +411,7 @@ public final class GameManager implements thien_et {
       var1.setColor(0);
       var1.fillRect(0, 0, this.U, this.V);
       GameManager var2 = this;
-      if (thien_w.a) {
+      if (TextRenderer.useCustomFont) {
          var1.drawImage(v, 0, 0, 20);
       } else {
          int var5 = g >> 1;
@@ -426,10 +426,10 @@ public final class GameManager implements thien_et {
       }
 
       var1.setColor(16777215);
-      thien_w var10000 = thien_w.a(thien_w.d);
+      TextRenderer var10000 = TextRenderer.getFontRenderer(TextRenderer.colorWhite);
       int var10002 = Screen.e >> 1;
-      int var10003 = thien_w.a ? 1 : O + 1;
-      var10000.a(((Screen)this.L.elementAt(this.W)).wrappedText, var10002, var10003, 2, var1, thien_w.j, thien_w.f);
+      int var10003 = TextRenderer.useCustomFont ? 1 : O + 1;
+      var10000.drawText(((Screen)this.L.elementAt(this.W)).wrappedText, var10002, var10003, 2, var1, TextRenderer.charWidth, TextRenderer.fontHeight);
       if (this.aE > 1) {
          for (int var4 = 0; var4 < var2.aE; var4++) {
             if (((Screen)var2.L.elementAt(var4)).isScrolling) {
@@ -481,7 +481,7 @@ public final class GameManager implements thien_et {
             var15.setColor(872315);
             var15.fillRect(var2.ac[var19] + 1, var2.af[var19] + 1, var2.ab[var19] - 1, var2.ae[var19] - 1);
             var15.setColor(14545919);
-            thien_v.a(var15, var2.ac[var19], var2.af[var19], var2.ab[var19], var2.ae[var19]);
+            UIButton.a(var15, var2.ac[var19], var2.af[var19], var2.ab[var19], var2.ae[var19]);
             int var24 = 5;
             if (var2.ah[var19] != null) {
                var15.drawImage(var2.ah[var19], var2.ac[var19] + 7 + (var2.ah[var19].getWidth() >> 1), var2.af[var19] + (var2.ae[var19] >> 1), 3);
@@ -489,13 +489,13 @@ public final class GameManager implements thien_et {
             }
 
             var15.setColor(16777215);
-            thien_w.a(thien_w.d).a(var2.aa[var19], var2.ac[var19] + 3 + var24, var2.af[var19] + 3, var15);
+            TextRenderer.getFontRenderer(TextRenderer.colorWhite).drawText(var2.aa[var19], var2.ac[var19] + 3 + var24, var2.af[var19] + 3, var15);
          }
       }
 
       var1.setClip(-1000, -1000, 2000, 2000);
       if (this.Y) {
-         ((thien_ad)this.n.elementAt(0)).a(var1);
+         ((PopupDialogLayout)this.n.elementAt(0)).paint(var1);
       } else if (this.ai) {
          var15 = var1;
          var2 = this;
@@ -503,7 +503,7 @@ public final class GameManager implements thien_et {
          int var25 = this.aj.size();
 
          for (int var6 = 0; var6 < var25; var6++) {
-            thien_am var7 = (thien_am)var2.aj.elementAt(var6);
+            PopupSideElementData var7 = (PopupSideElementData)var2.aj.elementAt(var6);
             var20 = var2.aH ? thien_b.c(var7.d + var7.f - var7.h) : thien_b.c(var7.f - (var7.d - var7.h));
             var15.setClip((var2.aH ? var7.h : var7.d) + 2, var7.i + 2, var20 - 3, var7.g - 3);
             int var8 = var7.f / 50 + 1;
@@ -519,7 +519,7 @@ public final class GameManager implements thien_et {
             var15.drawImage(x, (var2.aH ? var7.h : var7.d) + (var7.f >> 1), var7.i, 17);
             var15.setClip(var7.d, var7.e, var7.f + 1, var7.g + 1);
             var15.setColor(14545919);
-            thien_v.a(
+            UIButton.a(
                var15,
                (var2.aH ? var7.h : var7.d) + 1,
                var7.i + 1,
@@ -528,12 +528,12 @@ public final class GameManager implements thien_et {
             );
             var15.setClip(var2.aH ? var7.d : var7.d + 2, var7.e, var2.aH ? var7.f - 1 : var7.f, var7.g);
             var15.translate(var7.h + 5, var7.i + 5);
-            var8 = var7.a.size();
+            var8 = var7.popupSideElements.size();
 
             for (int var27 = 0; var27 < var8; var27++) {
-               var20 = 2 + var27 * var2.M + (thien_w.a ? 0 : 1);
-               String var10 = ((UIAction)var7.a.elementAt(var27)).label;
-               if (((UIAction)var7.a.elementAt(var27)).icon != null) {
+               var20 = 2 + var27 * var2.M + (TextRenderer.useCustomFont ? 0 : 1);
+               String var10 = ((UIAction)var7.popupSideElements.elementAt(var27)).label;
+               if (((UIAction)var7.popupSideElements.elementAt(var27)).popupSideElementData != null) {
                   var10 = var10 + " >";
                }
 
@@ -541,10 +541,10 @@ public final class GameManager implements thien_et {
                   var15.setColor(10278388);
                   var15.fillRoundRect(0, var27 * var2.M, (var2.aH ? thien_b.c(var7.d + var7.f - var7.h) : var7.f) - 9, var2.M + 1, 5, 5);
                   var15.setColor(0);
-                  thien_w.a(thien_w.c).a(var10, 3, var20, var15);
+                  TextRenderer.getFontRenderer(TextRenderer.colorSecondary).drawText(var10, 3, var20, var15);
                } else {
                   var15.setColor(16777215);
-                  thien_w.a(thien_w.d).a(var10, 3, var20, var15);
+                  TextRenderer.getFontRenderer(TextRenderer.colorWhite).drawText(var10, 3, var20, var15);
                }
             }
 
@@ -554,16 +554,16 @@ public final class GameManager implements thien_et {
          var15.setClip(-1000, -1000, 5000, 5000);
          Screen.drawFooter(var15);
          var15.setColor(16777215);
-         var20 = GameCanvas.screenHeight - (g >> 1) - (thien_w.f >> 1) + (thien_w.a ? 0 : 1);
-         thien_w.a(thien_w.d).a(TextConstant.select(), 4, var20, var15);
-         thien_w.a(thien_w.d).a(TextConstant.cancel(), var2.U - 4, var20, 1, var15, thien_w.j, thien_w.f);
+         var20 = GameCanvas.screenHeight - (g >> 1) - (TextRenderer.fontHeight >> 1) + (TextRenderer.useCustomFont ? 0 : 1);
+         TextRenderer.getFontRenderer(TextRenderer.colorWhite).drawText(TextConstant.select(), 4, var20, var15);
+         TextRenderer.getFontRenderer(TextRenderer.colorWhite).drawText(TextConstant.cancel(), var2.U - 4, var20, 1, var15, TextRenderer.charWidth, TextRenderer.fontHeight);
       } else if (this.ao) {
          this.b(var1);
       }
 
       if (this.ak) {
          int var14 = g + 2;
-         int var17 = thien_w.a ? 0 : 1;
+         int var17 = TextRenderer.useCustomFont ? 0 : 1;
          var1.setColor(16777215);
          var1.fillRect(10, var14 + var17, GameCanvas.screenWidth - 20, GameCanvas.screenHeight - (var14 << 1));
          var1.setColor(0);
@@ -571,11 +571,11 @@ public final class GameManager implements thien_et {
          var1.setClip(11, 11, GameCanvas.screenWidth - 22, GameCanvas.screenHeight - 22);
          if (this.al != null) {
             var1.drawImage(this.al, GameCanvas.screenWidth - this.al.getWidth() >> 1, var14 + 6, 0);
-            var14 += this.al.getHeight() + thien_w.f + var17;
+            var14 += this.al.getHeight() + TextRenderer.fontHeight + var17;
          }
 
          for (int var18 = 0; var18 < this.am.length; var18++) {
-            thien_w.a(thien_w.e).a(this.am[var18], GameCanvas.screenWidth >> 1, var14 + var18 * thien_w.f, 2, var1, thien_w.j, thien_w.f);
+            TextRenderer.getFontRenderer(TextRenderer.colorHighlight).drawText(this.am[var18], GameCanvas.screenWidth >> 1, var14 + var18 * TextRenderer.fontHeight, 2, var1, TextRenderer.charWidth, TextRenderer.fontHeight);
          }
       }
 
@@ -587,17 +587,17 @@ public final class GameManager implements thien_et {
       thien_ba.S = null;
       thien_ff.e();
       this.F();
-      this.b(this.l);
-      this.l.startSlide(-1);
+      this.displayScreen(this.loginScreen);
+      this.loginScreen.startSlide(-1);
       this.m.f();
       this.j.o();
       if (this.k != null) {
          this.k.g();
       }
 
-      int var1 = ConnectionManager.reconnectCount;
-      int var2 = ConnectionManager.connectionId;
-      int var3 = ConnectionManager.connectionId + var1;
+      int var1 = ConnectionManager.dataUsage;
+      int var2 = ConnectionManager.zeroDataUsage;
+      int var3 = ConnectionManager.zeroDataUsage + var1;
       Packet var4 = new Packet(42, 2);
       MessageHandler.writeInt(var3, var4);
       ConnectionManager.sendPacket(var4);
@@ -610,8 +610,8 @@ public final class GameManager implements thien_et {
       }
 
       this.a(new String[]{"Dung lượng internet", var1 + var2 + " Kb"});
-      ConnectionManager.reconnectCount = 0;
-      ConnectionManager.connectionId = 0;
+      ConnectionManager.dataUsage = 0;
+      ConnectionManager.zeroDataUsage = 0;
       ConnectionManager.disconnect();
 
       try {
@@ -624,7 +624,7 @@ public final class GameManager implements thien_et {
 
    public final void h() {
       this.m.wrapTitle(this.U - 30);
-      this.b(this.m);
+      this.displayScreen(this.m);
       this.c(this.j);
       this.j.x.a(true);
       this.j.x.actionTertiary = this.j.x.j;
@@ -634,7 +634,7 @@ public final class GameManager implements thien_et {
    public final void i() {
       this.j.wrapTitle(this.U - 30);
       this.c(this.m);
-      this.b(this.j);
+      this.displayScreen(this.j);
       this.j.x.a(false);
       this.j.x.actionTertiary = this.j.x.i;
    }
@@ -656,20 +656,20 @@ public final class GameManager implements thien_et {
       return this.az;
    }
 
-   public final thien_ad a(String var1) {
+   public final PopupDialogLayout a(String var1) {
       return this.a(var1, null, this.m(TextConstant.cancel()), null);
    }
 
-   public final thien_ad a(String var1, IAction var2) {
-      return this.a(thien_w.b(var1, GameCanvas.screenWidth - 30, thien_w.j), new UIAction("OK", var2), new UIAction("", var2), this.m(TextConstant.cancel()));
+   public final PopupDialogLayout a(String var1, IAction var2) {
+      return this.showCenterPopup(TextRenderer.splitText(var1, GameCanvas.screenWidth - 30, TextRenderer.charWidth), new UIAction("OK", var2), new UIAction("", var2), this.m(TextConstant.cancel()));
    }
 
    public final void b(String var1, IAction var2) {
       this.a(var1, null, new UIAction("OK", var2), null);
    }
 
-   public final void b(String var1) {
-      this.a(thien_w.b(var1, GameCanvas.screenWidth - 30, thien_w.j));
+   public final void showCenterPopup(String var1) {
+      this.a(TextRenderer.splitText(var1, GameCanvas.screenWidth - 30, TextRenderer.charWidth));
    }
 
    public final void a(String[] var1) {
@@ -677,7 +677,7 @@ public final class GameManager implements thien_et {
          this.aA = new UIAction("", this.E());
       }
 
-      this.a(var1, this.aA, this.m("OK"), null);
+      this.showCenterPopup(var1, this.aA, this.m("OK"), null);
    }
 
    public final void c(Screen var1) {
@@ -729,14 +729,15 @@ public final class GameManager implements thien_et {
       }
    }
 
-   public final void a(thien_am var1, int var2) {
+   //Chế độ layout (0 = left, 1 = right, 2 = center)
+   public final void showPopupSideLayout(PopupSideElementData popupSideElementData, int positionMode) {
       if (!this.Y) {
          if (!this.ai) {
             this.aj.removeAllElements();
          }
 
          this.ai = true;
-         var1.b = var2;
+         popupSideElementData.positionMode = positionMode;
          byte var3;
          if (this.U > 300) {
             var3 = 0;
@@ -749,70 +750,70 @@ public final class GameManager implements thien_et {
          int var4 = 0;
          int var5 = 0;
          if (this.aj.size() > 0) {
-            thien_am var6;
-            var4 = (var6 = (thien_am)this.aj.lastElement()).d;
+            PopupSideElementData var6;
+            var4 = (var6 = (PopupSideElementData)this.aj.lastElement()).d;
             var5 = var6.e;
          }
 
-         var1.g = 10 + var1.a.size() * this.M;
-         var1.f = 126;
+         popupSideElementData.g = 10 + popupSideElementData.popupSideElements.size() * this.M;
+         popupSideElementData.f = 126;
          if (this.aj.size() == 0) {
-            if (var2 == 0) {
+            if (positionMode == 0) {
                this.aH = false;
-               var1.d = 1;
-            } else if (var2 == 1) {
+               popupSideElementData.d = 1;
+            } else if (positionMode == 1) {
                this.aH = true;
-               var1.d = this.U - var1.f - 2;
-            } else if (var2 == 2) {
+               popupSideElementData.d = this.U - popupSideElementData.f - 2;
+            } else if (positionMode == 2) {
                this.aH = false;
-               var1.d = (this.U >> 1) - (var1.f >> 1);
+               popupSideElementData.d = (this.U >> 1) - (popupSideElementData.f >> 1);
             }
 
-            var1.e = this.V - g - var1.g;
-            var1.h = var1.d;
-            var1.i = this.V - g;
+            popupSideElementData.e = this.V - g - popupSideElementData.g;
+            popupSideElementData.h = popupSideElementData.d;
+            popupSideElementData.i = this.V - g;
          } else if (this.aj.size() > 0) {
             if (this.aH) {
-               if (this.aj.size() > 1 && var4 - var1.f + var3 < 0) {
+               if (this.aj.size() > 1 && var4 - popupSideElementData.f + var3 < 0) {
                   this.aH = false;
-                  var1.d = var4 + 126 - var3;
+                  popupSideElementData.d = var4 + 126 - var3;
                } else {
-                  var1.d = var4 - var1.f + var3;
+                  popupSideElementData.d = var4 - popupSideElementData.f + var3;
                }
             } else {
-               if (this.aj.size() > 1 && var4 + 126 - var3 + var1.f > this.U) {
+               if (this.aj.size() > 1 && var4 + 126 - var3 + popupSideElementData.f > this.U) {
                   this.aH = true;
-                  var1.d = var4 - var1.f + var3;
+                  popupSideElementData.d = var4 - popupSideElementData.f + var3;
                } else {
-                  var1.d = var4 + 126 - var3;
+                  popupSideElementData.d = var4 + 126 - var3;
                }
 
-               if (((thien_am)this.aj.firstElement()).b == 2) {
-                  var1.d = (this.U >> 1) - (var1.f >> 1);
+               if (((PopupSideElementData)this.aj.firstElement()).positionMode == 2) {
+                  popupSideElementData.d = (this.U >> 1) - (popupSideElementData.f >> 1);
                }
             }
 
-            if (var1.d < 0) {
-               var1.d = 0;
+            if (popupSideElementData.d < 0) {
+               popupSideElementData.d = 0;
             }
 
-            thien_am var8 = (thien_am)this.aj.lastElement();
-            if ((var2 = var5 + var8.c * this.M) + var1.g > this.V - g) {
-               var1.e = this.V - g - var1.g;
+            PopupSideElementData var8 = (PopupSideElementData)this.aj.lastElement();
+            if ((positionMode = var5 + var8.c * this.M) + popupSideElementData.g > this.V - g) {
+               popupSideElementData.e = this.V - g - popupSideElementData.g;
             } else {
-               var1.e = var2;
+               popupSideElementData.e = positionMode;
             }
 
-            var1.i = var1.e;
+            popupSideElementData.i = popupSideElementData.e;
             if (this.aH) {
-               var1.h = var1.d + var1.f;
+               popupSideElementData.h = popupSideElementData.d + popupSideElementData.f;
             } else {
-               var1.h = var1.d - var1.f;
+               popupSideElementData.h = popupSideElementData.d - popupSideElementData.f;
             }
          }
 
-         var1.c = 0;
-         this.aj.addElement(var1);
+         popupSideElementData.c = 0;
+         this.aj.addElement(popupSideElementData);
       }
    }
 
@@ -901,8 +902,8 @@ public final class GameManager implements thien_et {
       }
 
       if (this.aj.size() > 0) {
-         thien_am var19;
-         if ((var19 = (thien_am)this.aj.lastElement()).i > var19.e) {
+         PopupSideElementData var19;
+         if ((var19 = (PopupSideElementData)this.aj.lastElement()).i > var19.e) {
             int var28;
             if ((var28 = var19.i - var19.e >> 1) <= 0) {
                var28 = 1;
@@ -942,15 +943,15 @@ public final class GameManager implements thien_et {
             }
          } else if (!this.Y) {
             if (this.ai) {
-               thien_am var10 = (thien_am)this.aj.lastElement();
+               PopupSideElementData var10 = (PopupSideElementData)this.aj.lastElement();
                if (GameCanvas.touchX >= var10.d && GameCanvas.touchX <= var10.d + var10.f && GameCanvas.touchY <= var10.e + var10.g && GameCanvas.touchY >= var10.e) {
                   int var22;
                   if ((var22 = (GameCanvas.touchY - var10.e) / this.M) < 0) {
                      var22 = 0;
                   }
 
-                  if (var22 >= var10.a.size()) {
-                     var22 = var10.a.size() - 1;
+                  if (var22 >= var10.popupSideElements.size()) {
+                     var22 = var10.popupSideElements.size() - 1;
                   }
 
                   var10.c = var22;
@@ -1016,51 +1017,51 @@ public final class GameManager implements thien_et {
       }
 
       if (this.Y) {
-         thien_ad var17 = (thien_ad)this.n.elementAt(0);
-         if (var1[17] && var17.a != null) {
-            var17.a.actionHandler.action();
+         PopupDialogLayout var17 = (PopupDialogLayout)this.n.elementAt(0);
+         if (var1[17] && var17.leftAction != null) {
+            var17.leftAction.actionHandler.action();
          }
 
-         if (var1[18] && var17.c != null) {
-            var17.c.actionHandler.action();
+         if (var1[18] && var17.rightAction != null) {
+            var17.rightAction.actionHandler.action();
          }
 
-         if (var1[16] && var17.b != null) {
-            var17.b.actionHandler.action();
+         if (var1[16] && var17.centerAction != null) {
+            var17.centerAction.actionHandler.action();
          }
 
          GameCanvas.resetKeys();
       } else if (this.ai) {
          if (var1[12] || var2[12]) {
-            thien_am var16;
-            (var16 = (thien_am)this.aj.lastElement()).c--;
+            PopupSideElementData var16;
+            (var16 = (PopupSideElementData)this.aj.lastElement()).c--;
             if (var16.c < 0) {
-               var16.c = var16.a.size() - 1;
+               var16.c = var16.popupSideElements.size() - 1;
             }
          } else if (var1[13] || var2[13]) {
-            thien_am var15;
-            (var15 = (thien_am)this.aj.lastElement()).c++;
-            if (var15.c > var15.a.size() - 1) {
+            PopupSideElementData var15;
+            (var15 = (PopupSideElementData)this.aj.lastElement()).c++;
+            if (var15.c > var15.popupSideElements.size() - 1) {
                var15.c = 0;
             }
          } else if (var1[14]) {
             this.c(false);
          } else if (var1[15]) {
-            thien_am var13;
+            PopupSideElementData var13;
             UIAction var26;
-            if ((var26 = (UIAction)(var13 = (thien_am)this.aj.lastElement()).a.elementAt(var13.c)).icon != null) {
-               this.a(var26.icon, -1);
+            if ((var26 = (UIAction)(var13 = (PopupSideElementData)this.aj.lastElement()).popupSideElements.elementAt(var13.c)).popupSideElementData != null) {
+               this.showPopupSideLayout(var26.popupSideElementData, -1);
             }
          } else if (var1[16] || var1[17]) {
-            thien_am var14;
+            PopupSideElementData var14;
             UIAction var27;
-            if ((var27 = (UIAction)(var14 = (thien_am)this.aj.lastElement()).a.elementAt(var14.c)).icon == null) {
+            if ((var27 = (UIAction)(var14 = (PopupSideElementData)this.aj.lastElement()).popupSideElements.elementAt(var14.c)).popupSideElementData == null) {
                if (var27.actionHandler != null) {
                   var27.actionHandler.action();
                   this.c(true);
                }
             } else {
-               this.a(var27.icon, -1);
+               this.showPopupSideLayout(var27.popupSideElementData, -1);
             }
          } else if (var1[18]) {
             this.c(true);
@@ -1090,17 +1091,17 @@ public final class GameManager implements thien_et {
             try {
                Screen var11 = this.aD;
                if (this.aD == thien_ba.S && thien_ba.x) {
-                  String var23 = thien_w.g[this.aq * 6 + this.ap];
+                  String var23 = TextRenderer.emoticons[this.aq * 6 + this.ap];
                   if (thien_ba.ah == 1) {
                      MessageHandler.a(1, thien_ba.B, thien_ff.y, var23);
                   }
                }
 
                if (c(var11.padding)) {
-                  ((TextField)var11.getControlById(2)).insertText(thien_w.g[this.aq * 6 + this.ap]);
+                  ((TextField)var11.getControlById(2)).insertText(TextRenderer.emoticons[this.aq * 6 + this.ap]);
                } else {
                   thien_ew var24;
-                  (var24 = (thien_ew)this.aD).A.insertText(thien_w.g[this.aq * 6 + this.ap]);
+                  (var24 = (thien_ew)this.aD).A.insertText(TextRenderer.emoticons[this.aq * 6 + this.ap]);
                }
             } catch (Exception var7) {
             }
@@ -1361,7 +1362,7 @@ public final class GameManager implements thien_et {
       if ((var5 = (thien_ew)this.c(var4)) == null) {
          (var5 = new thien_ew(var4, true, false, null)).y = var1;
          var5.x = var1;
-         this.b(var5);
+         this.displayScreen(var5);
       }
 
       if (!var5.title.equals(this.aD.title)) {
@@ -1402,7 +1403,7 @@ public final class GameManager implements thien_et {
             var2.y = var1;
          }
 
-         this.b(var2);
+         this.displayScreen(var2);
       }
 
       return var2;
@@ -1412,7 +1413,7 @@ public final class GameManager implements thien_et {
       if (!n(var1)) {
          thien_ew var3;
          if (!(var3 = this.e(var1)).title.equals(this.aD.title)) {
-            String var4 = thien_w.a(var2, GameCanvas.screenWidth - GameCanvas.screenWidth / 3, thien_w.j);
+            String var4 = TextRenderer.wrapText(var2, GameCanvas.screenWidth - GameCanvas.screenWidth / 3, TextRenderer.charWidth);
             this.a(var1 + " chat: " + var4 + "...", (Image) null, 1);
             var3.isScrolling = true;
             this.a();
@@ -1434,11 +1435,11 @@ public final class GameManager implements thien_et {
       if ((var4 = (thien_ew)this.c(var3)) == null) {
          (var4 = new thien_ew(var3, true, false, null)).y = var1;
          var4.x = var1;
-         this.b(var4);
+         this.displayScreen(var4);
       }
 
       if (!var4.title.equals(this.aD.title)) {
-         var3 = thien_w.a(var2, GameCanvas.screenWidth - GameCanvas.screenWidth / 3, thien_w.j);
+         var3 = TextRenderer.wrapText(var2, GameCanvas.screenWidth - GameCanvas.screenWidth / 3, TextRenderer.charWidth);
          this.a(var1 + " chat: " + var3 + "...", (Image)null, 1);
          var4.isScrolling = true;
          this.a();
@@ -1460,18 +1461,18 @@ public final class GameManager implements thien_et {
 
    public final void n() {
       this.c();
-      this.l.usernameField.setText(this.X.G);
-      this.l.passwordField.setText(this.X.F);
+      this.loginScreen.usernameField.setText(this.X.G);
+      this.loginScreen.passwordField.setText(this.X.F);
       Xuka.saveUserID(this.X.G);
       Xuka.savePassword(this.X.F);
-      this.b(this.l);
-      this.l.selectControl(this.l.usernameField);
+      this.displayScreen(this.loginScreen);
+      this.loginScreen.selectControl(this.loginScreen.usernameField);
       this.c(this.X);
    }
 
    public final void o() {
       this.c();
-      this.b(TextConstant.wrongNameOrPassword());
+      this.showCenterPopup(TextConstant.wrongNameOrPassword());
    }
 
    public final void p() {
@@ -1544,23 +1545,23 @@ public final class GameManager implements thien_et {
    }
 
    public final void f(String var1) {
-      this.b(var1);
+      this.showCenterPopup(var1);
    }
 
    public final void q() {
       thien_ba.S = null;
       this.F();
-      this.b(this.l);
+      this.displayScreen(this.loginScreen);
       this.c();
       this.a(TextConstant.disconnected(), (Image)null, 0);
    }
 
    public final void g(String var1) {
-      this.b(TextConstant.addFriendFailed() + var1);
+      this.showCenterPopup(TextConstant.addFriendFailed() + var1);
    }
 
    public final void h(String var1) {
-      this.b(var1 + TextConstant.refusedToBeAdded());
+      this.showCenterPopup(var1 + TextConstant.refusedToBeAdded());
    }
 
    public final void a(int var1, thien_r var2, String var3) {
@@ -1576,11 +1577,11 @@ public final class GameManager implements thien_et {
       this.j.x.a(var1, var2);
       this.j.x.a(var1, var3, 1);
       a(var5, false);
-      this.b(TextConstant.add2() + var1 + TextConstant.success());
+      this.showCenterPopup(TextConstant.add2() + var1 + TextConstant.success());
    }
 
    public final void r() {
-      this.b(TextConstant.cannotCreateConference());
+      this.showCenterPopup(TextConstant.cannotCreateConference());
    }
 
    public final void c(String var1, String var2) {
@@ -1613,13 +1614,13 @@ public final class GameManager implements thien_et {
          var4.z.b();
       }
 
-      this.b(var4);
+      this.displayScreen(var4);
       this.d(var3);
    }
 
    public final void c(String var1, String var2, String var3) {
       if (!n(var1)) {
-         this.a(
+         this.showCenterPopup(
             new String[]{var1 + TextConstant.inviteConference2(), var3},
             new UIAction(TextConstant.cancel(), new thien_ed(this)),
             new UIAction("OK", new thien_ee(this, var2, var1, var3)),
@@ -1722,7 +1723,7 @@ public final class GameManager implements thien_et {
 
    public final void t() {
       this.k.a(false);
-      this.b(TextConstant.wrongYahooIdOrPassword());
+      this.showCenterPopup(TextConstant.wrongYahooIdOrPassword());
    }
 
    public final void i(String var1) {
@@ -1757,8 +1758,8 @@ public final class GameManager implements thien_et {
       thien_dl var4 = new thien_dl(this);
       thien_dm var5 = new thien_dm(this, var3, var4);
       String var7 = var3 + Xuka.refCode;
-      this.a(
-         thien_w.b(var1 + TextConstant.syntax() + var7 + " => " + var2.substring(6), GameCanvas.screenWidth - 30, thien_w.j),
+      this.showCenterPopup(
+         TextRenderer.splitText(var1 + TextConstant.syntax() + var7 + " => " + var2.substring(6), GameCanvas.screenWidth - 30, TextRenderer.charWidth),
          new UIAction("OK", var5),
          null,
          new UIAction(TextConstant.cancel(), var4)
@@ -1768,8 +1769,8 @@ public final class GameManager implements thien_et {
    public final void h(String var1, String var2) {
       this.I = var1;
       D = var2;
-      if (this.l != null) {
-         this.l.recoverPassword();
+      if (this.loginScreen != null) {
+         this.loginScreen.recoverPassword();
       }
    }
 
@@ -1813,7 +1814,7 @@ public final class GameManager implements thien_et {
          this.d(this.k);
       } else {
          this.k.a(false);
-         this.b(this.k);
+         this.displayScreen(this.k);
          this.d(this.k);
       }
    }
@@ -1856,12 +1857,12 @@ public final class GameManager implements thien_et {
          this.F = new thien_ca();
       }
 
-      this.b(this.F);
-      this.c(this.l);
+      this.displayScreen(this.F);
+      this.c(this.loginScreen);
       if (s) {
          this.I();
          this.k.a(false);
-         this.b(this.k);
+         this.displayScreen(this.k);
          this.k.f();
       }
 
@@ -1871,7 +1872,7 @@ public final class GameManager implements thien_et {
    public final void a(thien_s var1, int var2) {
       a(var2, false);
       a(var1, false, thien_ff.y);
-      this.j.x.m = thien_w.b(TextConstant.welcomeToXYahoo(), GameCanvas.screenWidth - 40, thien_w.j);
+      this.j.x.m = TextRenderer.splitText(TextConstant.welcomeToXYahoo(), GameCanvas.screenWidth - 40, TextRenderer.charWidth);
       this.j.x.a(var1, -1);
       this.c();
    }
@@ -1904,7 +1905,7 @@ public final class GameManager implements thien_et {
       (var2 = new FormScreen()).title = TextConstant.addFriend();
       UIFormBuilder.addLabelsAuto(var2, var1 + TextConstant.wantToAddYou());
       TextField var3 = UIFormBuilder.addTextField(var2, TextConstant.toNewGroup(), 0);
-      thien_z var4;
+      UIDropdown var4;
       (var4 = UIFormBuilder.addDropdown(var2, TextConstant.orExisting(), this.j.x.i())).a(new thien_dq(this, var4, var3));
       if (var4.a != null && var4.a.length != 0) {
          var3.setText(var4.b());
@@ -1932,7 +1933,7 @@ public final class GameManager implements thien_et {
       }
 
       int var4 = GameCanvas.screenWidth - var3 >> 1;
-      thien_ai var6 = new thien_ai(TextConstant.ignoreList(), var4, 10, thien_w.f);
+      thien_ai var6 = new thien_ai(TextConstant.ignoreList(), var4, 10, TextRenderer.fontHeight);
       int var5 = 10 + 1 + var6.height;
       String[] var7;
       if (var1.size() == 0) {
@@ -1945,14 +1946,14 @@ public final class GameManager implements thien_et {
          }
       }
 
-      thien_z var16 = new thien_z(var7, var4, var5, var3, thien_w.f + 6);
+      UIDropdown var16 = new UIDropdown(var7, var4, var5, var3, TextRenderer.fontHeight + 6);
       var5 += 8 + var16.height;
-      thien_ai var9 = new thien_ai(TextConstant.typeIdToAddDelete(), var4, var5, thien_w.f);
+      thien_ai var9 = new thien_ai(TextConstant.typeIdToAddDelete(), var4, var5, TextRenderer.fontHeight);
       var5 += 3 + var6.height;
       TextField var15;
-      (var15 = new TextField()).setBounds(var4, var5, var3, thien_w.f + 6);
+      (var15 = new TextField()).setBounds(var4, var5, var3, TextRenderer.fontHeight + 6);
       var5 += 10 + var15.height;
-      thien_v var10 = new thien_v(TextConstant.add() + "/" + TextConstant.delete(), var4, var5, var3, thien_w.f + 6);
+      UIButton var10 = new UIButton(TextConstant.add() + "/" + TextConstant.delete(), var4, var5, var3, TextRenderer.fontHeight + 6);
       var16.b = new thien_dv(this, var16, var15);
       String var11;
       if (!(var11 = var16.b()).equals("---")) {
@@ -1967,16 +1968,16 @@ public final class GameManager implements thien_et {
       var2.addControl(var10);
       var2.selectControl(var16);
       var2.leftCommand = new UIAction(TextConstant.cancel(), new thien_dx(this, var2));
-      this.b(var2);
+      this.displayScreen(var2);
       this.j();
       this.c();
    }
 
    public final void b(boolean var1) {
       if (var1) {
-         this.b(TextConstant.changeSuccess());
+         this.showCenterPopup(TextConstant.changeSuccess());
       } else {
-         this.b(TextConstant.wrongOldPassword());
+         this.showCenterPopup(TextConstant.wrongOldPassword());
       }
    }
 
@@ -2005,7 +2006,7 @@ public final class GameManager implements thien_et {
             if (var1 == 3) {
                this.ak = true;
                this.al = Image.createImage(var3, 0, var3.length);
-               this.am = thien_w.b(var2, GameCanvas.screenWidth - 50, thien_w.j);
+               this.am = TextRenderer.splitText(var2, GameCanvas.screenWidth - 50, TextRenderer.charWidth);
                this.an = (int)var6;
                return;
             }
@@ -2077,11 +2078,11 @@ public final class GameManager implements thien_et {
       this.j.x.b(var1);
       a(this.j.x.k, false, thien_ff.y);
       a(var2, false);
-      this.b(TextConstant.deleteSuccess());
+      this.showCenterPopup(TextConstant.deleteSuccess());
    }
 
    public final void a(int var1, String var2, String var3) {
-      this.b(TextConstant.moveIdSuccess());
+      this.showCenterPopup(TextConstant.moveIdSuccess());
       this.j.x.b(var2, var3);
       a(this.j.x.k, false, thien_ff.y);
       a(var1, false);
@@ -2089,7 +2090,7 @@ public final class GameManager implements thien_et {
 
    public final void b(int var1, String var2, String var3) {
       this.j.x.a(var2, var3);
-      this.b(TextConstant.renameGroupSuccess());
+      this.showCenterPopup(TextConstant.renameGroupSuccess());
       a(this.j.x.k, false, thien_ff.y);
       a(var1, false);
    }
@@ -2283,7 +2284,7 @@ public final class GameManager implements thien_et {
          this.a(var1 + ": " + var2, (Image)null, 0);
       } else {
          int var4;
-         if ((var4 = thien_w.a(var2)) != 100) {
+         if ((var4 = TextRenderer.findEmoticonIndex(var2)) != 100) {
             thien_bz[] var5 = null;
             if (var3 == 39) {
                var5 = thien_ba.S.F;
@@ -2317,7 +2318,7 @@ public final class GameManager implements thien_et {
 
       thien_ba var5 = thien_ba.d(1);
       if (this.L.contains(var5) && thien_ba.x) {
-         this.b(TextConstant.pleaseQuitYourCurrentGame());
+         this.showCenterPopup(TextConstant.pleaseQuitYourCurrentGame());
       } else {
          thien_ba.ai = var1;
          thien_ba.S.title = var4;
@@ -2445,7 +2446,7 @@ public final class GameManager implements thien_et {
       G.w.a(var1, 0);
       G.startSlide(1);
       if (!this.f(G)) {
-         this.b(G);
+         this.displayScreen(G);
       }
 
       this.d(G);

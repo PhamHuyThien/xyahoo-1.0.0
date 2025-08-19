@@ -19,7 +19,7 @@ implements IAction {
             return;
         }
         if (this.a.x.c(string)) {
-            GameManager.getInstance().b(TextConstant.thisGroupNameAlreadyExist());
+            GameManager.getInstance().showCenterPopup(TextConstant.thisGroupNameAlreadyExist());
             return;
         }
         MessageHandler.h(this.c, string);

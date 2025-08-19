@@ -86,9 +86,9 @@ extends UIControlBase {
 
     public final void drawBackground(Graphics graphics) {
         super.drawBackground(graphics);
-        graphics.setColor(UIColorPalette.getSecondaryColor());
+        graphics.setColor(UIColorConstant.getSecondaryColor());
         graphics.drawRect(this.baseX, this.baseY, this.width, this.height);
-        graphics.setColor(UIColorPalette.getHighlightColor());
+        graphics.setColor(UIColorConstant.getHighlightColor());
         graphics.drawRect(this.baseX - 1, this.baseY - 1, this.width + 2, this.height + 2);
     }
 

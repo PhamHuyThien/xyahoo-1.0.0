@@ -1,9 +1,9 @@
 package home.thienph.xyahoo;
 
+import javax.microedition.io.SocketConnection;
 import java.io.DataOutputStream;
 import java.io.InputStream;
 import java.util.Hashtable;
-import javax.microedition.io.SocketConnection;
 
 public final class ConnectionManager {
     private static DataOutputStream outputStream;
@@ -16,13 +16,13 @@ public final class ConnectionManager {
     private static Thread connectorThread;
     public static Thread readerThread;
     public static Thread writerThread;
-    public static int reconnectCount;
-    public static int connectionId;
-    private static int defaultRetry;
+    public static int dataUsage;
+    public static int zeroDataUsage;
+    private static int headerSize;
     private static Hashtable callbacks;
 
     static {
-        defaultRetry = 4;
+        headerSize = 4;
         packetQueue = new PacketWriter();
         callbacks = new Hashtable();
     }
@@ -78,9 +78,8 @@ public final class ConnectionManager {
             return;
         }
         catch (Exception exception) {
-            Exception exception2 = exception;
+            System.err.println("ConnectionManager.cleanup Exception: " + exception);
             exception.printStackTrace();
-            return;
         }
     }
 
@@ -112,7 +111,7 @@ public final class ConnectionManager {
         ConnectionManager.cleanup();
     }
 
-    static int getMaxRetry() {
-        return defaultRetry;
+    static int getHeaderSize() {
+        return headerSize;
     }
 }

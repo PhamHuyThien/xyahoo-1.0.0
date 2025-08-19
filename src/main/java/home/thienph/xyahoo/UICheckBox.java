@@ -2,14 +2,14 @@ package home.thienph.xyahoo;
 
 import javax.microedition.lcdui.Graphics;
 
-public final class thien_x
+public final class UICheckBox
 extends UIControlBase {
     private String c;
     private int d;
     public boolean a;
     public IAction b;
 
-    public thien_x(String string, int n, int n2, int n3, int n4) {
+    public UICheckBox(String string, int n, int n2, int n3, int n4) {
         this.c = string;
         this.baseX = n;
         this.baseY = n2;
@@ -59,7 +59,7 @@ extends UIControlBase {
             graphics.drawRoundRect(this.baseX + 13 + 4, this.baseY + 1, this.width - 13, this.height, 5, 5);
         }
         graphics.setColor(0xFFFFFF);
-        thien_w.a(thien_w.d).a(this.c, this.baseX + 13 + 5, this.baseY + 3, graphics);
+        TextRenderer.getFontRenderer(TextRenderer.colorWhite).drawText(this.c, this.baseX + 13 + 5, this.baseY + 3, graphics);
     }
 
     public final void drawBackground(Graphics graphics) {

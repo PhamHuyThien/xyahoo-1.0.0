@@ -2,11 +2,11 @@ package home.thienph.xyahoo;
 
 final class thien_dv
         implements IAction {
-    private final thien_z a;
+    private final UIDropdown a;
     private final TextField b;
 
-    thien_dv(GameManager gameManager2, thien_z thien_z2, TextField textField2) {
-        this.a = thien_z2;
+    thien_dv(GameManager gameManager2, UIDropdown UIDropdown2, TextField textField2) {
+        this.a = UIDropdown2;
         this.b = textField2;
     }
 

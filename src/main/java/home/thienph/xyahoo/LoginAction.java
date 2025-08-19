@@ -6,8 +6,8 @@ final class LoginAction
 implements IAction {
     private LoginScreen loginScreen;
 
-    LoginAction(LoginScreen loginScreen2) {
-        this.loginScreen = loginScreen2;
+    LoginAction(LoginScreen loginScreen) {
+        this.loginScreen = loginScreen;
     }
 
     public final void action() {

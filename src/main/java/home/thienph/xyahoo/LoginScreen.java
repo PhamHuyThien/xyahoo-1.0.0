@@ -7,9 +7,9 @@ public final class LoginScreen extends FormScreen
 {
     TextField usernameField;
     TextField passwordField;
-    TextField chatBoxField;
+    TextField commentField;
     private Vector menuItems;
-    thien_am mainMenu;
+    PopupSideElementData menuPopupSide;
     public static UIAction callButton;
     private int J;
     private static FormScreen settingsScreen;
@@ -20,29 +20,24 @@ public final class LoginScreen extends FormScreen
     
     public final void draw(final Graphics graphics) {
         super.draw(graphics);
-        thien_w.a(thien_w.d).a(GameManager.b, this.J, Screen.formHeight - 2 - thien_w.f, graphics);
+        TextRenderer.getFontRenderer(TextRenderer.colorWhite).drawText(GameManager.b, this.J, Screen.formHeight - 2 - TextRenderer.fontHeight, graphics);
     }
     
     public LoginScreen() {
-        this.J = Screen.e - thien_w.a(GameManager.b, thien_w.j) - 5;
-        final TextField f;
-        (f = new TextField("", 250, 0)).isEditable = false;
-        f.setBounds(0, Screen.formHeight - GameManager.g - (thien_w.f << 1) + 5, Screen.e - 1, thien_w.f + 6);
+        this.J = Screen.e - TextRenderer.computeTextWidth(GameManager.b, TextRenderer.charWidth) - 5;
+        final TextField f = new TextField("", 250, 0);
+        f.isEditable = false;
+        f.setBounds(0, Screen.formHeight - GameManager.g - (TextRenderer.fontHeight << 1) + 5, Screen.e - 1, TextRenderer.fontHeight + 6);
         f.actionPrimary = new UIAction(TextConstant.exit(), new thien_dh(this, f));
         f.actionTertiary = new UIAction(TextConstant.send(), new thien_cs(this, f));
-        this.chatBoxField = f;
-        final Vector vector;
-        (vector = new Vector()).addElement(thien_ca.I);
-        vector.addElement(new UIAction(TextConstant.comment(), new thien_da(this)));
-        vector.addElement(LoginScreen.callButton);
-        final UIAction obj;
-        (obj = new UIAction(TextConstant.support(), null)).icon = new thien_am(vector);
-        final String b = Xuka.readUserID();
+        this.commentField = f;
+
+
+        final String username = Xuka.readUserID();
         final String c = Xuka.c();
-        super.centerCommand = new UIAction(TextConstant.signIn(), new thien_db(this));
         super.title = " X Yahoo! ";
         FormScreen.calculateFormDimensions(70, 150);
-        super.x = Screen.formHeight - (thien_w.i * 3 + thien_aq.a + ((GameCanvas.screenHeight > 170) ? 55 : 20) + GameManager.g) >> 1;
+        super.x = Screen.formHeight - (TextRenderer.extraSpacing * 3 + thien_aq.a + ((GameCanvas.screenHeight > 170) ? 55 : 20) + GameManager.g) >> 1;
         UIFormBuilder.addImage(this, thien_aq.c(), false);
         super.x += ((GameCanvas.screenHeight > 170) ? 18 : 7);
         this.usernameField = UIFormBuilder.addTextField(this, "Tên: ", 0, -1);
@@ -56,20 +51,34 @@ public final class LoginScreen extends FormScreen
             UIFormBuilder.addWrappedLabels(TextConstant.socialNetworkLicenseNo(), this, -1, 16777215, false, false);
         }
         this.selectControl(this.usernameField);
-        (this.menuItems = new Vector()).addElement(new UIAction(TextConstant.register(), new thien_dc(this)));
-        this.menuItems.addElement(new UIAction(TextConstant.forgetPassword(), new thien_dd(this)));
-        this.menuItems.addElement(obj);
-        this.menuItems.addElement(new UIAction(TextConstant.settings(), new thien_de(this)));
-        this.menuItems.addElement(new UIAction(TextConstant.exit(), new thien_df(this)));
-        this.mainMenu = new thien_am(this.menuItems);
-        super.leftCommand = new UIAction("Menu", new thien_dg(this));
-        if (b != null) {
-            this.usernameField.setText(b);
+
+        //
+        final Vector vectorSupport = new Vector();
+        vectorSupport.addElement(thien_ca.uiActionInfo);
+        vectorSupport.addElement(new UIAction(TextConstant.comment(), new CommentAction(this)));
+        vectorSupport.addElement(LoginScreen.callButton);
+        //
+        final UIAction uiActionSupport = new UIAction(TextConstant.support(), null);
+        uiActionSupport.popupSideElementData = new PopupSideElementData(vectorSupport);
+        //
+        this.menuItems = new Vector();
+        this.menuItems.addElement(new UIAction(TextConstant.register(), new RegisterAction(this)));
+        this.menuItems.addElement(new UIAction(TextConstant.forgetPassword(), new ForgetPasswordAction(this)));
+        this.menuItems.addElement(uiActionSupport);
+        this.menuItems.addElement(new UIAction(TextConstant.settings(), new SettingAction(this)));
+        this.menuItems.addElement(new UIAction(TextConstant.exit(), new ExitAction(this)));
+        this.menuPopupSide = new PopupSideElementData(this.menuItems);
+
+        super.leftCommand = new UIAction("Menu", new MenuLoginAction(this));
+        super.centerCommand = new UIAction(TextConstant.signIn(), new thien_db(this));
+
+        if (username != null) {
+            this.usernameField.setText(username);
         }
         if (c != null) {
             this.passwordField.setText(c);
         }
-        if (b != null && b.length() > 0 && c != null && c.length() > 0 && GameManager.r) {
+        if (username != null && username.length() > 0 && c != null && c.length() > 0 && GameManager.autoLogin) {
             super.centerCommand.actionHandler.action();
         }
     }
@@ -80,23 +89,23 @@ public final class LoginScreen extends FormScreen
             (LoginScreen.settingsScreen = new FormScreen()).title = TextConstant.settings();
             final FormScreen k = LoginScreen.settingsScreen;
             k.x += 20;
-            final thien_z a = UIFormBuilder.addDropdown(LoginScreen.settingsScreen, TextConstant.typingSpeed(), new String[] { "1", "2", "3", "4", "5", "6", "7" });
-            final thien_x a2 = UIFormBuilder.addLink(LoginScreen.settingsScreen, TextConstant.sound(), (IAction)null);
-            final thien_x a3 = UIFormBuilder.addLink(LoginScreen.settingsScreen, TextConstant.vibrate(), (IAction)null);
-            final thien_x a4 = UIFormBuilder.addLink(LoginScreen.settingsScreen, TextConstant.autoLogin(), (IAction)null);
-            final thien_x a5 = UIFormBuilder.addLink(LoginScreen.settingsScreen, String.valueOf(TextConstant.autoLogin()) + " Yahoo!", (IAction)null);
-            final thien_v a6 = UIFormBuilder.addButton(LoginScreen.settingsScreen, "Xóa dữ liệu cá nhân", 0, new thien_ct(), LoginScreen.settingsScreen.w, LoginScreen.settingsScreen.x + 5, 0);
-            a6.baseX = Screen.e - a6.width >> 1;
-            a3.a = GameManager.q;
-            a2.a = !GameManager.p;
-            a4.a = GameManager.r;
-            a5.a = GameManager.s;
-            a.c(TextField.multiTapSpeedIndex);
-            LoginScreen.settingsScreen.selectControl(a);
-            LoginScreen.settingsScreen.leftCommand = new UIAction(TextConstant.close(), new thien_cu(a3, a3.a, a2, a2.a, a4, a4.a, a5, a5.a, a, a.a()));
-            LoginScreen.settingsScreen.centerCommand = new UIAction(TextConstant.save(), new thien_cv(a4, a5, a, a3, a2));
+            final UIDropdown keyboardSpeed = UIFormBuilder.addDropdown(LoginScreen.settingsScreen, TextConstant.typingSpeed(), new String[] { "1", "2", "3", "4", "5", "6", "7" });
+            final UICheckBox checkBoxSound = UIFormBuilder.addCheckBox(LoginScreen.settingsScreen, TextConstant.sound(), (IAction)null);
+            final UICheckBox checkBoxVibrate = UIFormBuilder.addCheckBox(LoginScreen.settingsScreen, TextConstant.vibrate(), (IAction)null);
+            final UICheckBox checkBoxAutoLogin = UIFormBuilder.addCheckBox(LoginScreen.settingsScreen, TextConstant.autoLogin(), (IAction)null);
+            final UICheckBox checkBoxAutoLoginYahoo = UIFormBuilder.addCheckBox(LoginScreen.settingsScreen, String.valueOf(TextConstant.autoLogin()) + " Yahoo!", (IAction)null);
+            final UIButton btnDeleteData = UIFormBuilder.addButton(LoginScreen.settingsScreen, "Xóa dữ liệu cá nhân", 0, new thien_ct(), LoginScreen.settingsScreen.w, LoginScreen.settingsScreen.x + 5, 0);
+            btnDeleteData.baseX = Screen.e - btnDeleteData.width >> 1;
+            checkBoxVibrate.a = GameManager.q;
+            checkBoxSound.a = !GameManager.p;
+            checkBoxAutoLogin.a = GameManager.autoLogin;
+            checkBoxAutoLoginYahoo.a = GameManager.s;
+            keyboardSpeed.c(TextField.multiTapSpeedIndex);
+            LoginScreen.settingsScreen.selectControl(keyboardSpeed);
+            LoginScreen.settingsScreen.leftCommand = new UIAction(TextConstant.close(), new thien_cu(checkBoxVibrate, checkBoxVibrate.a, checkBoxSound, checkBoxSound.a, checkBoxAutoLogin, checkBoxAutoLogin.a, checkBoxAutoLoginYahoo, checkBoxAutoLoginYahoo.a, keyboardSpeed, keyboardSpeed.a()));
+            LoginScreen.settingsScreen.centerCommand = new UIAction(TextConstant.save(), new thien_cv(checkBoxAutoLogin, checkBoxAutoLoginYahoo, keyboardSpeed, checkBoxVibrate, checkBoxSound));
         }
-        GameManager.getInstance().b(LoginScreen.settingsScreen);
+        GameManager.getInstance().displayScreen(LoginScreen.settingsScreen);
         LoginScreen.settingsScreen.startSlide(-1);
         GameManager.getInstance().j();
     }
@@ -118,14 +127,14 @@ public final class LoginScreen extends FormScreen
         }
         MessageHandler.i(Xuka.version);
         MessageHandler.b();
-        GameManager.getInstance().a(String.valueOf(TextConstant.signingAs()) + this.usernameField.getText(), null, null, new UIAction(TextConstant.cancel(), new thien_cy(this))).a(true);
+        GameManager.getInstance().a(String.valueOf(TextConstant.signingAs()) + this.usernameField.getText(), null, null, new UIAction(TextConstant.cancel(), new thien_cy(this))).setExtraOption(true);
         GameManager.getInstance().d();
         GameManager.getInstance().i = new LoginAction(this);
     }
-    
-    static void closeChatBox(LoginScreen LoginScreen) {
-        if ((LoginScreen = LoginScreen).chatBoxField != null) {
-            LoginScreen.removeControl(LoginScreen.chatBoxField);
+
+    static void removeCommentField(LoginScreen loginScreen) {
+        if (loginScreen.commentField != null) {
+            loginScreen.removeControl(loginScreen.commentField);
         }
     }
     

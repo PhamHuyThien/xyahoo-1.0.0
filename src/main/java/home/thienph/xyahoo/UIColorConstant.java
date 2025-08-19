@@ -1,6 +1,6 @@
 package home.thienph.xyahoo;
 
-public final class UIColorPalette {
+public final class UIColorConstant {
     private static final int themeIndex = 0;
     private static int[] primaryColors;
     private static int[] secondaryColors;

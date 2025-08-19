@@ -5,13 +5,13 @@ implements IAction {
     private GameManager a;
     private final TextField b;
     private final Screen c;
-    private final thien_z d;
+    private final UIDropdown d;
 
-    thien_dw(GameManager gameManager2, TextField textField2, Screen screen2, thien_z thien_z2) {
+    thien_dw(GameManager gameManager2, TextField textField2, Screen screen2, UIDropdown UIDropdown2) {
         this.a = gameManager2;
         this.b = textField2;
         this.c = screen2;
-        this.d = thien_z2;
+        this.d = UIDropdown2;
     }
 
     public final void action() {
@@ -25,14 +25,14 @@ implements IAction {
         int n = 0;
         while (n < this.d.a.length) {
             if (string.equals(this.d.a[n])) {
-                this.a.b(String.valueOf(TextConstant.deleteSuccess()) + string);
+                this.a.showCenterPopup(String.valueOf(TextConstant.deleteSuccess()) + string);
                 this.a.c(this.c);
                 this.a.k();
                 return;
             }
             ++n;
         }
-        this.a.b(String.valueOf(TextConstant.add2()) + string + TextConstant.success());
+        this.a.showCenterPopup(String.valueOf(TextConstant.add2()) + string + TextConstant.success());
         this.a.c(this.c);
         this.a.k();
     }

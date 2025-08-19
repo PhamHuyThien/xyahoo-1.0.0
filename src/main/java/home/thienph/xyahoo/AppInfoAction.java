@@ -1,8 +1,8 @@
 package home.thienph.xyahoo;
 
-final class thien_cb
+final class AppInfoAction
 implements IAction {
-    thien_cb() {
+    AppInfoAction() {
     }
 
     public final void action() {

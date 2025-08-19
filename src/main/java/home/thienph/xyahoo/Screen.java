@@ -56,11 +56,11 @@ public class Screen {
     }
 
     public final void wrapTitle(int n) {
-        this.wrappedText = thien_w.a(this.title, n, thien_w.j);
+        this.wrappedText = TextRenderer.wrapText(this.title, n, TextRenderer.charWidth);
     }
 
     public final void setWrappedText(String string) {
-        this.wrappedText = thien_w.a(string, GameCanvas.screenWidth - 30, thien_w.j);
+        this.wrappedText = TextRenderer.wrapText(string, GameCanvas.screenWidth - 30, TextRenderer.charWidth);
     }
 
     public void draw(Graphics graphics) {
@@ -115,9 +115,9 @@ public class Screen {
             }
         }
         graphics2.setColor(0xFFFFFF);
-        thien_w.a(thien_w.d).a(screen2.leftLabel, 4, footerY, graphics2);
-        thien_w.a(thien_w.d).a(screen2.rightLabel, 0 + e - 4, footerY, 1, graphics2, thien_w.j, thien_w.f);
-        thien_w.a(thien_w.d).a(screen2.centerLabel, 0 + (e >> 1), footerY, 2, graphics2, thien_w.j, thien_w.f);
+        TextRenderer.getFontRenderer(TextRenderer.colorWhite).drawText(screen2.leftLabel, 4, footerY, graphics2);
+        TextRenderer.getFontRenderer(TextRenderer.colorWhite).drawText(screen2.rightLabel, 0 + e - 4, footerY, 1, graphics2, TextRenderer.charWidth, TextRenderer.fontHeight);
+        TextRenderer.getFontRenderer(TextRenderer.colorWhite).drawText(screen2.centerLabel, 0 + (e >> 1), footerY, 2, graphics2, TextRenderer.charWidth, TextRenderer.fontHeight);
     }
 
     public void drawBackground(Graphics graphics) {
@@ -416,7 +416,7 @@ public class Screen {
     }
 
     public static void drawFooter(Graphics graphics) {
-        if (thien_w.a) {
+        if (TextRenderer.useCustomFont) {
             graphics.drawImage(GameManager.v, 0, formHeight + 2, 20);
             return;
         }

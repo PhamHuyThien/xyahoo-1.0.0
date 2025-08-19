@@ -34,7 +34,7 @@ public final class GameCanvas extends Canvas implements Runnable {
       screenWidth = this.getWidth();
       screenHeight = this.getHeight();
       gameState = 0;
-      thien_w.a();
+      TextRenderer.initFont();
       thien_es var1 = thien_es.a();
       ConnectionManager.registerCallback(1, var1);
       ConnectionManager.registerCallback(1001, var1);
@@ -409,7 +409,7 @@ public final class GameCanvas extends Canvas implements Runnable {
                   var1.drawImage(thien_aq.c(), screenWidth >> 1, (screenHeight >> 1) - 15, 3);
                   var1.setColor(16777215);
                   GameManager.instance.a(var1, screenWidth >> 1, (screenHeight + thien_aq.a >> 1) + 3);
-                  thien_w.a(thien_w.d).a(GameManager.b, screenWidth - 8, screenHeight - thien_w.f - 8, 1, var1, thien_w.j, thien_w.f);
+                  TextRenderer.getFontRenderer(TextRenderer.colorWhite).drawText(GameManager.b, screenWidth - 8, screenHeight - TextRenderer.fontHeight - 8, 1, var1, TextRenderer.charWidth, TextRenderer.fontHeight);
                   GameManager.instance.h++;
                }
             default:

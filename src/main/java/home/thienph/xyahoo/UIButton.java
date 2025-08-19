@@ -2,7 +2,7 @@ package home.thienph.xyahoo;
 
 import javax.microedition.lcdui.Graphics;
 
-public final class thien_v
+public final class UIButton
 extends UIControlBase {
     private String b;
     private int c;
@@ -12,10 +12,10 @@ extends UIControlBase {
     private static int f;
     private static int g;
 
-    public thien_v() {
+    public UIButton() {
     }
 
-    public thien_v(String string, int n, int n2, int n3, int n4) {
+    public UIButton(String string, int n, int n2, int n3, int n4) {
         this.c = 0;
         this.b = string;
         this.baseX = n;
@@ -48,9 +48,9 @@ extends UIControlBase {
         graphics.setColor(bl ? 9291764 : 728097);
         graphics.fillRect(this.baseX + 2, this.baseY + 1 + (this.height - 3 >> 1), this.width - 3, 2 + (this.height - 3 >> 1));
         graphics.setColor(bl ? 0 : 0xFFFFFF);
-        thien_w.a(bl ? thien_w.c : thien_w.d).a(this.b, this.baseX + (this.width >> 1), this.baseY + 3, 2, graphics, thien_w.j, thien_w.f);
+        TextRenderer.getFontRenderer(bl ? TextRenderer.colorSecondary : TextRenderer.colorWhite).drawText(this.b, this.baseX + (this.width >> 1), this.baseY + 3, 2, graphics, TextRenderer.charWidth, TextRenderer.fontHeight);
         graphics.setColor(bl ? 14675958 : 9478569);
-        thien_v.a(graphics, this.baseX + 1, this.baseY + 1, this.width - 2, this.height - 2);
+        UIButton.a(graphics, this.baseX + 1, this.baseY + 1, this.width - 2, this.height - 2);
     }
 
     public final void update() {

@@ -12,7 +12,7 @@ implements IAction {
 
     public final void action() {
         GameManager.instance.c();
-        GameManager.instance.b(TextConstant.pleaseWait());
+        GameManager.instance.showCenterPopup(TextConstant.pleaseWait());
         Xuka.startThread(this.a, this.b, null, null, true);
     }
 }

@@ -1,5 +1,6 @@
 package home.thienph.xyahoo;
 
+import java.io.IOException;
 import java.io.InputStream;
 
 final class PacketReaderThread
@@ -10,79 +11,54 @@ implements Runnable {
     public final void run() {
         try {
             while (ConnectionManager.isConnected()) {
-                Object packet;
-                int headerSize;
-                Object inputStream = ConnectionManager.inputStream;
-                int packetLength = ConnectionManager.getMaxRetry();
-                byte[] headerBuffer = new byte[packetLength];
-                int n3 = 0;
-                while (n3 >= 0 && n3 < packetLength) {
-                    headerSize = ((InputStream) inputStream).read(headerBuffer, n3, packetLength - n3);
-                    n3 += headerSize;
+                InputStream in = ConnectionManager.inputStream;
+                int headerSize = ConnectionManager.getHeaderSize(); // chiều dài header
+
+                // Lấy tổng độ dài packet từ header
+                byte[] headerBuffer = readPayload(in, headerSize);
+                int packetLength = PacketReaderThread.readIntFromBytes(headerBuffer);
+
+                // Đọc type (4 byte)
+                byte[] typeBuffer = readPayload(in, headerSize);
+                int packetType = PacketReaderThread.readIntFromBytes(typeBuffer);
+
+                // Đọc subtype (4 byte)
+                byte[] subtypeBuffer = readPayload(in, headerSize);
+                int packetSubtype = PacketReaderThread.readIntFromBytes(subtypeBuffer);
+
+                // Đọc payload (còn lại sau khi trừ type + subtype)
+                int payloadLength = packetLength - 8; // vì type + subtype = 8 byte
+                byte[] payload = readPayload(in, payloadLength);
+
+                // Tạo packet
+                Packet packet = new Packet(packetType, packetSubtype, payload);
+
+                // Dispatch đến handler
+                Integer key = new Integer(packet.getType());
+                PacketHandler handler = (PacketHandler) ConnectionManager.getCallbacks().get(key);
+                if (handler != null) {
+                    handler.dispatch(packet);
                 }
-                if (n3 == -1) {
-                    packet = null;
-                } else {
-                    int packetType;
-                    headerSize = PacketReaderThread.readIntFromBytes(headerBuffer);
-                    n3 = 0;
-                    while (n3 >= 0 && n3 < 4) {
-                        packetType = ((InputStream) inputStream).read(headerBuffer, n3, packetLength - n3);
-                        n3 += packetType;
-                    }
-                    if (n3 == -1) {
-                        packet = null;
-                    } else {
-                        int packetSubtype;
-                        packetType = PacketReaderThread.readIntFromBytes(headerBuffer);
-                        n3 = 0;
-                        while (n3 >= 0 && n3 < 4) {
-                            packetSubtype = ((InputStream) inputStream).read(headerBuffer, n3, packetLength - n3);
-                            n3 += packetSubtype;
-                        }
-                        if (n3 == -1) {
-                            packet = null;
-                        } else {
-                            packetSubtype = PacketReaderThread.readIntFromBytes(headerBuffer);
-                            int n6 = headerSize - 8;
-                            byte[] payload = new byte[n6];
-                            n3 = 0;
-                            while (n3 >= 0 && n3 < n6) {
-                                int n7 = ((InputStream) inputStream).read(payload, n3, n6 - n3);
-                                if (n7 <= 0) continue;
-                                n3 += n7;
-                            }
-                            if (n3 == -1) {
-                                packet = null;
-                            } else {
-                                ConnectionManager.connectionId += packetLength + n6;
-                                packet = inputStream = new Packet(packetType, packetSubtype, payload);
-                            }
-                        }
-                    }
-                }
-                if (packet != null) {
-                    Integer n8 = new Integer(((Packet) inputStream).getType());
-                    ConnectionManager.ConnectionListener = (PacketHandler) ConnectionManager.getCallbacks().get(n8);
-                    if (ConnectionManager.ConnectionListener == null) continue;
-                    ConnectionManager.ConnectionListener.dispatch((Packet) inputStream);
-                    continue;
-                }
-                break;
             }
+        } catch (Exception e) {
+            System.err.println("PacketReaderThread.run Exception isConnected: " + e);
+            e.printStackTrace();
         }
-        catch (Exception exception) {}
+
+        // Xử lý disconnect
         try {
             if (ConnectionManager.isConnected && ConnectionManager.ConnectionListener != null) {
                 ConnectionManager.ConnectionListener.onDisconnect();
             }
             if (ConnectionManager.getSocketConnection() != null) {
                 ConnectionManager.resetConnection();
-                return;
             }
+        } catch (Exception e) {
+            System.err.println("PacketReaderThread.run Exception disconnect: " + e);
+            e.printStackTrace();
         }
-        catch (Exception exception) {}
     }
+
 
     private static int readIntFromBytes(byte[] byArray) {
         int n = 0;
@@ -94,4 +70,16 @@ implements Runnable {
         }
         return n;
     }
+
+    private static byte[] readPayload(InputStream in, int payloadLength) throws IOException {
+        byte[] payload = new byte[payloadLength];
+        int readBytes = 0;
+        while (readBytes < payloadLength) {
+            int r = in.read(payload, readBytes, payloadLength - readBytes);
+            if (r == -1) return null; // mất kết nối hoặc hết dữ liệu
+            readBytes += r;
+        }
+        return payload;
+    }
+
 }

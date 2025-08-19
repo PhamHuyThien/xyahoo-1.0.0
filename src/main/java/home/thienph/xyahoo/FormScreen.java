@@ -80,7 +80,7 @@ extends Screen {
         this.sectionHeaders = new thien_ao[n];
         int n2 = 0;
         while (n2 < n) {
-            this.sectionHeaders[n2] = new thien_ao(stringArray[n2], 0, 0, Screen.e - 1, thien_w.f + 2);
+            this.sectionHeaders[n2] = new thien_ao(stringArray[n2], 0, 0, Screen.e - 1, TextRenderer.fontHeight + 2);
             this.sectionHeaders[n2].a = this;
             this.sectionHeaders[n2].b = n2;
             ++n2;
@@ -124,7 +124,7 @@ extends Screen {
                     ++n3;
                 }
                 if (formScreen2.selectedSectionIndex == UIControlBase2.selectedIndex) {
-                    if (UIControlBase2 instanceof thien_v) {
+                    if (UIControlBase2 instanceof UIButton) {
                         // empty if block
                     }
                     UIControlBase2.baseY = ++n2;

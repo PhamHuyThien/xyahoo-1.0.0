@@ -1,15 +1,15 @@
 package home.thienph.xyahoo;
 
-final class thien_de
+final class RegisterAction
 implements IAction {
     private LoginScreen a;
 
-    thien_de(LoginScreen loginScreen2) {
+    RegisterAction(LoginScreen loginScreen2) {
         this.a = loginScreen2;
     }
 
     public final void action() {
-        LoginScreen.closeChatBox(this.a);
-        LoginScreen.openSettings();
+        LoginScreen.removeCommentField(this.a);
+        GameManager.instance.e();
     }
 }

@@ -13,7 +13,7 @@ implements IAction {
         if (this.a.F == null) {
             this.a.F = new TextField("", 250, 0);
             this.a.F.isEditable = false;
-            this.a.F.setBounds(0, Screen.formHeight - (thien_w.f << 1) + 8, Screen.e - 1, thien_w.f + 6);
+            this.a.F.setBounds(0, Screen.formHeight - (TextRenderer.fontHeight << 1) + 8, Screen.e - 1, TextRenderer.fontHeight + 6);
             this.a.F.actionPrimary = new UIAction(TextConstant.exit(), new thien_cf(this));
             this.a.F.actionTertiary = new UIAction(TextConstant.send(), new thien_cg(this));
         } else {

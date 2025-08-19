@@ -6,7 +6,7 @@ public final class thien_eh
 extends FormScreen {
     private static String[] H = new String[]{"admin", "administrator", "root", "system", "xuka", "yahoo"};
     public TextField D;
-    private thien_z I;
+    private UIDropdown I;
     public TextField E;
     private TextField J;
     private String K;
@@ -28,7 +28,7 @@ extends FormScreen {
         System.gc();
         FormScreen.calculateFormDimensions(70, 150);
         this.initLayout();
-        this.x = Screen.formHeight - (thien_w.i * 3 + thien_aq.a + (GameCanvas.screenHeight > 170 ? 55 : 20) + GameManager.g) >> 1;
+        this.x = Screen.formHeight - (TextRenderer.extraSpacing * 3 + thien_aq.a + (GameCanvas.screenHeight > 170 ? 55 : 20) + GameManager.g) >> 1;
         UIFormBuilder.addImage((FormScreen)this, thien_aq.c(), false);
         this.x += GameCanvas.screenHeight > 170 ? 18 : 7;
         this.D = UIFormBuilder.addTextField((FormScreen)this, "T\u00ean: ", 0, -1);
@@ -47,9 +47,9 @@ extends FormScreen {
 
     protected final void f() {
         GameManager gameManager2 = GameManager.getInstance();
-        gameManager2.b(gameManager2.l);
-        gameManager2.d(gameManager2.l);
-        gameManager2.l.startSlide(1);
+        gameManager2.displayScreen(gameManager2.loginScreen);
+        gameManager2.d(gameManager2.loginScreen);
+        gameManager2.loginScreen.startSlide(1);
         gameManager2.c(this);
     }
 
@@ -103,7 +103,7 @@ extends FormScreen {
         } else {
             this.G = this.D.getText();
         }
-        GameManager.getInstance().a(TextConstant.registering(), null, new UIAction(TextConstant.cancel(), new thien_ek(this)), null).a(true);
+        GameManager.getInstance().a(TextConstant.registering(), null, new UIAction(TextConstant.cancel(), new thien_ek(this)), null).setExtraOption(true);
         GameManager.getInstance().i = new thien_el(this);
     }
 

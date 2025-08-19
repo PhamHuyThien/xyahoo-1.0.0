@@ -2,26 +2,26 @@ package home.thienph.xyahoo;
 
 final class thien_cv
 implements IAction {
-    private final thien_x a;
-    private final thien_x b;
-    private final thien_z c;
-    private final thien_x d;
-    private final thien_x e;
+    private final UICheckBox a;
+    private final UICheckBox b;
+    private final UIDropdown c;
+    private final UICheckBox d;
+    private final UICheckBox e;
 
-    thien_cv(thien_x thien_x2, thien_x thien_x3, thien_z thien_z2, thien_x thien_x4, thien_x thien_x5) {
-        this.a = thien_x2;
-        this.b = thien_x3;
-        this.c = thien_z2;
-        this.d = thien_x4;
-        this.e = thien_x5;
+    thien_cv(UICheckBox UICheckBox2, UICheckBox UICheckBox3, UIDropdown UIDropdown2, UICheckBox UICheckBox4, UICheckBox UICheckBox5) {
+        this.a = UICheckBox2;
+        this.b = UICheckBox3;
+        this.c = UIDropdown2;
+        this.d = UICheckBox4;
+        this.e = UICheckBox5;
     }
 
     public final void action() {
-        GameManager.getInstance().l.startSlide(1);
+        GameManager.getInstance().loginScreen.startSlide(1);
         GameManager.getInstance().c(LoginScreen.getSettingsScreen());
-        if (GameManager.r != this.a.a) {
-            GameManager.r = this.a.a;
-            Xuka.saveFlag("atlog", GameManager.r);
+        if (GameManager.autoLogin != this.a.a) {
+            GameManager.autoLogin = this.a.a;
+            Xuka.saveFlag("atlog", GameManager.autoLogin);
         }
         if (GameManager.s != this.b.a) {
             GameManager.s = this.b.a;

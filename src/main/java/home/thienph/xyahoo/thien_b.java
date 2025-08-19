@@ -84,7 +84,7 @@ public final class thien_b extends UIControlBase {
       System.currentTimeMillis();
       super.isEnabled = true;
       this.c = true;
-      this.I = thien_w.f + 3;
+      this.I = TextRenderer.fontHeight + 3;
       if (this.I < a[0].getHeight()) {
          this.I = a[0].getHeight();
       }
@@ -297,14 +297,14 @@ public final class thien_b extends UIControlBase {
       var1.setClip(super.baseX, super.baseY, super.width + 1, super.height);
       if (this.e) {
          var1.setColor(16777215);
-         thien_w.a(thien_w.d).a(TextConstant.pleaseWait(), this.T, 20, 2, var1, thien_w.j, thien_w.f);
-         GameManager.instance.a(var1, this.T, thien_w.f + 35);
+         TextRenderer.getFontRenderer(TextRenderer.colorWhite).drawText(TextConstant.pleaseWait(), this.T, 20, 2, var1, TextRenderer.charWidth, TextRenderer.fontHeight);
+         GameManager.instance.a(var1, this.T, TextRenderer.fontHeight + 35);
       } else if (this.K == 0) {
          var1.setColor(16777215);
          int var9 = this.m.length;
 
          while (--var9 >= 0) {
-            thien_w.a(thien_w.d).a(this.m[var9], this.T, 20 + var9 * thien_w.f, 2, var1, thien_w.j, thien_w.f);
+            TextRenderer.getFontRenderer(TextRenderer.colorWhite).drawText(this.m[var9], this.T, 20 + var9 * TextRenderer.fontHeight, 2, var1, TextRenderer.charWidth, TextRenderer.fontHeight);
          }
       } else {
          var1.translate(2, 2);
@@ -330,7 +330,7 @@ public final class thien_b extends UIControlBase {
                var1.drawRoundRect(0, var2 + 1, var4 + 1, var3, 5, 5);
                if (var3 > this.I) {
                   var1.setColor(3981823);
-                  thien_w.a(thien_w.e).a(var6.d, 22, var2 + this.V, var1);
+                  TextRenderer.getFontRenderer(TextRenderer.colorHighlight).drawText(var6.d, 22, var2 + this.V, var1);
                }
             }
 
@@ -347,9 +347,9 @@ public final class thien_b extends UIControlBase {
 
             String var11 = var6.d;
             if (var6.a == 1) {
-               var11 = thien_w.a(var11, super.width - 26, thien_w.j);
+               var11 = TextRenderer.wrapText(var11, super.width - 26, TextRenderer.charWidth);
                var1.setColor(16726823);
-               thien_w.a(thien_w.b).a(var11, var7, var2 + 2, var1);
+               TextRenderer.getFontRenderer(TextRenderer.colorPrimary).drawText(var11, var7, var2 + 2, var1);
             } else {
                var11 = var6.e;
                if (var6.f != null && !var6.f.equals("")) {
@@ -357,11 +357,11 @@ public final class thien_b extends UIControlBase {
                }
 
                if (!var6.e.equals("")) {
-                  var11 = thien_w.a(var11, super.width - 26, thien_w.j);
+                  var11 = TextRenderer.wrapText(var11, super.width - 26, TextRenderer.charWidth);
                }
 
                var1.setColor(var6.b);
-               thien_w.a(var6.c).a(var11, var7, var2 + 3, var1);
+               TextRenderer.getFontRenderer(var6.c).drawText(var11, var7, var2 + 3, var1);
                if (this.M && var6.g != 3) {
                   var1.drawImage(GameManager.y[var6.h ? 1 : 0], super.width - 12, var2 + (this.I >> 1), 3);
                }

@@ -28,7 +28,7 @@ implements IAction {
             }
         }
         thien_ew2.startSlide(1);
-        GameManager.instance.b(thien_ew2);
+        GameManager.instance.displayScreen(thien_ew2);
         GameManager.instance.d(thien_ew2.title);
     }
 }

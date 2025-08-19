@@ -58,19 +58,19 @@ public final class thien_ba extends Screen {
    public static String ai;
    private UIAction aw;
    private Vector ax;
-   private thien_am ay;
+   private PopupSideElementData ay;
    private Vector az;
-   private thien_am aA;
+   private PopupSideElementData aA;
    private UIAction aB;
    private Vector aC;
-   private thien_am aD;
+   private PopupSideElementData aD;
    public static Image[] aj;
    private int aE = -1;
    private UIAction aF = new UIAction(TextConstant.smileys(), new thien_bb(this));
    private UIAction aG = new UIAction("Chat", new thien_bm(this));
    private UIAction aH = new UIAction("Đặt cược", new thien_br(this));
    private static int aI = -1;
-   private thien_am aJ;
+   private PopupSideElementData aJ;
    private UIAction aK;
    private UIAction aL;
    private UIAction aM;
@@ -121,7 +121,7 @@ public final class thien_ba extends Screen {
       }
 
       this.az = new Vector();
-      this.aA = new thien_am(this.az);
+      this.aA = new PopupSideElementData(this.az);
       this.aB = new UIAction("Menu", new thien_bv(this));
       super.scrollLock = true;
       GameManager.f();
@@ -217,9 +217,9 @@ public final class thien_ba extends Screen {
       System.gc();
       if (this.aw == null) {
          this.ax = new Vector();
-         this.ay = new thien_am(this.ax);
+         this.ay = new PopupSideElementData(this.ax);
          this.aw = new UIAction(TextConstant.kick(), null);
-         this.aw.icon = this.ay;
+         this.aw.popupSideElementData = this.ay;
       }
 
       this.F = new thien_bz[var1];
@@ -296,7 +296,7 @@ public final class thien_ba extends Screen {
 
       if (this.aC == null) {
          this.aC = new Vector();
-         this.aD = new thien_am(this.aC);
+         this.aD = new PopupSideElementData(this.aC);
       } else {
          this.aC.removeAllElements();
       }
@@ -332,7 +332,7 @@ public final class thien_ba extends Screen {
 
       this.av = this.F[0];
       ap = null;
-      (ap = new TextField("", 9, 1)).setBounds(0, Screen.formHeight - GameManager.g - (thien_w.f << 1) - 10, Screen.e - 1, thien_w.f + 6);
+      (ap = new TextField("", 9, 1)).setBounds(0, Screen.formHeight - GameManager.g - (TextRenderer.fontHeight << 1) - 10, Screen.e - 1, TextRenderer.fontHeight + 6);
       if (this.aM == null) {
          this.aM = new UIAction(TextConstant.close(), new thien_bp(this));
       }
@@ -542,7 +542,7 @@ public final class thien_ba extends Screen {
             var6 = "Tới bét: ";
          }
 
-         var4 = var4 + var6 + thien_w.a(this.V[var5], 14) + " " + this.ar[var5] + " xuxu" + "\n";
+         var4 = var4 + var6 + TextRenderer.truncate(this.V[var5], 14) + " " + this.ar[var5] + " xuxu" + "\n";
          if (thien_ff.y.equals(this.V[var5]) && this.ar[var5] > 0L) {
             GameManager.instance.a("Chúc mừng " + thien_ff.y + " đã thắng số tiền " + this.ar[var5] + " xuxu", (Image) null, 1);
          }
@@ -623,7 +623,7 @@ public final class thien_ba extends Screen {
 
    private void k() {
       I = null;
-      (I = new TextField("", 50, 0)).setBounds(0, Screen.formHeight - GameManager.g - (thien_w.f << 1) - 10, Screen.e - 1, thien_w.f + 6);
+      (I = new TextField("", 50, 0)).setBounds(0, Screen.formHeight - GameManager.g - (TextRenderer.fontHeight << 1) - 10, Screen.e - 1, TextRenderer.fontHeight + 6);
       if (this.aK == null) {
          this.aK = new UIAction(TextConstant.cancel(), new thien_bn(this));
       }
@@ -649,7 +649,7 @@ public final class thien_ba extends Screen {
       return ap;
    }
 
-   static thien_am b(thien_ba var0) {
+   static PopupSideElementData b(thien_ba var0) {
       return var0.aA;
    }
 
@@ -657,15 +657,15 @@ public final class thien_ba extends Screen {
       var0.al = null;
    }
 
-   static thien_am c(thien_ba var0) {
+   static PopupSideElementData c(thien_ba var0) {
       return var0.aD;
    }
 
-   static thien_am d(thien_ba var0) {
+   static PopupSideElementData d(thien_ba var0) {
       return var0.aJ;
    }
 
-   static void a(thien_ba var0, thien_am var1) {
+   static void a(thien_ba var0, PopupSideElementData var1) {
       var0.aJ = var1;
    }
 

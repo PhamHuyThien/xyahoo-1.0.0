@@ -49,7 +49,7 @@ extends UIControlBase {
         System.currentTimeMillis();
         this.n = 0;
         this.isEnabled = true;
-        this.j = thien_w.f + 3;
+        this.j = TextRenderer.fontHeight + 3;
         if (this.j < thien_b.a[0].getHeight()) {
             this.j = thien_b.a[0].getHeight();
         }
@@ -227,7 +227,7 @@ extends UIControlBase {
                 graphics.drawRoundRect(0, n + 1, n3 + 1, n2, 5, 5);
                 if (n2 > this.j && thien_u2.f != null) {
                     graphics.setColor(3981823);
-                    thien_w.a(thien_w.e).a(thien_u2.f, 22, n + this.J, graphics);
+                    TextRenderer.getFontRenderer(TextRenderer.colorHighlight).drawText(thien_u2.f, 22, n + this.J, graphics);
                 }
             }
             graphics.setColor(0);
@@ -240,15 +240,15 @@ extends UIControlBase {
             }
             if (thien_u2.a == 1) {
                 string = thien_u2.d;
-                string = thien_w.a(string, this.width - 26, thien_w.j);
+                string = TextRenderer.wrapText(string, this.width - 26, TextRenderer.charWidth);
                 graphics.setColor(16726823);
-                thien_w.a(thien_w.b).a(string, n5, n + 2, graphics);
+                TextRenderer.getFontRenderer(TextRenderer.colorPrimary).drawText(string, n5, n + 2, graphics);
             } else {
                 string = thien_u2.e;
                 if (string != null) {
-                    string = thien_w.a(string, this.width - 26, thien_w.j);
+                    string = TextRenderer.wrapText(string, this.width - 26, TextRenderer.charWidth);
                     graphics.setColor(thien_u2.b);
-                    thien_w.a(thien_u2.c).a(string, n5, n + 3, graphics);
+                    TextRenderer.getFontRenderer(thien_u2.c).drawText(string, n5, n + 3, graphics);
                 }
             }
             n += n2;

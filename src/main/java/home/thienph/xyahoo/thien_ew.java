@@ -12,7 +12,7 @@ public final class thien_ew extends Screen {
    public thien_e z;
    TextField A;
    private boolean C;
-   private final thien_am D;
+   private final PopupSideElementData D;
    private final Vector E;
 
    public thien_ew(String var1, boolean var2, boolean var3, int[] var4) {
@@ -22,8 +22,8 @@ public final class thien_ew extends Screen {
       super.title = var1;
       this.A = new TextField();
       this.A.isEditable = false;
-      this.A.setBounds(1, Screen.formHeight - GameManager.g - 2, Screen.e - 3, thien_w.f + 6);
-      this.z = new thien_e(1, 1, Screen.e - 3, Screen.formHeight - GameManager.g - thien_w.f - 7);
+      this.A.setBounds(1, Screen.formHeight - GameManager.g - 2, Screen.e - 3, TextRenderer.fontHeight + 6);
+      this.z = new thien_e(1, 1, Screen.e - 3, Screen.formHeight - GameManager.g - TextRenderer.fontHeight - 7);
       this.addControl(this.z);
       this.addControl(this.A);
       this.selectControl(this.A);
@@ -37,7 +37,7 @@ public final class thien_ew extends Screen {
       this.E.addElement(new UIAction("Copy", new thien_fa(this)));
       this.E.addElement(new UIAction(TextConstant.paste(), new thien_fb(this)));
       this.E.addElement(new UIAction(TextConstant.close(), new thien_fc(this, var3)));
-      this.D = new thien_am(this.E);
+      this.D = new PopupSideElementData(this.E);
       super.leftCommand = new UIAction("Menu", new thien_fd(this));
       super.centerCommand = new UIAction("Chat", null);
       if (GameManager.E != null) {
@@ -129,7 +129,7 @@ public final class thien_ew extends Screen {
       this.z.drawScrollbar(var1);
    }
 
-   static thien_am a(thien_ew var0) {
+   static PopupSideElementData a(thien_ew var0) {
       return var0.D;
    }
 }

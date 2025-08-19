@@ -70,7 +70,7 @@ final class thien_gk implements IAction {
          }
 
          if (var15) {
-            GameManager.getInstance().b(TextConstant.thisIdAlreadyAdded());
+            GameManager.getInstance().showCenterPopup(TextConstant.thisIdAlreadyAdded());
          } else {
             MessageHandler.b(var1, var2, 1);
             GameManager.getInstance().c(this.c);

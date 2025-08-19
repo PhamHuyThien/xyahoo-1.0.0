@@ -2,7 +2,7 @@ package home.thienph.xyahoo;
 
 import javax.microedition.lcdui.Graphics;
 
-public final class thien_z
+public final class UIDropdown
 extends UIControlBase {
     public String[] a;
     private int c;
@@ -10,7 +10,7 @@ extends UIControlBase {
     public IAction b;
     private String e = "";
 
-    public thien_z(String[] stringArray, int n, int n2, int n3, int n4) {
+    public UIDropdown(String[] stringArray, int n, int n2, int n3, int n4) {
         this.a = stringArray;
         this.baseX = n;
         this.baseY = n2;
@@ -91,7 +91,7 @@ extends UIControlBase {
 
     private void g() {
         if (this.a.length != 0) {
-            this.e = thien_w.a(this.a[this.c], this.width - 35, thien_w.j);
+            this.e = TextRenderer.wrapText(this.a[this.c], this.width - 35, TextRenderer.charWidth);
         }
     }
 
@@ -101,17 +101,17 @@ extends UIControlBase {
             graphics.setColor(2580);
             graphics.fillRect(this.baseX + 2, this.baseY + 2, this.width - 3, this.height - 3);
         }
-        int n = this.baseY + 3 + (thien_w.a ? 0 : 1);
+        int n = this.baseY + 3 + (TextRenderer.useCustomFont ? 0 : 1);
         graphics.setColor(0xFFFFFF);
         if (this.a.length == 0) {
-            thien_w.a(thien_w.d).a(TextConstant.noItem(), this.baseX + (this.width >> 1), n, 2, graphics, thien_w.j, thien_w.f);
+            TextRenderer.getFontRenderer(TextRenderer.colorWhite).drawText(TextConstant.noItem(), this.baseX + (this.width >> 1), n, 2, graphics, TextRenderer.charWidth, TextRenderer.fontHeight);
         } else {
-            thien_w.a(thien_w.d).a(this.e, this.baseX + (this.width >> 1), n, 2, graphics, thien_w.j, thien_w.f);
+            TextRenderer.getFontRenderer(TextRenderer.colorWhite).drawText(this.e, this.baseX + (this.width >> 1), n, 2, graphics, TextRenderer.charWidth, TextRenderer.fontHeight);
         }
         n = this.height - 2;
         int n2 = this.baseY + 1;
         graphics.setColor(bl ? 14675958 : 9478569);
-        thien_v.a(graphics, this.baseX + 1, n2, this.width - 2, n);
+        UIButton.a(graphics, this.baseX + 1, n2, this.width - 2, n);
         n = this.baseY + (this.height >> 1);
         graphics.drawImage(thien_b.b[2], this.baseX + 9, n, 3);
         graphics.drawImage(thien_b.b[3], this.baseX + this.width - 9, n, 3);

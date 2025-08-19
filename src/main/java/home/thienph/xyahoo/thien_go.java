@@ -31,7 +31,7 @@ implements Runnable {
             messageConnection.send((Message)textMessage);
             if (this.c == null) {
                 GameManager.instance.c();
-                GameManager.instance.b(TextConstant.sendSmsCompleted());
+                GameManager.instance.showCenterPopup(TextConstant.sendSmsCompleted());
                 return;
             }
             this.c.action();
@@ -42,7 +42,7 @@ implements Runnable {
                 GameManager.instance.c();
             }
             if (this.e == null) {
-                GameManager.instance.b(TextConstant.sendSmsFailed());
+                GameManager.instance.showCenterPopup(TextConstant.sendSmsFailed());
                 return;
             }
             this.e.action();

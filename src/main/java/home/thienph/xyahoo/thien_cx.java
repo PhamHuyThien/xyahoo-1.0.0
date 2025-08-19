@@ -7,6 +7,6 @@ implements IAction {
 
     public final void action() {
         GameManager.instance.c();
-        GameManager.instance.b(TextConstant.youWillReceiveYourPassword());
+        GameManager.instance.showCenterPopup(TextConstant.youWillReceiveYourPassword());
     }
 }

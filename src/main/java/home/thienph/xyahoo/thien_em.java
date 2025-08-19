@@ -8,7 +8,7 @@ extends Screen {
     thien_al w;
     int x;
     private Vector A;
-    thien_am y;
+    PopupSideElementData y;
     public static UIAction z = new UIAction("N\u1ea1p xuxu", new thien_en());
 
     public thien_em() {
@@ -21,7 +21,7 @@ extends Screen {
         this.A.addElement(new UIAction(TextConstant.update(), new thien_ep(this)));
         this.A.addElement(z);
         this.A.addElement(new UIAction(TextConstant.close(), new thien_eq(this)));
-        this.y = new thien_am(this.A);
+        this.y = new PopupSideElementData(this.A);
         this.leftCommand = new UIAction("Menu", new thien_er(this));
     }
 

@@ -110,19 +110,19 @@ extends UIControlBase {
     }
 
     private void initClearButton() {
-        cursorHeight = thien_w.f + 1;
+        cursorHeight = TextRenderer.fontHeight + 1;
         this.actionSecondary = new UIAction(TextConstant.clear(), new thien_av(this));
-        fontWidth = thien_w.a("ABC", thien_w.j) + 1;
+        fontWidth = TextRenderer.computeTextWidth("ABC", TextRenderer.charWidth) + 1;
     }
 
     public TextField() {
-        UIColorPalette.getTextColor();
+        UIColorConstant.getTextColor();
         this.textContent = "";
         this.initClearButton();
     }
 
     public TextField(String string, int cursorPos, int n2) {
-        UIColorPalette.getTextColor();
+        UIColorConstant.getTextColor();
         this.textContent = string;
         this.maxLength = cursorPos;
         this.inputType = n2;
@@ -140,14 +140,14 @@ extends UIControlBase {
 
     private void updateScrollOffset() {
         this.displayText = this.inputType == 2 ? this.maskedText : this.textContent;
-        if (this.scrollOffset < 0 && thien_w.a(this.displayText, thien_w.j) + this.scrollOffset < this.width - 4 - 13 - fontWidth) {
-            this.scrollOffset = this.width - 10 - fontWidth - thien_w.a(this.displayText, thien_w.j);
+        if (this.scrollOffset < 0 && TextRenderer.computeTextWidth(this.displayText, TextRenderer.charWidth) + this.scrollOffset < this.width - 4 - 13 - fontWidth) {
+            this.scrollOffset = this.width - 10 - fontWidth - TextRenderer.computeTextWidth(this.displayText, TextRenderer.charWidth);
         }
-        if (this.scrollOffset + thien_w.a(this.displayText.substring(0, this.cursorPos), thien_w.j) <= 0) {
-            this.scrollOffset = -thien_w.a(this.displayText.substring(0, this.cursorPos), thien_w.j);
+        if (this.scrollOffset + TextRenderer.computeTextWidth(this.displayText.substring(0, this.cursorPos), TextRenderer.charWidth) <= 0) {
+            this.scrollOffset = -TextRenderer.computeTextWidth(this.displayText.substring(0, this.cursorPos), TextRenderer.charWidth);
             this.scrollOffset += 40;
-        } else if (this.scrollOffset + thien_w.a(this.displayText.substring(0, this.cursorPos), thien_w.j) >= this.width - 12 - fontWidth) {
-            this.scrollOffset = this.width + this.lineSpacing - fontWidth - thien_w.a(this.displayText.substring(0, this.cursorPos), thien_w.j) - 8;
+        } else if (this.scrollOffset + TextRenderer.computeTextWidth(this.displayText.substring(0, this.cursorPos), TextRenderer.charWidth) >= this.width - 12 - fontWidth) {
+            this.scrollOffset = this.width + this.lineSpacing - fontWidth - TextRenderer.computeTextWidth(this.displayText.substring(0, this.cursorPos), TextRenderer.charWidth) - 8;
         }
         if (this.scrollOffset > 0) {
             this.scrollOffset = 0;
@@ -312,19 +312,19 @@ extends UIControlBase {
         int n;
         Graphics graphics2;
         int n2 = 0;
-        int n3 = this.baseY + (this.height - thien_w.f >> 1);
+        int n3 = this.baseY + (this.height - TextRenderer.fontHeight >> 1);
         boolean bl = this.isSelected();
         this.displayText = this.inputType == 2 ? this.maskedText : this.textContent;
-        graphics.setColor(UIColorPalette.getSecondaryColor());
+        graphics.setColor(UIColorConstant.getSecondaryColor());
         if (bl && this.isEditable) {
             n2 = this.baseX + this.width - 3;
             graphics.setColor(2580);
             graphics.fillRect(this.baseX + 2, this.baseY + 2, this.width - 3, this.height - 3);
             if (!hasAlphaInput) {
                 graphics.setColor(9478569);
-                thien_v.a(graphics, n2 - fontWidth, this.baseY + 3, fontWidth, this.height - 6);
+                UIButton.a(graphics, n2 - fontWidth, this.baseY + 3, fontWidth, this.height - 6);
                 graphics.setColor(0xFFFFFF);
-                thien_w.a(thien_w.d).a(inputModes[this.inputModeIndex], n2 - (fontWidth >> 1) + (thien_w.a ? 0 : 1), n3, 2, graphics, thien_w.j, thien_w.f);
+                TextRenderer.getFontRenderer(TextRenderer.colorWhite).drawText(inputModes[this.inputModeIndex], n2 - (fontWidth >> 1) + (TextRenderer.useCustomFont ? 0 : 1), n3, 2, graphics, TextRenderer.charWidth, TextRenderer.fontHeight);
             }
         }
         if (bl) {
@@ -337,18 +337,18 @@ extends UIControlBase {
             n = bl && !this.isEditable ? 11320516 : 14675958;
         }
         graphics2.setColor(n);
-        thien_v.a(graphics, this.baseX + 1, this.baseY + 1, this.width - 2, this.height - 2);
+        UIButton.a(graphics, this.baseX + 1, this.baseY + 1, this.width - 2, this.height - 2);
         n2 = this.baseY + 1;
         this.textStartX = 4 + this.scrollOffset + this.baseX;
         graphics.setClip(this.baseX + 3, n2 > this.parentScreen.scrollY ? n2 : this.parentScreen.scrollY, this.width, this.height - 4);
-        thien_w.a(thien_w.d).a(this.displayText, this.textStartX, n3, graphics);
+        TextRenderer.getFontRenderer(TextRenderer.colorWhite).drawText(this.displayText, this.textStartX, n3, graphics);
         if (bl) {
             if (this.multiTapIndex == 0 && (this.cursorBlinkTimer > 0 || this.tickCounter / 5 % 2 == 0)) {
                 graphics.setColor(3981823);
             } else {
                 graphics.setColor(0xAAAAFF);
             }
-            graphics.fillRect(this.textStartX + thien_w.a(this.displayText.substring(0, this.cursorPos), thien_w.j) + (thien_w.a ? 1 : 0), this.baseY + (this.height - cursorHeight) / 2 + 1, 1, cursorHeight);
+            graphics.fillRect(this.textStartX + TextRenderer.computeTextWidth(this.displayText.substring(0, this.cursorPos), TextRenderer.charWidth) + (TextRenderer.useCustomFont ? 1 : 0), this.baseY + (this.height - cursorHeight) / 2 + 1, 1, cursorHeight);
         }
     }
 
