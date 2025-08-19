@@ -92,7 +92,7 @@ public final class thien_bz extends UIControlBase
     }
     
     private static String a() {
-        if (thien_ba.S.R) {
+        if (BigTwoGameScreen.instance.R) {
             return "gold";
         }
         return "xuxu";
@@ -119,7 +119,7 @@ public final class thien_bz extends UIControlBase
     }
     
     private void b(final Graphics graphics, final int n, final int n2) {
-        if (thien_ba.S.R && this.C != null) {
+        if (BigTwoGameScreen.instance.R && this.C != null) {
             graphics.setColor(((Integer)this.E).intValue());
             TextRenderer.getFontRenderer(this.E).drawText(this.C, n, n2, 2, graphics, TextRenderer.charWidth, TextRenderer.fontHeight);
             TextRenderer.getFontRenderer(this.E).drawText(String.valueOf(this.D) + "\u0111", n, n2 + 13, 2, graphics, TextRenderer.charWidth, TextRenderer.fontHeight);
@@ -128,10 +128,10 @@ public final class thien_bz extends UIControlBase
     
     public final void draw(final Graphics graphics) {
         if (this.a != null && !this.j) {
-            graphics.drawImage(thien_ba.aj[this.F], this.e, this.f, this.L);
+            graphics.drawImage(BigTwoGameScreen.aj[this.F], this.e, this.f, this.L);
             graphics.setColor(16777215);
-            TextRenderer.getFontRenderer(TextRenderer.colorWhite).drawText(String.valueOf(TextConstant.bet()) + ": " + thien_ba.S.C + " " + a(), 5, 2 - TextRenderer.fontHeight, graphics);
-            if (!thien_ba.S.E) {
+            TextRenderer.getFontRenderer(TextRenderer.colorWhite).drawText(String.valueOf(TextConstant.bet()) + ": " + BigTwoGameScreen.instance.C + " " + a(), 5, 2 - TextRenderer.fontHeight, graphics);
+            if (!BigTwoGameScreen.instance.E) {
                 if (this.H) {
                     this.d = TextConstant.host();
                 }
@@ -177,19 +177,19 @@ public final class thien_bz extends UIControlBase
             if (this.G && this.P >= 0) {
                 graphics.setColor(16726823);
                 if (this.k == 1 || this.k == 3) {
-                    thien_ba.S.rightCommand.label = "";
-                    thien_ba.S.centerCommand.label = "";
+                    BigTwoGameScreen.instance.rightCommand.label = "";
+                    BigTwoGameScreen.instance.centerCommand.label = "";
                     TextRenderer.getFontRenderer(TextRenderer.colorPrimary).drawText(new StringBuffer(String.valueOf(this.P)).toString(), this.e + 2, this.f - 15, graphics);
                     return;
                 }
                 if (this.k == 2) {
-                    thien_ba.S.rightCommand.label = "";
-                    thien_ba.S.centerCommand.label = "";
+                    BigTwoGameScreen.instance.rightCommand.label = "";
+                    BigTwoGameScreen.instance.centerCommand.label = "";
                     TextRenderer.getFontRenderer(TextRenderer.colorPrimary).drawText(new StringBuffer(String.valueOf(this.P)).toString(), this.e - 17, this.f - 5, graphics);
                     return;
                 }
-                thien_ba.S.rightCommand.label = TextConstant.deny();
-                thien_ba.S.centerCommand.label = TextConstant.dropCard();
+                BigTwoGameScreen.instance.rightCommand.label = TextConstant.deny();
+                BigTwoGameScreen.instance.centerCommand.label = TextConstant.dropCard();
                 TextRenderer.getFontRenderer(TextRenderer.colorPrimary).drawText(new StringBuffer(String.valueOf(this.P)).toString(), this.e - 17, this.f - 5, graphics);
             }
         }

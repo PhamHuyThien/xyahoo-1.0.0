@@ -92,8 +92,8 @@ public final class ChatRoomScreen extends Screen {
                GameManager.instance.B = BuddyListScreen.currentGroupName;
                GameManager.instance.C++;
                if (GameManager.instance.C > 5) {
-                  this.z.a("Bạn chỉ có thể chat 5 câu liên tục khi chat nhóm", 1);
-                  return false;
+//                  this.z.a("Bạn chỉ có thể chat 5 câu liên tục khi chat nhóm", 1);
+//                  return false;
                }
 
                MessageHandler.f(super.subtitle, this.A.getText());

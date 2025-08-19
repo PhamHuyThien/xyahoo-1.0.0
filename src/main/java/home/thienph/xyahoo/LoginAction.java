@@ -34,6 +34,6 @@ implements IAction {
         GameManager.getInstance().d = new Vector();
         GameCanvas.instance.connectToServer();
         MessageHandler.login(this.loginScreen.usernameField.getText(), this.loginScreen.passwordField.getText(), BuddyListScreen.userStatus, 1, n);
-        GameManager.getInstance().showHomeScreen();
+//        GameManager.getInstance().showHomeScreen();
     }
 }

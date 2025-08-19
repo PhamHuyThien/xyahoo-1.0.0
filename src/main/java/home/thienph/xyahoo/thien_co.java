@@ -11,7 +11,7 @@ implements IAction {
     public final void action() {
         String[] stringArray = this.a.getSelectedBuddyIds();
         MessageHandler.a(this.a.w, stringArray);
-        GameManager.getInstance().i();
+        GameManager.getInstance().showDanhSachBanBe();
         GameManager.getInstance().a(this.a.w, stringArray, this.a.x);
     }
 }

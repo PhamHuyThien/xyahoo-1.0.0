@@ -2,10 +2,10 @@ package home.thienph.xyahoo;
 
 final class thien_bl
 implements IAction {
-    private thien_ba a;
+    private BigTwoGameScreen a;
 
-    thien_bl(thien_ba thien_ba2) {
-        this.a = thien_ba2;
+    thien_bl(BigTwoGameScreen bigTwoGameScreen2) {
+        this.a = bigTwoGameScreen2;
     }
 
     public final void action() {
@@ -14,6 +14,6 @@ implements IAction {
             this.a.g();
         }
         long cfr_ignored_0 = this.a.ac;
-        this.a.a((byte)this.a.Z, this.a.aa, this.a.ab, this.a.ad, this.a.ae, this.a.af, this.a.ag, thien_ba.B);
+        this.a.a((byte)this.a.Z, this.a.aa, this.a.ab, this.a.ad, this.a.ae, this.a.af, this.a.ag, BigTwoGameScreen.B);
     }
 }

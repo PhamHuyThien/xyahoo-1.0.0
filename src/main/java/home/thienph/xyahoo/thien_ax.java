@@ -83,8 +83,8 @@ public final class thien_ax extends UIControlBase
         for (int j = 0; j < thien_ax.C; ++j) {
             this.d[j] = new thien_by();
         }
-        for (byte b = 0; b < thien_ba.S.K; ++b) {
-            thien_ax.G[b] = thien_ba.S.A[b];
+        for (byte b = 0; b < BigTwoGameScreen.instance.K; ++b) {
+            thien_ax.G[b] = BigTwoGameScreen.instance.A[b];
         }
         for (int k = 0; k < thien_ax.D; ++k) {
             thien_ax.F[k] = new thien_by();
@@ -130,7 +130,7 @@ public final class thien_ax extends UIControlBase
                         else {
                             this.handleKeyInput(13);
                         }
-                        final int a = TextRenderer.computeTextWidth(thien_ba.S.centerCommand.label, TextRenderer.charWidth);
+                        final int a = TextRenderer.computeTextWidth(BigTwoGameScreen.instance.centerCommand.label, TextRenderer.charWidth);
                         final int n5 = (super.width >> 1) - (a >> 1);
                         final int t = super.height;
                         if (n > n5 && n < n5 + a && n2 > t && n2 < t + Screen.topMargin) {
@@ -183,7 +183,7 @@ public final class thien_ax extends UIControlBase
                         b = false;
                         break;
                     }
-                    if (!thien_ba.J) {
+                    if (!BigTwoGameScreen.J) {
                         b = false;
                         break;
                     }
@@ -227,7 +227,7 @@ public final class thien_ax extends UIControlBase
                             final thien_by[] e = thien_ax.E;
                             int n = 0;
                             final byte[] a = thien_by.a(e);
-                            if (!this.g && thien_ba.z.equals(this.b)) {
+                            if (!this.g && BigTwoGameScreen.currentGroupName.equals(this.b)) {
                                 if (this.e && a(e) == a(thien_ax.F)) {
                                     if ((n = (this.a(a, 0) ? 1 : 0)) != 0) {
                                         this.e = false;
@@ -305,7 +305,7 @@ public final class thien_ax extends UIControlBase
                                 for (int k = 0; k < thien_ax.C; ++k) {
                                     this.I[k] = thien_ax.E[k].c;
                                 }
-                                MessageHandler.a(thien_ba.B, thien_ba.z, thien_ax.L, this.I);
+                                MessageHandler.a(BigTwoGameScreen.B, BigTwoGameScreen.currentGroupName, thien_ax.L, this.I);
                                 this.n = true;
                                 break Label_1049;
                             }
@@ -402,7 +402,7 @@ public final class thien_ax extends UIControlBase
                 }
             }
         }
-        if (thien_ba.S.Q && thien_ax.U) {
+        if (BigTwoGameScreen.instance.Q && thien_ax.U) {
             if (this.h) {
                 this.ac = this.M.length;
                 for (int n3 = 0; n3 < this.ac; ++n3) {
@@ -430,9 +430,9 @@ public final class thien_ax extends UIControlBase
         if (!thien_ax.B) {
             graphics.drawImage(thien_by.l, thien_ax.S + 2 + this.J * 11, this.K, 0);
         }
-        for (int n5 = 0; n5 < thien_ba.S.F.length; ++n5) {
+        for (int n5 = 0; n5 < BigTwoGameScreen.instance.F.length; ++n5) {
             final thien_bz thien_bz;
-            if ((thien_bz = thien_ba.S.F[n5]).m) {
+            if ((thien_bz = BigTwoGameScreen.instance.F[n5]).m) {
                 thien_bz.a(graphics, thien_bz.e, thien_bz.f - 5);
             }
         }
@@ -524,7 +524,7 @@ public final class thien_ax extends UIControlBase
                 this.N = false;
             }
         }
-        ++thien_ba.y;
+        ++BigTwoGameScreen.y;
     }
     
     private static void c() {
@@ -536,15 +536,15 @@ public final class thien_ax extends UIControlBase
     public final void b() {
         this.ab = null;
         System.gc();
-        this.ab = new thien_by[thien_ba.S.U][];
+        this.ab = new thien_by[BigTwoGameScreen.instance.U][];
         thien_ax.B = true;
-        this.ac = thien_ba.S.V.length;
-        for (byte b = 0; b < thien_ba.S.U; ++b) {
-            final String a = thien_ba.S.F[b].a;
-            final byte k = thien_ba.S.F[b].k;
+        this.ac = BigTwoGameScreen.instance.V.length;
+        for (byte b = 0; b < BigTwoGameScreen.instance.U; ++b) {
+            final String a = BigTwoGameScreen.instance.F[b].a;
+            final byte k = BigTwoGameScreen.instance.F[b].k;
             for (int i = 0; i < this.ac; ++i) {
-                if (thien_ba.S.V[i].equals(a)) {
-                    this.ab[b] = new thien_by[thien_ba.S.W[i].length];
+                if (BigTwoGameScreen.instance.V[i].equals(a)) {
+                    this.ab[b] = new thien_by[BigTwoGameScreen.instance.W[i].length];
                     int n = 0;
                     int j = 0;
                     if (k == 0) {
@@ -566,9 +566,9 @@ public final class thien_ax extends UIControlBase
                     this.ad = this.ab[b].length;
                     for (int l = 0; l < this.ad; ++l) {
                         this.ab[b][l] = new thien_by();
-                        this.ab[b][l].c = thien_ba.S.W[i][l];
-                        this.ab[b][l].d = (byte)(thien_ba.S.W[i][l] >> 2);
-                        this.ab[b][l].e = (byte)(thien_ba.S.W[i][l] % 4);
+                        this.ab[b][l].c = BigTwoGameScreen.instance.W[i][l];
+                        this.ab[b][l].d = (byte)(BigTwoGameScreen.instance.W[i][l] >> 2);
+                        this.ab[b][l].e = (byte)(BigTwoGameScreen.instance.W[i][l] % 4);
                         this.ab[b][l].i = n + l * 11;
                         this.ab[b][l].j = j;
                         if (l == this.ab[b].length - 1) {
@@ -579,7 +579,7 @@ public final class thien_ax extends UIControlBase
                 }
             }
         }
-        thien_ba.S.f();
+        BigTwoGameScreen.instance.f();
     }
     
     private static int a(final thien_by[] array) {

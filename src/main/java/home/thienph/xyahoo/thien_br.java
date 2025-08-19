@@ -2,16 +2,16 @@ package home.thienph.xyahoo;
 
 final class thien_br
 implements IAction {
-    private thien_ba a;
+    private BigTwoGameScreen a;
 
-    thien_br(thien_ba thien_ba2) {
-        this.a = thien_ba2;
+    thien_br(BigTwoGameScreen bigTwoGameScreen2) {
+        this.a = bigTwoGameScreen2;
     }
 
     public final void action() {
-        this.a.addControl(thien_ba.h());
-        this.a.selectControl(thien_ba.h());
-        thien_ba.H = true;
-        thien_ba.a(this.a);
+        this.a.addControl(BigTwoGameScreen.h());
+        this.a.selectControl(BigTwoGameScreen.h());
+        BigTwoGameScreen.H = true;
+        BigTwoGameScreen.a(this.a);
     }
 }

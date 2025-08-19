@@ -2,7 +2,7 @@ package home.thienph.xyahoo;
 
 final class thien_bk
 implements IAction {
-    thien_bk(thien_ba thien_ba2) {
+    thien_bk(BigTwoGameScreen bigTwoGameScreen2) {
     }
 
     public final void action() {

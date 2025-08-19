@@ -584,7 +584,7 @@ public final class GameManager implements IGameManager {
 
    public final void g() {
       this.A = false;
-      thien_ba.S = null;
+      BigTwoGameScreen.instance = null;
       BuddyListScreen.resetPendingChat();
       this.F();
       this.displayScreen(this.loginScreen);
@@ -622,7 +622,7 @@ public final class GameManager implements IGameManager {
       System.gc();
    }
 
-   public final void h() {
+   public final void showDanhSachPhongChat() {
       this.inviteConferenceScreen.wrapTitle(this.U - 30);
       this.displayScreen(this.inviteConferenceScreen);
       this.c(this.buddyListScreen);
@@ -631,7 +631,7 @@ public final class GameManager implements IGameManager {
       this.d(this.inviteConferenceScreen);
    }
 
-   public final void i() {
+   public final void showDanhSachBanBe() {
       this.buddyListScreen.wrapTitle(this.U - 30);
       this.c(this.inviteConferenceScreen);
       this.displayScreen(this.buddyListScreen);
@@ -1090,10 +1090,10 @@ public final class GameManager implements IGameManager {
 
             try {
                Screen var11 = this.aD;
-               if (this.aD == thien_ba.S && thien_ba.x) {
+               if (this.aD == BigTwoGameScreen.instance && BigTwoGameScreen.isGameStarted) {
                   String var23 = TextRenderer.emoticons[this.aq * 6 + this.ap];
-                  if (thien_ba.ah == 1) {
-                     MessageHandler.a(1, thien_ba.B, BuddyListScreen.currentGroupName, var23);
+                  if (BigTwoGameScreen.ah == 1) {
+                     MessageHandler.a(1, BigTwoGameScreen.B, BuddyListScreen.currentGroupName, var23);
                   }
                }
 
@@ -1454,7 +1454,7 @@ public final class GameManager implements IGameManager {
       var4.isVisible = true;
    }
 
-   public final void m() {
+   public final void loiDangKyTaiKhoan() {
       this.c();
       this.a(TextConstant.registrationError(), null, new UIAction("OK", new thien_eb(this)), null);
    }
@@ -1470,7 +1470,7 @@ public final class GameManager implements IGameManager {
       this.c(this.registerScreen);
    }
 
-   public final void o() {
+   public final void saiTKHoacMK() {
       this.c();
       this.showCenterPopup(TextConstant.wrongNameOrPassword());
    }
@@ -1549,18 +1549,18 @@ public final class GameManager implements IGameManager {
    }
 
    public final void q() {
-      thien_ba.S = null;
+      BigTwoGameScreen.instance = null;
       this.F();
       this.displayScreen(this.loginScreen);
       this.c();
       this.a(TextConstant.disconnected(), (Image)null, 0);
    }
 
-   public final void g(String var1) {
+   public final void khongTheThemBan(String var1) {
       this.showCenterPopup(TextConstant.addFriendFailed() + var1);
    }
 
-   public final void h(String var1) {
+   public final void tuChoiKetBan(String var1) {
       this.showCenterPopup(var1 + TextConstant.refusedToBeAdded());
    }
 
@@ -1572,7 +1572,7 @@ public final class GameManager implements IGameManager {
       a(var1, false);
    }
 
-   public final void a(String var1, int var2, String var3, String var4, int var5) {
+   public final void dongYKetBan(String var1, int var2, String var3, String var4, int var5) {
       this.buddyListScreen.buddyList.a(var1, var4, 2);
       this.buddyListScreen.buddyList.a(var1, var2);
       this.buddyListScreen.buddyList.a(var1, var3, 1);
@@ -1588,7 +1588,7 @@ public final class GameManager implements IGameManager {
       this.c();
       this.inviteConferenceScreen.w = var1;
       this.inviteConferenceScreen.x = var2;
-      this.h();
+      this.showDanhSachPhongChat();
    }
 
    public final void a(String var1, String[] var2, String var3) {
@@ -1740,7 +1740,7 @@ public final class GameManager implements IGameManager {
       this.a();
    }
 
-   public final void g(String var1, String var2) {
+   public final void updateNewVersion(String var1, String var2) {
       this.a(TextConstant.updateNewVersionXYahoo() + var1, new UIAction(TextConstant.download(), new thien_eg(this, var2)), null, new UIAction(TextConstant.cancel(), new thien_dk(this)));
    }
 
@@ -1752,7 +1752,7 @@ public final class GameManager implements IGameManager {
       return this.I == null ? K : this.I;
    }
 
-   public final void e(String var1, String var2, String var3) {
+   public final void soanTinNapTien(String var1, String var2, String var3) {
       this.c();
       this.J = var2;
       thien_dl var4 = new thien_dl(this);
@@ -1901,12 +1901,12 @@ public final class GameManager implements IGameManager {
    }
 
    public final void k(String var1) {
-      FormScreen var2;
-      (var2 = new FormScreen()).title = TextConstant.addFriend();
+      FormScreen var2 = new FormScreen();
+      var2.title = TextConstant.addFriend();
       UIFormBuilder.addLabelsAuto(var2, var1 + TextConstant.wantToAddYou());
       TextField var3 = UIFormBuilder.addTextField(var2, TextConstant.toNewGroup(), 0);
-      UIDropdown var4;
-      (var4 = UIFormBuilder.addDropdown(var2, TextConstant.orExisting(), this.buddyListScreen.buddyList.i())).a(new thien_dq(this, var4, var3));
+      UIDropdown var4 = UIFormBuilder.addDropdown(var2, TextConstant.orExisting(), this.buddyListScreen.buddyList.i());
+      var4.a(new thien_dq(this, var4, var3));
       if (var4.a != null && var4.a.length != 0) {
          var3.setText(var4.b());
       } else {
@@ -2088,7 +2088,7 @@ public final class GameManager implements IGameManager {
       a(var1, false);
    }
 
-   public final void b(int var1, String var2, String var3) {
+   public final void renameGroup(int var1, String var2, String var3) {
       this.buddyListScreen.buddyList.a(var2, var3);
       this.showCenterPopup(TextConstant.renameGroupSuccess());
       a(this.buddyListScreen.buddyList.buddyDataModel, false, BuddyListScreen.currentGroupName);
@@ -2119,83 +2119,83 @@ public final class GameManager implements IGameManager {
       int[] var13,
       Integer[] var14
    ) {
-      thien_ba.S.a(var2, var3, var4, null, false);
-      thien_ba.S.N = var11;
-      thien_ba.S.M = var7;
-      thien_ba.S.a(var1, (byte)var6.length, var6, var8, var9, (byte)var6.length, var6, var10, var12, var13, var14);
+      BigTwoGameScreen.instance.a(var2, var3, var4, null, false);
+      BigTwoGameScreen.instance.N = var11;
+      BigTwoGameScreen.instance.M = var7;
+      BigTwoGameScreen.instance.a(var1, (byte)var6.length, var6, var8, var9, (byte)var6.length, var6, var10, var12, var13, var14);
    }
 
    public final void a(String var1, String var2, int var3, byte[] var4, String var5, boolean var6) {
-      if (thien_ba.z.equals(var2)) {
-         thien_ba.S.P.a(var4);
+      if (BigTwoGameScreen.currentGroupName.equals(var2)) {
+         BigTwoGameScreen.instance.P.a(var4);
       }
 
-      thien_ba.S.a(var2, var3, var4, var5, var6);
+      BigTwoGameScreen.instance.a(var2, var3, var4, var5, var6);
    }
 
    public final void a(String var1, String var2, int var3, byte[] var4, String var5, boolean var6, int var7) {
       this.a(var1, var2, var3, var4, var5, var6);
 
-      for (int var8 = 0; var8 < thien_ba.S.F.length; var8++) {
-         if (thien_ba.S.F[var8].a.equals(var2)) {
-            thien_ba.S.F[var8].d = TextConstant.go() + var7;
-            thien_ba.S.F[var8].h = true;
+      for (int var8 = 0; var8 < BigTwoGameScreen.instance.F.length; var8++) {
+         if (BigTwoGameScreen.instance.F[var8].a.equals(var2)) {
+            BigTwoGameScreen.instance.F[var8].d = TextConstant.go() + var7;
+            BigTwoGameScreen.instance.F[var8].h = true;
          }
       }
    }
 
    public final void C() {
-      thien_ba.S.P.a();
+      BigTwoGameScreen.instance.P.a();
    }
 
    public final void a(String var1, String var2, String var3, String[] var4, int var5) {
-      if (var2.equals(thien_ba.z)) {
+      if (var2.equals(BigTwoGameScreen.currentGroupName)) {
          if (var5 == 1) {
             this.a(TextConstant.beKickByHost(), (Image)null, 1);
          }
 
-         thien_ba.e();
+         BigTwoGameScreen.e();
       } else {
          if (var4.length > 0) {
-            thien_ba.S.F = c(var4);
-            thien_ba.S.w = var3;
+            BigTwoGameScreen.instance.F = c(var4);
+            BigTwoGameScreen.instance.currentPlayerId = var3;
             long[] var11 = new long[var4.length];
             int[] var6 = new int[var4.length];
             String[] var7 = new String[var4.length];
             int[] var8 = new int[var4.length];
             Integer[] var9 = new Integer[var4.length];
-            thien_ba.S.O = new boolean[var4.length];
+            BigTwoGameScreen.instance.O = new boolean[var4.length];
 
             for (int var10 = 0; var10 < var4.length; var10++) {
-               var11[var10] = thien_ba.S.F[var10].b;
-               var6[var10] = thien_ba.S.F[var10].c;
-               thien_ba.S.O[var10] = thien_ba.S.F[var10].g;
-               var7[var10] = thien_ba.S.F[var10].C;
-               var8[var10] = thien_ba.S.F[var10].D;
-               var9[var10] = thien_ba.S.F[var10].E;
+               var11[var10] = BigTwoGameScreen.instance.F[var10].b;
+               var6[var10] = BigTwoGameScreen.instance.F[var10].c;
+               BigTwoGameScreen.instance.O[var10] = BigTwoGameScreen.instance.F[var10].g;
+               var7[var10] = BigTwoGameScreen.instance.F[var10].C;
+               var8[var10] = BigTwoGameScreen.instance.F[var10].D;
+               var9[var10] = BigTwoGameScreen.instance.F[var10].E;
                if (var4[var10].equals(var3)) {
-                  thien_ba.S.b(var2);
+                  BigTwoGameScreen.instance.b(var2);
                }
             }
 
-            thien_ba.S.a((byte)var4.length, var4, var11, var6, var7, var8, var9, var1);
+            BigTwoGameScreen.instance.a((byte)var4.length, var4, var11, var6, var7, var8, var9, var1);
          }
       }
    }
 
    public final void a(String var1, String var2, String var3, boolean var4) {
-      thien_ba.S.a(var2, var3, var4);
+      BigTwoGameScreen.instance.a(var2, var3, var4);
    }
 
    public final void a(String var1, long var2, String[] var4, long[] var5, int[] var6, boolean[] var7, String var8, String[] var9, int[] var10, Integer[] var11) {
-      thien_ba var12 = thien_ba.S;
-      thien_ba.S.Y = true;
+      BigTwoGameScreen var12 = BigTwoGameScreen.instance;
+      BigTwoGameScreen.instance.Y = true;
       var12.Z = var4.length;
       var12.aa = var4;
       var12.ab = var5;
       var12.ac = var2;
       var12.ad = var6;
-      var12.w = var8;
+      var12.currentPlayerId = var8;
       var12.O = new boolean[var4.length];
       var12.ae = var9;
       var12.af = var10;
@@ -2219,16 +2219,16 @@ public final class GameManager implements IGameManager {
 
    public final void a(byte[] var1, String var2, boolean var3) {
       thien_ax.B = false;
-      thien_ba.T = false;
-      thien_ba.S.E = true;
-      thien_ba.S.a(var1, var2, var3, true);
+      BigTwoGameScreen.T = false;
+      BigTwoGameScreen.instance.E = true;
+      BigTwoGameScreen.instance.a(var1, var2, var3, true);
    }
 
    public final void a(String[] var1, boolean[] var2) {
-      for (byte var3 = 0; var3 < thien_ba.S.F.length; var3++) {
+      for (byte var3 = 0; var3 < BigTwoGameScreen.instance.F.length; var3++) {
          for (int var4 = 0; var4 < var1.length; var4++) {
-            if (thien_ba.S.F[var3].a.equals(var1[var4])) {
-               thien_ba.S.F[var3].g = var2[var4];
+            if (BigTwoGameScreen.instance.F[var3].a.equals(var1[var4])) {
+               BigTwoGameScreen.instance.F[var3].g = var2[var4];
                break;
             }
          }
@@ -2239,9 +2239,9 @@ public final class GameManager implements IGameManager {
       thien_bz[] var1 = new thien_bz[var0.length];
 
       for (byte var2 = 0; var2 < var0.length; var2++) {
-         for (byte var3 = 0; var3 < thien_ba.S.F.length; var3++) {
-            if (var0[var2].equals(thien_ba.S.F[var3].a)) {
-               var1[var2] = thien_ba.S.F[var3];
+         for (byte var3 = 0; var3 < BigTwoGameScreen.instance.F.length; var3++) {
+            if (var0[var2].equals(BigTwoGameScreen.instance.F[var3].a)) {
+               var1[var2] = BigTwoGameScreen.instance.F[var3];
             }
          }
       }
@@ -2250,29 +2250,29 @@ public final class GameManager implements IGameManager {
    }
 
    public final void b(String var1, String var2, String var3, boolean var4) {
-      thien_ba.S.b(var2, var3, var4);
+      BigTwoGameScreen.instance.b(var2, var3, var4);
    }
 
    public final void a(
       String var1, String var2, byte var3, String[] var4, int[] var5, long[] var6, long[] var7, byte[][] var8, String[] var9, int[] var10, Integer[] var11
    ) {
-      thien_ba.S.N = new boolean[var4.length];
+      BigTwoGameScreen.instance.N = new boolean[var4.length];
 
       for (int var12 = 0; var12 < var4.length; var12++) {
-         thien_ba.S.N[var12] = false;
-         if (var4[var12].equals(thien_ba.z)) {
+         BigTwoGameScreen.instance.N[var12] = false;
+         if (var4[var12].equals(BigTwoGameScreen.currentGroupName)) {
             for (int var13 = 0; var13 < var4.length; var13++) {
-               if (thien_ba.S.F[var13].a.equals(var4[var12])) {
-                  thien_ba.S.F[var13].i = var8[var12];
-                  thien_ba.S.a(var8[var12], var2, false, false);
+               if (BigTwoGameScreen.instance.F[var13].a.equals(var4[var12])) {
+                  BigTwoGameScreen.instance.F[var13].i = var8[var12];
+                  BigTwoGameScreen.instance.a(var8[var12], var2, false, false);
                   break;
                }
             }
          }
       }
 
-      thien_ba.S.M = var5;
-      thien_ba.S.a(var1, var3, var4, var6, var7, var3, var4, var8, var9, var10, var11);
+      BigTwoGameScreen.instance.M = var5;
+      BigTwoGameScreen.instance.a(var1, var3, var4, var6, var7, var3, var4, var8, var9, var10, var11);
    }
 
    public final void a(long var1) {
@@ -2287,7 +2287,7 @@ public final class GameManager implements IGameManager {
          if ((var4 = TextRenderer.findEmoticonIndex(var2)) != 100) {
             thien_bz[] var5 = null;
             if (var3 == 39) {
-               var5 = thien_ba.S.F;
+               var5 = BigTwoGameScreen.instance.F;
             }
 
             if (var5 != null) {
@@ -2311,22 +2311,22 @@ public final class GameManager implements IGameManager {
    }
 
    public final void a(String var1, thien_aw[] var2, int var3, String var4) {
-      if (thien_ba.S != null && !thien_ba.x) {
-         this.c(thien_ba.S);
-         thien_ba.S = null;
+      if (BigTwoGameScreen.instance != null && !BigTwoGameScreen.isGameStarted) {
+         this.c(BigTwoGameScreen.instance);
+         BigTwoGameScreen.instance = null;
       }
 
-      thien_ba var5 = thien_ba.d(1);
-      if (this.L.contains(var5) && thien_ba.x) {
+      BigTwoGameScreen var5 = BigTwoGameScreen.getInstance(1);
+      if (this.L.contains(var5) && BigTwoGameScreen.isGameStarted) {
          this.showCenterPopup(TextConstant.pleaseQuitYourCurrentGame());
       } else {
-         thien_ba.ai = var1;
-         thien_ba.S.title = var4;
-         thien_ba.S.setWrappedText(var4);
-         thien_ba var6 = thien_ba.S;
+         BigTwoGameScreen.ai = var1;
+         BigTwoGameScreen.instance.title = var4;
+         BigTwoGameScreen.instance.setWrappedText(var4);
+         BigTwoGameScreen var6 = BigTwoGameScreen.instance;
          this.e(var6);
-         thien_ba.S.a(var2, 1);
-         this.d(thien_ba.S);
+         BigTwoGameScreen.instance.a(var2, 1);
+         this.d(BigTwoGameScreen.instance);
       }
    }
 

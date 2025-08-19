@@ -34,6 +34,7 @@ final class PacketWriter implements Runnable {
                     ByteBuffer payload = packet.getPayload();
                     int packetLength = 8 + payload.getLength();
                     byte[] packetByteLength = intToByteArray(packetLength);
+                    System.out.println("[OUT]command: " + packet.getCommandId() + " type: " + packet.getType() + " length: " + packetLength);
                     ConnectionManager.getOutputStream().write(packetByteLength, 0, 4);
                     ConnectionManager.getOutputStream().write(intToByteArray(packet.getCommandId()), 0, 4);
                     ConnectionManager.getOutputStream().write(intToByteArray(packet.getType()), 0, 4);

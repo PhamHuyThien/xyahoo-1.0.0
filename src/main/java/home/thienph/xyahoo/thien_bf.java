@@ -2,19 +2,19 @@ package home.thienph.xyahoo;
 
 final class thien_bf
 implements IAction {
-    private thien_ba a;
+    private BigTwoGameScreen a;
 
-    thien_bf(thien_ba thien_ba2) {
-        this.a = thien_ba2;
+    thien_bf(BigTwoGameScreen bigTwoGameScreen2) {
+        this.a = bigTwoGameScreen2;
     }
 
     public final void action() {
         if (this.a.centerCommand.label.equals(TextConstant.ready())) {
             int n = 0;
             while (n < this.a.F.length) {
-                if (this.a.F[n].a.equals(thien_ba.z)) {
+                if (this.a.F[n].a.equals(BigTwoGameScreen.currentGroupName)) {
                     this.a.centerCommand.label = "";
-                    MessageHandler.b(thien_ba.B, thien_ba.z);
+                    MessageHandler.b(BigTwoGameScreen.B, BigTwoGameScreen.currentGroupName);
                 }
                 ++n;
             }

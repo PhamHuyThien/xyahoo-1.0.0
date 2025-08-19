@@ -2,14 +2,14 @@ package home.thienph.xyahoo;
 
 final class thien_bv
 implements IAction {
-    private thien_ba a;
+    private BigTwoGameScreen a;
 
-    thien_bv(thien_ba thien_ba2) {
-        this.a = thien_ba2;
+    thien_bv(BigTwoGameScreen bigTwoGameScreen2) {
+        this.a = bigTwoGameScreen2;
     }
 
     public final void action() {
-        GameManager.getInstance().showPopupSideLayout(thien_ba.b(this.a), 0);
-        thien_ba.a(this.a);
+        GameManager.getInstance().showPopupSideLayout(BigTwoGameScreen.b(this.a), 0);
+        BigTwoGameScreen.a(this.a);
     }
 }

@@ -2,11 +2,11 @@ package home.thienph.xyahoo;
 
 final class thien_bg
 implements IAction {
-    private thien_ba a;
+    private BigTwoGameScreen a;
     private final thien_ax b;
 
-    thien_bg(thien_ba thien_ba2, thien_ax thien_ax2) {
-        this.a = thien_ba2;
+    thien_bg(BigTwoGameScreen bigTwoGameScreen2, thien_ax thien_ax2) {
+        this.a = bigTwoGameScreen2;
         this.b = thien_ax2;
     }
 
@@ -14,9 +14,9 @@ implements IAction {
         if (this.b.e) {
             this.b.e = false;
         }
-        if (thien_ba.z.equals(this.a.D)) {
+        if (BigTwoGameScreen.currentGroupName.equals(this.a.D)) {
             this.a.P.g = true;
-            MessageHandler.d(thien_ba.B, thien_ba.z);
+            MessageHandler.d(BigTwoGameScreen.B, BigTwoGameScreen.currentGroupName);
         }
     }
 }

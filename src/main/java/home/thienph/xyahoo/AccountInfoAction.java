@@ -1,8 +1,8 @@
 package home.thienph.xyahoo;
 
-final class thien_bs
+final class AccountInfoAction
 implements IAction {
-    thien_bs(thien_ba thien_ba2) {
+    AccountInfoAction(BigTwoGameScreen bigTwoGameScreen2) {
     }
 
     public final void action() {

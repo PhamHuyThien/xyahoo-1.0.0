@@ -4,7 +4,7 @@ import java.util.Vector;
 import javax.microedition.lcdui.Image;
 
 public final class GameHandler extends PacketHandler {
-   private static IGameManager b;
+   private static IGameManager gameManager;
    private static GameHandler instance = null;
    public static String a;
 
@@ -20,15 +20,15 @@ public final class GameHandler extends PacketHandler {
    }
 
    public static void a(IGameManager var0) {
-      b = var0;
+      gameManager = var0;
    }
 
    public final void onConnect() {
-      b.p();
+      gameManager.p();
    }
 
    public final void onDisconnect() {
-      b.q();
+      gameManager.q();
    }
 
    public final void shutdown() {
@@ -47,30 +47,30 @@ public final class GameHandler extends PacketHandler {
                var39[var259] = MessageHandler.readInt(var1);
             }
 
-            b.a(var257, var39);
+            gameManager.a(var257, var39);
             return;
          case -5:
-            b.z();
+            gameManager.z();
             return;
          case -3:
-            b.m();
+            gameManager.loiDangKyTaiKhoan();
             return;
          case -2:
-            b.n();
+            gameManager.n();
             return;
          case -1:
-            b.o();
+            gameManager.saiTKHoacMK();
             return;
          case 3:
             String var207 = MessageHandler.readString(var1);
             MessageHandler.readString(var1);
             String var192 = MessageHandler.readString(var1);
-            b.a(var207, var192);
+            gameManager.a(var207, var192);
             return;
          case 8:
             String var206 = MessageHandler.readString(var1);
             String var191 = MessageHandler.readString(var1);
-            b.a(var206, var191, 1);
+            gameManager.a(var206, var191, 1);
             return;
          case 9:
             var2 = MessageHandler.readInt(var1);
@@ -79,42 +79,42 @@ public final class GameHandler extends PacketHandler {
                String var226 = MessageHandler.readString(var1);
                String var236 = MessageHandler.readString(var1);
                String var244 = MessageHandler.readString(var1);
-               b.b(var226, var236, var244);
+               gameManager.b(var226, var236, var244);
             }
 
             return;
          case 15:
             String var204 = MessageHandler.readString(var1);
             int var190 = MessageHandler.readInt(var1);
-            b.a(var204, var190, 1);
+            gameManager.a(var204, var190, 1);
             return;
-         case 27:
+         case 27: //buzzz
             String var217 = MessageHandler.readString(var1);
             MessageHandler.readString(var1);
-            b.j(var217);
+            gameManager.j(var217);
             return;
-         case 37:
+         case 37: // update new Version
             String var235 = MessageHandler.readString(var1);
             String var243 = MessageHandler.readString(var1);
-            b.g(var235, var243);
+            gameManager.updateNewVersion(var235, var243);
             return;
-         case 39:
+         case 39: // show popup
             String var203 = MessageHandler.readString(var1);
             int var189;
             if ((var189 = MessageHandler.readInt(var1)) == 0) {
-               b.a(0, var203, null, 20L, 20L, null);
+               gameManager.a(0, var203, null, 20L, 20L, null);
                return;
             }
 
             if (var189 == 1) {
-               b.f(var203);
+               gameManager.f(var203);
                return;
             }
             break;
          case 44:
             a = MessageHandler.readString(var1);
             return;
-         case 45:
+         case 45: // soan tin nap tien
             String var202 = MessageHandler.readString(var1);
             String var216 = MessageHandler.readString(var1);
             String var225 = "";
@@ -122,7 +122,7 @@ public final class GameHandler extends PacketHandler {
                var225 = MessageHandler.readString(var1);
             }
 
-            b.e(var225, var202, var216);
+            gameManager.soanTinNapTien(var225, var202, var216);
             return;
          case 49:
             String var201 = MessageHandler.readString(var1);
@@ -137,7 +137,7 @@ public final class GameHandler extends PacketHandler {
             var1.getPayload().readByte();
             MessageHandler.readInt(var1);
             MessageHandler.readInt(var1);
-            b.a(var201, var215, var224, var234, var242);
+            gameManager.a(var201, var215, var224, var234, var242);
             return;
          case 63:
             var3 = MessageHandler.readInt(var1);
@@ -152,7 +152,7 @@ public final class GameHandler extends PacketHandler {
             return;
          case 64:
             boolean var232 = MessageHandler.readBool(var1);
-            b.b(var232);
+            gameManager.b(var232);
             return;
          case 113:
             int var258;
@@ -166,7 +166,7 @@ public final class GameHandler extends PacketHandler {
          case 116:
             System.gc();
             byte[] var41 = MessageHandler.readByteArray(var1);
-            b.a(var41);
+            gameManager.a(var41);
             return;
          case 117:
             var2 = MessageHandler.readInt(var1);
@@ -180,35 +180,35 @@ public final class GameHandler extends PacketHandler {
                long var38 = MessageHandler.readLong(var1);
                long var40 = MessageHandler.readLong(var1);
                String var252 = MessageHandler.readString(var1);
-               b.a(var222, var231, var240, var40, var38, var252);
+               gameManager.a(var222, var231, var240, var40, var38, var252);
             }
 
             return;
          case 120:
             var2 = MessageHandler.readInt(var1);
             byte[] var188 = MessageHandler.readByteArray(var1);
-            b.a(var2, var188);
+            gameManager.a(var2, var188);
             return;
          case 121:
             System.gc();
             byte[] var251 = MessageHandler.readByteArray(var1);
-            b.a(var251);
+            gameManager.a(var251);
             return;
          case 122:
             var2 = MessageHandler.readInt(var1);
             int var187 = MessageHandler.readInt(var1);
-            b.b(var2, var187);
+            gameManager.b(var2, var187);
             return;
          case 123:
             var2 = MessageHandler.readInt(var1);
             var3 = MessageHandler.readInt(var1);
             byte[] var186 = MessageHandler.readByteArray(var1);
-            b.a(var2, var3, var186);
+            gameManager.a(var2, var3, var186);
             return;
          case 269:
             String var254 = MessageHandler.readString(var1);
             String var256 = MessageHandler.readString(var1);
-            b.h(var254, var256);
+            gameManager.h(var254, var256);
             return;
          case 317:
             int var239;
@@ -218,34 +218,34 @@ public final class GameHandler extends PacketHandler {
                var250[var253] = MessageHandler.readString(var1);
             }
 
-            b.b(var250);
+            gameManager.b(var250);
             return;
-         case 1001:
+         case 1001: // moi vao nhom
             String var304 = MessageHandler.readString(var1);
             String var164 = MessageHandler.readString(var1);
             if (!var304.equals("")) {
-               b.c(var304, var164);
+               gameManager.c(var304, var164);
                return;
             }
 
-            b.r();
+            gameManager.r();
             return;
          case 1004:
             String var168 = MessageHandler.readString(var1);
             String var169 = MessageHandler.readString(var1);
             int var170;
             if ((var170 = MessageHandler.readInt(var1)) == 0) {
-               b.e(var169, var168);
+               gameManager.e(var169, var168);
                return;
             }
 
             if (var170 == 1) {
-               b.d(var169, var168);
+               gameManager.d(var169, var168);
                return;
             }
 
             if (var170 == 2) {
-               b.f(var169, var168);
+               gameManager.f(var169, var168);
                return;
             }
             break;
@@ -253,42 +253,42 @@ public final class GameHandler extends PacketHandler {
             String var305 = MessageHandler.readString(var1);
             String var175 = MessageHandler.readString(var1);
             String var176 = MessageHandler.readString(var1);
-            b.d(var175, var305, var176);
+            gameManager.d(var175, var305, var176);
             return;
-         case 1006:
+         case 1006: // phong chat
             String var165 = MessageHandler.readString(var1);
             String var166 = MessageHandler.readString(var1);
             String var167 = MessageHandler.readString(var1);
-            b.c(var167, var165, var166);
+            gameManager.c(var167, var165, var166);
             return;
          case 1007:
             String var171 = MessageHandler.readString(var1);
-            int var172;
-            String[] var173 = new String[var172 = MessageHandler.readInt(var1)];
+            int var172 = MessageHandler.readInt(var1)  ;
+            String[] var173 = new String[var172];
 
             for (byte var174 = 0; var174 < var172; var174 += 1) {
                var173[var174] = MessageHandler.readString(var1);
             }
 
-            b.a(var171, var173);
+            gameManager.a(var171, var173);
             return;
          case 1009:
             String var132 = MessageHandler.readString(var1);
-            b.k(var132);
+            gameManager.k(var132);
             return;
-         case 1010:
-            boolean var122 = MessageHandler.readBool(var1);
-            String var123 = MessageHandler.readString(var1);
-            if (var122) {
+         case 1010: // xx dong y them ban vao danh sach bạn be
+            boolean dongY = MessageHandler.readBool(var1); // dong y, khong dong y
+            String var123 = MessageHandler.readString(var1); // user dong y
+            if (dongY) {
                String var294 = MessageHandler.readString(var1);
                int var295 = MessageHandler.readInt(var1);
                String var296 = MessageHandler.readString(var1);
                int var185 = MessageHandler.readInt(var1);
-               b.a(var123, var295, var296, var294, var185);
+               gameManager.dongYKetBan(var123, var295, var296, var294, var185);
                return;
             }
 
-            b.h(var123);
+            gameManager.tuChoiKetBan(var123);
             return;
          case 1017:
             int var124 = MessageHandler.readInt(var1);
@@ -313,24 +313,24 @@ public final class GameHandler extends PacketHandler {
             var1.getPayload().readByte();
             MessageHandler.readInt(var1);
             MessageHandler.readInt(var1);
-            b.a(var124, var130, var126);
+            gameManager.a(var124, var130, var126);
             return;
-         case 1020:
+         case 1020: // xoa ban be thanh cong
             int var120 = MessageHandler.readInt(var1);
             String var121 = MessageHandler.readString(var1);
-            b.a(var121, var120);
+            gameManager.a(var121, var120);
             return;
          case 1021:
             int var293 = MessageHandler.readInt(var1);
             String var118 = MessageHandler.readString(var1);
             String var119 = MessageHandler.readString(var1);
-            b.a(var293, var118, var119);
+            gameManager.a(var293, var118, var119);
             return;
-         case 1022:
+         case 1022: // rename group
             int var290 = MessageHandler.readInt(var1);
             String var291 = MessageHandler.readString(var1);
             String var292 = MessageHandler.readString(var1);
-            b.b(var290, var291, var292);
+            gameManager.renameGroup(var290, var291, var292);
             return;
          case 1023:
             String var133 = MessageHandler.readString(var1);
@@ -341,11 +341,11 @@ public final class GameHandler extends PacketHandler {
                var135[var298] = MessageHandler.readInt(var1);
             }
 
-            b.a(var133, var135);
+            gameManager.a(var133, var135);
             return;
-         case 1029:
+         case 1029: // khong the them ban
             String var131 = MessageHandler.readString(var1);
-            b.g(var131);
+            gameManager.khongTheThemBan(var131);
             return;
          case 1045:
             int var151 = MessageHandler.readInt(var1);
@@ -367,7 +367,7 @@ public final class GameHandler extends PacketHandler {
                }
             }
 
-            b.a(var152, var151);
+            gameManager.a(var152, var151);
             return;
          case 1046:
             String var136 = MessageHandler.readString(var1);
@@ -394,7 +394,7 @@ public final class GameHandler extends PacketHandler {
                var150 = MessageHandler.readString(var1);
             }
 
-            b.a(var136, var137, var139, var299, var141, var142, var143, var144, var145, var146, var147, var148, var150, var149);
+            gameManager.a(var136, var137, var139, var299, var141, var142, var143, var144, var145, var146, var147, var148, var150, var149);
             return;
          case 1047:
             int var157;
@@ -404,7 +404,7 @@ public final class GameHandler extends PacketHandler {
                var158[var302] = MessageHandler.readString(var1);
             }
 
-            b.a(var158, null, null);
+            gameManager.a(var158, null, null);
             return;
          case 1048:
             int var159;
@@ -418,7 +418,7 @@ public final class GameHandler extends PacketHandler {
                var162[var163] = MessageHandler.readString(var1);
             }
 
-            b.a(var160, var161, var162);
+            gameManager.a(var160, var161, var162);
             return;
          case 3402:
          case 5000011:
@@ -444,7 +444,7 @@ public final class GameHandler extends PacketHandler {
                var230[var238].a((byte) MessageHandler.readInt(var1));
             }
 
-            b.a(var211, var230, 1, var196);
+            gameManager.a(var211, var230, 1, var196);
             return;
          case 3403:
             String var237 = MessageHandler.readString(var1);
@@ -471,10 +471,10 @@ public final class GameHandler extends PacketHandler {
                }
             }
 
-            thien_ba.B = var237;
-            thien_ba.S.C = var57;
-            thien_ba.S.R = MessageHandler.readBool(var1);
-            thien_ba var178 = thien_ba.S;
+            BigTwoGameScreen.B = var237;
+            BigTwoGameScreen.instance.C = var57;
+            BigTwoGameScreen.instance.R = MessageHandler.readBool(var1);
+            BigTwoGameScreen var178 = BigTwoGameScreen.instance;
             String var307 = MessageHandler.readString(var1);
             String var309 = MessageHandler.readString(var1);
             var178.setWrappedText(var307 + " - " + var309);
@@ -488,7 +488,7 @@ public final class GameHandler extends PacketHandler {
                var267[var268] = new Integer(MessageHandler.readInt(var1));
             }
 
-            b.a(var237, var57, var220, var229, var249, var262, var195, var265, var266, var267);
+            gameManager.a(var237, var57, var220, var229, var249, var262, var195, var265, var266, var267);
             return;
          case 3405:
             MessageHandler.readString(var1);
@@ -501,7 +501,7 @@ public final class GameHandler extends PacketHandler {
                   var228[var248] = MessageHandler.readBool(var1);
                }
 
-               b.a(var219, var228);
+               gameManager.a(var219, var228);
                return;
             }
             break;
@@ -513,7 +513,7 @@ public final class GameHandler extends PacketHandler {
                String var261 = MessageHandler.readString(var1);
                boolean var263 = MessageHandler.readBool(var1);
                MessageHandler.readLong(var1);
-               b.a(var247, var261, var263);
+               gameManager.a(var247, var261, var263);
                return;
             }
 
@@ -531,7 +531,7 @@ public final class GameHandler extends PacketHandler {
                   MessageHandler.readLong(var1);
                }
 
-               b.a(var270, var271, var76, var274);
+               gameManager.a(var270, var271, var76, var274);
                return;
             }
             break;
@@ -545,11 +545,11 @@ public final class GameHandler extends PacketHandler {
                boolean var278 = MessageHandler.readBool(var1);
                if (MessageHandler.readBool(var1)) {
                   int var279 = MessageHandler.readInt(var1);
-                  b.a(var75, var273, var275, var276, var277, var278, var279);
+                  gameManager.a(var75, var273, var275, var276, var277, var278, var279);
                   return;
                }
 
-               b.a(var75, var273, var275, var276, var277, var278);
+               gameManager.a(var75, var273, var275, var276, var277, var278);
                return;
             }
 
@@ -557,8 +557,8 @@ public final class GameHandler extends PacketHandler {
             GameManager.getInstance().a(var272, (Image)null, 1);
             MessageHandler.readInt(var1);
             MessageHandler.readByteArray(var1);
-            if (thien_ba.B.equals(var75)) {
-               b.C();
+            if (BigTwoGameScreen.B.equals(var75)) {
+               gameManager.C();
                return;
             }
             break;
@@ -576,7 +576,7 @@ public final class GameHandler extends PacketHandler {
                      MessageHandler.readLong(var1);
                   }
 
-                  b.b(var281, var282, var284, var286);
+                  gameManager.b(var281, var282, var284, var286);
                   return;
                }
 
@@ -588,7 +588,7 @@ public final class GameHandler extends PacketHandler {
                   var285[var287] = MessageHandler.readString(var1);
                }
 
-               b.a(var281, var282, var94, var285, 0);
+               gameManager.a(var281, var282, var94, var285, 0);
                return;
             }
             break;
@@ -605,13 +605,13 @@ public final class GameHandler extends PacketHandler {
                return;
             }
 
-            thien_ba.S.C = var308;
+            BigTwoGameScreen.instance.C = var308;
             break;
          case 3411:
             MessageHandler.readString(var1);
             String var180 = MessageHandler.readString(var1);
             String var181 = MessageHandler.readString(var1);
-            b.b(var180, var181, var3);
+            gameManager.b(var180, var181, var3);
             break;
          case 3412:
             String var112 = MessageHandler.readString(var1);
@@ -624,7 +624,7 @@ public final class GameHandler extends PacketHandler {
                   var116[var117] = MessageHandler.readString(var1);
                }
 
-               b.a(var112, var114, thien_ba.S.w, var116, 1);
+               gameManager.a(var112, var114, BigTwoGameScreen.instance.currentPlayerId, var116, 1);
                return;
             }
             break;
@@ -632,7 +632,7 @@ public final class GameHandler extends PacketHandler {
             MessageHandler.readString(var1);
             long var289 = MessageHandler.readLong(var1);
             MessageHandler.readLong(var1);
-            b.a(var289);
+            gameManager.a(var289);
             return;
          case 3417:
             b(var1);
@@ -682,7 +682,7 @@ public final class GameHandler extends PacketHandler {
                System.out.println("tRank " + var73 + "= " + var269[var73] + "; Scoring = " + var71[var73] + "; color = " + var72[var73]);
             }
 
-            b.a(var227, var246, (byte)var64, var65, var66, var67, var68, var69, var269, var71, var72);
+            gameManager.a(var227, var246, (byte)var64, var65, var66, var67, var68, var69, var269, var71, var72);
             return;
          case 34081:
             String var77 = MessageHandler.readString(var1);
@@ -691,7 +691,7 @@ public final class GameHandler extends PacketHandler {
             byte[] var80 = MessageHandler.readByteArray(var1);
             int var81 = MessageHandler.readInt(var1);
             String var194 = MessageHandler.readString(var1);
-            thien_ba.S.w = var194;
+            BigTwoGameScreen.instance.currentPlayerId = var194;
             int var82;
             String[] var83 = new String[var82 = MessageHandler.readInt(var1)];
             int[] var84 = new int[var82];
@@ -719,14 +719,14 @@ public final class GameHandler extends PacketHandler {
                var91[var92] = new Integer(MessageHandler.readInt(var1));
             }
 
-            b.a(var77, var78, var79, var80, var81, var83, var84, var85, var86, var87, var88, var280, var90, var91);
+            gameManager.a(var77, var78, var79, var80, var81, var83, var84, var85, var86, var87, var88, var280, var90, var91);
             return;
          case 34091:
             String var95 = MessageHandler.readString(var1);
             String var96 = MessageHandler.readString(var1);
             int var97 = MessageHandler.readInt(var1);
             String var98 = MessageHandler.readString(var1);
-            thien_ba.S.w = var98;
+            BigTwoGameScreen.instance.currentPlayerId = var98;
             byte[] var99 = new byte[0];
             int var100;
             String[] var101 = new String[var100 = MessageHandler.readInt(var1)];
@@ -755,7 +755,7 @@ public final class GameHandler extends PacketHandler {
                var109[var110] = new Integer(MessageHandler.readInt(var1));
             }
 
-            b.a(var95, var96, 0, var99, var97, var101, var102, var103, var104, var105, var106, var288, var108, var109);
+            gameManager.a(var95, var96, 0, var99, var97, var101, var102, var103, var104, var105, var106, var288, var108, var109);
             return;
          case 5000009:
             thien_s var193 = new thien_s();
@@ -777,7 +777,7 @@ public final class GameHandler extends PacketHandler {
                var193.a(var5[var6], var4[var6]);
             }
 
-            b.b(var193);
+            gameManager.b(var193);
             return;
          case 6000000:
             MessageHandler.a(Xuka.refCode);

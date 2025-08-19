@@ -31,6 +31,7 @@ implements Runnable {
                 byte[] payload = readPayload(in, payloadLength);
 
                 // Tạo packet
+                System.out.println("[IN] command: " + packetType + " type: " + packetSubtype + " length: " + packetLength);
                 Packet packet = new Packet(packetType, packetSubtype, payload);
 
                 // Dispatch đến handler
@@ -40,9 +41,7 @@ implements Runnable {
                     handler.dispatch(packet);
                 }
             }
-        } catch (Exception e) {
-            System.err.println("PacketReaderThread.run Exception isConnected: " + e);
-            e.printStackTrace();
+        } catch (Exception ignore) {
         }
 
         // Xử lý disconnect
@@ -53,9 +52,7 @@ implements Runnable {
             if (ConnectionManager.getSocketConnection() != null) {
                 ConnectionManager.resetConnection();
             }
-        } catch (Exception e) {
-            System.err.println("PacketReaderThread.run Exception disconnect: " + e);
-            e.printStackTrace();
+        } catch (Exception ignore) {
         }
     }
 

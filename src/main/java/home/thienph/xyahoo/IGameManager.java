@@ -11,7 +11,7 @@ public interface IGameManager {
 
     public void a(thien_s var1);
 
-    public void o();
+    public void saiTKHoacMK();
 
     public void a(String var1, String var2);
 
@@ -21,7 +21,7 @@ public interface IGameManager {
 
     public void n();
 
-    public void m();
+    public void loiDangKyTaiKhoan();
 
     public void p();
 
@@ -33,9 +33,9 @@ public interface IGameManager {
 
     public void a(int var1, String var2, byte[] var3, long var4, long var6, String var8);
 
-    public void a(String var1, int var2, String var3, String var4, int var5);
+    public void dongYKetBan(String var1, int var2, String var3, String var4, int var5);
 
-    public void g(String var1);
+    public void khongTheThemBan(String var1);
 
     public void c(String var1, String var2);
 
@@ -53,7 +53,7 @@ public interface IGameManager {
 
     public void a(int var1, thien_r var2, String var3);
 
-    public void h(String var1);
+    public void tuChoiKetBan(String var1);
 
     public void d(String var1, String var2, String var3);
 
@@ -69,9 +69,9 @@ public interface IGameManager {
 
     public void j(String var1);
 
-    public void g(String var1, String var2);
+    public void updateNewVersion(String var1, String var2);
 
-    public void e(String var1, String var2, String var3);
+    public void soanTinNapTien(String var1, String var2, String var3);
 
     public void a(String var1, byte var2, String var3, int var4, int var5);
 
@@ -101,7 +101,7 @@ public interface IGameManager {
 
     public void a(int var1, String var2, String var3);
 
-    public void b(int var1, String var2, String var3);
+    public void renameGroup(int var1, String var2, String var3);
 
     public void h(String var1, String var2);
 

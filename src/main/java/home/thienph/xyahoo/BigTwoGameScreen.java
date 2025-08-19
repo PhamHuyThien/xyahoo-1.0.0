@@ -4,13 +4,13 @@ import java.util.Vector;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 
-public final class thien_ba extends Screen {
-   public String w;
-   public static boolean x;
+public final class BigTwoGameScreen extends Screen {
+   public String currentPlayerId;
+   public static boolean isGameStarted;
    static int y;
    private thien_aw[] ak;
    private thien_ay al;
-   public static String z;
+   public static String currentGroupName;
    public String[] A = new String[4];
    private long[] am = new long[4];
    private static int an;
@@ -34,7 +34,7 @@ public final class thien_ba extends Screen {
    private boolean aq;
    public boolean Q;
    public boolean R;
-   public static thien_ba S;
+   public static BigTwoGameScreen instance;
    public static boolean T;
    byte U;
    String[] V;
@@ -78,18 +78,18 @@ public final class thien_ba extends Screen {
    private UIAction aO;
    private UIAction aP;
 
-   public static thien_ba d(int var0) {
-      if (S == null) {
-         S = new thien_ba(var0);
+   public static BigTwoGameScreen getInstance(int var0) {
+      if (instance == null) {
+         instance = new BigTwoGameScreen(var0);
       }
 
-      return S;
+      return instance;
    }
 
    public final void b(String var1) {
       Vector var10000 = this.ax;
       String var2 = var1;
-      thien_ba var5 = this;
+      BigTwoGameScreen var5 = this;
       byte var3 = 0;
 
       UIAction var10001;
@@ -111,11 +111,11 @@ public final class thien_ba extends Screen {
       var10000.removeElement(var10001);
    }
 
-   private thien_ba(int var1) {
-      new UIAction("Tài khoản", new thien_bs(this));
-      this.aO = new UIAction(TextConstant.update(), new thien_bt(this));
-      this.aP = new UIAction("Tìm bàn", new thien_bu(this));
-      z = BuddyListScreen.currentGroupName;
+   private BigTwoGameScreen(int var1) {
+      new UIAction("Tài khoản", new AccountInfoAction(this));
+      this.aO = new UIAction(TextConstant.update(), new UpdateAction(this));
+      this.aP = new UIAction("Tìm bàn", new TimBanAction(this));
+      currentGroupName = BuddyListScreen.currentGroupName;
       if (var1 == 1) {
          super.title = TextConstant.bigTwo();
       }
@@ -133,7 +133,7 @@ public final class thien_ba extends Screen {
    }
 
    public final boolean handleInput(boolean[] var1, boolean[] var2, int[] var3) {
-      if (var3[0] > 32 && x && !H) {
+      if (var3[0] > 32 && isGameStarted && !H) {
          this.addControl(I);
          J = true;
          this.selectControl(I);
@@ -153,7 +153,7 @@ public final class thien_ba extends Screen {
    public final void a(thien_aw[] var1, int var2) {
       ah = var2;
       J = false;
-      x = false;
+      isGameStarted = false;
       GameManager.instance.c();
       this.X = true;
       this.P = null;
@@ -183,7 +183,7 @@ public final class thien_ba extends Screen {
    }
 
    public static void e() {
-      x = false;
+      isGameStarted = false;
       MessageHandler.b(ai);
    }
 
@@ -204,7 +204,7 @@ public final class thien_ba extends Screen {
    }
 
    public final void a(byte var1, String[] var2, long[] var3, int[] var4, String[] var5, int[] var6, Integer[] var7, String var8) {
-      x = true;
+      isGameStarted = true;
       ah = 1;
       GameManager.instance.c();
       this.clearControls();
@@ -243,7 +243,7 @@ public final class thien_ba extends Screen {
       byte var13 = 0;
 
       for (byte var14 = 0; var14 < var1; var14++) {
-         if (z.equals(var2[var14])) {
+         if (currentGroupName.equals(var2[var14])) {
             var12 = var14;
             break;
          }
@@ -259,11 +259,11 @@ public final class thien_ba extends Screen {
 
          var13 = var18[var20];
          if (var2[var13] != null) {
-            this.F[var20] = new thien_bz(var2[var13], var3[var13], var20, var4[var13], var2[var13].equals(this.w), var5[var13], var6[var13], var7[var13]);
+            this.F[var20] = new thien_bz(var2[var13], var3[var13], var20, var4[var13], var2[var13].equals(this.currentPlayerId), var5[var13], var6[var13], var7[var13]);
             this.F[var20].g = this.O[var13];
          }
 
-         if (z.equals(this.F[var20].a)) {
+         if (currentGroupName.equals(this.F[var20].a)) {
             an = this.F[var20].e;
             ao = this.F[var20].f;
             var10 = this.F[var20].g;
@@ -301,7 +301,7 @@ public final class thien_ba extends Screen {
          this.aC.removeAllElements();
       }
 
-      if (z.equals(this.w) && this.F.length > 1) {
+      if (currentGroupName.equals(this.currentPlayerId) && this.F.length > 1) {
          this.ax.removeAllElements();
 
          for (byte var22 = 0; var22 < this.F.length; var22++) {
@@ -324,7 +324,7 @@ public final class thien_ba extends Screen {
       this.aC.addElement(new UIAction("Rời bàn", new thien_bc(this)));
       super.leftCommand = new UIAction("Menu", new thien_bd(this));
       super.rightCommand = null;
-      if (z.equals(this.w)) {
+      if (currentGroupName.equals(this.currentPlayerId)) {
          super.centerCommand = new UIAction(TextConstant.playNow(), new thien_be(this));
       } else if (!var10) {
          super.centerCommand = new UIAction(TextConstant.ready(), new thien_bf(this));
@@ -368,7 +368,7 @@ public final class thien_ba extends Screen {
       thien_ax.l = var4;
       this.P.b = var2;
       this.D = var2;
-      if (z.equals(var2)) {
+      if (currentGroupName.equals(var2)) {
          this.aq = var3;
          this.P.e = var3;
       }
@@ -378,7 +378,7 @@ public final class thien_ba extends Screen {
       this.P.i = an;
       this.P.j = ao + 8;
       thien_ax var7 = this.P;
-      thien_ba var5 = this;
+      BigTwoGameScreen var5 = this;
 
       for (byte var8 = 0; var8 < var5.F.length; var8++) {
          if (var5.F[var8] != null) {
@@ -403,9 +403,9 @@ public final class thien_ba extends Screen {
       var5.leftCommand = new UIAction("Menu", new thien_bh(var5));
       System.gc();
 
-      for (byte var6 = 0; var6 < S.K; var6++) {
-         if (S.F[var6].a != null && S.F[var6].a.equals(var2)) {
-            S.F[var6].c(30);
+      for (byte var6 = 0; var6 < instance.K; var6++) {
+         if (instance.F[var6].a != null && instance.F[var6].a.equals(var2)) {
+            instance.F[var6].c(30);
             return;
          }
       }
@@ -433,7 +433,7 @@ public final class thien_ba extends Screen {
          if (this.P.h) {
             this.P.g = false;
 
-            for (int var8 = 0; var8 < S.K; var8++) {
+            for (int var8 = 0; var8 < instance.K; var8++) {
                this.F[var8].l = false;
             }
          } else {
@@ -553,7 +553,7 @@ public final class thien_ba extends Screen {
 
       for (int var9 = 0; var9 < this.at; var9++) {
          for (int var7 = 0; var7 < this.K; var7++) {
-            if (!var8 && this.as[var7] < this.C && this.V[var7] != null && z.equals(this.V[var7])) {
+            if (!var8 && this.as[var7] < this.C && this.V[var7] != null && currentGroupName.equals(this.V[var7])) {
                var8 = true;
             }
 
@@ -585,12 +585,12 @@ public final class thien_ba extends Screen {
       this.Z = var4.length;
 
       for (int var3 = 0; var3 < var4.length; var3++) {
-         this.aa[var3] = S.F[var3].a;
-         this.ab[var3] = S.F[var3].b;
-         this.ad[var3] = S.F[var3].c;
-         this.ae[var3] = S.F[var3].C;
-         this.af[var3] = S.F[var3].D;
-         this.ag[var3] = S.F[var3].E;
+         this.aa[var3] = instance.F[var3].a;
+         this.ab[var3] = instance.F[var3].b;
+         this.ad[var3] = instance.F[var3].c;
+         this.ae[var3] = instance.F[var3].C;
+         this.af[var3] = instance.F[var3].D;
+         this.ag[var3] = instance.F[var3].E;
          this.O[var3] = false;
       }
    }
@@ -598,7 +598,7 @@ public final class thien_ba extends Screen {
    public final void b(String var1, String var2, boolean var3) {
       this.P.b = var2;
       this.P.h = var3;
-      S.D = var2;
+      instance.D = var2;
       if (this.P.h) {
          this.P.g = false;
          this.P.d = null;
@@ -637,11 +637,11 @@ public final class thien_ba extends Screen {
    }
 
    public static void e(int var0) {
-      x = false;
+      isGameStarted = false;
       MessageHandler.a(var0, 0, ai);
    }
 
-   static void a(thien_ba var0) {
+   static void a(BigTwoGameScreen var0) {
       var0.j();
    }
 
@@ -649,35 +649,35 @@ public final class thien_ba extends Screen {
       return ap;
    }
 
-   static PopupSideElementData b(thien_ba var0) {
+   static PopupSideElementData b(BigTwoGameScreen var0) {
       return var0.aA;
    }
 
-   static void a(thien_ba var0, thien_ay var1) {
+   static void a(BigTwoGameScreen var0, thien_ay var1) {
       var0.al = null;
    }
 
-   static PopupSideElementData c(thien_ba var0) {
+   static PopupSideElementData c(BigTwoGameScreen var0) {
       return var0.aD;
    }
 
-   static PopupSideElementData d(thien_ba var0) {
+   static PopupSideElementData d(BigTwoGameScreen var0) {
       return var0.aJ;
    }
 
-   static void a(thien_ba var0, PopupSideElementData var1) {
+   static void a(BigTwoGameScreen var0, PopupSideElementData var1) {
       var0.aJ = var1;
    }
 
-   static UIAction e(thien_ba var0) {
+   static UIAction e(BigTwoGameScreen var0) {
       return var0.aG;
    }
 
-   static UIAction f(thien_ba var0) {
+   static UIAction f(BigTwoGameScreen var0) {
       return var0.aF;
    }
 
-   static UIControlBase g(thien_ba var0) {
+   static UIControlBase g(BigTwoGameScreen var0) {
       return var0.av;
    }
 }

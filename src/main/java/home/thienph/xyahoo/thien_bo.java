@@ -2,20 +2,20 @@ package home.thienph.xyahoo;
 
 final class thien_bo
         implements IAction {
-    private thien_ba a;
+    private BigTwoGameScreen a;
 
-    thien_bo(thien_ba thien_ba2) {
-        this.a = thien_ba2;
+    thien_bo(BigTwoGameScreen bigTwoGameScreen2) {
+        this.a = bigTwoGameScreen2;
     }
 
     public final void action() {
-        this.a.removeControl(thien_ba.I);
-        thien_ba.J = false;
-        this.a.selectControl(thien_ba.g(this.a));
-        if (thien_ba.ah == 1) {
-            MessageHandler.a(thien_ba.ah, thien_ba.B, thien_ba.z, thien_ba.I.getText());
+        this.a.removeControl(BigTwoGameScreen.I);
+        BigTwoGameScreen.J = false;
+        this.a.selectControl(BigTwoGameScreen.g(this.a));
+        if (BigTwoGameScreen.ah == 1) {
+            MessageHandler.a(BigTwoGameScreen.ah, BigTwoGameScreen.B, BigTwoGameScreen.currentGroupName, BigTwoGameScreen.I.getText());
         }
-        thien_ba.a(this.a);
-        thien_ba.I.setText("");
+        BigTwoGameScreen.a(this.a);
+        BigTwoGameScreen.I.setText("");
     }
 }

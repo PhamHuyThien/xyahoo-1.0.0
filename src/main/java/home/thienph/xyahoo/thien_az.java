@@ -11,7 +11,7 @@ implements IAction {
     public final void action() {
         String string = thien_ay.c[thien_ay.a((thien_ay)this.a)].a;
         if (thien_ay.b(this.a) == 1) {
-            MessageHandler.a(string, thien_ba.z);
+            MessageHandler.a(string, BigTwoGameScreen.currentGroupName);
         }
     }
 }
