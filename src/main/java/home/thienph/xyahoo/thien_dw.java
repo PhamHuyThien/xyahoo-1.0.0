@@ -21,7 +21,7 @@ implements IAction {
             return;
         }
         GameManager.t.addElement(string);
-        MessageHandler.i(thien_ff.y, string);
+        MessageHandler.i(BuddyListScreen.currentGroupName, string);
         int n = 0;
         while (n < this.d.a.length) {
             if (string.equals(this.d.a[n])) {

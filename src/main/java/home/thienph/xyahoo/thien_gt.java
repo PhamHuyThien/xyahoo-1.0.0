@@ -2,35 +2,35 @@ package home.thienph.xyahoo;
 
 final class thien_gt
 implements IAction {
-    private thien_gp a;
+    private LoginYahooScreen a;
 
-    thien_gt(thien_gp thien_gp2) {
-        this.a = thien_gp2;
+    thien_gt(LoginYahooScreen loginYahooScreen2) {
+        this.a = loginYahooScreen2;
     }
 
     public final void action() {
         int n;
-        String string = thien_fe.b(thien_gp.b(this.a).getText().trim());
-        int n2 = n = thien_gp.c(this.a).a() == 0 ? 0 : 12;
-        if (string != null && !string.equals(thien_gp.A)) {
-            thien_gp.a(this.a, string);
-            thien_gp.z = 0;
+        String string = thien_fe.b(LoginYahooScreen.b(this.a).getText().trim());
+        int n2 = n = LoginYahooScreen.c(this.a).a() == 0 ? 0 : 12;
+        if (string != null && !string.equals(LoginYahooScreen.A)) {
+            LoginYahooScreen.a(this.a, string);
+            LoginYahooScreen.z = 0;
             GameManager.z = true;
-        } else if (n != thien_gp.z) {
+        } else if (n != LoginYahooScreen.z) {
             if (n == 0) {
                 if (string != null && string.length() > 0) {
-                    thien_gp.a(this.a, string);
+                    LoginYahooScreen.a(this.a, string);
                 } else {
                     MessageHandler.a(0, 2);
                 }
-                thien_gp.z = 0;
+                LoginYahooScreen.z = 0;
                 GameManager.z = true;
             } else {
                 MessageHandler.a(12, 2);
-                thien_gp.z = 12;
+                LoginYahooScreen.z = 12;
                 GameManager.z = true;
             }
         }
-        GameManager.getInstance().c(thien_gp.d(this.a));
+        GameManager.getInstance().c(LoginYahooScreen.d(this.a));
     }
 }

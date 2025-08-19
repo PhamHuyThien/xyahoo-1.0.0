@@ -4,7 +4,7 @@ import java.util.Vector;
 import javax.microedition.io.ConnectionNotFoundException;
 import javax.microedition.lcdui.Graphics;
 
-public final class thien_ew extends Screen {
+public final class ChatRoomScreen extends Screen {
    public boolean w;
    public String x;
    public String y;
@@ -15,7 +15,7 @@ public final class thien_ew extends Screen {
    private final PopupSideElementData D;
    private final Vector E;
 
-   public thien_ew(String var1, boolean var2, boolean var3, int[] var4) {
+   public ChatRoomScreen(String var1, boolean var2, boolean var3, int[] var4) {
       super.isLocked = true;
       this.w = var2;
       this.C = var3;
@@ -46,8 +46,8 @@ public final class thien_ew extends Screen {
    }
 
    public static void e() {
-      if (thien_ff.E != null) {
-         thien_aq.a(thien_ff.E, 1);
+      if (BuddyListScreen.pendingChatTarget != null) {
+         thien_aq.a(BuddyListScreen.pendingChatTarget, 1);
       }
    }
 
@@ -57,8 +57,8 @@ public final class thien_ew extends Screen {
          thien_aq.a(this.B, 1);
       }
 
-      if (thien_ff.E != null) {
-         thien_aq.a(thien_ff.E, 1);
+      if (BuddyListScreen.pendingChatTarget != null) {
+         thien_aq.a(BuddyListScreen.pendingChatTarget, 1);
       }
    }
 
@@ -89,7 +89,7 @@ public final class thien_ew extends Screen {
 
             Object var5 = null;
             if (this.C) {
-               GameManager.instance.B = thien_ff.y;
+               GameManager.instance.B = BuddyListScreen.currentGroupName;
                GameManager.instance.C++;
                if (GameManager.instance.C > 5) {
                   this.z.a("Bạn chỉ có thể chat 5 câu liên tục khi chat nhóm", 1);
@@ -98,12 +98,12 @@ public final class thien_ew extends Screen {
 
                MessageHandler.f(super.subtitle, this.A.getText());
             } else if (this.w) {
-               MessageHandler.a((String)(var5 = thien_gp.x), this.x, this.A.getText(), 2);
+               MessageHandler.a((String)(var5 = LoginYahooScreen.x), this.x, this.A.getText(), 2);
             } else {
-               MessageHandler.a((String)(var5 = thien_ff.y), super.title, this.A.getText(), 1);
+               MessageHandler.a((String)(var5 = BuddyListScreen.currentGroupName), super.title, this.A.getText(), 1);
             }
 
-            this.z.a(this.w ? thien_gp.y : thien_ff.A, this.A.getText(), 0);
+            this.z.a(this.w ? LoginYahooScreen.y : BuddyListScreen.userStatusMessage, this.A.getText(), 0);
             this.z.b();
             this.A.setText("");
             return false;
@@ -129,7 +129,7 @@ public final class thien_ew extends Screen {
       this.z.drawScrollbar(var1);
    }
 
-   static PopupSideElementData a(thien_ew var0) {
+   static PopupSideElementData a(ChatRoomScreen var0) {
       return var0.D;
    }
 }

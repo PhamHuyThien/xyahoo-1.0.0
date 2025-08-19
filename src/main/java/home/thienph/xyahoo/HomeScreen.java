@@ -1,63 +1,63 @@
 package home.thienph.xyahoo;
 
-import java.io.IOException;
-import java.util.Vector;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
+import java.io.IOException;
+import java.util.Vector;
 
-public final class thien_ca extends FormScreen {
-   public static thien_ca D;
+public final class HomeScreen extends FormScreen {
+   public static HomeScreen instance;
    private Vector J;
    PopupSideElementData E;
    TextField F = null;
    boolean G;
-   public UIGridMenu H;
+   public UIGridMenu menuHome;
    static UIAction uiActionInfo = new UIAction(TextConstant.info(), new AppInfoAction());
 
    private void f() {
-      String[] var1;
-      int var2 = (var1 = new String[]{"Yahoo!", "Tiến Lên", "Games", "Tài Khoản"}).length;
+      String[] menuNames = new String[]{"Yahoo!", "Tiến Lên", "Games", "Tài Khoản"};
+      int menuLength = (menuNames).length;
 
       try {
-         Image[] var3 = new Image[var2];
+         Image[] menuImages = new Image[menuLength];
 
-         for (byte var4 = 0; var4 < var2; var4++) {
-            var3[var4] = Image.createImage("/Icn" + var4 + ".png");
+         for (byte var4 = 0; var4 < menuLength; var4++) {
+            menuImages[var4] = Image.createImage("/Icn" + var4 + ".png");
          }
 
-         this.H = new UIGridMenu(
-            0, Screen.headerHeight + 7, Screen.e - 3, Screen.formHeight - 3 - GameManager.g, var2, var1, null, null, var3[0].getWidth(), var3[0].getHeight(), true, 1
+         this.menuHome = new UIGridMenu(
+            0, Screen.headerHeight + 7, Screen.e - 3, Screen.formHeight - 3 - GameManager.g, menuLength, menuNames, null, null, menuImages[0].getWidth(), menuImages[0].getHeight(), true, 1
          );
-         UIGridMenu var6 = this.H;
-         this.H.images = var3;
+         UIGridMenu var6 = this.menuHome;
+         this.menuHome.images = menuImages;
          System.gc();
       } catch (IOException var5) {
       }
 
-      this.addControl(this.H);
-      this.selectControl(this.H);
-      UIGridMenu var10000 = this.H;
-      UIAction var7 = new UIAction(TextConstant.select(), new thien_cc(this));
+      this.addControl(this.menuHome);
+      this.selectControl(this.menuHome);
+      UIGridMenu var10000 = this.menuHome;
+      UIAction var7 = new UIAction(TextConstant.select(), new SelectMenuHomeAction(this));
       var10000.actionTertiary = var7;
    }
 
-   public thien_ca() {
+   public HomeScreen() {
       super.title = "X Yahoo!";
-      D = this;
-      UIAction var1 = new UIAction(TextConstant.settings(), new thien_cd(this));
-      UIAction var2 = new UIAction(TextConstant.comment(), new thien_ce(this));
-      UIAction var3 = new UIAction(TextConstant.signOut(), new thien_ch(this));
-      Vector var4;
-      (var4 = new Vector()).addElement(uiActionInfo);
+      instance = this;
+      UIAction settingAction = new UIAction(TextConstant.settings(), new HomeSettingAction(this));
+      UIAction var2 = new UIAction(TextConstant.comment(), new HomeCommentAction(this));
+      UIAction var3 = new UIAction(TextConstant.signOut(), new HomeSignOutAction(this));
+      Vector var4 = new Vector();
+      var4.addElement(uiActionInfo);
       var4.addElement(var2);
       var4.addElement(LoginScreen.callButton);
       (var2 = new UIAction(TextConstant.support(), null)).popupSideElementData = new PopupSideElementData(var4);
       this.J = new Vector();
       this.J.addElement(var2);
-      this.J.addElement(var1);
+      this.J.addElement(settingAction);
       this.J.addElement(var3);
       this.E = new PopupSideElementData(this.J);
-      super.leftCommand = new UIAction("Menu", new thien_cj(this));
+      super.leftCommand = new UIAction("Menu", new OpenMenuHomeAction(this));
       this.f();
    }
 
@@ -84,12 +84,12 @@ public final class thien_ca extends FormScreen {
       }
    }
 
-   public final void e(int var1) {
+   public final void openMenu(int menuId) {
       GameManager var2 = GameManager.instance;
       System.gc();
-      switch (var1) {
+      switch (menuId) {
          case 0:
-            var2.y();
+            var2.showLoginYahooScreen();
             return;
          case 1:
             if (GameManager.a) {
@@ -113,16 +113,16 @@ public final class thien_ca extends FormScreen {
    }
 
    public final void updateLayout() {
-      this.H.handleFocus();
+      this.menuHome.handleFocus();
    }
 
    public final void drawOverlay(Graphics var1) {
-      this.H.drawScrollbar(var1);
+      this.menuHome.drawScrollbar(var1);
    }
 
-   static void a(thien_ca var0) {
+   static void a(HomeScreen var0) {
       var0.removeControl(var0.F);
-      var0.selectControl(var0.H);
+      var0.selectControl(var0.menuHome);
       var0.F.setText("");
       var0.G = false;
    }

@@ -4,7 +4,7 @@ import java.util.Vector;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 
-public final class thien_gp
+public final class LoginYahooScreen
 extends Screen {
     public thien_b w;
     public static String x;
@@ -35,12 +35,12 @@ extends Screen {
     private UIDropdown W;
     private TextField X;
 
-    public thien_gp() {
+    public LoginYahooScreen() {
         String string = Xuka.d();
         String string2 = Xuka.e();
         this.title = "Yahoo!";
-        int n = thien_ca.D.H.images[0].getHeight();
-        this.P = Screen.e - thien_ca.D.H.images[0].getWidth() >> 1;
+        int n = HomeScreen.instance.menuHome.images[0].getHeight();
+        this.P = Screen.e - HomeScreen.instance.menuHome.images[0].getWidth() >> 1;
         int n2 = (TextRenderer.fontHeight + 6 << 2) + 28 + n + 5;
         this.Q = n2 <= Screen.formHeight - GameManager.g ? GameManager.f - 10 + (Screen.formHeight - GameManager.g - n2 >> 1) : GameManager.f + 5;
         n = this.Q + n - 3;
@@ -130,14 +130,14 @@ extends Screen {
         }
         this.scrollTargetY = 0;
         this.scrollY = 0;
-        thien_gp thien_gp2 = this;
-        thien_gp2.w.handleFocus();
+        LoginYahooScreen loginYahooScreen2 = this;
+        loginYahooScreen2.w.handleFocus();
         System.gc();
     }
 
     public final void drawBackground(Graphics graphics) {
         if (!this.F) {
-            graphics.drawImage(thien_ca.D.H.images[0], this.P, this.Q, 0);
+            graphics.drawImage(HomeScreen.instance.menuHome.images[0], this.P, this.Q, 0);
         }
         super.drawBackground(graphics);
     }
@@ -169,14 +169,14 @@ extends Screen {
         }
         this.w.e = true;
         this.a(true);
-        thien_gp thien_gp2 = this;
+        LoginYahooScreen loginYahooScreen2 = this;
         this.U = GameManager.a(true);
-        if (thien_gp2.U != -1) {
+        if (loginYahooScreen2.U != -1) {
             thien_s thien_s2 = GameManager.a(true, x);
             if (thien_s2 != null) {
-                GameManager.instance.k.w.a(thien_s2, -1);
+                GameManager.instance.loginYahooScreen.w.a(thien_s2, -1);
             } else {
-                thien_gp2.U = -1;
+                loginYahooScreen2.U = -1;
             }
         }
         MessageHandler.login(string, string2, z, 2, this.U);
@@ -208,10 +208,10 @@ extends Screen {
         Object object;
         if (nArray[0] > 32 && !this.E && this.F) {
             object = this;
-            ((thien_gp)object).H.setText("");
-            ((Screen)object).addControl(((thien_gp)object).H);
-            ((Screen)object).selectControl(((thien_gp)object).H);
-            ((thien_gp)object).E = true;
+            ((LoginYahooScreen)object).H.setText("");
+            ((Screen)object).addControl(((LoginYahooScreen)object).H);
+            ((Screen)object).selectControl(((LoginYahooScreen)object).H);
+            ((LoginYahooScreen)object).E = true;
         }
         object = "";
         if (this.E) {
@@ -244,49 +244,49 @@ extends Screen {
         GameManager.getInstance().a(String.valueOf(TextConstant.inviteYourYahoo()) + "?", new thien_gs(this));
     }
 
-    static void a(thien_gp thien_gp2) {
+    static void a(LoginYahooScreen loginYahooScreen2) {
         if (D) {
-            GameManager.instance.a("Vui l\u00f2ng tho\u00e1t Yahoo! v\u00e0 b\u1ecf ch\u1ecdn \u0111\u0103ng nh\u1eadp \u1ea9n", (Image)null, 1);
+            GameManager.instance.a("Vui lòng thoát Yahoo! và bỏ chọn đăng nhập ẩn", (Image)null, 1);
             return;
         }
         if (GameManager.z) {
-            GameManager.instance.a("Vui l\u00f2ng ch\u1edd 10s", (Image)null, 1);
+            GameManager.instance.a("Vui lòng chờ 10s", (Image)null, 1);
             return;
         }
-        if (thien_gp2.V == null) {
+        if (loginYahooScreen2.V == null) {
             System.gc();
-            thien_gp2.V = new FormScreen();
-            thien_gp2.V.title = TextConstant.status();
-            FormScreen cfr_ignored_0 = thien_gp2.V;
+            loginYahooScreen2.V = new FormScreen();
+            loginYahooScreen2.V.title = TextConstant.status();
+            FormScreen cfr_ignored_0 = loginYahooScreen2.V;
             FormScreen.calculateFormDimensions(70, 150);
-            thien_gp2.V.x += 20;
-            thien_gp2.W = UIFormBuilder.addDropdown(thien_gp2.V, TextConstant.status(), new String[]{TextConstant.available(), TextConstant.invisible2()});
-            thien_gp2.X = UIFormBuilder.addTextFieldWithLabel(thien_gp2.V, TextConstant.statusMessage(), 0, -1);
-            thien_gp2.V.selectControl(thien_gp2.W);
-            thien_gp2.V.centerCommand = new UIAction("OK", new thien_gt(thien_gp2));
-            thien_gp2.V.leftCommand = new UIAction(TextConstant.cancel(), new thien_gu(thien_gp2));
+            loginYahooScreen2.V.x += 20;
+            loginYahooScreen2.W = UIFormBuilder.addDropdown(loginYahooScreen2.V, TextConstant.status(), new String[]{TextConstant.available(), TextConstant.invisible2()});
+            loginYahooScreen2.X = UIFormBuilder.addTextFieldWithLabel(loginYahooScreen2.V, TextConstant.statusMessage(), 0, -1);
+            loginYahooScreen2.V.selectControl(loginYahooScreen2.W);
+            loginYahooScreen2.V.centerCommand = new UIAction("OK", new thien_gt(loginYahooScreen2));
+            loginYahooScreen2.V.leftCommand = new UIAction(TextConstant.cancel(), new thien_gu(loginYahooScreen2));
         }
-        thien_gp2.W.c(z == 0 ? 0 : 1);
-        GameManager.getInstance().displayScreen(thien_gp2.V);
-        thien_gp2.X.setText(A);
+        loginYahooScreen2.W.c(z == 0 ? 0 : 1);
+        GameManager.getInstance().displayScreen(loginYahooScreen2.V);
+        loginYahooScreen2.X.setText(A);
         GameManager.getInstance().j();
     }
 
-    static TextField b(thien_gp thien_gp2) {
-        return thien_gp2.X;
+    static TextField b(LoginYahooScreen loginYahooScreen2) {
+        return loginYahooScreen2.X;
     }
 
-    static UIDropdown c(thien_gp thien_gp2) {
-        return thien_gp2.W;
+    static UIDropdown c(LoginYahooScreen loginYahooScreen2) {
+        return loginYahooScreen2.W;
     }
 
-   static void a(thien_gp var0, String var1) {
+   static void a(LoginYahooScreen var0, String var1) {
       MessageHandler.a(var1, 2);
       A = var1;
       Xuka.saveCustomStr(x, var1, true);
    }
 
-    static FormScreen d(thien_gp thien_gp2) {
-        return thien_gp2.V;
+    static FormScreen d(LoginYahooScreen loginYahooScreen2) {
+        return loginYahooScreen2.V;
     }
 }

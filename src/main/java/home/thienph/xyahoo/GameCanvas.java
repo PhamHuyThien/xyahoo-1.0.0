@@ -35,7 +35,7 @@ public final class GameCanvas extends Canvas implements Runnable {
       screenHeight = this.getHeight();
       gameState = 0;
       TextRenderer.initFont();
-      thien_es var1 = thien_es.a();
+      GameHandler var1 = GameHandler.getInstance();
       ConnectionManager.registerCallback(1, var1);
       ConnectionManager.registerCallback(1001, var1);
       ConnectionManager.registerCallback(1000, var1);
@@ -45,7 +45,7 @@ public final class GameCanvas extends Canvas implements Runnable {
       ConnectionManager.registerCallback(1001, var1);
       ConnectionManager.ConnectionListener = var1;
       GameManager var2;
-      thien_es.a(var2 = GameManager.getInstance());
+      GameHandler.a(var2 = GameManager.getInstance());
       thien_eu.a(var2);
       ConnectionManager.sendPacket(new Packet(-2, -1));
       new Thread(this).start();

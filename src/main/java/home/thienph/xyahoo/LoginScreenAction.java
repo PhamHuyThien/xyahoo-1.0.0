@@ -1,10 +1,10 @@
 package home.thienph.xyahoo;
 
-final class thien_db
+final class LoginScreenAction
 implements IAction {
     private LoginScreen loginScreen;
 
-    thien_db(LoginScreen loginScreen2) {
+    LoginScreenAction(LoginScreen loginScreen2) {
         this.loginScreen = loginScreen2;
     }
 

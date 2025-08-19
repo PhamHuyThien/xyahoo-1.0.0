@@ -2,16 +2,16 @@ package home.thienph.xyahoo;
 
 final class thien_cg
 implements IAction {
-    private thien_ce a;
+    private HomeCommentAction a;
 
-    thien_cg(thien_ce thien_ce2) {
-        this.a = thien_ce2;
+    thien_cg(HomeCommentAction homeCommentAction2) {
+        this.a = homeCommentAction2;
     }
 
     public final void action() {
-        thien_ce thien_ce2 = this.a;
-        thien_ca.a(thien_ce2.a);
-        thien_ce2 = this.a;
-        MessageHandler.c(thien_ce2.a.F.getText());
+        HomeCommentAction homeCommentAction2 = this.a;
+        HomeScreen.a(homeCommentAction2.homeScreen);
+        homeCommentAction2 = this.a;
+        MessageHandler.c(homeCommentAction2.homeScreen.F.getText());
     }
 }

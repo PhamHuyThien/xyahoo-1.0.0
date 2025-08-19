@@ -18,10 +18,10 @@ implements IAction {
         if (this.b.getText().equals("")) {
             return;
         }
-        this.a.j.x.b().a(this.b.getText(), new thien_r(this.c, "", 0, "", new int[0], 0, 0));
-        this.a.j.x.c();
-        thien_ff thien_ff2 = this.a.j;
-        thien_ff2.x.d();
+        this.a.j.buddyList.b().a(this.b.getText(), new thien_r(this.c, "", 0, "", new int[0], 0, 0));
+        this.a.j.buddyList.c();
+        BuddyListScreen buddyListScreen2 = this.a.j;
+        buddyListScreen2.buddyList.d();
         MessageHandler.a(true, this.b.getText(), this.c);
         this.a.c(this.d);
     }

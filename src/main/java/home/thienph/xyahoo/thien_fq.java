@@ -2,11 +2,11 @@ package home.thienph.xyahoo;
 
 final class thien_fq
 implements IAction {
-    private thien_ff a;
+    private BuddyListScreen a;
     private final thien_cl b;
 
-    thien_fq(thien_ff thien_ff2, thien_cl thien_cl2) {
-        this.a = thien_ff2;
+    thien_fq(BuddyListScreen buddyListScreen2, thien_cl thien_cl2) {
+        this.a = buddyListScreen2;
         this.b = thien_cl2;
     }
 
@@ -17,6 +17,6 @@ implements IAction {
             return;
         }
         GameManager.getInstance().c(this.b);
-        this.a.a(string, 0);
+        this.a.handleChatAction(string, 0);
     }
 }

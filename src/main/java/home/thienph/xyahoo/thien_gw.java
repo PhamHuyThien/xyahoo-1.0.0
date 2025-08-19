@@ -4,10 +4,10 @@ import javax.microedition.lcdui.Image;
 
 final class thien_gw
 implements IAction {
-    private thien_gp a;
+    private LoginYahooScreen a;
 
-    thien_gw(thien_gp thien_gp2) {
-        this.a = thien_gp2;
+    thien_gw(LoginYahooScreen loginYahooScreen2) {
+        this.a = loginYahooScreen2;
     }
 
     public final void action() {

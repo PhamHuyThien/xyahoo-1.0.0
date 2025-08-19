@@ -78,7 +78,7 @@ extends UIControlBase {
             if (n4 >= 30000) {
                 this.a(graphics, string, this.baseX + 2 + n, n2);
                 string = "";
-                graphics.drawRegion(GameManager.u, (n4 -= 30000) * 18, 0, 18, 18, 0, this.baseX + 2 + (n += TextRenderer.computeTextWidth(string, TextRenderer.charWidth)) + 10, this.baseY + (TextRenderer.fontHeight >> 1), 3);
+                graphics.drawRegion(GameManager.iconChats, (n4 -= 30000) * 18, 0, 18, 18, 0, this.baseX + 2 + (n += TextRenderer.computeTextWidth(string, TextRenderer.charWidth)) + 10, this.baseY + (TextRenderer.fontHeight >> 1), 3);
                 n += 20;
             } else {
                 string = String.valueOf(string) + (char)n4;

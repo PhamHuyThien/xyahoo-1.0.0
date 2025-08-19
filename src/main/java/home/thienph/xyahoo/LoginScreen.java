@@ -54,7 +54,7 @@ public final class LoginScreen extends FormScreen
 
         //
         final Vector vectorSupport = new Vector();
-        vectorSupport.addElement(thien_ca.uiActionInfo);
+        vectorSupport.addElement(HomeScreen.uiActionInfo);
         vectorSupport.addElement(new UIAction(TextConstant.comment(), new CommentAction(this)));
         vectorSupport.addElement(LoginScreen.callButton);
         //
@@ -65,12 +65,12 @@ public final class LoginScreen extends FormScreen
         this.menuItems.addElement(new UIAction(TextConstant.register(), new RegisterAction(this)));
         this.menuItems.addElement(new UIAction(TextConstant.forgetPassword(), new ForgetPasswordAction(this)));
         this.menuItems.addElement(uiActionSupport);
-        this.menuItems.addElement(new UIAction(TextConstant.settings(), new SettingAction(this)));
+        this.menuItems.addElement(new UIAction(TextConstant.settings(), new SettingLoginAction(this)));
         this.menuItems.addElement(new UIAction(TextConstant.exit(), new ExitAction(this)));
         this.menuPopupSide = new PopupSideElementData(this.menuItems);
 
         super.leftCommand = new UIAction("Menu", new MenuLoginAction(this));
-        super.centerCommand = new UIAction(TextConstant.signIn(), new thien_db(this));
+        super.centerCommand = new UIAction(TextConstant.signIn(), new LoginScreenAction(this));
 
         if (username != null) {
             this.usernameField.setText(username);
@@ -129,7 +129,7 @@ public final class LoginScreen extends FormScreen
         MessageHandler.b();
         GameManager.getInstance().a(String.valueOf(TextConstant.signingAs()) + this.usernameField.getText(), null, null, new UIAction(TextConstant.cancel(), new thien_cy(this))).setExtraOption(true);
         GameManager.getInstance().d();
-        GameManager.getInstance().i = new LoginAction(this);
+        GameManager.getInstance().loginAction = new LoginAction(this);
     }
 
     static void removeCommentField(LoginScreen loginScreen) {
@@ -142,3 +142,4 @@ public final class LoginScreen extends FormScreen
         return LoginScreen.settingsScreen;
     }
 }
+

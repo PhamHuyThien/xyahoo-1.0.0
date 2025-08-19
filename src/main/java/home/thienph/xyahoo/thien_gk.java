@@ -5,7 +5,7 @@ final class thien_gk implements IAction {
    private final TextField b;
    private final Screen c;
 
-   thien_gk(thien_ff var1, TextField var2, TextField var3, Screen var4) {
+   thien_gk(BuddyListScreen var1, TextField var2, TextField var3, Screen var4) {
       this.a = var2;
       this.b = var3;
       this.c = var4;
@@ -21,7 +21,7 @@ final class thien_gk implements IAction {
       } else if (var2.equals("")) {
          this.c.selectControl(this.b);
       } else {
-         thien_s var10000 = GameManager.getInstance().j.x.b();
+         thien_s var10000 = GameManager.getInstance().j.buddyList.b();
          String var4 = var2;
          thien_s var3 = var10000;
          int var5 = var10000.a.size() - 1;
@@ -46,7 +46,7 @@ final class thien_gk implements IAction {
             var2 = var8;
          }
 
-         var10000 = GameManager.getInstance().j.x.b();
+         var10000 = GameManager.getInstance().j.buddyList.b();
          var4 = var1;
          var3 = var10000;
          var5 = var10000.a.size() - 1;

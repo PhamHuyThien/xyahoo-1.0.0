@@ -5,7 +5,7 @@ implements IAction {
     private final TextField a;
     private final UIDropdown b;
 
-    thien_gj(thien_ff thien_ff2, TextField textField2, UIDropdown UIDropdown2) {
+    thien_gj(BuddyListScreen buddyListScreen2, TextField textField2, UIDropdown UIDropdown2) {
         this.a = textField2;
         this.b = UIDropdown2;
     }

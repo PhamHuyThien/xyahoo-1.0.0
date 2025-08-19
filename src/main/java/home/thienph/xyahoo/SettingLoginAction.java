@@ -1,10 +1,10 @@
 package home.thienph.xyahoo;
 
-final class SettingAction
+final class SettingLoginAction
 implements IAction {
     private LoginScreen loginScreen;
 
-    SettingAction(LoginScreen loginScreen2) {
+    SettingLoginAction(LoginScreen loginScreen2) {
         this.loginScreen = loginScreen2;
     }
 

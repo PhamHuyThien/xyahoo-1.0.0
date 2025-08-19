@@ -2,7 +2,7 @@ package home.thienph.xyahoo;
 
 final class thien_ex
 implements IAction {
-    thien_ex(thien_ew thien_ew2) {
+    thien_ex(ChatRoomScreen chatRoomScreen2) {
     }
 
     public final void action() {

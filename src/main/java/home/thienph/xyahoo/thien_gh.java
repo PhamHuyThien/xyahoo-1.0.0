@@ -2,13 +2,13 @@ package home.thienph.xyahoo;
 
 final class thien_gh
 implements IAction {
-    private thien_ff a;
+    private BuddyListScreen a;
 
-    thien_gh(thien_ff thien_ff2) {
-        this.a = thien_ff2;
+    thien_gh(BuddyListScreen buddyListScreen2) {
+        this.a = buddyListScreen2;
     }
 
     public final void action() {
-        GameManager.getInstance().showPopupSideLayout(this.a.I, 0);
+        GameManager.getInstance().showPopupSideLayout(this.a.popupMenuData, 0);
     }
 }

@@ -2,21 +2,21 @@ package home.thienph.xyahoo;
 
 final class thien_fz
 implements IAction {
-    private thien_ff a;
+    private BuddyListScreen a;
 
-    thien_fz(thien_ff thien_ff2) {
-        this.a = thien_ff2;
+    thien_fz(BuddyListScreen buddyListScreen2) {
+        this.a = buddyListScreen2;
     }
 
     public final void action() {
-        thien_u thien_u2 = this.a.x.h();
+        thien_u thien_u2 = this.a.buddyList.h();
         if (thien_u2 == null) {
             return;
         }
         if (thien_u2.a == 0) {
-            this.a.j();
+            this.a.moveUserToGroup();
             return;
         }
-        this.a.f();
+        this.a.renameGroup();
     }
 }

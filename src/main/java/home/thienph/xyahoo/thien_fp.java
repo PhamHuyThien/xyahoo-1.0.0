@@ -4,14 +4,14 @@ import javax.microedition.lcdui.Image;
 
 final class thien_fp
 implements IAction {
-    private thien_ff a;
+    private BuddyListScreen a;
     private final TextField b;
     private final TextField c;
     private final TextField d;
     private final Screen e;
 
-    thien_fp(thien_ff thien_ff2, TextField textField2, TextField textField3, TextField textField4, Screen screen2) {
-        this.a = thien_ff2;
+    thien_fp(BuddyListScreen buddyListScreen2, TextField textField2, TextField textField3, TextField textField4, Screen screen2) {
+        this.a = buddyListScreen2;
         this.b = textField2;
         this.c = textField3;
         this.d = textField4;

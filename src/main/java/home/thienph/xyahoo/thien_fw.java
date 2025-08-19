@@ -2,17 +2,17 @@ package home.thienph.xyahoo;
 
 final class thien_fw
 implements IAction {
-    private thien_ff a;
+    private BuddyListScreen a;
 
-    thien_fw(thien_ff thien_ff2) {
-        this.a = thien_ff2;
+    thien_fw(BuddyListScreen buddyListScreen2) {
+        this.a = buddyListScreen2;
     }
 
     public final void action() {
-        if (thien_ff.C = !thien_ff.C) {
-            thien_ff thien_ff2 = this.a;
-            thien_ff2.x.d();
+        if (BuddyListScreen.isRankingEnabled = !BuddyListScreen.isRankingEnabled) {
+            BuddyListScreen buddyListScreen2 = this.a;
+            buddyListScreen2.buddyList.d();
         }
-        Xuka.saveFlag("onrank", thien_ff.C);
+        Xuka.saveFlag("onrank", BuddyListScreen.isRankingEnabled);
     }
 }

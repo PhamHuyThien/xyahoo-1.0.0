@@ -3,20 +3,20 @@ package home.thienph.xyahoo;
 import java.util.Vector;
 import javax.microedition.lcdui.Image;
 
-public final class thien_es extends PacketHandler {
+public final class GameHandler extends PacketHandler {
    private static thien_et b;
-   private static thien_es c = null;
+   private static GameHandler instance = null;
    public static String a;
 
-   private thien_es() {
+   private GameHandler() {
    }
 
-   public static thien_es a() {
-      if (c == null) {
-         c = new thien_es();
+   public static GameHandler getInstance() {
+      if (instance == null) {
+         instance = new GameHandler();
       }
 
-      return c;
+      return instance;
    }
 
    public static void a(thien_et var0) {

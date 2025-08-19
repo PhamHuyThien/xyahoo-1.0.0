@@ -2,10 +2,10 @@ package home.thienph.xyahoo;
 
 final class thien_ej
 implements IAction {
-    private thien_eh a;
+    private RegisterScreen a;
 
-    thien_ej(thien_eh thien_eh2) {
-        this.a = thien_eh2;
+    thien_ej(RegisterScreen registerScreen2) {
+        this.a = registerScreen2;
     }
 
     public final void action() {

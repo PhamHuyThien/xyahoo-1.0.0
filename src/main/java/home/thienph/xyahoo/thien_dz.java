@@ -11,7 +11,7 @@ implements IAction {
     }
 
     public final void action() {
-        MessageHandler.c(thien_gp.x, this.b, 0);
+        MessageHandler.c(LoginYahooScreen.x, this.b, 0);
         this.a.c();
     }
 }

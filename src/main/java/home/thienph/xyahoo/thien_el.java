@@ -2,16 +2,16 @@ package home.thienph.xyahoo;
 
 final class thien_el
 implements IAction {
-    private thien_eh a;
+    private RegisterScreen registerScreen;
 
-    thien_el(thien_eh thien_eh2) {
-        this.a = thien_eh2;
+    thien_el(RegisterScreen registerScreen2) {
+        this.registerScreen = registerScreen2;
     }
 
     public final void action() {
         GameCanvas.instance.connectToServer();
-        thien_eh.a(this.a, this.a.D.getText());
-        this.a.F = this.a.E.getText();
-        MessageHandler.e(this.a.G, this.a.E.getText());
+        RegisterScreen.a(this.registerScreen, this.registerScreen.fullNameField.getText());
+        this.registerScreen.F = this.registerScreen.E.getText();
+        MessageHandler.e(this.registerScreen.G, this.registerScreen.E.getText());
     }
 }

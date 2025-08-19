@@ -4,7 +4,7 @@ import java.util.Vector;
 import javax.microedition.lcdui.Graphics;
 
 public final class thien_cn extends Screen {
-   private thien_b y = GameManager.getInstance().j.x;
+   private thien_b y = GameManager.getInstance().j.buddyList;
    String w;
    String x;
    private boolean z;

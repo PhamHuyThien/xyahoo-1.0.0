@@ -2,13 +2,13 @@ package home.thienph.xyahoo;
 
 final class thien_fd
 implements IAction {
-    private thien_ew a;
+    private ChatRoomScreen a;
 
-    thien_fd(thien_ew thien_ew2) {
-        this.a = thien_ew2;
+    thien_fd(ChatRoomScreen chatRoomScreen2) {
+        this.a = chatRoomScreen2;
     }
 
     public final void action() {
-        GameManager.getInstance().showPopupSideLayout(thien_ew.a(this.a), 0);
+        GameManager.getInstance().showPopupSideLayout(ChatRoomScreen.a(this.a), 0);
     }
 }

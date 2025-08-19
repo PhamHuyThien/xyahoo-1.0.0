@@ -2,11 +2,11 @@ package home.thienph.xyahoo;
 
 final class thien_fc
 implements IAction {
-    private thien_ew a;
+    private ChatRoomScreen a;
     private final boolean b;
 
-    thien_fc(thien_ew thien_ew2, boolean bl) {
-        this.a = thien_ew2;
+    thien_fc(ChatRoomScreen chatRoomScreen2, boolean bl) {
+        this.a = chatRoomScreen2;
         this.b = bl;
     }
 

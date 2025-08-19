@@ -126,12 +126,12 @@ public class MessageHandler {
                   b(var165.getPayload().getBuffer());
                   break;
                case 4:
-                  FormScreen var104;
-                  (var104 = new FormScreen()).isScrolling = true;
+                  FormScreen formScreen = new FormScreen();
+                  formScreen.isScrolling = true;
                   String var105 = decodePacket(var1);
-                  var104.title = var105;
+                  formScreen.title = var105;
                   int var106 = readInt(var1);
-                  var104.padding = var106;
+                  formScreen.padding = var106;
                   boolean var107 = readBool(var1);
                   Screen var108;
                   if ((var108 = GameManager.instance.d(var106)) != null) {
@@ -139,11 +139,11 @@ public class MessageHandler {
                   }
 
                   if (var106 == -1) {
-                     GameManager.instance.A();
+                     GameManager.instance.showHomeScreen();
                   }
 
-                  var104.startSlide(1);
-                  GameManager.instance.displayScreen(var104);
+                  formScreen.startSlide(1);
+                  GameManager.instance.displayScreen(formScreen);
                   if (var107) {
                      GameManager.instance.j();
                   }
@@ -449,11 +449,11 @@ public class MessageHandler {
                   break;
                case 25:
                   String var127 = readString(var1);
-                  GameManager.instance.j.b(var127);
+                  GameManager.instance.j.showAddFriendScreen(var127);
                   break;
                case 26:
                   String var125 = readString(var1);
-                  thien_ew var126 = GameManager.getInstance().e(var125);
+                  ChatRoomScreen var126 = GameManager.getInstance().e(var125);
                   GameManager.getInstance().d(var126.title);
                   break;
                case 28:
@@ -565,7 +565,7 @@ public class MessageHandler {
                case 40:
                   String var120 = readString(var1);
                   byte var2 = var1.getPayload().readByte();
-                  GameManager.instance.j.a(var120, var2);
+                  GameManager.instance.j.handleChatAction(var120, var2);
             }
          }
       }
@@ -603,7 +603,7 @@ public class MessageHandler {
       if (var0 == 5000008) {
          writeString("", var1);
       } else if (var0 == 321) {
-         writeString(thien_ff.y, var1);
+         writeString(BuddyListScreen.currentGroupName, var1);
       }
 
       ConnectionManager.sendPacket(var1);
@@ -800,8 +800,8 @@ public class MessageHandler {
    public static void a(String var0, int var1) {
       Packet var2 = new Packet(8, var1 == 1 ? 2 : 20);
       if (var1 == 2) {
-         thien_gp.A = var0;
-         Xuka.saveCustomStr(thien_gp.x, var0, true);
+         LoginYahooScreen.A = var0;
+         Xuka.saveCustomStr(LoginYahooScreen.x, var0, true);
       }
 
       writeString(var0, var2);
@@ -927,9 +927,9 @@ public class MessageHandler {
    }
 
    public static void c() {
-      if (thien_es.a != null) {
+      if (GameHandler.a != null) {
          Packet var0 = new Packet(50, 2);
-         writeString(thien_es.a, var0);
+         writeString(GameHandler.a, var0);
          ConnectionManager.sendPacket(var0);
       }
    }

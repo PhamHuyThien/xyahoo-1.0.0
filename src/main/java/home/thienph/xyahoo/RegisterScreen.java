@@ -2,10 +2,10 @@ package home.thienph.xyahoo;
 
 import javax.microedition.lcdui.Image;
 
-public final class thien_eh
+public final class RegisterScreen
 extends FormScreen {
     private static String[] H = new String[]{"admin", "administrator", "root", "system", "xuka", "yahoo"};
-    public TextField D;
+    public TextField fullNameField;
     private UIDropdown I;
     public TextField E;
     private TextField J;
@@ -13,7 +13,7 @@ extends FormScreen {
     public String F;
     public String G;
 
-    public thien_eh() {
+    public RegisterScreen() {
         this.title = TextConstant.register();
         this.leftCommand = new UIAction(TextConstant.close(), new thien_ei(this));
         this.centerCommand = new UIAction(TextConstant.register(), new thien_ej(this));
@@ -21,7 +21,7 @@ extends FormScreen {
 
     public final void b(String[] stringArray) {
         this.clearControls();
-        this.D = null;
+        this.fullNameField = null;
         this.I = null;
         this.E = null;
         this.J = null;
@@ -31,18 +31,18 @@ extends FormScreen {
         this.x = Screen.formHeight - (TextRenderer.extraSpacing * 3 + thien_aq.a + (GameCanvas.screenHeight > 170 ? 55 : 20) + GameManager.g) >> 1;
         UIFormBuilder.addImage((FormScreen)this, thien_aq.c(), false);
         this.x += GameCanvas.screenHeight > 170 ? 18 : 7;
-        this.D = UIFormBuilder.addTextField((FormScreen)this, "T\u00ean: ", 0, -1);
+        this.fullNameField = UIFormBuilder.addTextField((FormScreen)this, "Tên: ", 0, -1);
         this.x += 5;
         this.I = stringArray != null ? UIFormBuilder.addDropdown((FormScreen)this, TextConstant.suggestedId(), stringArray) : null;
         this.E = UIFormBuilder.addTextField((FormScreen)this, String.valueOf(TextConstant.password()) + ":", 2, -1);
         this.x += 5;
         this.J = UIFormBuilder.addTextField((FormScreen)this, String.valueOf(TextConstant.retype()) + ":", 2, -1);
         if (stringArray != null) {
-            this.D.setText(this.K);
+            this.fullNameField.setText(this.K);
             this.E.setText(this.F);
             this.J.setText(this.F);
         }
-        this.selectControl(this.D);
+        this.selectControl(this.fullNameField);
     }
 
     protected final void f() {
@@ -54,28 +54,28 @@ extends FormScreen {
     }
 
     public final void g() {
-        int n = thien_fe.a(this.D.getText());
+        int n = thien_fe.a(this.fullNameField.getText());
         if (n == 1) {
             GameManager.getInstance().a("ID" + TextConstant.lengthMustBeFrom6To64(), (Image)null, 1);
-            this.selectControl(this.D);
+            this.selectControl(this.fullNameField);
             return;
         }
         if (n == 2) {
             GameManager.getInstance().a(TextConstant.idCantStartWithNumber(), (Image)null, 1);
-            this.selectControl(this.D);
+            this.selectControl(this.fullNameField);
             return;
         }
         if (n == 3) {
             GameManager.getInstance().a(TextConstant.getIdCantStartWithNumber(), (Image)null, 1);
-            this.selectControl(this.D);
+            this.selectControl(this.fullNameField);
             return;
         }
         n = 0;
         while (n < H.length) {
-            if (H[n].equals(this.D.getText())) {
+            if (H[n].equals(this.fullNameField.getText())) {
                 GameManager.getInstance().a(TextConstant.cannotUseThisName(), (Image)null, 1);
-                this.D.setText("");
-                this.selectControl(this.D);
+                this.fullNameField.setText("");
+                this.selectControl(this.fullNameField);
                 return;
             }
             ++n;
@@ -90,8 +90,8 @@ extends FormScreen {
             this.selectControl(this.J);
             return;
         }
-        this.D.setText(this.D.getText().toLowerCase());
-        if (this.K != null && this.K.equals(this.D.getText())) {
+        this.fullNameField.setText(this.fullNameField.getText().toLowerCase());
+        if (this.K != null && this.K.equals(this.fullNameField.getText())) {
             if (this.I != null) {
                 this.G = this.I.b();
                 if (this.G == null) {
@@ -101,13 +101,13 @@ extends FormScreen {
                 this.G = this.K;
             }
         } else {
-            this.G = this.D.getText();
+            this.G = this.fullNameField.getText();
         }
         GameManager.getInstance().a(TextConstant.registering(), null, new UIAction(TextConstant.cancel(), new thien_ek(this)), null).setExtraOption(true);
-        GameManager.getInstance().i = new thien_el(this);
+        GameManager.getInstance().loginAction = new thien_el(this);
     }
 
-    static void a(thien_eh thien_eh2, String string) {
-        thien_eh2.K = string;
+    static void a(RegisterScreen registerScreen2, String string) {
+        registerScreen2.K = string;
     }
 }

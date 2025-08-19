@@ -1,8 +1,8 @@
 package home.thienph.xyahoo;
 
-final class thien_cd
+final class HomeSettingAction
 implements IAction {
-    thien_cd(thien_ca thien_ca2) {
+    HomeSettingAction(HomeScreen homeScreen2) {
     }
 
     public final void action() {

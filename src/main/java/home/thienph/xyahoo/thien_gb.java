@@ -5,7 +5,7 @@ implements IAction {
     private final TextField a;
     private final Screen b;
 
-    thien_gb(thien_ff thien_ff2, TextField textField2, Screen screen2) {
+    thien_gb(BuddyListScreen buddyListScreen2, TextField textField2, Screen screen2) {
         this.a = textField2;
         this.b = screen2;
     }

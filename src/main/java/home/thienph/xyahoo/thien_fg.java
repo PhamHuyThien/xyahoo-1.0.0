@@ -2,12 +2,12 @@ package home.thienph.xyahoo;
 
 final class thien_fg
 implements IAction {
-    private thien_ff a;
+    private BuddyListScreen a;
     private final thien_cl b;
     private final String c;
 
-    thien_fg(thien_ff thien_ff2, thien_cl thien_cl2, String string) {
-        this.a = thien_ff2;
+    thien_fg(BuddyListScreen buddyListScreen2, thien_cl thien_cl2, String string) {
+        this.a = buddyListScreen2;
         this.b = thien_cl2;
         this.c = string;
     }
@@ -18,7 +18,7 @@ implements IAction {
         if (string.equals("")) {
             return;
         }
-        if (this.a.x.c(string)) {
+        if (this.a.buddyList.c(string)) {
             GameManager.getInstance().showCenterPopup(TextConstant.thisGroupNameAlreadyExist());
             return;
         }

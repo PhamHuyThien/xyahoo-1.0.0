@@ -4,7 +4,7 @@ final class thien_fo
 implements IAction {
     private final Screen a;
 
-    thien_fo(thien_ff thien_ff2, Screen screen2) {
+    thien_fo(BuddyListScreen buddyListScreen2, Screen screen2) {
         this.a = screen2;
     }
 

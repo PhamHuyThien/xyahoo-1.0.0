@@ -6,7 +6,7 @@ implements IAction {
     private final UIDropdown b;
     private final Screen c;
 
-    thien_fn(thien_ff thien_ff2, TextField textField2, UIDropdown UIDropdown2, Screen screen2) {
+    thien_fn(BuddyListScreen buddyListScreen2, TextField textField2, UIDropdown UIDropdown2, Screen screen2) {
         this.a = textField2;
         this.b = UIDropdown2;
         this.c = screen2;
@@ -15,14 +15,14 @@ implements IAction {
     public final void action() {
         String string = thien_fe.b(this.a.getText().trim());
         int n = this.b.a() == 0 ? 1 : 0;
-        if (n != thien_ff.B) {
+        if (n != BuddyListScreen.userStatus) {
             MessageHandler.a(n, 1);
-            thien_ff.B = n;
+            BuddyListScreen.userStatus = n;
         }
-        if (thien_ff.B == 1) {
+        if (BuddyListScreen.userStatus == 1) {
             MessageHandler.a(string, 1);
-            thien_ff.D = string;
-            Xuka.saveCustomStr(thien_ff.y, thien_ff.D, false);
+            BuddyListScreen.tempStatusMessage = string;
+            Xuka.saveCustomStr(BuddyListScreen.currentGroupName, BuddyListScreen.tempStatusMessage, false);
         }
         GameManager.getInstance().c(this.c);
         GameManager.instance.l();

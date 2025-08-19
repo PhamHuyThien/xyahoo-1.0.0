@@ -115,7 +115,7 @@ public final class thien_ba extends Screen {
       new UIAction("Tài khoản", new thien_bs(this));
       this.aO = new UIAction(TextConstant.update(), new thien_bt(this));
       this.aP = new UIAction("Tìm bàn", new thien_bu(this));
-      z = thien_ff.y;
+      z = BuddyListScreen.currentGroupName;
       if (var1 == 1) {
          super.title = TextConstant.bigTwo();
       }
@@ -543,8 +543,8 @@ public final class thien_ba extends Screen {
          }
 
          var4 = var4 + var6 + TextRenderer.truncate(this.V[var5], 14) + " " + this.ar[var5] + " xuxu" + "\n";
-         if (thien_ff.y.equals(this.V[var5]) && this.ar[var5] > 0L) {
-            GameManager.instance.a("Chúc mừng " + thien_ff.y + " đã thắng số tiền " + this.ar[var5] + " xuxu", (Image) null, 1);
+         if (BuddyListScreen.currentGroupName.equals(this.V[var5]) && this.ar[var5] > 0L) {
+            GameManager.instance.a("Chúc mừng " + BuddyListScreen.currentGroupName + " đã thắng số tiền " + this.ar[var5] + " xuxu", (Image) null, 1);
          }
       }
 

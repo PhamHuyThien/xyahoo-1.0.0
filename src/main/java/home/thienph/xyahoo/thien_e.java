@@ -192,7 +192,7 @@ public final class thien_e extends UIControlBase {
                      var3 += TextRenderer.computeTextWidth(var10, TextRenderer.charWidth);
                      var10 = "";
                      var7 -= 30000;
-                     var1.drawRegion(GameManager.u, var7 * 18, 0, 18, 18, 0, var3 + 10, var12 * TextRenderer.lineSpacing + (TextRenderer.lineSpacing >> 1) + 34, 3);
+                     var1.drawRegion(GameManager.iconChats, var7 * 18, 0, 18, 18, 0, var3 + 10, var12 * TextRenderer.lineSpacing + (TextRenderer.lineSpacing >> 1) + 34, 3);
                      var3 += 20;
                   } else {
                      var10 = var10 + var7;

@@ -2,10 +2,10 @@ package home.thienph.xyahoo;
 
 final class thien_gr
 implements IAction {
-    private thien_gp a;
+    private LoginYahooScreen a;
 
-    thien_gr(thien_gp thien_gp2) {
-        this.a = thien_gp2;
+    thien_gr(LoginYahooScreen loginYahooScreen2) {
+        this.a = loginYahooScreen2;
     }
 
     public final void action() {

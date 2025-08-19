@@ -2,13 +2,13 @@ package home.thienph.xyahoo;
 
 final class thien_gf
 implements IAction {
-    private thien_ff a;
+    private BuddyListScreen a;
 
-    thien_gf(thien_ff thien_ff2) {
-        this.a = thien_ff2;
+    thien_gf(BuddyListScreen buddyListScreen2) {
+        this.a = buddyListScreen2;
     }
 
     public final void action() {
-        this.a.i();
+        this.a.broadcastMessage();
     }
 }

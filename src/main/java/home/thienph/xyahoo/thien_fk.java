@@ -7,7 +7,7 @@ implements IAction {
     private final String c;
     private final String d;
 
-    thien_fk(thien_ff thien_ff2, TextField textField2, Screen screen2, String string, String string2) {
+    thien_fk(BuddyListScreen buddyListScreen2, TextField textField2, Screen screen2, String string, String string2) {
         this.a = textField2;
         this.b = screen2;
         this.c = string;

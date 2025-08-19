@@ -111,7 +111,7 @@ public final class thien_bz extends UIControlBase
             graphics.drawLine(n2 + 10, n3 + 30, n2 + 13, n3 - 3);
             graphics.setColor(872315);
             graphics.fillRoundRect(n2 - 3, n3 - 3, 25, 25, 5, 5);
-            graphics.drawRegion(GameManager.u, this.B * 18, 0, 18, 18, 0, n2, n3, 20);
+            graphics.drawRegion(GameManager.iconChats, this.B * 18, 0, 18, 18, 0, n2, n3, 20);
             graphics.setColor(0);
             return;
         }
