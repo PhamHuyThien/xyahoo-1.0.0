@@ -176,7 +176,7 @@ public final class thien_ba extends Screen {
       super.rightCommand = this.aP;
       this.az.removeAllElements();
       this.az.addElement(this.aO);
-      this.az.addElement(thien_em.z);
+      this.az.addElement(RoomListScreen.z);
       this.az.addElement(new UIAction("Rời phòng", new thien_bw(this)));
       super.leftCommand = this.aB;
       System.gc();
@@ -320,7 +320,7 @@ public final class thien_ba extends Screen {
          this.aC.addElement(this.aH);
       }
 
-      this.aC.addElement(thien_em.z);
+      this.aC.addElement(RoomListScreen.z);
       this.aC.addElement(new UIAction("Rời bàn", new thien_bc(this)));
       super.leftCommand = new UIAction("Menu", new thien_bd(this));
       super.rightCommand = null;

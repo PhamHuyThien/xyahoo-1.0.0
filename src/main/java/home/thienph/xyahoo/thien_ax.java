@@ -498,7 +498,7 @@ public final class thien_ax extends UIControlBase
             final int z = this.Z;
             final int aa = this.aa;
             Label_0155: {
-                if (thien_b.c(this.V - this.Z) > thien_b.c(this.X)) {
+                if (UIBuddyListControl.c(this.V - this.Z) > UIBuddyListControl.c(this.X)) {
                     this.Z += this.X;
                     if (this.Z != z) {
                         break Label_0155;
@@ -507,7 +507,7 @@ public final class thien_ax extends UIControlBase
                 this.Z = this.V;
             }
             Label_0206: {
-                if (thien_b.c(this.W - this.aa) > thien_b.c(this.Y)) {
+                if (UIBuddyListControl.c(this.W - this.aa) > UIBuddyListControl.c(this.Y)) {
                     this.aa += this.Y;
                     if (this.aa != aa) {
                         break Label_0206;

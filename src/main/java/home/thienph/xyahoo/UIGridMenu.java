@@ -272,7 +272,7 @@ extends UIControlBase {
 
     public final void handlePointerRelease(int n, int n2) {
         n = n2 - this.lastDragY;
-        if (thien_b.c(n) > 10) {
+        if (UIBuddyListControl.c(n) > 10) {
             if (n > 0) {
                 this.scrollOffsetY += n;
                 if (this.scrollOffsetY > 0) {

@@ -6,7 +6,7 @@ import javax.microedition.lcdui.Image;
 
 public final class LoginYahooScreen
 extends Screen {
-    public thien_b w;
+    public UIBuddyListControl w;
     public static String x;
     public static String y;
     public static int z;
@@ -70,11 +70,11 @@ extends Screen {
         this.H = new TextField();
         this.H.isShiftMode = true;
         this.H.setBounds(0, Screen.formHeight - GameManager.g - TextRenderer.fontHeight - 11, Screen.e - 6, TextRenderer.fontHeight + 6);
-        this.w = new thien_b(1, 1, Screen.e - 3, Screen.formHeight - 2 - GameManager.g, true);
+        this.w = new UIBuddyListControl(1, 1, Screen.e - 3, Screen.formHeight - 2 - GameManager.g, true);
         this.addControl(this.w);
         this.selectControl(this.w);
-        this.w.c = true;
-        this.w.d = Xuka.readFlag("hideOffline", true);
+        this.w.isAutoChatEnabled = true;
+        this.w.isFilterActive = Xuka.readFlag("hideOffline", true);
         this.G = new Vector();
         this.G.addElement(new UIAction(TextConstant.showHideOffline(), new thien_gq(this)));
         this.G.addElement(new UIAction(TextConstant.status(), new thien_gv(this)));
@@ -167,7 +167,7 @@ extends Screen {
         if (n == 1 || n == 2) {
             x = String.valueOf(x) + this.O.b() + ".com";
         }
-        this.w.e = true;
+        this.w.isLoading = true;
         this.a(true);
         LoginYahooScreen loginYahooScreen2 = this;
         this.U = GameManager.a(true);
@@ -191,11 +191,11 @@ extends Screen {
     }
 
     public final void g() {
-        if (this.w.l != null) {
-            this.w.l.removeAllElements();
+        if (this.w.visibleItems != null) {
+            this.w.visibleItems.removeAllElements();
         }
-        this.w.l = null;
-        this.w.k = null;
+        this.w.visibleItems = null;
+        this.w.buddyDataModel = null;
     }
 
     private void i() {

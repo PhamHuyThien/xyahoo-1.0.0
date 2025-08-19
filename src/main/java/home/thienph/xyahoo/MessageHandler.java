@@ -449,7 +449,7 @@ public class MessageHandler {
                   break;
                case 25:
                   String var127 = readString(var1);
-                  GameManager.instance.j.showAddFriendScreen(var127);
+                  GameManager.instance.buddyListScreen.showAddFriendScreen(var127);
                   break;
                case 26:
                   String var125 = readString(var1);
@@ -565,7 +565,7 @@ public class MessageHandler {
                case 40:
                   String var120 = readString(var1);
                   byte var2 = var1.getPayload().readByte();
-                  GameManager.instance.j.handleChatAction(var120, var2);
+                  GameManager.instance.buddyListScreen.handleChatAction(var120, var2);
             }
          }
       }

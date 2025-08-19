@@ -270,7 +270,7 @@ public final class thien_e extends UIControlBase {
    }
 
    public final void handlePointerRelease(int var1, int var2) {
-      if (thien_b.c(var1 - this.C) > 1 || thien_b.c(var2 - this.D) > 1) {
+      if (UIBuddyListControl.c(var1 - this.C) > 1 || UIBuddyListControl.c(var2 - this.D) > 1) {
          this.B = true;
          this.a = this.a - (var2 - this.D);
          if (this.a < 0) {

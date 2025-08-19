@@ -380,7 +380,7 @@ public class Screen {
             UIControlBase2.handlePointerRelease(n - UIControlBase2.baseX, n2 + this.scrollY - UIControlBase2.baseY);
             return;
         }
-        if (!this.isLocked && thien_b.c(n2 - this.lastTouchY) > 1) {
+        if (!this.isLocked && UIBuddyListControl.c(n2 - this.lastTouchY) > 1) {
             this.isDragging = true;
             this.scrollTargetY -= n2 - this.lastTouchY;
             if (this.scrollTargetY < 0) {

@@ -2,27 +2,27 @@ package home.thienph.xyahoo;
 
 final class thien_c
 implements IAction {
-    private thien_b a;
+    private UIBuddyListControl a;
 
-    thien_c(thien_b thien_b2) {
-        this.a = thien_b2;
+    thien_c(UIBuddyListControl UIBuddyListControl2) {
+        this.a = UIBuddyListControl2;
     }
 
     public final void action() {
-        Object object = this.a.c ? "Y! " + thien_b.a((thien_b)this.a).d : thien_b.a((thien_b)this.a).d;
+        Object object = this.a.isAutoChatEnabled ? "Y! " + UIBuddyListControl.a((UIBuddyListControl)this.a).d : UIBuddyListControl.a((UIBuddyListControl)this.a).d;
         ChatRoomScreen chatRoomScreen2 = (ChatRoomScreen) GameManager.instance.c((String)object);
         if (chatRoomScreen2 != null) {
             chatRoomScreen2.startSlide(1);
             GameManager.instance.d((String)object);
             return;
         }
-        if (this.a.c) {
-            chatRoomScreen2 = new ChatRoomScreen((String)object, this.a.c, false, null);
-            new ChatRoomScreen((String)object, this.a.c, false, null).x = thien_b.a((thien_b)this.a).d;
+        if (this.a.isAutoChatEnabled) {
+            chatRoomScreen2 = new ChatRoomScreen((String)object, this.a.isAutoChatEnabled, false, null);
+            new ChatRoomScreen((String)object, this.a.isAutoChatEnabled, false, null).x = UIBuddyListControl.a((UIBuddyListControl)this.a).d;
         } else {
-            chatRoomScreen2 = new ChatRoomScreen((String)object, this.a.c, false, thien_b.a((thien_b)this.a).j);
-            new ChatRoomScreen((String)object, this.a.c, false, thien_b.a((thien_b)this.a).j).y = thien_b.a((thien_b)this.a).e.equals("") ? thien_b.a((thien_b)this.a).d : thien_b.a((thien_b)this.a).e;
-            object = thien_b.a((thien_b)this.a).i;
+            chatRoomScreen2 = new ChatRoomScreen((String)object, this.a.isAutoChatEnabled, false, UIBuddyListControl.a((UIBuddyListControl)this.a).j);
+            new ChatRoomScreen((String)object, this.a.isAutoChatEnabled, false, UIBuddyListControl.a((UIBuddyListControl)this.a).j).y = UIBuddyListControl.a((UIBuddyListControl)this.a).e.equals("") ? UIBuddyListControl.a((UIBuddyListControl)this.a).d : UIBuddyListControl.a((UIBuddyListControl)this.a).e;
+            object = UIBuddyListControl.a((UIBuddyListControl)this.a).i;
             if (object != null) {
                 chatRoomScreen2.b(Integer.toString(((thien_r)object).i));
             }

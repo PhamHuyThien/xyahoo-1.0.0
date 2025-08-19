@@ -19,14 +19,14 @@ implements IAction {
         Xuka.saveUserID(this.loginScreen.usernameField.getText());
         Xuka.savePassword(this.loginScreen.passwordField.getText());
         Xuka.saveFlag("status", true);
-        if (GameManager.instance.j == null) {
-            GameManager.instance.j = new BuddyListScreen();
-            GameManager.instance.m = new thien_cn();
+        if (GameManager.instance.buddyListScreen == null) {
+            GameManager.instance.buddyListScreen = new BuddyListScreen();
+            GameManager.instance.inviteConferenceScreen = new InviteConferenceScreen();
         }
         if ((n = GameManager.a(false)) != -1) {
             thien_s thien_s2 = GameManager.a(false, BuddyListScreen.currentGroupName);
             if (thien_s2 != null) {
-                GameManager.getInstance().j.buddyList.a(thien_s2, -1);
+                GameManager.getInstance().buddyListScreen.buddyList.a(thien_s2, -1);
             } else {
                 n = -1;
             }

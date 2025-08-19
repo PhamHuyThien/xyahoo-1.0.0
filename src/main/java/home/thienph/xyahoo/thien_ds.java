@@ -18,9 +18,9 @@ implements IAction {
         if (this.b.getText().equals("")) {
             return;
         }
-        this.a.j.buddyList.b().a(this.b.getText(), new thien_r(this.c, "", 0, "", new int[0], 0, 0));
-        this.a.j.buddyList.c();
-        BuddyListScreen buddyListScreen2 = this.a.j;
+        this.a.buddyListScreen.buddyList.getDataModel().a(this.b.getText(), new thien_r(this.c, "", 0, "", new int[0], 0, 0));
+        this.a.buddyListScreen.buddyList.c();
+        BuddyListScreen buddyListScreen2 = this.a.buddyListScreen;
         buddyListScreen2.buddyList.d();
         MessageHandler.a(true, this.b.getText(), this.c);
         this.a.c(this.d);

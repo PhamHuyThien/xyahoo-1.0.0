@@ -25,7 +25,7 @@ implements IAction {
                 return;
             }
             String string = thien_u2.d;
-            thien_s thien_s2 = this.a.buddyList.b();
+            thien_s thien_s2 = this.a.buddyList.getDataModel();
             int n = thien_s2.a.size() - 1;
             while (n >= 0) {
                 thien_t thien_t2 = (thien_t)thien_s2.a.elementAt(n);
@@ -39,7 +39,7 @@ implements IAction {
         }
         if (bl) {
             MessageHandler.e(thien_u2.d);
-            GameManager.getInstance().j.buddyList.a(thien_u2.d);
+            GameManager.getInstance().buddyListScreen.buddyList.a(thien_u2.d);
             return;
         }
         GameManager.getInstance().showCenterPopup(TextConstant.youCanDeleteEmptyGroup());

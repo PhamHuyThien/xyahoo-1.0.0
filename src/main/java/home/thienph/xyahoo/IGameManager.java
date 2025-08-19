@@ -1,6 +1,6 @@
 package home.thienph.xyahoo;
 
-public interface thien_et {
+public interface IGameManager {
     public void a(String[] var1, int[] var2);
 
     public void a(thien_s var1, int var2);

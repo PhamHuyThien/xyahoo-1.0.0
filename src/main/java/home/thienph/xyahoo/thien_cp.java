@@ -2,10 +2,10 @@ package home.thienph.xyahoo;
 
 final class thien_cp
 implements IAction {
-    private thien_cn a;
+    private InviteConferenceScreen a;
 
-    thien_cp(thien_cn thien_cn2) {
-        this.a = thien_cn2;
+    thien_cp(InviteConferenceScreen inviteConferenceScreen2) {
+        this.a = inviteConferenceScreen2;
     }
 
     public final void action() {

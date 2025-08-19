@@ -45,7 +45,7 @@ extends UIControlBase {
         }
         graphics.setColor(3981823);
         TextRenderer.getFontRenderer(TextRenderer.colorHighlight).drawText(this.d, this.baseX + 23, this.baseY + (this.height - TextRenderer.fontHeight >> 1), graphics);
-        graphics.drawImage(thien_b.b[this.c ? 0 : 1], this.baseX + 10, this.baseY + (this.height >> 1), 3);
+        graphics.drawImage(UIBuddyListControl.groupIcons[this.c ? 0 : 1], this.baseX + 10, this.baseY + (this.height >> 1), 3);
     }
 
     public final void update() {

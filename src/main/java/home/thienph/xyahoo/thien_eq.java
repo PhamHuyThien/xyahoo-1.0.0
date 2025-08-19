@@ -2,10 +2,10 @@ package home.thienph.xyahoo;
 
 final class thien_eq
 implements IAction {
-    private thien_em a;
+    private RoomListScreen a;
 
-    thien_eq(thien_em thien_em2) {
-        this.a = thien_em2;
+    thien_eq(RoomListScreen roomListScreen2) {
+        this.a = roomListScreen2;
     }
 
     public final void action() {

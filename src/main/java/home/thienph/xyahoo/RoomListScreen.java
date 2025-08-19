@@ -3,20 +3,20 @@ package home.thienph.xyahoo;
 import java.util.Vector;
 import javax.microedition.lcdui.Graphics;
 
-public final class thien_em
+public final class RoomListScreen
 extends Screen {
-    thien_al w;
+    ContactListUI contactListUI;
     int x;
     private Vector A;
     PopupSideElementData y;
-    public static UIAction z = new UIAction("N\u1ea1p xuxu", new thien_en());
+    public static UIAction z = new UIAction("Nạp xuxu", new thien_en());
 
-    public thien_em() {
+    public RoomListScreen() {
         this.isLocked = true;
-        this.w = new thien_al(1, 1, Screen.e - 3, Screen.formHeight - 2 - GameManager.g, 0);
-        this.addControl(this.w);
-        this.selectControl(this.w);
-        this.rightCommand = new UIAction("T\u00ecm ph\u00f2ng", new thien_eo(this));
+        this.contactListUI = new ContactListUI(1, 1, Screen.e - 3, Screen.formHeight - 2 - GameManager.g, 0);
+        this.addControl(this.contactListUI);
+        this.selectControl(this.contactListUI);
+        this.rightCommand = new UIAction("Tìm phòng", new thien_eo(this));
         this.A = new Vector();
         this.A.addElement(new UIAction(TextConstant.update(), new thien_ep(this)));
         this.A.addElement(z);
@@ -26,10 +26,10 @@ extends Screen {
     }
 
     public final void updateLayout() {
-        this.w.handleFocus();
+        this.contactListUI.handleFocus();
     }
 
     public final void drawOverlay(Graphics graphics) {
-        this.w.drawScrollbar(graphics);
+        this.contactListUI.drawScrollbar(graphics);
     }
 }

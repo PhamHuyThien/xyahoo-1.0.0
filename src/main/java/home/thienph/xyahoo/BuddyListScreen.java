@@ -5,7 +5,7 @@ import javax.microedition.lcdui.Graphics;
 
 public final class BuddyListScreen extends Screen {
    public static int[] onlineStatusIcons;
-   public thien_b buddyList;
+   public UIBuddyListControl buddyList;
    public static String currentGroupName;
    public static String userFullName;
    public static String userStatusMessage;
@@ -308,9 +308,9 @@ public final class BuddyListScreen extends Screen {
       this.searchField = new TextField();
       this.searchField.isShiftMode = true;
       this.searchField.setBounds(0, Screen.formHeight - GameManager.g - TextRenderer.fontHeight - 11, Screen.e - 6, TextRenderer.fontHeight + 6);
-      this.buddyList = new thien_b(1, 1, Screen.e - 3, Screen.formHeight - 2 - GameManager.g, true);
-      this.buddyList.c = false;
-      this.buddyList.n = true;
+      this.buddyList = new UIBuddyListControl(1, 1, Screen.e - 3, Screen.formHeight - 2 - GameManager.g, true);
+      this.buddyList.isAutoChatEnabled = false;
+      this.buddyList.isScrollable = true;
       this.addControl(this.buddyList);
       this.selectControl(this.buddyList);
       this.menuActions = new Vector();
@@ -345,12 +345,12 @@ public final class BuddyListScreen extends Screen {
    }
 
    public final void o() {
-      if (this.buddyList.l != null) {
-         this.buddyList.l.removeAllElements();
+      if (this.buddyList.visibleItems != null) {
+         this.buddyList.visibleItems.removeAllElements();
       }
 
-      this.buddyList.l = null;
-      this.buddyList.k = null;
+      this.buddyList.visibleItems = null;
+      this.buddyList.buddyDataModel = null;
    }
 
    public final boolean handleInput(boolean[] var1, boolean[] var2, int[] var3) {

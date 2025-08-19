@@ -3,7 +3,7 @@ package home.thienph.xyahoo;
 import java.util.Vector;
 import javax.microedition.lcdui.Graphics;
 
-public final class thien_al
+public final class ContactListUI
 extends UIControlBase {
     private int e;
     private int f;
@@ -40,7 +40,7 @@ extends UIControlBase {
         this.handleFocus();
     }
 
-    public thien_al(int n, int n2, int n3, int n4, int n5) {
+    public ContactListUI(int n, int n2, int n3, int n4, int n5) {
         super(1, 1, n3, n4, true);
         new Vector();
         this.b = new UIAction(TextConstant.select(), null);
@@ -50,8 +50,8 @@ extends UIControlBase {
         this.n = 0;
         this.isEnabled = true;
         this.j = TextRenderer.fontHeight + 3;
-        if (this.j < thien_b.a[0].getHeight()) {
-            this.j = thien_b.a[0].getHeight();
+        if (this.j < UIBuddyListControl.statusIcons[0].getHeight()) {
+            this.j = UIBuddyListControl.statusIcons[0].getHeight();
         }
         this.D = n3 - 51;
         this.E = 1;
@@ -233,10 +233,10 @@ extends UIControlBase {
             graphics.setColor(0);
             if (thien_u2.a == 1) {
                 n5 = 18;
-                graphics.drawImage(thien_b.b[thien_u2.g], 9, n + (this.j >> 1) + 1, 3);
+                graphics.drawImage(UIBuddyListControl.groupIcons[thien_u2.g], 9, n + (this.j >> 1) + 1, 3);
             } else {
                 n5 = 22;
-                graphics.drawImage(thien_b.a[thien_u2.g], 11, n + (this.j >> 1) + 2, 3);
+                graphics.drawImage(UIBuddyListControl.statusIcons[thien_u2.g], 11, n + (this.j >> 1) + 2, 3);
             }
             if (thien_u2.a == 1) {
                 string = thien_u2.d;
@@ -263,21 +263,21 @@ extends UIControlBase {
     }
 
     public final void update() {
-        thien_al thien_al2 = this;
-        if (thien_al2.h != thien_al2.e) {
-            thien_al2.f = thien_al2.e - thien_al2.h << 2;
-            thien_al2.g += thien_al2.f;
-            thien_al2.h += thien_al2.g >> 4;
-            thien_al2.g &= 0xF;
-            if (thien_al2.h > thien_al2.i) {
-                thien_al2.h = thien_al2.i;
+        ContactListUI contactListUI2 = this;
+        if (contactListUI2.h != contactListUI2.e) {
+            contactListUI2.f = contactListUI2.e - contactListUI2.h << 2;
+            contactListUI2.g += contactListUI2.f;
+            contactListUI2.h += contactListUI2.g >> 4;
+            contactListUI2.g &= 0xF;
+            if (contactListUI2.h > contactListUI2.i) {
+                contactListUI2.h = contactListUI2.i;
             }
-            if (thien_al2.h < 0) {
-                thien_al2.h = 0;
+            if (contactListUI2.h < 0) {
+                contactListUI2.h = 0;
             }
-            thien_al2.k = thien_al2.h / thien_al2.j - 1;
-            if (thien_al2.k < 0) {
-                thien_al2.k = 0;
+            contactListUI2.k = contactListUI2.h / contactListUI2.j - 1;
+            if (contactListUI2.k < 0) {
+                contactListUI2.k = 0;
             }
         }
     }
@@ -352,7 +352,7 @@ extends UIControlBase {
     }
 
     public final void handlePointerRelease(int n, int n2) {
-        if (thien_b.c(n - this.M) > 1 || thien_b.c(n2 - this.N) > 1) {
+        if (UIBuddyListControl.c(n - this.M) > 1 || UIBuddyListControl.c(n2 - this.N) > 1) {
             this.L = true;
             this.e -= n2 - this.N;
             if (this.e < 0) {

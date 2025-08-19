@@ -72,7 +72,7 @@ public final class thien_bz extends UIControlBase
         this.b = b;
         this.k = (byte)n;
         if (this.c == -1) {
-            final Image[] a2 = thien_b.a;
+            final Image[] a2 = UIBuddyListControl.statusIcons;
         }
         final int n2 = Screen.formHeight - GameManager.f - 40 - ((32 > TextRenderer.fontHeight << 1) ? 32 : (TextRenderer.fontHeight << 1)) - 5;
         if (n % 2 == 0) {

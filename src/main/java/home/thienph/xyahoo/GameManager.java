@@ -8,7 +8,7 @@ import javax.microedition.lcdui.Display;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 
-public final class GameManager implements thien_et {
+public final class GameManager implements IGameManager {
    private static boolean H;
    public static boolean a;
    public static String b;
@@ -34,11 +34,11 @@ public final class GameManager implements thien_et {
    private int V;
    public IAction loginAction;
    private int W;
-   public BuddyListScreen j;
+   public BuddyListScreen buddyListScreen;
    public LoginYahooScreen loginYahooScreen;
    public LoginScreen loginScreen;
-   private RegisterScreen X;
-   public thien_cn m;
+   private RegisterScreen registerScreen;
+   public InviteConferenceScreen inviteConferenceScreen;
    private boolean Y;
    public Vector n = new Vector();
    private int[] Z = new int[3];
@@ -69,7 +69,7 @@ public final class GameManager implements thien_et {
    public static boolean q = true;
    public static boolean autoLogin = true;
    public static boolean s = false;
-   private static Image aw;
+   private static Image loadImage;
    private static Image ax;
    public static Vector t;
    public static Image iconChats;
@@ -97,11 +97,11 @@ public final class GameManager implements thien_et {
    public static String D;
    public static String E;
    HomeScreen homeScreen;
-   public static thien_em G;
+   public static RoomListScreen G;
 
    static {
       try {
-         aw = Image.createImage("/Load.png");
+         loadImage = Image.createImage("/Load.png");
       } catch (Exception var0) {
       }
 
@@ -158,7 +158,7 @@ public final class GameManager implements thien_et {
    }
 
    public final void a(Graphics var1, int var2, int var3) {
-      var1.drawRegion(aw, 0, this.h % 4 == 0 ? this.T++ * 6 : this.T * 6, 46, 6, 0, var2, var3, 3);
+      var1.drawRegion(loadImage, 0, this.h % 4 == 0 ? this.T++ * 6 : this.T * 6, 46, 6, 0, var2, var3, 3);
       this.T = this.T > 4 ? 0 : this.T;
    }
 
@@ -348,7 +348,7 @@ public final class GameManager implements thien_et {
       } catch (Exception var10) {
       }
 
-      thien_b.a();
+      UIBuddyListControl.loadIcons();
       ax.getHeight();
       this.R = g;
       this.S = g - 7 >> 1;
@@ -386,14 +386,14 @@ public final class GameManager implements thien_et {
    }
 
    public final void e() {
-      if (this.X == null) {
-         this.X = new RegisterScreen();
+      if (this.registerScreen == null) {
+         this.registerScreen = new RegisterScreen();
       }
 
-      this.X.b((String[]) null);
-      this.displayScreen(this.X);
-      this.d(this.X);
-      this.X.startSlide(-1);
+      this.registerScreen.b((String[]) null);
+      this.displayScreen(this.registerScreen);
+      this.d(this.registerScreen);
+      this.registerScreen.startSlide(-1);
       this.c(this.loginScreen);
    }
 
@@ -444,11 +444,11 @@ public final class GameManager implements thien_et {
          }
 
          if (var2.W > 0 && var2.aF < 10) {
-            var1.drawImage(thien_b.b[2], 4, var2.S, 20);
+            var1.drawImage(UIBuddyListControl.groupIcons[2], 4, var2.S, 20);
          }
 
          if (var2.W < var2.aE - 1 && var2.aG < 10) {
-            var1.drawImage(thien_b.b[3], var2.U - 10, var2.S, 20);
+            var1.drawImage(UIBuddyListControl.groupIcons[3], var2.U - 10, var2.S, 20);
          }
       }
 
@@ -504,7 +504,7 @@ public final class GameManager implements thien_et {
 
          for (int var6 = 0; var6 < var25; var6++) {
             PopupSideElementData var7 = (PopupSideElementData)var2.aj.elementAt(var6);
-            var20 = var2.aH ? thien_b.c(var7.d + var7.f - var7.h) : thien_b.c(var7.f - (var7.d - var7.h));
+            var20 = var2.aH ? UIBuddyListControl.c(var7.d + var7.f - var7.h) : UIBuddyListControl.c(var7.f - (var7.d - var7.h));
             var15.setClip((var2.aH ? var7.h : var7.d) + 2, var7.i + 2, var20 - 3, var7.g - 3);
             int var8 = var7.f / 50 + 1;
 
@@ -523,7 +523,7 @@ public final class GameManager implements thien_et {
                var15,
                (var2.aH ? var7.h : var7.d) + 1,
                var7.i + 1,
-               (var2.aH ? thien_b.c(var7.d + var7.f - var7.h) : thien_b.c(var7.f - (var7.d - var7.h))) - 2,
+                    (var2.aH ? UIBuddyListControl.c(var7.d + var7.f - var7.h) : UIBuddyListControl.c(var7.f - (var7.d - var7.h))) - 2,
                var7.g - 2
             );
             var15.setClip(var2.aH ? var7.d : var7.d + 2, var7.e, var2.aH ? var7.f - 1 : var7.f, var7.g);
@@ -539,7 +539,7 @@ public final class GameManager implements thien_et {
 
                if (var27 == var7.c) {
                   var15.setColor(10278388);
-                  var15.fillRoundRect(0, var27 * var2.M, (var2.aH ? thien_b.c(var7.d + var7.f - var7.h) : var7.f) - 9, var2.M + 1, 5, 5);
+                  var15.fillRoundRect(0, var27 * var2.M, (var2.aH ? UIBuddyListControl.c(var7.d + var7.f - var7.h) : var7.f) - 9, var2.M + 1, 5, 5);
                   var15.setColor(0);
                   TextRenderer.getFontRenderer(TextRenderer.colorSecondary).drawText(var10, 3, var20, var15);
                } else {
@@ -589,8 +589,8 @@ public final class GameManager implements thien_et {
       this.F();
       this.displayScreen(this.loginScreen);
       this.loginScreen.startSlide(-1);
-      this.m.f();
-      this.j.o();
+      this.inviteConferenceScreen.clearBuddyList();
+      this.buddyListScreen.o();
       if (this.loginYahooScreen != null) {
          this.loginYahooScreen.g();
       }
@@ -623,20 +623,20 @@ public final class GameManager implements thien_et {
    }
 
    public final void h() {
-      this.m.wrapTitle(this.U - 30);
-      this.displayScreen(this.m);
-      this.c(this.j);
-      this.j.buddyList.a(true);
-      this.j.buddyList.actionTertiary = this.j.buddyList.j;
-      this.d(this.m);
+      this.inviteConferenceScreen.wrapTitle(this.U - 30);
+      this.displayScreen(this.inviteConferenceScreen);
+      this.c(this.buddyListScreen);
+      this.buddyListScreen.buddyList.a(true);
+      this.buddyListScreen.buddyList.actionTertiary = this.buddyListScreen.buddyList.markAction;
+      this.d(this.inviteConferenceScreen);
    }
 
    public final void i() {
-      this.j.wrapTitle(this.U - 30);
-      this.c(this.m);
-      this.displayScreen(this.j);
-      this.j.buddyList.a(false);
-      this.j.buddyList.actionTertiary = this.j.buddyList.i;
+      this.buddyListScreen.wrapTitle(this.U - 30);
+      this.c(this.inviteConferenceScreen);
+      this.displayScreen(this.buddyListScreen);
+      this.buddyListScreen.buddyList.a(false);
+      this.buddyListScreen.buddyList.actionTertiary = this.buddyListScreen.buddyList.selectAction;
    }
 
    private IAction E() {
@@ -914,7 +914,7 @@ public final class GameManager implements thien_et {
 
          if (var19.h != var19.d) {
             int var29;
-            if ((var29 = thien_b.c(var19.d - var19.h) >> 1) <= 0) {
+            if ((var29 = UIBuddyListControl.c(var19.d - var19.h) >> 1) <= 0) {
                var29 = 1;
             }
 
@@ -1203,7 +1203,7 @@ public final class GameManager implements thien_et {
    }
 
    public static void l() {
-      instance.d(instance.j);
+      instance.d(instance.buddyListScreen);
    }
 
    public final void d(String var1) {
@@ -1391,7 +1391,7 @@ public final class GameManager implements thien_et {
       ChatRoomScreen var2;
       if ((var2 = (ChatRoomScreen)this.c(var1)) == null) {
          thien_u var3;
-         if ((var3 = this.j.buddyList.e(var1)) == null) {
+         if ((var3 = this.buddyListScreen.buddyList.e(var1)) == null) {
             var2 = new ChatRoomScreen(var1, false, false, null);
          } else {
             (var2 = new ChatRoomScreen(var1, false, false, var3.j)).b(Integer.toString(var3.i.i));
@@ -1461,13 +1461,13 @@ public final class GameManager implements thien_et {
 
    public final void n() {
       this.c();
-      this.loginScreen.usernameField.setText(this.X.G);
-      this.loginScreen.passwordField.setText(this.X.F);
-      Xuka.saveUserID(this.X.G);
-      Xuka.savePassword(this.X.F);
+      this.loginScreen.usernameField.setText(this.registerScreen.G);
+      this.loginScreen.passwordField.setText(this.registerScreen.F);
+      Xuka.saveUserID(this.registerScreen.G);
+      Xuka.savePassword(this.registerScreen.F);
       this.displayScreen(this.loginScreen);
       this.loginScreen.selectControl(this.loginScreen.usernameField);
-      this.c(this.X);
+      this.c(this.registerScreen);
    }
 
    public final void o() {
@@ -1487,8 +1487,8 @@ public final class GameManager implements thien_et {
       var2 = thien_fe.b(var2);
       switch (var3) {
          case 1:
-            if (this.j.buddyList != null) {
-               this.j.buddyList.a(var1, var2, 1);
+            if (this.buddyListScreen.buddyList != null) {
+               this.buddyListScreen.buddyList.a(var1, var2, 1);
                return;
             }
             break;
@@ -1504,10 +1504,10 @@ public final class GameManager implements thien_et {
    public final void a(String var1, int var2, int var3) {
       switch (var3) {
          case 1:
-            if (this.j.buddyList.a(var1, var2)) {
+            if (this.buddyListScreen.buddyList.a(var1, var2)) {
                String var9 = var2 == 1 ? TextConstant.isOnline() : TextConstant.isOffline();
                int var11 = this.aD instanceof ChatRoomScreen ? 2 : 0;
-               this.a(var1 + var9, var2 == 1 ? thien_b.a[1] : thien_b.a[0], var11);
+               this.a(var1 + var9, var2 == 1 ? UIBuddyListControl.statusIcons[1] : UIBuddyListControl.statusIcons[0], var11);
 
                try {
                   ChatRoomScreen var12;
@@ -1526,7 +1526,7 @@ public final class GameManager implements thien_et {
                if (this.loginYahooScreen != null && this.loginYahooScreen.w != null && this.loginYahooScreen.w.a(var1, var2)) {
                   String var8 = var2 == 1 ? TextConstant.isOnline() : TextConstant.isOffline();
                   int var4 = this.aD instanceof ChatRoomScreen ? 2 : 0;
-                  this.a("Y! " + var1 + var8, var2 == 1 ? thien_b.a[1] : thien_b.a[0], var4);
+                  this.a("Y! " + var1 + var8, var2 == 1 ? UIBuddyListControl.statusIcons[1] : UIBuddyListControl.statusIcons[0], var4);
 
                   try {
                      ChatRoomScreen var10;
@@ -1565,17 +1565,17 @@ public final class GameManager implements thien_et {
    }
 
    public final void a(int var1, thien_r var2, String var3) {
-      this.j.buddyList.k.a(var3, var2);
-      this.j.buddyList.c();
-      thien_b.d();
-      a(this.j.buddyList.k, false, BuddyListScreen.currentGroupName);
+      this.buddyListScreen.buddyList.buddyDataModel.a(var3, var2);
+      this.buddyListScreen.buddyList.c();
+      UIBuddyListControl.d();
+      a(this.buddyListScreen.buddyList.buddyDataModel, false, BuddyListScreen.currentGroupName);
       a(var1, false);
    }
 
    public final void a(String var1, int var2, String var3, String var4, int var5) {
-      this.j.buddyList.a(var1, var4, 2);
-      this.j.buddyList.a(var1, var2);
-      this.j.buddyList.a(var1, var3, 1);
+      this.buddyListScreen.buddyList.a(var1, var4, 2);
+      this.buddyListScreen.buddyList.a(var1, var2);
+      this.buddyListScreen.buddyList.a(var1, var3, 1);
       a(var5, false);
       this.showCenterPopup(TextConstant.add2() + var1 + TextConstant.success());
    }
@@ -1586,8 +1586,8 @@ public final class GameManager implements thien_et {
 
    public final void c(String var1, String var2) {
       this.c();
-      this.m.w = var1;
-      this.m.x = var2;
+      this.inviteConferenceScreen.w = var1;
+      this.inviteConferenceScreen.x = var2;
       this.h();
    }
 
@@ -1872,8 +1872,8 @@ public final class GameManager implements thien_et {
    public final void a(thien_s var1, int var2) {
       a(var2, false);
       a(var1, false, BuddyListScreen.currentGroupName);
-      this.j.buddyList.m = TextRenderer.splitText(TextConstant.welcomeToXYahoo(), GameCanvas.screenWidth - 40, TextRenderer.charWidth);
-      this.j.buddyList.a(var1, -1);
+      this.buddyListScreen.buddyList.pleaseWait = TextRenderer.splitText(TextConstant.welcomeToXYahoo(), GameCanvas.screenWidth - 40, TextRenderer.charWidth);
+      this.buddyListScreen.buddyList.a(var1, -1);
       this.c();
    }
 
@@ -1897,7 +1897,7 @@ public final class GameManager implements thien_et {
       a(var1, true, LoginYahooScreen.x);
       this.loginYahooScreen.w.a(var1, -1);
       this.loginYahooScreen.isVisible = true;
-      this.loginYahooScreen.w.e = false;
+      this.loginYahooScreen.w.isLoading = false;
    }
 
    public final void k(String var1) {
@@ -1906,7 +1906,7 @@ public final class GameManager implements thien_et {
       UIFormBuilder.addLabelsAuto(var2, var1 + TextConstant.wantToAddYou());
       TextField var3 = UIFormBuilder.addTextField(var2, TextConstant.toNewGroup(), 0);
       UIDropdown var4;
-      (var4 = UIFormBuilder.addDropdown(var2, TextConstant.orExisting(), this.j.buddyList.i())).a(new thien_dq(this, var4, var3));
+      (var4 = UIFormBuilder.addDropdown(var2, TextConstant.orExisting(), this.buddyListScreen.buddyList.i())).a(new thien_dq(this, var4, var3));
       if (var4.a != null && var4.a.length != 0) {
          var3.setText(var4.b());
       } else {
@@ -2061,37 +2061,37 @@ public final class GameManager implements thien_et {
       } else {
          int[] var3 = var2;
          String var9 = var1;
-         thien_s var8 = this.j.buddyList.k;
+         thien_s var8 = this.buddyListScreen.buddyList.buddyDataModel;
 
-         for (int var4 = this.j.buddyList.k.a.size() - 1; var4 >= 0; var4--) {
+         for (int var4 = this.buddyListScreen.buddyList.buddyDataModel.a.size() - 1; var4 >= 0; var4--) {
             thien_r var5;
             if ((var5 = ((thien_t)var8.a.elementAt(var4)).a(var9)) != null) {
                var5.f = var3;
             }
          }
 
-         this.j.buddyList.c();
+         this.buddyListScreen.buddyList.c();
       }
    }
 
    public final void a(String var1, int var2) {
-      this.j.buddyList.b(var1);
-      a(this.j.buddyList.k, false, BuddyListScreen.currentGroupName);
+      this.buddyListScreen.buddyList.b(var1);
+      a(this.buddyListScreen.buddyList.buddyDataModel, false, BuddyListScreen.currentGroupName);
       a(var2, false);
       this.showCenterPopup(TextConstant.deleteSuccess());
    }
 
    public final void a(int var1, String var2, String var3) {
       this.showCenterPopup(TextConstant.moveIdSuccess());
-      this.j.buddyList.b(var2, var3);
-      a(this.j.buddyList.k, false, BuddyListScreen.currentGroupName);
+      this.buddyListScreen.buddyList.b(var2, var3);
+      a(this.buddyListScreen.buddyList.buddyDataModel, false, BuddyListScreen.currentGroupName);
       a(var1, false);
    }
 
    public final void b(int var1, String var2, String var3) {
-      this.j.buddyList.a(var2, var3);
+      this.buddyListScreen.buddyList.a(var2, var3);
       this.showCenterPopup(TextConstant.renameGroupSuccess());
-      a(this.j.buddyList.k, false, BuddyListScreen.currentGroupName);
+      a(this.buddyListScreen.buddyList.buddyDataModel, false, BuddyListScreen.currentGroupName);
       a(var1, false);
    }
 
@@ -2349,7 +2349,7 @@ public final class GameManager implements thien_et {
       Object var15 = null;
       Vector var18 = null;
       if (var14 == 1) {
-         var18 = this.j.buddyList.l;
+         var18 = this.buddyListScreen.buddyList.visibleItems;
       }
 
       var7 = (byte) var18.size();
@@ -2371,13 +2371,13 @@ public final class GameManager implements thien_et {
       }
 
       if (var14 == 1) {
-         thien_b.d();
+         UIBuddyListControl.d();
       }
    }
 
    public final void a(String[] var1, int[] var2, String[] var3) {
       thien_s var4;
-      int var5 = (var4 = this.j.buddyList.b()).a.size();
+      int var5 = (var4 = this.buddyListScreen.buddyList.getDataModel()).a.size();
 
       while (--var5 >= 0) {
          thien_t var6;
@@ -2401,7 +2401,7 @@ public final class GameManager implements thien_et {
          }
       }
 
-      this.j.buddyList.a(var4, -1);
+      this.buddyListScreen.buddyList.a(var4, -1);
    }
 
    private static String g(int var0) {
@@ -2436,14 +2436,14 @@ public final class GameManager implements thien_et {
 
    public final void b(thien_s var1) {
       if (G == null) {
-         (G = new thien_em()).w.d = new thien_dp(this);
-         G.w.b.label = "Vào phòng";
+         (G = new RoomListScreen()).contactListUI.d = new thien_dp(this);
+         G.contactListUI.b.label = "Vào phòng";
          G.title = "Tiến Lên Miền Nam";
          G.x = 0;
          G.setWrappedText(G.title);
       }
 
-      G.w.a(var1, 0);
+      G.contactListUI.a(var1, 0);
       G.startSlide(1);
       if (!this.f(G)) {
          this.displayScreen(G);

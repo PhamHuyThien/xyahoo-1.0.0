@@ -9,8 +9,8 @@ implements IAction {
     }
 
     public final void action() {
-        this.a.buddyList.d = !this.a.buddyList.d;
+        this.a.buddyList.isFilterActive = !this.a.buddyList.isFilterActive;
         this.a.buddyList.c();
-        this.a.buddyList.h = 0;
+        this.a.buddyList.selectedGroupIndex = 0;
     }
 }

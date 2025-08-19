@@ -7,7 +7,7 @@ implements IAction {
 
     public final void action() {
         try {
-            GameManager.instance.j.buddyList.f.removeAllElements();
+            GameManager.instance.buddyListScreen.buddyList.actionButtons.removeAllElements();
         }
         catch (Exception exception) {}
         if (GameManager.instance.loginYahooScreen != null) {

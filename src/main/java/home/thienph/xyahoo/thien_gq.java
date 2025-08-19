@@ -9,9 +9,9 @@ implements IAction {
     }
 
     public final void action() {
-        this.a.w.d = !this.a.w.d;
+        this.a.w.isFilterActive = !this.a.w.isFilterActive;
         this.a.w.c();
-        this.a.w.h = 0;
-        Xuka.saveFlag("hideOffline", this.a.w.d);
+        this.a.w.selectedGroupIndex = 0;
+        Xuka.saveFlag("hideOffline", this.a.w.isFilterActive);
     }
 }

@@ -228,7 +228,7 @@ extends UIControlBase {
 
     public final void handlePointerRelease(int n, int n2) {
         n = n2 - this.K;
-        if (thien_b.c(n) > 10) {
+        if (UIBuddyListControl.c(n) > 10) {
             if (n > 0) {
                 this.F += n;
                 if (this.F > 0) {

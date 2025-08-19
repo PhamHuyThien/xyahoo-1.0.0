@@ -17,7 +17,7 @@ public final class thien_ck {
             a.put(new Integer(var0), var1);
          } else {
             MessageHandler.b(var0);
-            var1 = thien_b.a[2];
+            var1 = UIBuddyListControl.statusIcons[2];
             a.put(new Integer(var0), var1);
          }
 

@@ -2,7 +2,7 @@ package home.thienph.xyahoo;
 
 public final class thien_eu extends PacketHandler {
    private static thien_eu a = null;
-   private static thien_et b;
+   private static IGameManager b;
 
    public final void onConnect() {
       b.p();
@@ -104,7 +104,7 @@ public final class thien_eu extends PacketHandler {
       return a;
    }
 
-   public static void a(thien_et var0) {
+   public static void a(IGameManager var0) {
       b = var0;
    }
 

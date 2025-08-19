@@ -4,7 +4,7 @@ import java.util.Vector;
 import javax.microedition.lcdui.Image;
 
 public final class GameHandler extends PacketHandler {
-   private static thien_et b;
+   private static IGameManager b;
    private static GameHandler instance = null;
    public static String a;
 
@@ -19,7 +19,7 @@ public final class GameHandler extends PacketHandler {
       return instance;
    }
 
-   public static void a(thien_et var0) {
+   public static void a(IGameManager var0) {
       b = var0;
    }
 

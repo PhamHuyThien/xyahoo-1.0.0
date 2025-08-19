@@ -113,8 +113,8 @@ extends UIControlBase {
         graphics.setColor(bl ? 14675958 : 9478569);
         UIButton.a(graphics, this.baseX + 1, n2, this.width - 2, n);
         n = this.baseY + (this.height >> 1);
-        graphics.drawImage(thien_b.b[2], this.baseX + 9, n, 3);
-        graphics.drawImage(thien_b.b[3], this.baseX + this.width - 9, n, 3);
+        graphics.drawImage(UIBuddyListControl.groupIcons[2], this.baseX + 9, n, 3);
+        graphics.drawImage(UIBuddyListControl.groupIcons[3], this.baseX + this.width - 9, n, 3);
     }
 
     public final void a(IAction IAction2) {

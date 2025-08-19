@@ -9,7 +9,7 @@ implements IAction {
     }
 
     public final void action() {
-        GameManager.getInstance().m.w = this.a.subtitle;
+        GameManager.getInstance().inviteConferenceScreen.w = this.a.subtitle;
         GameManager.getInstance().h();
     }
 }

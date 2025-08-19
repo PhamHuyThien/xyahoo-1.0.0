@@ -5,8 +5,8 @@ final class thien_dp implements IAction {
    }
 
    public final void action() {
-      thien_al var1 = GameManager.G.w;
-      MessageHandler.b((GameManager.G.w.a < 0 ? null : (thien_u)var1.c.elementAt(var1.a)).d);
+      ContactListUI var1 = GameManager.G.contactListUI;
+      MessageHandler.b((GameManager.G.contactListUI.a < 0 ? null : (thien_u)var1.c.elementAt(var1.a)).d);
    }
 }
 

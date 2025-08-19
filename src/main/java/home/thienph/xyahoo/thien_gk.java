@@ -21,7 +21,7 @@ final class thien_gk implements IAction {
       } else if (var2.equals("")) {
          this.c.selectControl(this.b);
       } else {
-         thien_s var10000 = GameManager.getInstance().j.buddyList.b();
+         thien_s var10000 = GameManager.getInstance().buddyListScreen.buddyList.getDataModel();
          String var4 = var2;
          thien_s var3 = var10000;
          int var5 = var10000.a.size() - 1;
@@ -46,7 +46,7 @@ final class thien_gk implements IAction {
             var2 = var8;
          }
 
-         var10000 = GameManager.getInstance().j.buddyList.b();
+         var10000 = GameManager.getInstance().buddyListScreen.buddyList.getDataModel();
          var4 = var1;
          var3 = var10000;
          var5 = var10000.a.size() - 1;
