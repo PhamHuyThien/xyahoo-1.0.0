@@ -9,7 +9,7 @@ public final class ChatRoomScreen extends Screen {
    public String x;
    public String y;
    private String B;
-   public thien_e z;
+   public ChatMessageList z;
    TextField A;
    private boolean C;
    private final PopupSideElementData D;
@@ -23,7 +23,7 @@ public final class ChatRoomScreen extends Screen {
       this.A = new TextField();
       this.A.isEditable = false;
       this.A.setBounds(1, Screen.formHeight - GameManager.topMargin - 2, Screen.e - 3, TextRenderer.fontHeight + 6);
-      this.z = new thien_e(1, 1, Screen.e - 3, Screen.formHeight - GameManager.topMargin - TextRenderer.fontHeight - 7);
+      this.z = new ChatMessageList(1, 1, Screen.e - 3, Screen.formHeight - GameManager.topMargin - TextRenderer.fontHeight - 7);
       this.addControl(this.z);
       this.addControl(this.A);
       this.selectControl(this.A);
@@ -41,7 +41,7 @@ public final class ChatRoomScreen extends Screen {
       super.leftCommand = new UIAction("Menu", new thien_fd(this));
       super.centerCommand = new UIAction("Chat", null);
       if (GameManager.promoMessage != null) {
-         this.z.a(GameManager.promoMessage, 2);
+         this.z.addMessage(GameManager.promoMessage, 2);
       }
    }
 
@@ -65,11 +65,11 @@ public final class ChatRoomScreen extends Screen {
    public final boolean handleInput(boolean[] var1, boolean[] var2, int[] var3) {
       if (var1[16]) {
          var1[16] = false;
-         this.A.setText(thien_fe.b(this.A.getText()));
+         this.A.setText(ContentFilter.filterProfanity(this.A.getText()));
          if (this.A.getText().equals("")) {
             String var8;
             int var10;
-            if ((var10 = (var8 = this.z.c()).indexOf("http://")) >= 0) {
+            if ((var10 = (var8 = this.z.getSelectedLine()).indexOf("http://")) >= 0) {
                String var9 = var8.substring(var10);
 
                try {
@@ -84,7 +84,7 @@ public final class ChatRoomScreen extends Screen {
             }
          } else {
             if (this.A.getText().equals("plf")) {
-               this.z.a("", Xuka.platformName, 0);
+               this.z.addUserMessage("", Xuka.platformName, 0);
             }
 
             Object var5 = null;
@@ -103,8 +103,8 @@ public final class ChatRoomScreen extends Screen {
                MessageHandler.a((String)(var5 = BuddyListScreen.currentGroupName), super.title, this.A.getText(), 1);
             }
 
-            this.z.a(this.w ? LoginYahooScreen.y : BuddyListScreen.userStatusMessage, this.A.getText(), 0);
-            this.z.b();
+            this.z.addUserMessage(this.w ? LoginYahooScreen.y : BuddyListScreen.userStatusMessage, this.A.getText(), 0);
+            this.z.scrollToBottom();
             this.A.setText("");
             return false;
          }

@@ -9,6 +9,6 @@ implements IAction {
     }
 
     public final void action() {
-        this.a.c();
+        this.a.closeTopDialog();
     }
 }

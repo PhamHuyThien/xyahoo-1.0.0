@@ -9,7 +9,7 @@ final class thien_gi
     }
 
     public final void action() {
-        GameManager.getInstance().c(this.a);
-        GameManager.instance.l();
+        GameManager.getInstance().removeScreen(this.a);
+        GameManager.instance.focusBuddyList();
     }
 }

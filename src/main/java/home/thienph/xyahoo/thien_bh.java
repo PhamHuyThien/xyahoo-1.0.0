@@ -18,6 +18,6 @@ final class thien_bh implements IAction
             vector.addElement(BigTwoGameScreen.getSmileyAction(this.a));
             vector.addElement(new UIAction("Rời bàn", new thien_bi(this)));
         }
-        GameManager.getInstance().showPopupSideLayout(BigTwoGameScreen.getContextMenuData(this.a), 0);
+        GameManager.getInstance().showSideMenu(BigTwoGameScreen.getContextMenuData(this.a), 0);
     }
 }

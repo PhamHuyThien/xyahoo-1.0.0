@@ -75,7 +75,7 @@ extends UIControlBase {
                 int n2 = this.f[n] >> 24;
                 int n3 = this.f[n] << 8 >> 24;
                 short s = (short)this.f[n];
-                Image image = thien_ck.a(s);
+                Image image = ImageCacheManager.getImage(s);
                 if (image != null) {
                     graphics.drawImage(image, this.baseX + (this.width >> 1) + n2, this.baseY + (this.height >> 1) + n3, 0);
                 }

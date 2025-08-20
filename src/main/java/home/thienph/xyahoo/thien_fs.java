@@ -14,10 +14,10 @@ implements IAction {
         if (string.trim().equals("")) {
             return;
         }
-        GameManager.getInstance().c(this.a);
+        GameManager.getInstance().removeScreen(this.a);
         BuddyListScreen.userFullName = string;
         BuddyListScreen.userStatusMessage = BuddyListScreen.userFullName.equals("") ? BuddyListScreen.currentGroupName : BuddyListScreen.userFullName;
         MessageHandler.b(string, "", "");
-        GameManager.instance.l();
+        GameManager.instance.focusBuddyList();
     }
 }

@@ -12,8 +12,8 @@ implements IAction {
 
     public final void action() {
         thien_dm thien_dm2 = this.a;
-        thien_dm2.a.c();
+        thien_dm2.a.closeTopDialog();
         thien_dm2 = this.a;
-        thien_dm2.a.b(TextConstant.sendSmsFailed(), this.b);
+        thien_dm2.a.showInfoDialog(TextConstant.sendSmsFailed(), this.b);
     }
 }

@@ -19,7 +19,7 @@ implements IAction {
         }
         String string2 = this.b.b();
         MessageHandler.j(string2, string);
-        GameManager.getInstance().c(this.c);
-        GameManager.instance.l();
+        GameManager.getInstance().removeScreen(this.c);
+        GameManager.instance.focusBuddyList();
     }
 }

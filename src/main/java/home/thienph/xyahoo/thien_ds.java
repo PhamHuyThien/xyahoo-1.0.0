@@ -23,6 +23,6 @@ implements IAction {
         BuddyListScreen buddyListScreen2 = this.a.buddyListScreen;
         buddyListScreen2.buddyList.d();
         MessageHandler.a(true, this.b.getText(), this.c);
-        this.a.c(this.d);
+        this.a.removeScreen(this.d);
     }
 }

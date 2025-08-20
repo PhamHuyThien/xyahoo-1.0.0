@@ -10,8 +10,8 @@ implements IAction {
 
     public final void action() {
         thien_dm thien_dm2 = this.a;
-        thien_dm2.a.c();
+        thien_dm2.a.closeTopDialog();
         thien_dm2 = this.a;
-        thien_dm2.a.showCenterPopup(TextConstant.pleaseWaitForTheReturnActiveSms());
+        thien_dm2.a.showSimpleDialog(TextConstant.pleaseWaitForTheReturnActiveSms());
     }
 }

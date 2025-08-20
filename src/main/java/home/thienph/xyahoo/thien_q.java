@@ -15,9 +15,9 @@ implements IAction {
     public final void action() {
         int n;
         Screen screen2;
-        if (this.a && (screen2 = GameManager.instance.d(n = this.b.getSelectedItemId())) != null) {
+        if (this.a && (screen2 = GameManager.instance.findScreenById(n = this.b.getSelectedItemId())) != null) {
             screen2.startSlide(1);
-            GameManager.instance.d(screen2);
+            GameManager.instance.switchToScreen(screen2);
             return;
         }
         MessageHandler.processRawPacket(MessageHandler.readByteArray(this.c));

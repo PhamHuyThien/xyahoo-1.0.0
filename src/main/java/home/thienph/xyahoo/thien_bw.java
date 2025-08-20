@@ -9,7 +9,7 @@ final class thien_bw implements IAction
     }
     
     public final void action() {
-        GameManager.instance.c(BigTwoGameScreen.instance);
+        GameManager.instance.removeScreen(BigTwoGameScreen.instance);
         TableListControl.playIcon = null;
         TableListControl.tableImage = null;
         BigTwoGameScreen.setTableListControl(this.a, (TableListControl)null);

@@ -32,7 +32,7 @@ public final class BuddyListScreen extends Screen {
          (var2 = new thien_cl(TextConstant.rename(), TextConstant.typeNewNameForGroup() + "\"" + this.buddyList.g() + "\"")).D.setText(var1);
          var2.a(new thien_fg(this, var2, var1));
          GameManager.getInstance().showScreen(var2);
-         GameManager.getInstance().j();
+         GameManager.getInstance().goToLastScreen();
       }
    }
 
@@ -40,13 +40,13 @@ public final class BuddyListScreen extends Screen {
       thien_cl var1;
       (var1 = new thien_cl(TextConstant.chatTo(), TextConstant.enterTheIdYouWantToChat())).a(new thien_fq(this, var1));
       GameManager.getInstance().showScreen(var1);
-      GameManager.getInstance().j();
+      GameManager.getInstance().goToLastScreen();
    }
 
    public final void handleChatAction(String var1, int var2) {
       if (var2 == 0) {
-         ChatRoomScreen var3 = GameManager.getInstance().e(var1);
-         GameManager.getInstance().d(var3.title);
+         ChatRoomScreen var3 = GameManager.getInstance().createChatRoom(var1);
+         GameManager.getInstance().switchToScreenByTitle(var3.title);
       } else {
          if (var2 == 1) {
             this.showAddFriendScreen(var1);
@@ -79,11 +79,11 @@ public final class BuddyListScreen extends Screen {
       var1.centerCommand = new UIAction("OK", new thien_gb(this, var6, var1));
       var1.leftCommand = new UIAction(TextConstant.cancel(), new thien_gi(this, var1));
       GameManager.getInstance().showScreen(var1);
-      GameManager.getInstance().j();
+      GameManager.getInstance().goToLastScreen();
    }
 
    public final void showAddFriendScreen(String var1) {
-      GameManager.currentScreen = GameManager.getInstance().u();
+      GameManager.currentScreen = GameManager.getInstance().getCurrentScreen();
       Screen var2;
       (var2 = new Screen()).title = TextConstant.addFriend();
       int var3;
@@ -128,7 +128,7 @@ public final class BuddyListScreen extends Screen {
       var2.centerCommand = new UIAction("OK", new thien_gk(this, var7, var8, var2));
       var2.leftCommand = new UIAction(TextConstant.cancel(), new thien_gl(this, var2));
       GameManager.instance.pushScreen(var2);
-      GameManager.getInstance().j();
+      GameManager.getInstance().goToLastScreen();
    }
 
    public final void broadcastMessage() {
@@ -165,7 +165,7 @@ public final class BuddyListScreen extends Screen {
       PopupSideElementData var10 = new PopupSideElementData(var9);
       var1.leftCommand = new UIAction("Menu", new thien_fi(this, var10));
       GameManager.getInstance().showScreen(var1);
-      GameManager.getInstance().j();
+      GameManager.getInstance().goToLastScreen();
    }
 
    public final void moveUserToGroup() {
@@ -210,7 +210,7 @@ public final class BuddyListScreen extends Screen {
          var2.centerCommand = new UIAction("OK", new thien_fk(this, var8, var2, var9, var1));
          var2.leftCommand = new UIAction(TextConstant.cancel(), new thien_fl(this, var2));
          GameManager.getInstance().showScreen(var2);
-         GameManager.getInstance().j();
+         GameManager.getInstance().goToLastScreen();
       }
    }
 
@@ -247,7 +247,7 @@ public final class BuddyListScreen extends Screen {
       var1.centerCommand = new UIAction("OK", new thien_fn(this, var6, var8, var1));
       var1.leftCommand = new UIAction(TextConstant.cancel(), new thien_fo(this, var1));
       GameManager.getInstance().showScreen(var1);
-      GameManager.getInstance().j();
+      GameManager.getInstance().goToLastScreen();
    }
 
    protected final void showChangePassword() {
@@ -290,7 +290,7 @@ public final class BuddyListScreen extends Screen {
       var1.centerCommand = new UIAction("OK", new thien_fp(this, var6, var8, var10, var1));
       var1.leftCommand = new UIAction(TextConstant.cancel(), new thien_fr(this, var1));
       GameManager.getInstance().showScreen(var1);
-      GameManager.getInstance().j();
+      GameManager.getInstance().goToLastScreen();
    }
 
    protected final void showChangeFullName() {
@@ -298,7 +298,7 @@ public final class BuddyListScreen extends Screen {
       (var1 = new thien_cl(TextConstant.changeFullname(), TextConstant.changeFullname())).D.setText(userFullName);
       var1.a(new thien_fs(this, var1));
       GameManager.getInstance().showScreen(var1);
-      GameManager.getInstance().j();
+      GameManager.getInstance().goToLastScreen();
    }
 
    public BuddyListScreen() {

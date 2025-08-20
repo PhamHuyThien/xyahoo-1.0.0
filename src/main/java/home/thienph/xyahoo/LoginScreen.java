@@ -107,12 +107,12 @@ public final class LoginScreen extends FormScreen
         }
         GameManager.getInstance().showScreen(LoginScreen.settingsScreen);
         LoginScreen.settingsScreen.startSlide(-1);
-        GameManager.getInstance().j();
+        GameManager.getInstance().goToLastScreen();
     }
     
     public final void recoverPassword() {
-        GameManager.instance.c();
-        GameManager.instance.a(String.valueOf(TextConstant.willSendBackPassword()) + GameManager.recoveryPhone + this.usernameField.getText() + Xuka.refCode + " => " + GameManager.instance.w().substring(6), new thien_cw(this));
+        GameManager.instance.closeTopDialog();
+        GameManager.instance.showConfirmDialog(String.valueOf(TextConstant.willSendBackPassword()) + GameManager.recoveryPhone + this.usernameField.getText() + Xuka.refCode + " => " + GameManager.instance.getRecoveryInfo().substring(6), new thien_cw(this));
     }
     
     public final void login() {
@@ -127,8 +127,8 @@ public final class LoginScreen extends FormScreen
         }
         MessageHandler.i(Xuka.version);
         MessageHandler.b();
-        GameManager.getInstance().showCenterPopupData(String.valueOf(TextConstant.signingAs()) + this.usernameField.getText(), null, null, new UIAction(TextConstant.cancel(), new thien_cy(this))).setExtraOption(true);
-        GameManager.getInstance().d();
+        GameManager.getInstance().showCenterDialog(String.valueOf(TextConstant.signingAs()) + this.usernameField.getText(), null, null, new UIAction(TextConstant.cancel(), new thien_cy(this))).setExtraOption(true);
+        GameManager.getInstance().handleConnectionStatus();
         GameManager.getInstance().loginAction = new LoginAction(this);
     }
 

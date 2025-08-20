@@ -6,6 +6,6 @@ implements IAction {
     }
 
     public final void action() {
-        GameManager.getInstance().c(GameManager.instance.buddyListScreen);
+        GameManager.getInstance().removeScreen(GameManager.instance.buddyListScreen);
     }
 }

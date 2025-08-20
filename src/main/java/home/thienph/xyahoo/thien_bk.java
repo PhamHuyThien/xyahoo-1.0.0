@@ -6,6 +6,6 @@ implements IAction {
     }
 
     public final void action() {
-        GameManager.getInstance().c();
+        GameManager.getInstance().closeTopDialog();
     }
 }

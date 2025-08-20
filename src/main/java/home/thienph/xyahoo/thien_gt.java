@@ -10,7 +10,7 @@ implements IAction {
 
     public final void action() {
         int n;
-        String string = thien_fe.b(LoginYahooScreen.b(this.a).getText().trim());
+        String string = ContentFilter.filterProfanity(LoginYahooScreen.b(this.a).getText().trim());
         int n2 = n = LoginYahooScreen.c(this.a).a() == 0 ? 0 : 12;
         if (string != null && !string.equals(LoginYahooScreen.A)) {
             LoginYahooScreen.a(this.a, string);
@@ -31,6 +31,6 @@ implements IAction {
                 GameManager.isShowingAnimation = true;
             }
         }
-        GameManager.getInstance().c(LoginYahooScreen.d(this.a));
+        GameManager.getInstance().removeScreen(LoginYahooScreen.d(this.a));
     }
 }

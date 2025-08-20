@@ -10,6 +10,6 @@ implements IAction {
 
     public final void action() {
         LoginScreen.removeCommentField(this.loginScreen);
-        GameManager.getInstance().showPopupSideLayout(this.loginScreen.menuPopupSide, 0);
+        GameManager.getInstance().showSideMenu(this.loginScreen.menuPopupSide, 0);
     }
 }

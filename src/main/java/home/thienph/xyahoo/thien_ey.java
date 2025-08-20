@@ -18,8 +18,8 @@ implements IAction {
         } else {
             MessageHandler.a(string, this.a.title, 1);
         }
-        this.a.z.a(this.b ? LoginYahooScreen.y : BuddyListScreen.userStatusMessage, this.b ? TextConstant.buzz[0] : TextConstant.buzz(), 0);
+        this.a.z.addUserMessage(this.b ? LoginYahooScreen.y : BuddyListScreen.userStatusMessage, this.b ? TextConstant.buzz[0] : TextConstant.buzz(), 0);
         GameManager.getInstance().vibrate();
-        this.a.z.b();
+        this.a.z.scrollToBottom();
     }
 }

@@ -9,7 +9,7 @@ implements IAction {
     }
 
     public final void action() {
-        String string = this.a.z.d();
+        String string = this.a.z.getSelectedMessage();
         if (!string.equals("")) {
             GameManager.statusMessage = string;
         }

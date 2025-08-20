@@ -7,6 +7,6 @@ implements IAction {
 
     public final void action() {
         ConnectionManager.disconnect();
-        GameManager.getInstance().c();
+        GameManager.getInstance().closeTopDialog();
     }
 }

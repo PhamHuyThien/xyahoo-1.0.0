@@ -33,7 +33,7 @@ implements IAction {
             return;
         }
         MessageHandler.b("", this.b.getText(), this.c.getText());
-        GameManager.getInstance().c(this.e);
-        GameManager.instance.l();
+        GameManager.getInstance().removeScreen(this.e);
+        GameManager.instance.focusBuddyList();
     }
 }

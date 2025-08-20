@@ -10,6 +10,6 @@ implements IAction {
 
     public final void action() {
         System.out.println("ccoooooooooooooo");
-        this.a.c();
+        this.a.closeTopDialog();
     }
 }

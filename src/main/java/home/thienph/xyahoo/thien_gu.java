@@ -9,6 +9,6 @@ implements IAction {
     }
 
     public final void action() {
-        GameManager.getInstance().c(LoginYahooScreen.d(this.a));
+        GameManager.getInstance().removeScreen(LoginYahooScreen.d(this.a));
     }
 }

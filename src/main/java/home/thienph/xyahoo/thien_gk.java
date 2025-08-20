@@ -70,11 +70,11 @@ final class thien_gk implements IAction {
          }
 
          if (var15) {
-            GameManager.getInstance().showCenterPopup(TextConstant.thisIdAlreadyAdded());
+            GameManager.getInstance().showSimpleDialog(TextConstant.thisIdAlreadyAdded());
          } else {
             MessageHandler.b(var1, var2, 1);
-            GameManager.getInstance().c(this.c);
-            GameManager.getInstance().d(GameManager.currentScreen);
+            GameManager.getInstance().removeScreen(this.c);
+            GameManager.getInstance().switchToScreen(GameManager.currentScreen);
          }
       }
    }

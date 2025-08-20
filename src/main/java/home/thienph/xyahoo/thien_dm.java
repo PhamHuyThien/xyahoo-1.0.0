@@ -13,7 +13,7 @@ implements IAction {
     }
 
     public final void action() {
-        this.a.c();
-        Xuka.startThread(this.b, this.a.v(), new thien_dn(this), new thien_do(this, this.c), false);
+        this.a.closeTopDialog();
+        Xuka.startThread(this.b, this.a.getCardSyntax(), new thien_dn(this), new thien_do(this, this.c), false);
     }
 }

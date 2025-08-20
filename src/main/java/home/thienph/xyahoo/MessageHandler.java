@@ -35,15 +35,15 @@ public class MessageHandler {
             switch (readInt(var1)) {
                case 0:
                   int var147 = readInt(var1);
-                  GameManager.instance.c(GameManager.instance.d(var147));
+                  GameManager.instance.removeScreen(GameManager.instance.findScreenById(var147));
                   break;
                case 1:
                   boolean var184 = readBool(var1);
                   String var146 = decodePacket(var1);
-                  GameManager.instance.a(var146).setExtraOption(var184);
+                  GameManager.instance.showMessage(var146).setExtraOption(var184);
                   break;
                case 2:
-                  GameManager.instance.c();
+                  GameManager.instance.closeTopDialog();
                   break;
                case 3:
                   int var144 = readInt(var1);
@@ -60,7 +60,7 @@ public class MessageHandler {
                            writeInt(readInt(var1), var165);
                         } else if (var186 == 1) {
                            var180 = readInt(var1);
-                           Screen var189 = GameManager.instance.d(var180);
+                           Screen var189 = GameManager.instance.findScreenById(var180);
                            int var196 = readInt(var1);
                            UIControlBase var199 = var189.getControlById(var196);
                            boolean var206 = readBool(var1);
@@ -91,7 +91,7 @@ public class MessageHandler {
                            writeString(decodePacket(var1), var165);
                         } else if (var186 == 1) {
                            var180 = readInt(var1);
-                           Screen var190 = GameManager.instance.d(var180);
+                           Screen var190 = GameManager.instance.findScreenById(var180);
                            int var197 = readInt(var1);
                            boolean var200 = readBool(var1);
                            UIControlBase var207;
@@ -112,7 +112,7 @@ public class MessageHandler {
                            writeBool(readBool(var1), var165);
                         } else if (var186 == 1) {
                            var180 = readInt(var1);
-                           Screen var191 = GameManager.instance.d(var180);
+                           Screen var191 = GameManager.instance.findScreenById(var180);
                            int var198 = readInt(var1);
                            UIControlBase var201;
                            if ((var201 = var191.getControlById(var198)) instanceof UICheckBox) {
@@ -134,27 +134,27 @@ public class MessageHandler {
                   formScreen.padding = var106;
                   boolean var107 = readBool(var1);
                   Screen var108;
-                  if ((var108 = GameManager.instance.d(var106)) != null) {
-                     GameManager.instance.c(var108);
+                  if ((var108 = GameManager.instance.findScreenById(var106)) != null) {
+                     GameManager.instance.removeScreen(var108);
                   }
 
                   if (var106 == -1) {
-                     GameManager.instance.showHomeScreen();
+                     GameManager.instance.displayHomeScreen();
                   }
 
                   formScreen.startSlide(1);
                   GameManager.instance.showScreen(formScreen);
                   if (var107) {
-                     GameManager.instance.j();
+                     GameManager.instance.goToLastScreen();
                   }
                   break;
                case 5:
                   int var188 = readInt(var1);
-                  Screen var195 = GameManager.instance.d(var188);
+                  Screen var195 = GameManager.instance.findScreenById(var188);
                   switch (var1.getPayload().readByte()) {
                      case 0:
                         UIAction var205 = parseMenuEntry(var1);
-                        if (GameManager.c(var188)) {
+                        if (GameManager.isTextFieldControl(var188)) {
                            Vector var212;
                            (var212 = new Vector()).addElement(new UIAction(TextConstant.smileys(), new thien_m()));
                            var212.addElement(var205);
@@ -174,7 +174,7 @@ public class MessageHandler {
                   }
                case 6:
                   int var161 = readInt(var1);
-                  FormScreen var174 = (FormScreen) GameManager.instance.d(var161);
+                  FormScreen var174 = (FormScreen) GameManager.instance.findScreenById(var161);
                   byte var194 = var1.getPayload().readByte();
                   Object var142 = null;
                   switch (var194) {
@@ -299,7 +299,7 @@ public class MessageHandler {
                         int var99 = readInt(var1);
                         int var100 = readInt(var1);
                         int var101 = readInt(var1);
-                        ((UIDropdown) GameManager.instance.d(var99).getControlById(var100)).c(var101);
+                        ((UIDropdown) GameManager.instance.findScreenById(var99).getControlById(var100)).c(var101);
                   }
 
                   var161 = readInt(var1);
@@ -310,11 +310,11 @@ public class MessageHandler {
                   break;
                case 7:
                   int var141 = readInt(var1);
-                  Screen var64 = GameManager.instance.d(var141);
+                  Screen var64 = GameManager.instance.findScreenById(var141);
                   int var65 = readInt(var1);
                   UIControlBase var66 = var64.getControlById(var65);
                   var64.selectControl(var66);
-                  if (var64.equals(GameManager.instance.u())) {
+                  if (var64.equals(GameManager.instance.getCurrentScreen())) {
                      var64.updateLayout();
                   }
                   break;
@@ -346,11 +346,11 @@ public class MessageHandler {
                   }
 
                   PopupSideElementData var230 = new PopupSideElementData(var71);
-                  GameManager.instance.showPopupSideLayout(var230, var70);
+                  GameManager.instance.showSideMenu(var230, var70);
                   break;
                case 12:
                   int var204 = readInt(var1);
-                  FormScreen var211 = (FormScreen) GameManager.instance.d(var204);
+                  FormScreen var211 = (FormScreen) GameManager.instance.findScreenById(var204);
                   int var217;
                   String[] var140 = new String[var217 = readInt(var1)];
 
@@ -362,7 +362,7 @@ public class MessageHandler {
                   break;
                case 13:
                   int var67 = readInt(var1);
-                  FormScreen var68 = (FormScreen) GameManager.instance.d(var67);
+                  FormScreen var68 = (FormScreen) GameManager.instance.findScreenById(var67);
                   int var69 = readInt(var1);
                   var68.toggleSection(var69);
                   break;
@@ -373,7 +373,7 @@ public class MessageHandler {
                      var159 = readString(var1);
                   } else {
                      int var136 = readInt(var1);
-                     Screen var173 = GameManager.instance.d(var136);
+                     Screen var173 = GameManager.instance.findScreenById(var136);
                      int var137 = readInt(var1);
                      boolean var179 = readBool(var1);
                      UIControlBase var138;
@@ -387,7 +387,7 @@ public class MessageHandler {
                   }
 
                   String var139 = readString(var1);
-                  GameManager.instance.a("Gửi tin nhắn: " + var159 + Xuka.refCode + " => " + var139.substring(6), new thien_l(var159, var139));
+                  GameManager.instance.showConfirmDialog("Gửi tin nhắn: " + var159 + Xuka.refCode + " => " + var139.substring(6), new thien_l(var159, var139));
                   break;
                case 15:
                   try {
@@ -396,30 +396,30 @@ public class MessageHandler {
                   }
                   break;
                case 16:
-                  GameManager.instance.d(readInt(var1)).getControlById(readInt(var1)).baseX = readInt(var1);
+                  GameManager.instance.findScreenById(readInt(var1)).getControlById(readInt(var1)).baseX = readInt(var1);
                   break;
                case 17:
                   Screen var133;
-                  UIControlBase var158 = (var133 = GameManager.instance.d(readInt(var1))).getControlById(readInt(var1));
+                  UIControlBase var158 = (var133 = GameManager.instance.findScreenById(readInt(var1))).getControlById(readInt(var1));
                   UIControlBase var134 = var133.getControlById(readInt(var1));
                   var158.baseX = var134.baseX + var134.width + 10;
                   break;
                case 18:
                   FormScreen var132;
                   UIControlBase var157;
-                  (var157 = (var132 = (FormScreen) GameManager.instance.d(readInt(var1))).getControlById(readInt(var1))).baseY = readInt(var1);
+                  (var157 = (var132 = (FormScreen) GameManager.instance.findScreenById(readInt(var1))).getControlById(readInt(var1))).baseY = readInt(var1);
                   var132.x = var157.baseY + var157.height + 2;
                   break;
                case 19:
                   FormScreen var131;
-                  UIControlBase var156 = (var131 = (FormScreen) GameManager.instance.d(readInt(var1))).getControlById(readInt(var1));
+                  UIControlBase var156 = (var131 = (FormScreen) GameManager.instance.findScreenById(readInt(var1))).getControlById(readInt(var1));
                   UIControlBase var172 = var131.getControlById(readInt(var1));
                   var156.baseY = var172.baseY + var172.height + 2;
                   var131.x = var156.baseY + var156.height + 2;
                   break;
                case 20:
                   FormScreen var130;
-                  UIControlBase var155 = (var130 = (FormScreen) GameManager.instance.d(readInt(var1))).getControlById(readInt(var1));
+                  UIControlBase var155 = (var130 = (FormScreen) GameManager.instance.findScreenById(readInt(var1))).getControlById(readInt(var1));
                   UIControlBase var171 = var130.getControlById(readInt(var1));
                   var155.baseY = var171.baseY;
                   var130.x = var155.baseY + var155.height + 2;
@@ -432,10 +432,10 @@ public class MessageHandler {
                   b(var154.getPayload().getBuffer());
                   break;
                case 22:
-                  GameManager.instance.c(GameManager.instance.c(readString(var1)));
+                  GameManager.instance.removeScreen(GameManager.instance.findScreenByTitle(readString(var1)));
                   break;
                case 23:
-                  GameManager.instance.c();
+                  GameManager.instance.closeTopDialog();
                   break;
                case 24:
                   int var128 = readInt(var1);
@@ -443,7 +443,7 @@ public class MessageHandler {
                   String var170 = readString(var1);
 
                   try {
-                     ((TextField) GameManager.instance.d(var128).getControlById(var153)).setText(var170);
+                     ((TextField) GameManager.instance.findScreenById(var128).getControlById(var153)).setText(var170);
                   } catch (Exception var119) {
                   }
                   break;
@@ -453,15 +453,15 @@ public class MessageHandler {
                   break;
                case 26:
                   String var125 = readString(var1);
-                  ChatRoomScreen var126 = GameManager.getInstance().e(var125);
-                  GameManager.getInstance().d(var126.title);
+                  ChatRoomScreen var126 = GameManager.getInstance().createChatRoom(var125);
+                  GameManager.getInstance().switchToScreenByTitle(var126.title);
                   break;
                case 28:
                   if (GameManager.instance.dialogQueue.size() > 0 && ((PopupDialogLayout) GameManager.instance.dialogQueue.elementAt(0)).showExtraOption) {
-                     GameManager.instance.c();
+                     GameManager.instance.closeTopDialog();
                   }
 
-                  GameManager.instance.showCenterPopup(readString(var1));
+                  GameManager.instance.showSimpleDialog(readString(var1));
                   break;
                case 29:
                   String title = readString(var1);
@@ -475,10 +475,10 @@ public class MessageHandler {
                   UIAction centerAction = new UIAction(centerActionName, new CenterButtonAction(centerActionData));
                   UIAction rightAction = new UIAction(rightActionName, new RightButtonAction(rightActionData));
                   if (GameManager.instance.dialogQueue.size() > 0 && ((PopupDialogLayout) GameManager.instance.dialogQueue.elementAt(0)).showExtraOption) {
-                     GameManager.instance.c();
+                     GameManager.instance.closeTopDialog();
                   }
 
-                  GameManager.instance.showCenterPopupData(title, leftAction, centerAction, rightAction);
+                  GameManager.instance.showCenterDialog(title, leftAction, centerAction, rightAction);
                   break;
                case 35:
                   int var3 = readInt(var1);
@@ -494,7 +494,7 @@ public class MessageHandler {
                            writeInt(readInt(var1), var5);
                         } else if (var8 == 1) {
                            int var9 = readInt(var1);
-                           Screen var10 = GameManager.instance.d(var9);
+                           Screen var10 = GameManager.instance.findScreenById(var9);
                            int var11 = readInt(var1);
                            UIControlBase var121 = var10.getControlById(var11);
                            boolean var148 = readBool(var1);
@@ -525,7 +525,7 @@ public class MessageHandler {
                            writeString(decodePacket(var1), var5);
                         } else if (var8 == 1) {
                            int var202 = readInt(var1);
-                           Screen var209 = GameManager.instance.d(var202);
+                           Screen var209 = GameManager.instance.findScreenById(var202);
                            int var215 = readInt(var1);
                            boolean var122 = readBool(var1);
                            UIControlBase var149;
@@ -546,7 +546,7 @@ public class MessageHandler {
                            writeBool(readBool(var1), var5);
                         } else if (var8 == 1) {
                            int var203 = readInt(var1);
-                           Screen var210 = GameManager.instance.d(var203);
+                           Screen var210 = GameManager.instance.findScreenById(var203);
                            int var216 = readInt(var1);
                            UIControlBase var123;
                            if ((var123 = var210.getControlById(var216)) instanceof UICheckBox) {
@@ -784,8 +784,8 @@ public class MessageHandler {
 
    public static void e(String var0, String var1) {
       Packet var2 = new Packet(5000010, 13);
-      writeString(thien_hj.a(var0), var2);
-      writeString(thien_hj.a(var1), var2);
+      writeString(Base64Encoder.encodeAndReverse(var0), var2);
+      writeString(Base64Encoder.encodeAndReverse(var1), var2);
       writeInt(Xuka.partnerId, var2);
       writeInt(Xuka.appId, var2);
       ConnectionManager.sendPacket(var2);
@@ -824,8 +824,8 @@ public class MessageHandler {
          var6 = new Packet(61, 20);
       }
 
-      writeString(thien_hj.a(username), var6);
-      writeString(thien_hj.a(password), var6);
+      writeString(Base64Encoder.encodeAndReverse(username), var6);
+      writeString(Base64Encoder.encodeAndReverse(password), var6);
       writeInt(var2, var6);
       writeString("", var6);
       writeInt(var4, var6);

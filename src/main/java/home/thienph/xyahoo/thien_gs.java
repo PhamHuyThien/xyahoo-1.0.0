@@ -6,7 +6,7 @@ implements IAction {
     }
 
     public final void action() {
-        GameManager.getInstance().c();
+        GameManager.getInstance().closeTopDialog();
         Packet packet2 = new Packet(66, 12);
         ConnectionManager.sendPacket(packet2);
     }

@@ -11,8 +11,8 @@ implements IAction {
     }
 
     public final void action() {
-        GameManager.instance.c();
-        GameManager.instance.showCenterPopup(TextConstant.pleaseWait());
+        GameManager.instance.closeTopDialog();
+        GameManager.instance.showSimpleDialog(TextConstant.pleaseWait());
         Xuka.startThread(this.a, this.b, null, null, true);
     }
 }

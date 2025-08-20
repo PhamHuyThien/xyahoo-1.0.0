@@ -48,13 +48,13 @@ extends FormScreen {
     protected final void f() {
         GameManager gameManager2 = GameManager.getInstance();
         gameManager2.showScreen(gameManager2.loginScreen);
-        gameManager2.d(gameManager2.loginScreen);
+        gameManager2.switchToScreen(gameManager2.loginScreen);
         gameManager2.loginScreen.startSlide(1);
-        gameManager2.c(this);
+        gameManager2.removeScreen(this);
     }
 
     public final void g() {
-        int n = thien_fe.a(this.fullNameField.getText());
+        int n = ContentFilter.validateUsername(this.fullNameField.getText());
         if (n == 1) {
             GameManager.getInstance().showNotification("ID" + TextConstant.lengthMustBeFrom6To64(), (Image)null, 1);
             this.selectControl(this.fullNameField);
@@ -103,7 +103,7 @@ extends FormScreen {
         } else {
             this.G = this.fullNameField.getText();
         }
-        GameManager.getInstance().showCenterPopupData(TextConstant.registering(), null, new UIAction(TextConstant.cancel(), new thien_ek(this)), null).setExtraOption(true);
+        GameManager.getInstance().showCenterDialog(TextConstant.registering(), null, new UIAction(TextConstant.cancel(), new thien_ek(this)), null).setExtraOption(true);
         GameManager.getInstance().loginAction = new thien_el(this);
     }
 

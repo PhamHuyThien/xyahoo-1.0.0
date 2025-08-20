@@ -5,34 +5,34 @@ import java.util.Hashtable;
 import javax.microedition.lcdui.Image;
 import javax.microedition.rms.RecordStore;
 
-public final class thien_ck {
-   private static Hashtable a = new Hashtable();
+public final class ImageCacheManager {
+   private static Hashtable imageCache = new Hashtable();
 
-   public static Image a(int var0) {
+   public static Image getImage(int var0) {
       Image var1;
-      if ((var1 = (Image)a.get(new Integer(var0))) != null) {
+      if ((var1 = (Image) imageCache.get(new Integer(var0))) != null) {
          return var1;
       } else {
-         if ((var1 = b(var0)) != null) {
-            a.put(new Integer(var0), var1);
+         if ((var1 = loadImage(var0)) != null) {
+            imageCache.put(new Integer(var0), var1);
          } else {
             MessageHandler.b(var0);
             var1 = UIBuddyListControl.statusIcons[2];
-            a.put(new Integer(var0), var1);
+            imageCache.put(new Integer(var0), var1);
          }
 
          return var1;
       }
    }
 
-   public static void a(int var0, byte[] var1) {
+   public static void storeImage(int var0, byte[] var1) {
       try {
          try {
-            a.remove(new Integer(var0));
+            imageCache.remove(new Integer(var0));
          } catch (Exception var3) {
          }
 
-         a.put(new Integer(var0), Image.createImage(var1, 0, var1.length));
+         imageCache.put(new Integer(var0), Image.createImage(var1, 0, var1.length));
          String var10000 = "img" + var0;
          var1 = var1;
          String var5 = var10000;
@@ -55,7 +55,7 @@ public final class thien_ck {
       }
    }
 
-   private static Image b(int var0) {
+   private static Image loadImage(int var0) {
       Image var1 = null;
 
       try {
@@ -66,7 +66,7 @@ public final class thien_ck {
       if (var1 != null) {
          return var1;
       } else {
-         byte[] var4 = a("img" + var0);
+         byte[] var4 = readFromStorage("img" + var0);
 
          try {
             var1 = Image.createImage(var4, 0, var4.length);
@@ -77,7 +77,7 @@ public final class thien_ck {
       }
    }
 
-   private static byte[] a(String var0) {
+   private static byte[] readFromStorage(String var0) {
       try {
          RecordStore var3;
          byte[] var1 = (var3 = RecordStore.openRecordStore(var0, false)).getRecord(1);

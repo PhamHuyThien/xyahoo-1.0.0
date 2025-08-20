@@ -75,10 +75,10 @@ public final class HomeScreen extends FormScreen {
 
    public static void f(int var0, int var1) {
       Screen var2;
-      if ((var2 = GameManager.instance.d(var0)) != null) {
-         GameManager.instance.c();
+      if ((var2 = GameManager.instance.findScreenById(var0)) != null) {
+         GameManager.instance.closeTopDialog();
          var2.startSlide(1);
-         GameManager.instance.d(var2);
+         GameManager.instance.switchToScreen(var2);
       } else {
          MessageHandler.a(var1);
       }
@@ -89,11 +89,11 @@ public final class HomeScreen extends FormScreen {
       System.gc();
       switch (menuId) {
          case 0:
-            var2.showLoginYahooScreen();
+            var2.displayYahooLogin();
             return;
          case 1:
             if (GameManager.isTestMode) {
-               var2.x();
+               var2.showRoomList();
                return;
             }
 

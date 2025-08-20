@@ -2,10 +2,10 @@ package home.thienph.xyahoo;
 
 import java.io.UnsupportedEncodingException;
 
-public final class thien_hj {
-    private static final byte[] a = new byte[]{65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 43, 47};
-    private static final byte[] b;
-    private static final byte[] c;
+public final class Base64Encoder {
+    private static final byte[] STANDARD_BASE64_ALPHABET = new byte[]{65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 43, 47};
+    private static final byte[] URL_SAFE_BASE64_ALPHABET;
+    private static final byte[] ORDERED_BASE64_ALPHABET;
 
     static {
         byte[] byArray = new byte[127];
@@ -135,7 +135,7 @@ public final class thien_hj {
         byArray[124] = -9;
         byArray[125] = -9;
         byArray[126] = -9;
-        b = new byte[]{65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 45, 95};
+        URL_SAFE_BASE64_ALPHABET = new byte[]{65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 45, 95};
         byte[] byArray2 = new byte[127];
         byArray2[0] = -9;
         byArray2[1] = -9;
@@ -263,7 +263,7 @@ public final class thien_hj {
         byArray2[124] = -9;
         byArray2[125] = -9;
         byArray2[126] = -9;
-        c = new byte[]{45, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 95, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122};
+        ORDERED_BASE64_ALPHABET = new byte[]{45, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 95, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122};
         byte[] byArray3 = new byte[127];
         byArray3[0] = -9;
         byArray3[1] = -9;
@@ -393,8 +393,8 @@ public final class thien_hj {
         byArray3[126] = -9;
     }
 
-    private static byte[] a(byte[] byArray, int n, int n2, byte[] byArray2, int n3, int n4) {
-        byte[] byArray3 = (n4 & 0x10) == 16 ? b : ((n4 & 0x20) == 32 ? c : a);
+    private static byte[] encode3BytesTo4(byte[] byArray, int n, int n2, byte[] byArray2, int n3, int n4) {
+        byte[] byArray3 = (n4 & 0x10) == 16 ? URL_SAFE_BASE64_ALPHABET : ((n4 & 0x20) == 32 ? ORDERED_BASE64_ALPHABET : STANDARD_BASE64_ALPHABET);
         int n5 = (n2 > 0 ? byArray[n] << 24 >>> 8 : 0) | (n2 > 1 ? byArray[n + 1] << 24 >>> 16 : 0) | (n2 > 2 ? byArray[n + 2] << 24 >>> 24 : 0);
         switch (n2) {
             case 3: {
@@ -422,7 +422,7 @@ public final class thien_hj {
         return byArray2;
     }
 
-    private static String a(byte[] byArray, int n, int n2, int n3) {
+    private static String encodeToBase64String(byte[] byArray, int n, int n2, int n3) {
         n = (n2 << 2) / 3;
         byte[] byArray2 = new byte[n + (n2 % 3 > 0 ? 4 : 0) + n / 76];
         n3 = 0;
@@ -430,7 +430,7 @@ public final class thien_hj {
         int n5 = n2 - 2;
         int n6 = 0;
         while (n3 < n5) {
-            thien_hj.a(byArray, n3, 3, byArray2, n4, 0);
+            Base64Encoder.encode3BytesTo4(byArray, n3, 3, byArray2, n4, 0);
             if ((n6 += 4) == 76) {
                 byArray2[n4 + 4] = 10;
                 ++n4;
@@ -440,7 +440,7 @@ public final class thien_hj {
             n4 += 4;
         }
         if (n3 < n2) {
-            thien_hj.a(byArray, n3, n2 - n3, byArray2, n4, 0);
+            Base64Encoder.encode3BytesTo4(byArray, n3, n2 - n3, byArray2, n4, 0);
             n4 += 4;
         }
         try {
@@ -451,10 +451,10 @@ public final class thien_hj {
         }
     }
 
-   public static String a(String var0) {
+   public static String encodeAndReverse(String var0) {
       byte[] var5;
       String var6;
-      char[] var1 = (var6 = a(var5 = var0.getBytes(), 0, var5.length, 0)).toCharArray();
+      char[] var1 = (var6 = encodeToBase64String(var5 = var0.getBytes(), 0, var5.length, 0)).toCharArray();
       int var2 = var6.length() - 1;
       int var7 = var6.length() / 2;
 

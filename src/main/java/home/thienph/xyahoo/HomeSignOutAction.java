@@ -6,6 +6,6 @@ implements IAction {
     }
 
     public final void action() {
-        GameManager.getInstance().a(TextConstant.areYouSure(), new ConfirmSignOutAction(this));
+        GameManager.getInstance().showConfirmDialog(TextConstant.areYouSure(), new ConfirmSignOutAction(this));
     }
 }

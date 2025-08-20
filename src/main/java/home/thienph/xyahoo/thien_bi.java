@@ -9,7 +9,7 @@ implements IAction {
     }
 
     public final void action() {
-        GameManager.getInstance().c();
-        GameManager.instance.a("Bạn có muốn rời bàn?", new thien_bj(this));
+        GameManager.getInstance().closeTopDialog();
+        GameManager.instance.showConfirmDialog("Bạn có muốn rời bàn?", new thien_bj(this));
     }
 }

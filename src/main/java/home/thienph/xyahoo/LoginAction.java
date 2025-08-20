@@ -23,8 +23,8 @@ implements IAction {
             GameManager.instance.buddyListScreen = new BuddyListScreen();
             GameManager.instance.inviteConferenceScreen = new InviteConferenceScreen();
         }
-        if ((n = GameManager.a(false)) != -1) {
-            thien_s thien_s2 = GameManager.a(false, BuddyListScreen.currentGroupName);
+        if ((n = GameManager.getChecksumValue(false)) != -1) {
+            thien_s thien_s2 = GameManager.loadBuddyList(false, BuddyListScreen.currentGroupName);
             if (thien_s2 != null) {
                 GameManager.getInstance().buddyListScreen.buddyList.a(thien_s2, -1);
             } else {

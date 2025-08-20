@@ -201,7 +201,7 @@ extends UIControlBase {
                if (var15.useCustomImages) {
                   var15.a(var2, var15.images[var7], var3, var4, var19, var7);
                } else {
-                  var15.a(var2, thien_ck.a(var15.iconIds[var7]), var3, var4, var19, var7);
+                  var15.a(var2, ImageCacheManager.getImage(var15.iconIds[var7]), var3, var4, var19, var7);
                }
 
                String[] var20 = (String[])var15.labels.elementAt(var7);

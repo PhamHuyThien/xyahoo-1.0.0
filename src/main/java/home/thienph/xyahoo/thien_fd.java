@@ -9,6 +9,6 @@ implements IAction {
     }
 
     public final void action() {
-        GameManager.getInstance().showPopupSideLayout(ChatRoomScreen.a(this.a), 0);
+        GameManager.getInstance().showSideMenu(ChatRoomScreen.a(this.a), 0);
     }
 }

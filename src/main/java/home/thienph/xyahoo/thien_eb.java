@@ -10,6 +10,6 @@ implements IAction {
 
     public final void action() {
         ConnectionManager.disconnect();
-        this.a.c();
+        this.a.closeTopDialog();
     }
 }

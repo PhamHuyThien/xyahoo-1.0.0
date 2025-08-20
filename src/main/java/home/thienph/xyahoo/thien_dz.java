@@ -12,6 +12,6 @@ implements IAction {
 
     public final void action() {
         MessageHandler.c(LoginYahooScreen.x, this.b, 0);
-        this.a.c();
+        this.a.closeTopDialog();
     }
 }

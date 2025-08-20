@@ -20,12 +20,12 @@ implements IAction {
             this.b.selectControl(this.a);
             return;
         }
-        GameManager.instance.l();
+        GameManager.instance.focusBuddyList();
         if (string.equals(this.c)) {
-            GameManager.getInstance().c(this.b);
+            GameManager.getInstance().removeScreen(this.b);
             return;
         }
         MessageHandler.g(this.d, string);
-        GameManager.getInstance().c(this.b);
+        GameManager.getInstance().removeScreen(this.b);
     }
 }

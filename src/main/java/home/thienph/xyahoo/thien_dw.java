@@ -25,15 +25,15 @@ implements IAction {
         int n = 0;
         while (n < this.d.a.length) {
             if (string.equals(this.d.a[n])) {
-                this.a.showCenterPopup(String.valueOf(TextConstant.deleteSuccess()) + string);
-                this.a.c(this.c);
-                this.a.k();
+                this.a.showSimpleDialog(String.valueOf(TextConstant.deleteSuccess()) + string);
+                this.a.removeScreen(this.c);
+                this.a.goToFirstScreen();
                 return;
             }
             ++n;
         }
-        this.a.showCenterPopup(String.valueOf(TextConstant.add2()) + string + TextConstant.success());
-        this.a.c(this.c);
-        this.a.k();
+        this.a.showSimpleDialog(String.valueOf(TextConstant.add2()) + string + TextConstant.success());
+        this.a.removeScreen(this.c);
+        this.a.goToFirstScreen();
     }
 }

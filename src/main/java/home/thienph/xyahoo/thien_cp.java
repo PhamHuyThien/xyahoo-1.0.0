@@ -9,7 +9,7 @@ implements IAction {
     }
 
     public final void action() {
-        GameManager.getInstance().showDanhSachBanBe();
+        GameManager.getInstance().showFriendsList();
         MessageHandler.h(this.a.w);
     }
 }

@@ -16,7 +16,7 @@ implements IAction {
         if (string.equals("")) {
             return;
         }
-        GameManager.getInstance().c(this.b);
+        GameManager.getInstance().removeScreen(this.b);
         this.a.handleChatAction(string, 0);
     }
 }

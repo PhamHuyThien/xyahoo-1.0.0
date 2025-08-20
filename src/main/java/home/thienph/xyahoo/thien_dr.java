@@ -16,6 +16,6 @@ implements IAction {
 
     public final void action() {
         MessageHandler.a(false, this.b.getText(), this.c);
-        this.a.c(this.d);
+        this.a.removeScreen(this.d);
     }
 }

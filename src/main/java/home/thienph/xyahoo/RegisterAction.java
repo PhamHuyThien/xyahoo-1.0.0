@@ -10,6 +10,6 @@ implements IAction {
 
     public final void action() {
         LoginScreen.removeCommentField(this.a);
-        GameManager.instance.e();
+        GameManager.instance.showRegisterScreen();
     }
 }

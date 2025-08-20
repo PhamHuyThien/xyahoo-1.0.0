@@ -10,6 +10,6 @@ implements IAction {
 
     public final void action() {
         GameManager.getInstance().inviteConferenceScreen.w = this.a.subtitle;
-        GameManager.getInstance().showDanhSachPhongChat();
+        GameManager.getInstance().showChatRoomList();
     }
 }

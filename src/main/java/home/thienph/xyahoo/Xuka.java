@@ -236,7 +236,7 @@ public class Xuka extends MIDlet
         if ((b = readRecord(s)) == null || b.length != 4) {
             return -1;
         }
-        return GameManager.a(b[0], b[1], b[2], b[3]);
+        return GameManager.bytesToInt(b[0], b[1], b[2], b[3]);
     }
     
     public static String[] readAllIPs() {

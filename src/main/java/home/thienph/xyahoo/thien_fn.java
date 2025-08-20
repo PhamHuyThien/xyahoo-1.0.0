@@ -13,7 +13,7 @@ implements IAction {
     }
 
     public final void action() {
-        String string = thien_fe.b(this.a.getText().trim());
+        String string = ContentFilter.filterProfanity(this.a.getText().trim());
         int n = this.b.a() == 0 ? 1 : 0;
         if (n != BuddyListScreen.userStatus) {
             MessageHandler.a(n, 1);
@@ -24,7 +24,7 @@ implements IAction {
             BuddyListScreen.tempStatusMessage = string;
             Xuka.saveCustomStr(BuddyListScreen.currentGroupName, BuddyListScreen.tempStatusMessage, false);
         }
-        GameManager.getInstance().c(this.c);
-        GameManager.instance.l();
+        GameManager.getInstance().removeScreen(this.c);
+        GameManager.instance.focusBuddyList();
     }
 }

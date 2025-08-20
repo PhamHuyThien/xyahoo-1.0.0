@@ -26,7 +26,7 @@ public final class GameManager implements IGameManager {
    private static int rightBorder;
    private static int screenTop;
    private static int touchAreaWidth = 15;
-   public int h;
+   public int frameCounter;
    private int topOffset;
    private int centerOffset;
    private int animationFrame;
@@ -158,7 +158,7 @@ public final class GameManager implements IGameManager {
    }
 
    public final void drawLoadingAnimation(Graphics var1, int var2, int var3) {
-      var1.drawRegion(loadImage, 0, this.h % 4 == 0 ? this.animationFrame++ * 6 : this.animationFrame * 6, 46, 6, 0, var2, var3, 3);
+      var1.drawRegion(loadImage, 0, this.frameCounter % 4 == 0 ? this.animationFrame++ * 6 : this.animationFrame * 6, 46, 6, 0, var2, var3, 3);
       this.animationFrame = this.animationFrame > 4 ? 0 : this.animationFrame;
    }
 
@@ -248,7 +248,7 @@ public final class GameManager implements IGameManager {
       return instance;
    }
 
-   public final PopupDialogLayout showCenterPopupData(String var1, UIAction var2, UIAction var3, UIAction var4) {
+   public final PopupDialogLayout showCenterDialog(String var1, UIAction var2, UIAction var3, UIAction var4) {
       this.isShowingSidePopup = false;
       PopupDialogLayout var5 = new PopupDialogLayout(var1, var2, var3, var4);
       this.dialogQueue.addElement(var5);
@@ -256,7 +256,7 @@ public final class GameManager implements IGameManager {
       return var5;
    }
 
-   private PopupDialogLayout showCenterPopup(String[] contents, UIAction leftBtn, UIAction centerBtn, UIAction rightBtn) {
+   private PopupDialogLayout showCenterDialog(String[] contents, UIAction leftBtn, UIAction centerBtn, UIAction rightBtn) {
       this.isShowingSidePopup = false;
       PopupDialogLayout var5 = new PopupDialogLayout(contents, leftBtn, centerBtn, rightBtn);
       this.dialogQueue.addElement(var5);
@@ -264,7 +264,7 @@ public final class GameManager implements IGameManager {
       return var5;
    }
 
-   public final void c() {
+   public final void closeTopDialog() {
       if (this.dialogQueue.size() > 0) {
          this.dialogQueue.removeElementAt(0);
       }
@@ -277,7 +277,7 @@ public final class GameManager implements IGameManager {
    protected GameManager() {
    }
 
-   public final void a(int var1, int var2) {
+   public final void initialize(int var1, int var2) {
       isLocalServer = Xuka.serverIPs[0].startsWith("10.") || Xuka.serverIPs[0].endsWith(".0.1");
       isTestMode = Xuka.serverIPs[0].endsWith("113") || isLocalServer;
       System.out.println("X Yahoo! = " + isTestMode);
@@ -376,28 +376,28 @@ public final class GameManager implements IGameManager {
       GameCanvas.isGameStarted = true;
    }
 
-   public final void d() {
+   public final void handleConnectionStatus() {
       if (ConnectionManager.isConnecting) {
-         this.showCenterPopupData(TextConstant.checkingConnection(), null, null, new UIAction(TextConstant.close(), new thien_dj(this))).setExtraOption(true);
+         this.showCenterDialog(TextConstant.checkingConnection(), null, null, new UIAction(TextConstant.close(), new thien_dj(this))).setExtraOption(true);
       } else if (this.hasConnectionError) {
-         this.c();
-         this.showCenterPopupData(TextConstant.connectionError(), null, null, new UIAction(TextConstant.close(), new thien_du(this)));
+         this.closeTopDialog();
+         this.showCenterDialog(TextConstant.connectionError(), null, null, new UIAction(TextConstant.close(), new thien_du(this)));
       }
    }
 
-   public final void e() {
+   public final void showRegisterScreen() {
       if (this.registerScreen == null) {
          this.registerScreen = new RegisterScreen();
       }
 
       this.registerScreen.b((String[]) null);
       this.showScreen(this.registerScreen);
-      this.d(this.registerScreen);
+      this.switchToScreen(this.registerScreen);
       this.registerScreen.startSlide(-1);
-      this.c(this.loginScreen);
+      this.removeScreen(this.loginScreen);
    }
 
-   public static void f() {
+   public static void loadGameBackground() {
       try {
          if (gameBackground == null) {
             gameBackground = Image.createImage("/GBg.png");
@@ -407,7 +407,7 @@ public final class GameManager implements IGameManager {
       }
    }
 
-   public final void a(Graphics var1) {
+   public final void paint(Graphics var1) {
       var1.setColor(0);
       var1.fillRect(0, 0, this.screenWidth, this.screenHeight);
       GameManager var2 = this;
@@ -582,11 +582,11 @@ public final class GameManager implements IGameManager {
       var1.setClip(-1000, -1000, 2000, 2000);
    }
 
-   public final void g() {
+   public final void logout() {
       this.isLoggedIn = false;
       BigTwoGameScreen.instance = null;
       BuddyListScreen.resetPendingChat();
-      this.F();
+      this.clearAllScreens();
       this.showScreen(this.loginScreen);
       this.loginScreen.startSlide(-1);
       this.inviteConferenceScreen.clearBuddyList();
@@ -622,24 +622,24 @@ public final class GameManager implements IGameManager {
       System.gc();
    }
 
-   public final void showDanhSachPhongChat() {
+   public final void showChatRoomList() {
       this.inviteConferenceScreen.wrapTitle(this.screenWidth - 30);
       this.showScreen(this.inviteConferenceScreen);
-      this.c(this.buddyListScreen);
+      this.removeScreen(this.buddyListScreen);
       this.buddyListScreen.buddyList.a(true);
       this.buddyListScreen.buddyList.actionTertiary = this.buddyListScreen.buddyList.markAction;
-      this.d(this.inviteConferenceScreen);
+      this.switchToScreen(this.inviteConferenceScreen);
    }
 
-   public final void showDanhSachBanBe() {
+   public final void showFriendsList() {
       this.buddyListScreen.wrapTitle(this.screenWidth - 30);
-      this.c(this.inviteConferenceScreen);
+      this.removeScreen(this.inviteConferenceScreen);
       this.showScreen(this.buddyListScreen);
       this.buddyListScreen.buddyList.a(false);
       this.buddyListScreen.buddyList.actionTertiary = this.buddyListScreen.buddyList.selectAction;
    }
 
-   private IAction E() {
+   private IAction getCloseAction() {
       if (this.closeAction == null) {
          this.closeAction = new thien_ea(this);
       }
@@ -647,40 +647,40 @@ public final class GameManager implements IGameManager {
       return this.closeAction;
    }
 
-   private UIAction m(String var1) {
+   private UIAction createCancelAction(String var1) {
       if (this.cancelAction == null) {
-         this.cancelAction = new UIAction("", this.E());
+         this.cancelAction = new UIAction("", this.getCloseAction());
       }
 
       this.cancelAction.label = var1;
       return this.cancelAction;
    }
 
-   public final PopupDialogLayout a(String var1) {
-      return this.showCenterPopupData(var1, null, this.m(TextConstant.cancel()), null);
+   public final PopupDialogLayout showMessage(String var1) {
+      return this.showCenterDialog(var1, null, this.createCancelAction(TextConstant.cancel()), null);
    }
 
-   public final PopupDialogLayout a(String var1, IAction var2) {
-      return this.showCenterPopup(TextRenderer.splitText(var1, GameCanvas.screenWidth - 30, TextRenderer.charWidth), new UIAction("OK", var2), new UIAction("", var2), this.m(TextConstant.cancel()));
+   public final PopupDialogLayout showConfirmDialog(String var1, IAction var2) {
+      return this.showCenterDialog(TextRenderer.splitText(var1, GameCanvas.screenWidth - 30, TextRenderer.charWidth), new UIAction("OK", var2), new UIAction("", var2), this.createCancelAction(TextConstant.cancel()));
    }
 
-   public final void b(String var1, IAction var2) {
-      this.showCenterPopupData(var1, null, new UIAction("OK", var2), null);
+   public final void showInfoDialog(String var1, IAction var2) {
+      this.showCenterDialog(var1, null, new UIAction("OK", var2), null);
    }
 
-   public final void showCenterPopup(String var1) {
+   public final void showSimpleDialog(String var1) {
       this.showCenterPopup(TextRenderer.splitText(var1, GameCanvas.screenWidth - 30, TextRenderer.charWidth));
    }
 
    public final void showCenterPopup(String[] var1) {
       if (this.okAction == null) {
-         this.okAction = new UIAction("", this.E());
+         this.okAction = new UIAction("", this.getCloseAction());
       }
 
-      this.showCenterPopup(var1, this.okAction, this.m("OK"), null);
+      this.showCenterDialog(var1, this.okAction, this.createCancelAction("OK"), null);
    }
 
-   public final void c(Screen var1) {
+   public final void removeScreen(Screen var1) {
       int var2 = this.screenStack.size();
 
       while (--var2 >= 0) {
@@ -701,14 +701,14 @@ public final class GameManager implements IGameManager {
       this.updateActiveScreen();
    }
 
-   private void F() {
+   private void clearAllScreens() {
       this.screenStack.removeAllElements();
       this.currentScreenIndex = 0;
       this.screenCount = 0;
       this.activeScreen = null;
    }
 
-   public final Screen c(String var1) {
+   public final Screen findScreenByTitle(String var1) {
       int var2 = this.screenCount;
 
       while (--var2 >= 0) {
@@ -720,7 +720,7 @@ public final class GameManager implements IGameManager {
       return null;
    }
 
-   private void c(boolean var1) {
+   private void closeSidePopup(boolean var1) {
       if (!var1 && this.sidePopupQueue.size() > 1) {
          this.sidePopupQueue.removeElementAt(this.sidePopupQueue.size() - 1);
       } else {
@@ -730,7 +730,7 @@ public final class GameManager implements IGameManager {
    }
 
    //Chế độ layout (0 = left, 1 = right, 2 = center)
-   public final void showPopupSideLayout(PopupSideElementData popupSideElementData, int positionMode) {
+   public final void showSideMenu(PopupSideElementData popupSideElementData, int positionMode) {
       if (!this.isShowingDialog) {
          if (!this.isShowingSidePopup) {
             this.sidePopupQueue.removeAllElements();
@@ -817,13 +817,13 @@ public final class GameManager implements IGameManager {
       }
    }
 
-   public final void a(boolean[] var1, boolean[] var2, int[] var3) {
-      this.h++;
-      if (this.h >= 100000) {
-         this.h = 0;
+   public final void handleInput(boolean[] var1, boolean[] var2, int[] var3) {
+      this.frameCounter++;
+      if (this.frameCounter >= 100000) {
+         this.frameCounter = 0;
       }
 
-      if (this.h % 500 == 0 && ConnectionManager.isConnected) {
+      if (this.frameCounter % 500 == 0 && ConnectionManager.isConnected) {
          MessageHandler.c();
       }
 
@@ -849,7 +849,7 @@ public final class GameManager implements IGameManager {
          for (int var5 = this.messageQueue.size() - 1; var5 >= 0; var5--) {
             MessageHandler var6;
             if ((var6 = (MessageHandler)var4.messageQueue.elementAt(var5)) != null) {
-               if ((long)var4.h % var6.c == 0L) {
+               if ((long)var4.frameCounter % var6.c == 0L) {
                   var6.e = true;
                }
 
@@ -957,7 +957,7 @@ public final class GameManager implements IGameManager {
                   var10.c = var22;
                   var1[16] = true;
                } else {
-                  this.c(false);
+                  this.closeSidePopup(false);
                }
             } else if (this.isShowingEmoticonPicker) {
                if (GameCanvas.touchX >= this.emoticonAreaX && GameCanvas.touchX <= this.emoticonAreaX + this.emoticonAreaWidth && GameCanvas.touchY <= this.emoticonAreaY + this.emoticonAreaHeight && GameCanvas.touchY >= this.emoticonAreaY) {
@@ -991,10 +991,10 @@ public final class GameManager implements IGameManager {
             } else if (GameCanvas.touchY <= 0 || GameCanvas.touchY >= topMargin) {
                this.activeScreen.onTouchPress(GameCanvas.touchX, GameCanvas.touchY - Screen.headerHeight);
             } else if (GameCanvas.touchX < touchAreaWidth) {
-               this.H();
+               this.previousScreen();
                var1[14] = false;
             } else if (GameCanvas.touchX > GameCanvas.screenWidth - touchAreaWidth) {
-               this.G();
+               this.nextScreen();
                var1[15] = false;
             }
          }
@@ -1045,12 +1045,12 @@ public final class GameManager implements IGameManager {
                var15.c = 0;
             }
          } else if (var1[14]) {
-            this.c(false);
+            this.closeSidePopup(false);
          } else if (var1[15]) {
             PopupSideElementData var13;
             UIAction var26;
             if ((var26 = (UIAction)(var13 = (PopupSideElementData)this.sidePopupQueue.lastElement()).popupSideElements.elementAt(var13.c)).popupSideElementData != null) {
-               this.showPopupSideLayout(var26.popupSideElementData, -1);
+               this.showSideMenu(var26.popupSideElementData, -1);
             }
          } else if (var1[16] || var1[17]) {
             PopupSideElementData var14;
@@ -1058,13 +1058,13 @@ public final class GameManager implements IGameManager {
             if ((var27 = (UIAction)(var14 = (PopupSideElementData)this.sidePopupQueue.lastElement()).popupSideElements.elementAt(var14.c)).popupSideElementData == null) {
                if (var27.actionHandler != null) {
                   var27.actionHandler.action();
-                  this.c(true);
+                  this.closeSidePopup(true);
                }
             } else {
-               this.showPopupSideLayout(var27.popupSideElementData, -1);
+               this.showSideMenu(var27.popupSideElementData, -1);
             }
          } else if (var1[18]) {
-            this.c(true);
+            this.closeSidePopup(true);
          }
 
          GameCanvas.resetKeys();
@@ -1075,13 +1075,13 @@ public final class GameManager implements IGameManager {
          if (this.activeScreen.handleInput(var1, var2, var3)) {
             if (var12) {
                var1[14] = false;
-               this.H();
+               this.previousScreen();
                return;
             }
 
             if (var25) {
                var1[15] = false;
-               this.G();
+               this.nextScreen();
             }
          }
       } else {
@@ -1097,7 +1097,7 @@ public final class GameManager implements IGameManager {
                   }
                }
 
-               if (c(var11.padding)) {
+               if (isTextFieldControl(var11.padding)) {
                   ((TextField)var11.getControlById(2)).insertText(TextRenderer.emoticons[this.emoticonY * 6 + this.emoticonX]);
                } else {
                   ChatRoomScreen var24;
@@ -1112,14 +1112,14 @@ public final class GameManager implements IGameManager {
          }
 
          if (var1[12] || var2[12]) {
-            this.d(true);
+            this.navigateEmoticonUp(true);
          }
 
          if (var1[13] || var2[13]) {
             this.emoticonY++;
             if (this.emoticonY > 6) {
                this.emoticonY = 0;
-               this.e(false);
+               this.navigateEmoticonRight(false);
             }
          }
 
@@ -1127,19 +1127,19 @@ public final class GameManager implements IGameManager {
             this.emoticonX--;
             if (this.emoticonX < 0) {
                this.emoticonX = 5;
-               this.d(false);
+               this.navigateEmoticonUp(false);
             }
          }
 
          if (var1[15] || var2[15]) {
-            this.e(true);
+            this.navigateEmoticonRight(true);
          }
 
          GameCanvas.resetKeys();
       }
    }
 
-   private void d(boolean var1) {
+   private void navigateEmoticonUp(boolean var1) {
       this.emoticonY--;
       if (this.emoticonY < 0) {
          this.emoticonY = 6;
@@ -1152,7 +1152,7 @@ public final class GameManager implements IGameManager {
       }
    }
 
-   private void e(boolean var1) {
+   private void navigateEmoticonRight(boolean var1) {
       this.emoticonX++;
       if (this.emoticonX > 5) {
          this.emoticonX = 0;
@@ -1165,7 +1165,7 @@ public final class GameManager implements IGameManager {
       }
    }
 
-   private void G() {
+   private void nextScreen() {
       if (this.screenCount > 1) {
          this.currentScreenIndex++;
          if (this.currentScreenIndex >= this.screenCount) {
@@ -1177,7 +1177,7 @@ public final class GameManager implements IGameManager {
       }
    }
 
-   private void H() {
+   private void previousScreen() {
       if (this.screenCount > 1) {
          this.currentScreenIndex--;
          if (this.currentScreenIndex < 0) {
@@ -1189,24 +1189,24 @@ public final class GameManager implements IGameManager {
       }
    }
 
-   private void e(int var1) {
+   private void goToScreen(int var1) {
       this.currentScreenIndex = var1;
       this.updateActiveScreen();
    }
 
-   public final void j() {
-      this.e(this.screenCount - 1);
+   public final void goToLastScreen() {
+      this.goToScreen(this.screenCount - 1);
    }
 
-   public final void k() {
-      this.e(0);
+   public final void goToFirstScreen() {
+      this.goToScreen(0);
    }
 
-   public static void l() {
-      instance.d(instance.buddyListScreen);
+   public static void focusBuddyList() {
+      instance.switchToScreen(instance.buddyListScreen);
    }
 
-   public final void d(String var1) {
+   public final void switchToScreenByTitle(String var1) {
       int var2 = this.screenCount;
 
       do {
@@ -1217,9 +1217,9 @@ public final class GameManager implements IGameManager {
       this.updateActiveScreen();
    }
 
-   public final void d(Screen var1) {
+   public final void switchToScreen(Screen var1) {
       if (var1 == null) {
-         this.e(0);
+         this.goToScreen(0);
       } else {
          int var2 = this.screenCount;
 
@@ -1228,7 +1228,7 @@ public final class GameManager implements IGameManager {
          } while (var2 >= 0 && !((Screen)this.screenStack.elementAt(var2)).equals(var1));
 
          if (var2 == -1) {
-            this.e(0);
+            this.goToScreen(0);
          } else {
             this.currentScreenIndex = var2;
             this.updateActiveScreen();
@@ -1236,7 +1236,7 @@ public final class GameManager implements IGameManager {
       }
    }
 
-   private boolean f(Screen var1) {
+   private boolean containsScreen(Screen var1) {
       int var2 = this.screenCount;
 
       while (--var2 >= 0) {
@@ -1248,11 +1248,11 @@ public final class GameManager implements IGameManager {
       return false;
    }
 
-   public static int a(byte var0, byte var1, byte var2, byte var3) {
+   public static int bytesToInt(byte var0, byte var1, byte var2, byte var3) {
       return var0 << 24 & 0xFF000000 | var1 << 16 & 0xFF0000 | var2 << 8 & 0xFF00 | var3 & 0xFF;
    }
 
-   private static byte[] f(int var0) {
+   private static byte[] intToBytes(int var0) {
       byte[] var1;
       (var1 = new byte[4])[0] = (byte)(var0 >> 24);
       var1[1] = (byte)(var0 >> 16 & 0xFF);
@@ -1261,20 +1261,20 @@ public final class GameManager implements IGameManager {
       return var1;
    }
 
-   private static void a(ByteArrayOutputStream var0, String var1) throws IOException {
+   private static void writeString(ByteArrayOutputStream var0, String var1) throws IOException {
       var0.write(var1.getBytes());
       var0.write(nullByte);
    }
 
-   private static void a(ByteArrayOutputStream var0, int var1) throws IOException {
-      var0.write(f(var1));
+   private static void writeInt(ByteArrayOutputStream var0, int var1) throws IOException {
+      var0.write(intToBytes(var1));
    }
 
-   private static int a(ByteArrayInputStream var0) {
-      return a((byte)var0.read(), (byte)var0.read(), (byte)var0.read(), (byte)var0.read());
+   private static int readInt(ByteArrayInputStream var0) {
+      return bytesToInt((byte)var0.read(), (byte)var0.read(), (byte)var0.read(), (byte)var0.read());
    }
 
-   private static String b(ByteArrayInputStream var0) {
+   private static String readString(ByteArrayInputStream var0) {
       String var1 = "";
 
       int var2;
@@ -1285,32 +1285,32 @@ public final class GameManager implements IGameManager {
       return var1;
    }
 
-   private static void a(int var0, boolean var1) {
-      Xuka.writeRecord(var1 ? "yahoocs" : "vitalkcs", f(var0));
+   private static void saveChecksum(int var0, boolean var1) {
+      Xuka.writeRecord(var1 ? "yahoocs" : "vitalkcs", intToBytes(var0));
    }
 
-   public static int a(boolean var0) {
+   public static int getChecksumValue(boolean var0) {
       return Xuka.readIP4toInt(var0 ? "yahoocs" : "vitalkcs");
    }
 
-   private static boolean a(thien_s var0, boolean var1, String var2) {
+   private static boolean loadChecksum(thien_s var0, boolean var1, String var2) {
       ByteArrayOutputStream var3 = new ByteArrayOutputStream();
       Vector var9 = var0.a;
 
       try {
-         a(var3, var9.size());
+         writeInt(var3, var9.size());
 
          for (int var4 = 0; var4 < var9.size(); var4++) {
             thien_t var5 = (thien_t)var9.elementAt(var4);
-            a(var3, var5.a());
+            writeString(var3, var5.a());
             Vector var10 = var5.a;
-            a(var3, var10.size());
+            writeInt(var3, var10.size());
 
             for (int var6 = 0; var6 < var10.size(); var6++) {
                thien_r var7 = (thien_r)var10.elementAt(var6);
-               a(var3, var7.a);
-               a(var3, var7.b);
-               a(var3, var7.h);
+               writeString(var3, var7.a);
+               writeString(var3, var7.b);
+               writeInt(var3, var7.h);
             }
          }
 
@@ -1321,7 +1321,7 @@ public final class GameManager implements IGameManager {
       }
    }
 
-   public static thien_s a(boolean var0, String var1) {
+   public static thien_s loadBuddyList(boolean var0, String var1) {
       byte[] var9;
       if ((var9 = Xuka.readRecord((var0 ? "ybuddy" : "vbuddy") + var1)) == null) {
          return null;
@@ -1331,18 +1331,18 @@ public final class GameManager implements IGameManager {
 
          try {
             var11.a = new Vector();
-            int var2 = a(var10);
+            int var2 = readInt(var10);
 
             for (int var3 = 0; var3 < var2; var3++) {
                thien_t var4;
-               (var4 = new thien_t(b(var10))).a = new Vector();
-               int var5 = a(var10);
+               (var4 = new thien_t(readString(var10))).a = new Vector();
+               int var5 = readInt(var10);
 
                for (int var6 = 0; var6 < var5; var6++) {
                   thien_r var7;
-                  (var7 = new thien_r()).a = b(var10);
-                  var7.b = b(var10);
-                  var7.h = a(var10);
+                  (var7 = new thien_r()).a = readString(var10);
+                  var7.b = readString(var10);
+                  var7.h = readInt(var10);
                   var4.a(var7);
                }
 
@@ -1356,10 +1356,10 @@ public final class GameManager implements IGameManager {
       }
    }
 
-   public final void a(String var1, String var2, String var3) {
+   public final void handleYahooMessage(String var1, String var2, String var3) {
       String var4 = "Y! " + var1;
       ChatRoomScreen var5;
-      if ((var5 = (ChatRoomScreen)this.c(var4)) == null) {
+      if ((var5 = (ChatRoomScreen)this.findScreenByTitle(var4)) == null) {
          (var5 = new ChatRoomScreen(var4, true, false, null)).y = var1;
          var5.x = var1;
          this.showScreen(var5);
@@ -1369,27 +1369,27 @@ public final class GameManager implements IGameManager {
          this.vibrate();
       }
 
-      var5.z.a(var1 + " (" + var3 + ")", var2, 1);
-      var5.z.b();
+      var5.z.addUserMessage(var1 + " (" + var3 + ")", var2, 1);
+      var5.z.scrollToBottom();
       var5.isVisible = true;
    }
 
-   public final void b(String var1, String var2, String var3) {
-      if (!n(var1)) {
+   public final void handlePrivateMessage(String var1, String var2, String var3) {
+      if (!isUserBlocked(var1)) {
          ChatRoomScreen var4;
-         if (!(var4 = this.e(var1)).title.equals(this.activeScreen.title)) {
+         if (!(var4 = this.createChatRoom(var1)).title.equals(this.activeScreen.title)) {
             this.vibrate();
          }
 
-         var4.z.a(var4.y + " (" + var3 + ")", var2, 1);
-         var4.z.b();
+         var4.z.addUserMessage(var4.y + " (" + var3 + ")", var2, 1);
+         var4.z.scrollToBottom();
          var4.isVisible = true;
       }
    }
 
-   public final ChatRoomScreen e(String var1) {
+   public final ChatRoomScreen createChatRoom(String var1) {
       ChatRoomScreen var2;
-      if ((var2 = (ChatRoomScreen)this.c(var1)) == null) {
+      if ((var2 = (ChatRoomScreen)this.findScreenByTitle(var1)) == null) {
          thien_u var3;
          if ((var3 = this.buddyListScreen.buddyList.e(var1)) == null) {
             var2 = new ChatRoomScreen(var1, false, false, null);
@@ -1409,30 +1409,30 @@ public final class GameManager implements IGameManager {
       return var2;
    }
 
-   public final void a(String var1, String var2) {
-      if (!n(var1)) {
+   public final void receivePrivateMessage(String var1, String var2) {
+      if (!isUserBlocked(var1)) {
          ChatRoomScreen var3;
-         if (!(var3 = this.e(var1)).title.equals(this.activeScreen.title)) {
+         if (!(var3 = this.createChatRoom(var1)).title.equals(this.activeScreen.title)) {
             String var4 = TextRenderer.wrapText(var2, GameCanvas.screenWidth - GameCanvas.screenWidth / 3, TextRenderer.charWidth);
             this.showNotification(var1 + " chat: " + var4 + "...", (Image) null, 1);
             var3.isScrolling = true;
             this.vibrate();
          }
 
-         boolean var5 = var3.z.a();
-         var3.z.a(var3.y, var2, 1);
+         boolean var5 = var3.z.isAtBottom();
+         var3.z.addUserMessage(var3.y, var2, 1);
          if (var5) {
-            var3.z.b();
+            var3.z.scrollToBottom();
          }
 
          var3.isVisible = true;
       }
    }
 
-   public final void b(String var1, String var2) {
+   public final void receiveYahooMessage(String var1, String var2) {
       String var3 = "Y! " + var1;
       ChatRoomScreen var4;
-      if ((var4 = (ChatRoomScreen)this.c(var3)) == null) {
+      if ((var4 = (ChatRoomScreen)this.findScreenByTitle(var3)) == null) {
          (var4 = new ChatRoomScreen(var3, true, false, null)).y = var1;
          var4.x = var1;
          this.showScreen(var4);
@@ -1445,46 +1445,46 @@ public final class GameManager implements IGameManager {
          this.vibrate();
       }
 
-      boolean var6 = var4.z.a();
-      var4.z.a(var1, var2, 1);
+      boolean var6 = var4.z.isAtBottom();
+      var4.z.addUserMessage(var1, var2, 1);
       if (var6) {
-         var4.z.b();
+         var4.z.scrollToBottom();
       }
 
       var4.isVisible = true;
    }
 
-   public final void loiDangKyTaiKhoan() {
-      this.c();
-      this.showCenterPopupData(TextConstant.registrationError(), null, new UIAction("OK", new thien_eb(this)), null);
+   public final void registrationError() {
+      this.closeTopDialog();
+      this.showCenterDialog(TextConstant.registrationError(), null, new UIAction("OK", new thien_eb(this)), null);
    }
 
-   public final void n() {
-      this.c();
+   public final void registrationSuccess() {
+      this.closeTopDialog();
       this.loginScreen.usernameField.setText(this.registerScreen.G);
       this.loginScreen.passwordField.setText(this.registerScreen.F);
       Xuka.saveUserID(this.registerScreen.G);
       Xuka.savePassword(this.registerScreen.F);
       this.showScreen(this.loginScreen);
       this.loginScreen.selectControl(this.loginScreen.usernameField);
-      this.c(this.registerScreen);
+      this.removeScreen(this.registerScreen);
    }
 
-   public final void saiTKHoacMK() {
-      this.c();
-      this.showCenterPopup(TextConstant.wrongNameOrPassword());
+   public final void wrongCredentials() {
+      this.closeTopDialog();
+      this.showSimpleDialog(TextConstant.wrongNameOrPassword());
    }
 
-   public final void p() {
+   public final void connectionError() {
       this.hasConnectionError = true;
       if (GameCanvas.gameState == 1) {
-         this.c();
-         this.showCenterPopupData(TextConstant.connectionError(), null, null, new UIAction(TextConstant.close(), new thien_ec(this)));
+         this.closeTopDialog();
+         this.showCenterDialog(TextConstant.connectionError(), null, null, new UIAction(TextConstant.close(), new thien_ec(this)));
       }
    }
 
-   public final void a(String var1, String var2, int var3) {
-      var2 = thien_fe.b(var2);
+   public final void updateBuddyStatus(String var1, String var2, int var3) {
+      var2 = ContentFilter.filterProfanity(var2);
       switch (var3) {
          case 1:
             if (this.buddyListScreen.buddyList != null) {
@@ -1501,7 +1501,7 @@ public final class GameManager implements IGameManager {
       }
    }
 
-   public final void a(String var1, int var2, int var3) {
+   public final void setBuddyOnlineStatus(String var1, int var2, int var3) {
       switch (var3) {
          case 1:
             if (this.buddyListScreen.buddyList.a(var1, var2)) {
@@ -1511,9 +1511,9 @@ public final class GameManager implements IGameManager {
 
                try {
                   ChatRoomScreen var12;
-                  if ((var12 = (ChatRoomScreen)this.c(var1)) != null) {
-                     var12.z.a(var1 + var9, var2 == 1 ? 1 : 2);
-                     var12.z.b();
+                  if ((var12 = (ChatRoomScreen)this.findScreenByTitle(var1)) != null) {
+                     var12.z.addMessage(var1 + var9, var2 == 1 ? 1 : 2);
+                     var12.z.scrollToBottom();
                      return;
                   }
                } catch (Exception var7) {
@@ -1530,9 +1530,9 @@ public final class GameManager implements IGameManager {
 
                   try {
                      ChatRoomScreen var10;
-                     if ((var10 = (ChatRoomScreen)this.c("Y! " + var1)) != null) {
-                        var10.z.a(var1 + var8, var2 == 1 ? 1 : 2);
-                        var10.z.b();
+                     if ((var10 = (ChatRoomScreen)this.findScreenByTitle("Y! " + var1)) != null) {
+                        var10.z.addMessage(var1 + var8, var2 == 1 ? 1 : 2);
+                        var10.z.scrollToBottom();
                         return;
                      }
                   } catch (Exception var5) {
@@ -1544,51 +1544,51 @@ public final class GameManager implements IGameManager {
       }
    }
 
-   public final void f(String var1) {
-      this.showCenterPopup(var1);
+   public final void showErrorMessage(String var1) {
+      this.showSimpleDialog(var1);
    }
 
-   public final void q() {
+   public final void handleDisconnect() {
       BigTwoGameScreen.instance = null;
-      this.F();
+      this.clearAllScreens();
       this.showScreen(this.loginScreen);
-      this.c();
+      this.closeTopDialog();
       this.showNotification(TextConstant.disconnected(), (Image)null, 0);
    }
 
    public final void khongTheThemBan(String var1) {
-      this.showCenterPopup(TextConstant.addFriendFailed() + var1);
+      this.showSimpleDialog(TextConstant.addFriendFailed() + var1);
    }
 
    public final void tuChoiKetBan(String var1) {
-      this.showCenterPopup(var1 + TextConstant.refusedToBeAdded());
+      this.showSimpleDialog(var1 + TextConstant.refusedToBeAdded());
    }
 
-   public final void a(int var1, thien_r var2, String var3) {
+   public final void addFriendToGroup(int var1, thien_r var2, String var3) {
       this.buddyListScreen.buddyList.buddyDataModel.a(var3, var2);
       this.buddyListScreen.buddyList.c();
       UIBuddyListControl.d();
-      a(this.buddyListScreen.buddyList.buddyDataModel, false, BuddyListScreen.currentGroupName);
-      a(var1, false);
+      loadChecksum(this.buddyListScreen.buddyList.buddyDataModel, false, BuddyListScreen.currentGroupName);
+      saveChecksum(var1, false);
    }
 
    public final void dongYKetBan(String var1, int var2, String var3, String var4, int var5) {
       this.buddyListScreen.buddyList.a(var1, var4, 2);
       this.buddyListScreen.buddyList.a(var1, var2);
       this.buddyListScreen.buddyList.a(var1, var3, 1);
-      a(var5, false);
-      this.showCenterPopup(TextConstant.add2() + var1 + TextConstant.success());
+      saveChecksum(var5, false);
+      this.showSimpleDialog(TextConstant.add2() + var1 + TextConstant.success());
    }
 
-   public final void r() {
-      this.showCenterPopup(TextConstant.cannotCreateConference());
+   public final void cannotCreateConference() {
+      this.showSimpleDialog(TextConstant.cannotCreateConference());
    }
 
-   public final void c(String var1, String var2) {
-      this.c();
+   public final void inviteToConference(String var1, String var2) {
+      this.closeTopDialog();
       this.inviteConferenceScreen.w = var1;
       this.inviteConferenceScreen.x = var2;
-      this.showDanhSachPhongChat();
+      this.showChatRoomList();
    }
 
    public final void a(String var1, String[] var2, String var3) {
@@ -1608,19 +1608,19 @@ public final class GameManager implements IGameManager {
          this.inviteeCount = var2.length;
 
          for (int var8 = 0; var8 < this.inviteeCount; var8++) {
-            var4.z.a(TextConstant.inviting() + var2[var8] + "...", 1);
+            var4.z.addMessage(TextConstant.inviting() + var2[var8] + "...", 1);
          }
 
-         var4.z.b();
+         var4.z.scrollToBottom();
       }
 
       this.showScreen(var4);
-      this.d(var3);
+      this.switchToScreenByTitle(var3);
    }
 
-   public final void c(String var1, String var2, String var3) {
-      if (!n(var1)) {
-         this.showCenterPopup(
+   public final void showConferenceInviteDialog(String var1, String var2, String var3) {
+      if (!isUserBlocked(var1)) {
+         this.showCenterDialog(
             new String[]{var1 + TextConstant.inviteConference2(), var3},
             new UIAction(TextConstant.cancel(), new thien_ed(this)),
             new UIAction("OK", new thien_ee(this, var2, var1, var3)),
@@ -1629,46 +1629,46 @@ public final class GameManager implements IGameManager {
       }
    }
 
-   public final void d(String var1, String var2) {
+   public final void handleUserJoinedConference(String var1, String var2) {
       int var3 = this.screenCount;
 
       while (--var3 >= 0) {
          Screen var4;
          if ((var4 = (Screen)this.screenStack.elementAt(var3)).subtitle.equals(var2)) {
             ChatRoomScreen var5;
-            (var5 = (ChatRoomScreen)var4).z.a(var1 + TextConstant.hasJoined(), 2);
-            var5.z.b();
+            (var5 = (ChatRoomScreen)var4).z.addMessage(var1 + TextConstant.hasJoined(), 2);
+            var5.z.scrollToBottom();
          }
       }
    }
 
-   public final void e(String var1, String var2) {
+   public final void handleUserRefusedConference(String var1, String var2) {
       int var3 = this.screenCount;
 
       while (--var3 >= 0) {
          Screen var4;
          if ((var4 = (Screen)this.screenStack.elementAt(var3)).subtitle.equals(var2)) {
             ChatRoomScreen var5;
-            (var5 = (ChatRoomScreen)var4).z.a(var1 + TextConstant.hasRefused(), 2);
-            var5.z.b();
+            (var5 = (ChatRoomScreen)var4).z.addMessage(var1 + TextConstant.hasRefused(), 2);
+            var5.z.scrollToBottom();
          }
       }
    }
 
-   public final void f(String var1, String var2) {
+   public final void handleUserLeftConference(String var1, String var2) {
       int var3 = this.screenCount;
 
       while (--var3 >= 0) {
          Screen var4;
          if ((var4 = (Screen)this.screenStack.elementAt(var3)).subtitle.equals(var2)) {
             ChatRoomScreen var5;
-            (var5 = (ChatRoomScreen)var4).z.a(var1 + TextConstant.hasLeft(), 2);
-            var5.z.b();
+            (var5 = (ChatRoomScreen)var4).z.addMessage(var1 + TextConstant.hasLeft(), 2);
+            var5.z.scrollToBottom();
          }
       }
    }
 
-   public final void d(String var1, String var2, String var3) {
+   public final void handleConferenceMessage(String var1, String var2, String var3) {
       if (var1.equals(this.lastMessageSender)) {
          this.messageRepeatCount++;
          if (this.messageRepeatCount > 3) {
@@ -1689,14 +1689,14 @@ public final class GameManager implements IGameManager {
                var3 = var3.substring(0, 99) + "...";
             }
 
-            var6.z.a(var1, var3, 1);
-            var6.z.b();
+            var6.z.addUserMessage(var1, var3, 1);
+            var6.z.scrollToBottom();
             var6.isVisible = true;
          }
       }
    }
 
-   public final void a(String var1, String[] var2) {
+   public final void handleMultipleUsersJoinedConference(String var1, String[] var2) {
       int var3 = this.screenCount;
 
       while (--var3 >= 0) {
@@ -1706,59 +1706,59 @@ public final class GameManager implements IGameManager {
             this.inviteeCount = var2.length;
 
             for (int var6 = 0; var6 < this.inviteeCount; var6++) {
-               var5.z.a(var2[var6] + TextConstant.hasJoined(), 1);
+               var5.z.addMessage(var2[var6] + TextConstant.hasJoined(), 1);
             }
 
-            var5.z.b();
+            var5.z.scrollToBottom();
             return;
          }
       }
    }
 
-   public final void s() {
+   public final void yahooDisconnected() {
       this.loginYahooScreen.C = false;
       this.loginYahooScreen.a(false);
       this.showNotification(TextConstant.disconnectYahoo(), (Image)null, 0);
    }
 
-   public final void t() {
+   public final void yahooLoginFailed() {
       this.loginYahooScreen.a(false);
-      this.showCenterPopup(TextConstant.wrongYahooIdOrPassword());
+      this.showSimpleDialog(TextConstant.wrongYahooIdOrPassword());
    }
 
-   public final void i(String var1) {
-      this.b(var1, TextConstant.buzz[0]);
+   public final void receiveBuzz(String var1) {
+      this.receiveYahooMessage(var1, TextConstant.buzz[0]);
       this.vibrate();
    }
 
-   public final Screen u() {
+   public final Screen getCurrentScreen() {
       return this.activeScreen;
    }
 
-   public final void j(String var1) {
-      this.a(var1, TextConstant.buzz());
+   public final void sendBuzz(String var1) {
+      this.receivePrivateMessage(var1, TextConstant.buzz());
       this.vibrate();
    }
 
-   public final void updateNewVersion(String var1, String var2) {
-      this.showCenterPopupData(TextConstant.updateNewVersionXYahoo() + var1, new UIAction(TextConstant.download(), new thien_eg(this, var2)), null, new UIAction(TextConstant.cancel(), new thien_dk(this)));
+   public final void showUpdateDialog(String var1, String var2) {
+      this.showCenterDialog(TextConstant.updateNewVersionXYahoo() + var1, new UIAction(TextConstant.download(), new thien_eg(this, var2)), null, new UIAction(TextConstant.cancel(), new thien_dk(this)));
    }
 
-   public final String v() {
+   public final String getCardSyntax() {
       return this.cardSyntax == null ? emptyString : this.cardSyntax;
    }
 
-   public final String w() {
+   public final String getRecoveryInfo() {
       return this.recoveryEmail == null ? emptyString : this.recoveryEmail;
    }
 
-   public final void soanTinNapTien(String var1, String var2, String var3) {
-      this.c();
+   public final void showTopUpMessage(String var1, String var2, String var3) {
+      this.closeTopDialog();
       this.cardSyntax = var2;
       thien_dl var4 = new thien_dl(this);
       thien_dm var5 = new thien_dm(this, var3, var4);
       String var7 = var3 + Xuka.refCode;
-      this.showCenterPopup(
+      this.showCenterDialog(
          TextRenderer.splitText(var1 + TextConstant.syntax() + var7 + " => " + var2.substring(6), GameCanvas.screenWidth - 30, TextRenderer.charWidth),
          new UIAction("OK", var5),
          null,
@@ -1766,7 +1766,7 @@ public final class GameManager implements IGameManager {
       );
    }
 
-   public final void h(String var1, String var2) {
+   public final void setRecoveryInfo(String var1, String var2) {
       this.recoveryEmail = var1;
       recoveryPhone = var2;
       if (this.loginScreen != null) {
@@ -1774,7 +1774,7 @@ public final class GameManager implements IGameManager {
       }
    }
 
-   public final void a(String var1, byte var2, String var3, int var4, int var5) {
+   public final void setUserSessionData(String var1, byte var2, String var3, int var4, int var5) {
       BuddyListScreen.userFullName = var1;
       if (!var1.equals("")) {
          BuddyListScreen.userStatusMessage = BuddyListScreen.userFullName;
@@ -1787,7 +1787,7 @@ public final class GameManager implements IGameManager {
       ChatRoomScreen.e();
    }
 
-   private static boolean n(String var0) {
+   private static boolean isUserBlocked(String var0) {
       int var1 = blockedUsers.size();
 
       while (--var1 >= 0) {
@@ -1799,27 +1799,27 @@ public final class GameManager implements IGameManager {
       return false;
    }
 
-   public final void x() {
-      if (roomListScreen != null && this.f(roomListScreen)) {
+   public final void showRoomList() {
+      if (roomListScreen != null && this.containsScreen(roomListScreen)) {
          roomListScreen.startSlide(1);
-         this.d(roomListScreen);
+         this.switchToScreen(roomListScreen);
       } else {
          MessageHandler.a();
       }
    }
 
-   public final void showLoginYahooScreen() {
-      this.I();
-      if (this.f(this.loginYahooScreen)) {
-         this.d(this.loginYahooScreen);
+   public final void displayYahooLogin() {
+      this.initializeYahooLogin();
+      if (this.containsScreen(this.loginYahooScreen)) {
+         this.switchToScreen(this.loginYahooScreen);
       } else {
          this.loginYahooScreen.a(false);
          this.showScreen(this.loginYahooScreen);
-         this.d(this.loginYahooScreen);
+         this.switchToScreen(this.loginYahooScreen);
       }
    }
 
-   private void I() {
+   private void initializeYahooLogin() {
       if (this.loginYahooScreen == null) {
          this.loginYahooScreen = new LoginYahooScreen();
       }
@@ -1827,7 +1827,7 @@ public final class GameManager implements IGameManager {
       this.loginYahooScreen.startSlide(1);
    }
 
-   public final void z() {
+   public final void loginSuccess() {
       String var2;
       if ((var2 = Xuka.readCustomStr(BuddyListScreen.currentGroupName, false)) != null) {
          BuddyListScreen.tempStatusMessage = var2;
@@ -1848,19 +1848,19 @@ public final class GameManager implements IGameManager {
       Packet var3 = new Packet(59, 14);
       MessageHandler.writeInt(var1, var3);
       ConnectionManager.sendPacket(var3);
-      this.showHomeScreen();
+      this.displayHomeScreen();
    }
 
-   public final void showHomeScreen() {
-      this.c();
+   public final void displayHomeScreen() {
+      this.closeTopDialog();
       if (this.homeScreen == null) {
          this.homeScreen = new HomeScreen();
       }
 
       this.showScreen(this.homeScreen);
-      this.c(this.loginScreen);
+      this.removeScreen(this.loginScreen);
       if (autoLoginYahoo) {
-         this.I();
+         this.initializeYahooLogin();
          this.loginYahooScreen.a(false);
          this.showScreen(this.loginYahooScreen);
          this.loginYahooScreen.f();
@@ -1869,19 +1869,19 @@ public final class GameManager implements IGameManager {
       TextRendererHelper.releaseLogo();
    }
 
-   public final void a(thien_s var1, int var2) {
-      a(var2, false);
-      a(var1, false, BuddyListScreen.currentGroupName);
+   public final void setBuddyListData(thien_s var1, int var2) {
+      saveChecksum(var2, false);
+      loadChecksum(var1, false, BuddyListScreen.currentGroupName);
       this.buddyListScreen.buddyList.pleaseWait = TextRenderer.splitText(TextConstant.welcomeToXYahoo(), GameCanvas.screenWidth - 40, TextRenderer.charWidth);
       this.buddyListScreen.buddyList.a(var1, -1);
-      this.c();
+      this.closeTopDialog();
    }
 
-   public final void b(int var1) {
-      a(var1, true);
+   public final void saveYahooChecksum(int var1) {
+      saveChecksum(var1, true);
    }
 
-   public final void B() {
+   public final void yahooLoginSuccess() {
       if (LoginYahooScreen.z == 0 && LoginYahooScreen.A != null && LoginYahooScreen.A.length() > 0) {
          MessageHandler.a(LoginYahooScreen.A, 2);
       }
@@ -1893,14 +1893,14 @@ public final class GameManager implements IGameManager {
       }
    }
 
-   public final void a(thien_s var1) {
-      a(var1, true, LoginYahooScreen.x);
+   public final void setYahooBuddyList(thien_s var1) {
+      loadChecksum(var1, true, LoginYahooScreen.x);
       this.loginYahooScreen.w.a(var1, -1);
       this.loginYahooScreen.isVisible = true;
       this.loginYahooScreen.w.isLoading = false;
    }
 
-   public final void k(String var1) {
+   public final void showAddFriendDialog(String var1) {
       FormScreen var2 = new FormScreen();
       var2.title = TextConstant.addFriend();
       UIFormBuilder.addLabelsAuto(var2, var1 + TextConstant.wantToAddYou());
@@ -1969,23 +1969,23 @@ public final class GameManager implements IGameManager {
       var2.selectControl(var16);
       var2.leftCommand = new UIAction(TextConstant.cancel(), new thien_dx(this, var2));
       this.showScreen(var2);
-      this.j();
-      this.c();
+      this.goToLastScreen();
+      this.closeTopDialog();
    }
 
-   public final void b(boolean var1) {
+   public final void changeUserPassword(boolean var1) {
       if (var1) {
-         this.showCenterPopup(TextConstant.changeSuccess());
+         this.showSimpleDialog(TextConstant.changeSuccess());
       } else {
-         this.showCenterPopup(TextConstant.wrongOldPassword());
+         this.showSimpleDialog(TextConstant.wrongOldPassword());
       }
    }
 
-   public static boolean c(int var0) {
+   public static boolean isTextFieldControl(int var0) {
       return var0 == 2000 || var0 == 2002 || var0 == 2003 || var0 == 2001;
    }
 
-   public final void a(int var1, String var2, byte[] var3, long var4, long var6, String var8) {
+   public final void handlePlayerMoveAdvanced(int var1, String var2, byte[] var3, long var4, long var6, String var8) {
       try {
          if (var1 == 0) {
             if (var4 <= 0L) {
@@ -2015,11 +2015,11 @@ public final class GameManager implements IGameManager {
       }
    }
 
-   public final void l(String var1) {
-      this.showCenterPopupData(var1 + TextConstant.addYouHisFriendlist(), new UIAction("OK", new thien_dy(this, var1)), null, new UIAction(TextConstant.cancel(), new thien_dz(this, var1)));
+   public final void acceptAddFriend(String var1) {
+      this.showCenterDialog(var1 + TextConstant.addYouHisFriendlist(), new UIAction("OK", new thien_dy(this, var1)), null, new UIAction(TextConstant.cancel(), new thien_dz(this, var1)));
    }
 
-   public final void a(String[] var1, int[] var2) {
+   public final void saveServerConfig(String[] var1, int[] var2) {
       Xuka.saveAllIPs(var1);
       Xuka.saveAllPorts(var2);
       if (!Xuka.readFlag("report", false)) {
@@ -2034,7 +2034,7 @@ public final class GameManager implements IGameManager {
       MessageHandler.b();
    }
 
-   public final Screen d(int var1) {
+   public final Screen findScreenById(int var1) {
       int var2 = this.screenCount;
 
       while (--var2 >= 0) {
@@ -2047,15 +2047,15 @@ public final class GameManager implements IGameManager {
       return null;
    }
 
-   public final void a(byte[] var1) {
+   public final void processRawData(byte[] var1) {
       MessageHandler.processRawPacket(var1);
    }
 
-   public final void a(int var1, byte[] var2) {
-      thien_ck.a(var1, var2);
+   public final void handleBinaryData(int var1, byte[] var2) {
+      ImageCacheManager.storeImage(var1, var2);
    }
 
-   public final void a(String var1, int[] var2) {
+   public final void updateStatusIcons(String var1, int[] var2) {
       if (var1.equals(BuddyListScreen.currentGroupName)) {
          BuddyListScreen.onlineStatusIcons = var2;
       } else {
@@ -2074,28 +2074,28 @@ public final class GameManager implements IGameManager {
       }
    }
 
-   public final void a(String var1, int var2) {
+   public final void deleteBuddy(String var1, int var2) {
       this.buddyListScreen.buddyList.b(var1);
-      a(this.buddyListScreen.buddyList.buddyDataModel, false, BuddyListScreen.currentGroupName);
-      a(var2, false);
-      this.showCenterPopup(TextConstant.deleteSuccess());
+      loadChecksum(this.buddyListScreen.buddyList.buddyDataModel, false, BuddyListScreen.currentGroupName);
+      saveChecksum(var2, false);
+      this.showSimpleDialog(TextConstant.deleteSuccess());
    }
 
-   public final void a(int var1, String var2, String var3) {
-      this.showCenterPopup(TextConstant.moveIdSuccess());
+   public final void moveBuddy(int var1, String var2, String var3) {
+      this.showSimpleDialog(TextConstant.moveIdSuccess());
       this.buddyListScreen.buddyList.b(var2, var3);
-      a(this.buddyListScreen.buddyList.buddyDataModel, false, BuddyListScreen.currentGroupName);
-      a(var1, false);
+      loadChecksum(this.buddyListScreen.buddyList.buddyDataModel, false, BuddyListScreen.currentGroupName);
+      saveChecksum(var1, false);
    }
 
    public final void renameGroup(int var1, String var2, String var3) {
       this.buddyListScreen.buddyList.a(var2, var3);
-      this.showCenterPopup(TextConstant.renameGroupSuccess());
-      a(this.buddyListScreen.buddyList.buddyDataModel, false, BuddyListScreen.currentGroupName);
-      a(var1, false);
+      this.showSimpleDialog(TextConstant.renameGroupSuccess());
+      loadChecksum(this.buddyListScreen.buddyList.buddyDataModel, false, BuddyListScreen.currentGroupName);
+      saveChecksum(var1, false);
    }
 
-   public final void b(String[] var1) {
+   public final void handleRegistrationData(String[] var1) {
       Screen var2 = this.activeScreen;
       if (this.activeScreen != null && var2 instanceof RegisterScreen) {
          RegisterScreen var3;
@@ -2103,7 +2103,7 @@ public final class GameManager implements IGameManager {
       }
    }
 
-   public final void a(
+   public final void handleCompleteGameResult(
       String var1,
       String var2,
       int var3,
@@ -2125,7 +2125,7 @@ public final class GameManager implements IGameManager {
       BigTwoGameScreen.instance.handleGameResult(var1, (byte)var6.length, var6, var8, var9, (byte)var6.length, var6, var10, var12, var13, var14);
    }
 
-   public final void a(String var1, String var2, int var3, byte[] var4, String var5, boolean var6) {
+   public final void handlePlayerMove(String var1, String var2, int var3, byte[] var4, String var5, boolean var6) {
       if (BigTwoGameScreen.currentGroupName.equals(var2)) {
          BigTwoGameScreen.instance.gameBoardControl.updatePlayedCards(var4);
       }
@@ -2133,8 +2133,8 @@ public final class GameManager implements IGameManager {
       BigTwoGameScreen.instance.handlePlayerMove(var2, var3, var4, var5, var6);
    }
 
-   public final void a(String var1, String var2, int var3, byte[] var4, String var5, boolean var6, int var7) {
-      this.a(var1, var2, var3, var4, var5, var6);
+   public final void handlePlayerMoveWithTurn(String var1, String var2, int var3, byte[] var4, String var5, boolean var6, int var7) {
+      this.handlePlayerMove(var1, var2, var3, var4, var5, var6);
 
       for (int var8 = 0; var8 < BigTwoGameScreen.instance.players.length; var8++) {
          if (BigTwoGameScreen.instance.players[var8].playerName.equals(var2)) {
@@ -2144,11 +2144,11 @@ public final class GameManager implements IGameManager {
       }
    }
 
-   public final void C() {
+   public final void resetGameSelection() {
       BigTwoGameScreen.instance.gameBoardControl.resetSelection();
    }
 
-   public final void a(String var1, String var2, String var3, String[] var4, int var5) {
+   public final void handlePlayerLeave(String var1, String var2, String var3, String[] var4, int var5) {
       if (var2.equals(BigTwoGameScreen.currentGroupName)) {
          if (var5 == 1) {
             this.showNotification(TextConstant.beKickByHost(), (Image)null, 1);
@@ -2157,7 +2157,7 @@ public final class GameManager implements IGameManager {
          BigTwoGameScreen.leaveGame();
       } else {
          if (var4.length > 0) {
-            BigTwoGameScreen.instance.players = c(var4);
+            BigTwoGameScreen.instance.players = createGamePlayers(var4);
             BigTwoGameScreen.instance.currentPlayerId = var3;
             long[] var11 = new long[var4.length];
             int[] var6 = new int[var4.length];
@@ -2183,11 +2183,11 @@ public final class GameManager implements IGameManager {
       }
    }
 
-   public final void a(String var1, String var2, String var3, boolean var4) {
+   public final void handlePlayerPass(String var1, String var2, String var3, boolean var4) {
       BigTwoGameScreen.instance.handlePlayerPass(var2, var3, var4);
    }
 
-   public final void a(String var1, long var2, String[] var4, long[] var5, int[] var6, boolean[] var7, String var8, String[] var9, int[] var10, Integer[] var11) {
+   public final void handleSpectatorGameJoin(String var1, long var2, String[] var4, long[] var5, int[] var6, boolean[] var7, String var8, String[] var9, int[] var10, Integer[] var11) {
       BigTwoGameScreen var12 = BigTwoGameScreen.instance;
       BigTwoGameScreen.instance.isSpectatorMode = true;
       var12.activePlayerCount = var4.length;
@@ -2212,19 +2212,19 @@ public final class GameManager implements IGameManager {
             var12.playerGameStates[var13] = var7[var13];
          }
 
-         this.c();
+         this.closeTopDialog();
          var12.initializeGameSession((byte)var4.length, var4, var5, var6, var9, var10, var11, var1);
       }
    }
 
-   public final void a(byte[] var1, String var2, boolean var3) {
+   public final void startGamePlay(byte[] var1, String var2, boolean var3) {
       GameBoardControl.isShowingAllCards = false;
       BigTwoGameScreen.isGamePaused = false;
       BigTwoGameScreen.instance.isWaitingResponse = true;
       BigTwoGameScreen.instance.startGamePlay(var1, var2, var3, true);
    }
 
-   public final void a(String[] var1, boolean[] var2) {
+   public final void updatePlayerReadyStates(String[] var1, boolean[] var2) {
       for (byte var3 = 0; var3 < BigTwoGameScreen.instance.players.length; var3++) {
          for (int var4 = 0; var4 < var1.length; var4++) {
             if (BigTwoGameScreen.instance.players[var3].playerName.equals(var1[var4])) {
@@ -2235,7 +2235,7 @@ public final class GameManager implements IGameManager {
       }
    }
 
-   public static GamePlayer[] c(String[] var0) {
+   public static GamePlayer[] createGamePlayers(String[] var0) {
       GamePlayer[] var1 = new GamePlayer[var0.length];
 
       for (byte var2 = 0; var2 < var0.length; var2++) {
@@ -2249,11 +2249,11 @@ public final class GameManager implements IGameManager {
       return var1;
    }
 
-   public final void b(String var1, String var2, String var3, boolean var4) {
+   public final void handleTurnChange(String var1, String var2, String var3, boolean var4) {
       BigTwoGameScreen.instance.handleTurnChange(var2, var3, var4);
    }
 
-   public final void a(
+   public final void handleGameEndResult(
       String var1, String var2, byte var3, String[] var4, int[] var5, long[] var6, long[] var7, byte[][] var8, String[] var9, int[] var10, Integer[] var11
    ) {
       BigTwoGameScreen.instance.playerReadyStates = new boolean[var4.length];
@@ -2275,11 +2275,11 @@ public final class GameManager implements IGameManager {
       BigTwoGameScreen.instance.handleGameResult(var1, var3, var4, var6, var7, var3, var4, var8, var9, var10, var11);
    }
 
-   public final void a(long var1) {
+   public final void showMoneyUpdate(long var1) {
       this.showNotification(TextConstant.yourMoneys() + var1 + " xuxu", (Image)null, 1);
    }
 
-   public final void b(String var1, String var2, int var3) {
+   public final void handleGameChat(String var1, String var2, int var3) {
       if (var2.length() >= 5) {
          this.showNotification(var1 + ": " + var2, (Image)null, 0);
       } else {
@@ -2310,15 +2310,15 @@ public final class GameManager implements IGameManager {
       }
    }
 
-   public final void a(String var1, TableInfo[] var2, int var3, String var4) {
+   public final void showGameTables(String var1, TableInfo[] var2, int var3, String var4) {
       if (BigTwoGameScreen.instance != null && !BigTwoGameScreen.isGameStarted) {
-         this.c(BigTwoGameScreen.instance);
+         this.removeScreen(BigTwoGameScreen.instance);
          BigTwoGameScreen.instance = null;
       }
 
       BigTwoGameScreen var5 = BigTwoGameScreen.getInstance(1);
       if (this.screenStack.contains(var5) && BigTwoGameScreen.isGameStarted) {
-         this.showCenterPopup(TextConstant.pleaseQuitYourCurrentGame());
+         this.showSimpleDialog(TextConstant.pleaseQuitYourCurrentGame());
       } else {
          BigTwoGameScreen.currentRoomName = var1;
          BigTwoGameScreen.instance.title = var4;
@@ -2326,7 +2326,7 @@ public final class GameManager implements IGameManager {
          BigTwoGameScreen var6 = BigTwoGameScreen.instance;
          this.addScreen(var6);
          BigTwoGameScreen.instance.showTableList(var2, 1);
-         this.d(BigTwoGameScreen.instance);
+         this.switchToScreen(BigTwoGameScreen.instance);
       }
    }
 
@@ -2375,7 +2375,7 @@ public final class GameManager implements IGameManager {
       }
    }
 
-   public final void a(String[] var1, int[] var2, String[] var3) {
+   public final void updateMultipleBuddyStatus(String[] var1, int[] var2, String[] var3) {
       thien_s var4;
       int var5 = (var4 = this.buddyListScreen.buddyList.getDataModel()).a.size();
 
@@ -2404,17 +2404,17 @@ public final class GameManager implements IGameManager {
       this.buddyListScreen.buddyList.a(var4, -1);
    }
 
-   private static String g(int var0) {
+   private static String getCacheKey1(int var0) {
       return "cs" + var0;
    }
 
-   private static String h(int var0) {
+   private static String getCacheKey2(int var0) {
       return "cs2" + var0;
    }
 
-   public final void b(int var1, int var2) {
+   public final void loadCachedData(int var1, int var2) {
       byte[] var7;
-      if (Xuka.readIP4toInt(g(var1)) == var2 && (var7 = Xuka.readRecord(h(var1))) != null) {
+      if (Xuka.readIP4toInt(getCacheKey1(var1)) == var2 && (var7 = Xuka.readRecord(getCacheKey2(var1))) != null) {
          try {
             MessageHandler.processRawPacket(var7);
             return;
@@ -2428,13 +2428,13 @@ public final class GameManager implements IGameManager {
       ConnectionManager.sendPacket(var8);
    }
 
-   public final void a(int var1, int var2, byte[] var3) {
+   public final void saveCachedData(int var1, int var2, byte[] var3) {
       MessageHandler.processRawPacket(var3);
-      Xuka.writeRecord(g(var1), f(var2));
-      Xuka.writeRecord(h(var1), var3);
+      Xuka.writeRecord(getCacheKey1(var1), intToBytes(var2));
+      Xuka.writeRecord(getCacheKey2(var1), var3);
    }
 
-   public final void b(thien_s var1) {
+   public final void setCachedBuddyList(thien_s var1) {
       if (roomListScreen == null) {
          (roomListScreen = new RoomListScreen()).contactListUI.d = new thien_dp(this);
          roomListScreen.contactListUI.b.label = "Vào phòng";
@@ -2445,10 +2445,10 @@ public final class GameManager implements IGameManager {
 
       roomListScreen.contactListUI.a(var1, 0);
       roomListScreen.startSlide(1);
-      if (!this.f(roomListScreen)) {
+      if (!this.containsScreen(roomListScreen)) {
          this.showScreen(roomListScreen);
       }
 
-      this.d(roomListScreen);
+      this.switchToScreen(roomListScreen);
    }
 }

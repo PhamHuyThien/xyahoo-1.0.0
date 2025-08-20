@@ -19,11 +19,11 @@ implements IAction {
             return;
         }
         if (this.a.buddyList.c(string)) {
-            GameManager.getInstance().showCenterPopup(TextConstant.thisGroupNameAlreadyExist());
+            GameManager.getInstance().showSimpleDialog(TextConstant.thisGroupNameAlreadyExist());
             return;
         }
         MessageHandler.h(this.c, string);
-        GameManager.getInstance().c(this.b);
-        GameManager.instance.l();
+        GameManager.getInstance().removeScreen(this.b);
+        GameManager.instance.focusBuddyList();
     }
 }

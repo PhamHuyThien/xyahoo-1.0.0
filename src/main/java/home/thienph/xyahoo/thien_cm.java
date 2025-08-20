@@ -9,6 +9,6 @@ implements IAction {
     }
 
     public final void action() {
-        GameManager.instance.c(this.a);
+        GameManager.instance.removeScreen(this.a);
     }
 }

@@ -40,13 +40,13 @@ public final class GameCanvas extends Canvas implements Runnable {
       ConnectionManager.registerCallback(1001, var1);
       ConnectionManager.registerCallback(1000, var1);
       ConnectionManager.registerCallback(39, var1);
-      ConnectionManager.registerCallback(2, thien_eu.a());
+      ConnectionManager.registerCallback(2, Game2Handler.getInstance());
       ConnectionManager.registerCallback(48, var1);
       ConnectionManager.registerCallback(1001, var1);
       ConnectionManager.ConnectionListener = var1;
       GameManager var2;
       GameHandler.a(var2 = GameManager.getInstance());
-      thien_eu.a(var2);
+      Game2Handler.setGameManager(var2);
       ConnectionManager.sendPacket(new Packet(-2, -1));
       new Thread(this).start();
    }
@@ -75,7 +75,7 @@ public final class GameCanvas extends Canvas implements Runnable {
                   screenWidth = instance.getWidth();
                   screenHeight = instance.getHeight();
                   if (thien_ev.a == 35) {
-                     GameManager.getInstance().a(screenWidth, screenHeight);
+                     GameManager.getInstance().initialize(screenWidth, screenHeight);
                   }
 
                   if (isGameStarted) {
@@ -86,7 +86,7 @@ public final class GameCanvas extends Canvas implements Runnable {
                   thien_ev.a++;
                   break;
                case 1:
-                  GameManager.instance.a(keyPressedState, keyRepeatedState, lastKeyCode);
+                  GameManager.instance.handleInput(keyPressedState, keyRepeatedState, lastKeyCode);
             }
          } catch (Exception var5) {
             var5.printStackTrace();
@@ -410,12 +410,12 @@ public final class GameCanvas extends Canvas implements Runnable {
                   var1.setColor(16777215);
                   GameManager.instance.drawLoadingAnimation(var1, screenWidth >> 1, (screenHeight + TextRendererHelper.defaultFontSize >> 1) + 3);
                   TextRenderer.getFontRenderer(TextRenderer.colorWhite).drawText(GameManager.serverMessage, screenWidth - 8, screenHeight - TextRenderer.fontHeight - 8, 1, var1, TextRenderer.charWidth, TextRenderer.fontHeight);
-                  GameManager.instance.h++;
+                  GameManager.instance.frameCounter++;
                }
             default:
                return;
             case 1:
-               GameManager.instance.a(var1);
+               GameManager.instance.paint(var1);
          }
       } catch (Exception var2) {
          var2.printStackTrace();

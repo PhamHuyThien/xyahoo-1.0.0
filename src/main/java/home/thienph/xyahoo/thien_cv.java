@@ -18,7 +18,7 @@ implements IAction {
 
     public final void action() {
         GameManager.getInstance().loginScreen.startSlide(1);
-        GameManager.getInstance().c(LoginScreen.getSettingsScreen());
+        GameManager.getInstance().removeScreen(LoginScreen.getSettingsScreen());
         if (GameManager.autoLogin != this.a.a) {
             GameManager.autoLogin = this.a.a;
             Xuka.saveFlag("atlog", GameManager.autoLogin);

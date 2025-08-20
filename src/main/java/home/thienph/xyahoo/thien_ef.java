@@ -14,6 +14,6 @@ implements IAction {
 
     public final void action() {
         MessageHandler.a(this.b, false, "", this.c);
-        this.a.c();
+        this.a.closeTopDialog();
     }
 }

@@ -14,6 +14,6 @@ implements IAction {
         if (this.b) {
             MessageHandler.h(this.a.subtitle);
         }
-        GameManager.getInstance().c(this.a);
+        GameManager.getInstance().removeScreen(this.a);
     }
 }

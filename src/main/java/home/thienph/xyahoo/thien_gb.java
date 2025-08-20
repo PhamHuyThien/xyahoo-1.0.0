@@ -16,8 +16,8 @@ implements IAction {
         if (string.equals("")) {
             return;
         }
-        GameManager.getInstance().c(this.b);
+        GameManager.getInstance().removeScreen(this.b);
         MessageHandler.g(string);
-        GameManager.instance.l();
+        GameManager.instance.focusBuddyList();
     }
 }

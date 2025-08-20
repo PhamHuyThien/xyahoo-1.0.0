@@ -42,6 +42,6 @@ implements IAction {
             GameManager.getInstance().buddyListScreen.buddyList.a(thien_u2.d);
             return;
         }
-        GameManager.getInstance().showCenterPopup(TextConstant.youCanDeleteEmptyGroup());
+        GameManager.getInstance().showSimpleDialog(TextConstant.youCanDeleteEmptyGroup());
     }
 }

@@ -124,7 +124,7 @@ public final class BigTwoGameScreen extends Screen {
       this.gameMenuData = new PopupSideElementData(this.gameMenuItems);
       this.gameMenuAction = new UIAction("Menu", new thien_bv(this));
       super.scrollLock = true;
-      GameManager.f();
+      GameManager.loadGameBackground();
       this.isInitialized = false;
    }
 
@@ -154,7 +154,7 @@ public final class BigTwoGameScreen extends Screen {
       selectedTableType = var2;
       isChatVisible = false;
       isGameStarted = false;
-      GameManager.instance.c();
+      GameManager.instance.closeTopDialog();
       this.showTableList = true;
       this.gameBoardControl = null;
       this.tableInfos = null;
@@ -206,7 +206,7 @@ public final class BigTwoGameScreen extends Screen {
    public final void initializeGameSession(byte var1, String[] var2, long[] var3, int[] var4, String[] var5, int[] var6, Integer[] var7, String var8) {
       isGameStarted = true;
       selectedTableType = 1;
-      GameManager.instance.c();
+      GameManager.instance.closeTopDialog();
       this.clearControls();
       isChatVisible = false;
       TableListControl.tableList = null;
@@ -548,7 +548,7 @@ public final class BigTwoGameScreen extends Screen {
          }
       }
 
-      GameManager.instance.showCenterPopupData(var4, null, null, new UIAction(TextConstant.close(), new thien_bk(this)));
+      GameManager.instance.showCenterDialog(var4, null, null, new UIAction(TextConstant.close(), new thien_bk(this)));
       boolean var8 = false;
 
       for (int var9 = 0; var9 < this.gamePlayerCount; var9++) {
@@ -581,7 +581,7 @@ public final class BigTwoGameScreen extends Screen {
 
       String[] var4 = new String[var1.size()];
       var1.copyInto(var4);
-      this.players = GameManager.c(var4);
+      this.players = GameManager.createGamePlayers(var4);
       this.activePlayerCount = var4.length;
 
       for (int var3 = 0; var3 < var4.length; var3++) {

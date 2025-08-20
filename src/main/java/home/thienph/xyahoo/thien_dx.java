@@ -11,7 +11,7 @@ implements IAction {
     }
 
     public final void action() {
-        this.a.c(this.b);
-        this.a.k();
+        this.a.removeScreen(this.b);
+        this.a.goToFirstScreen();
     }
 }

@@ -88,7 +88,7 @@ extends Screen {
             MessageHandler.b(x, 2);
             this.a(false);
         }
-        GameManager.instance.c(this.V);
+        GameManager.instance.removeScreen(this.V);
         this.V = null;
     }
 
@@ -170,9 +170,9 @@ extends Screen {
         this.w.isLoading = true;
         this.a(true);
         LoginYahooScreen loginYahooScreen2 = this;
-        this.U = GameManager.a(true);
+        this.U = GameManager.getChecksumValue(true);
         if (loginYahooScreen2.U != -1) {
-            thien_s thien_s2 = GameManager.a(true, x);
+            thien_s thien_s2 = GameManager.loadBuddyList(true, x);
             if (thien_s2 != null) {
                 GameManager.instance.loginYahooScreen.w.a(thien_s2, -1);
             } else {
@@ -241,7 +241,7 @@ extends Screen {
 
     public final void h() {
         Xuka.setXpamFlag(x);
-        GameManager.getInstance().a(String.valueOf(TextConstant.inviteYourYahoo()) + "?", new thien_gs(this));
+        GameManager.getInstance().showConfirmDialog(String.valueOf(TextConstant.inviteYourYahoo()) + "?", new thien_gs(this));
     }
 
     static void a(LoginYahooScreen loginYahooScreen2) {
@@ -269,7 +269,7 @@ extends Screen {
         loginYahooScreen2.W.c(z == 0 ? 0 : 1);
         GameManager.getInstance().showScreen(loginYahooScreen2.V);
         loginYahooScreen2.X.setText(A);
-        GameManager.getInstance().j();
+        GameManager.getInstance().goToLastScreen();
     }
 
     static TextField b(LoginYahooScreen loginYahooScreen2) {

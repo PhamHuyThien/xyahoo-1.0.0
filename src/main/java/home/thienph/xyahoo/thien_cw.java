@@ -9,8 +9,8 @@ final class thien_cw
     }
 
     public final void action() {
-        GameManager.instance.c();
-        GameManager.instance.showCenterPopup(TextConstant.pleaseWait());
-        Xuka.startThread(String.valueOf(GameManager.recoveryPhone) + this.a.usernameField.getText(), GameManager.instance.w(), new thien_cx(this), null, true);
+        GameManager.instance.closeTopDialog();
+        GameManager.instance.showSimpleDialog(TextConstant.pleaseWait());
+        Xuka.startThread(String.valueOf(GameManager.recoveryPhone) + this.a.usernameField.getText(), GameManager.instance.getRecoveryInfo(), new thien_cx(this), null, true);
     }
 }
