@@ -20,14 +20,14 @@ public final class LoginScreen extends FormScreen
     
     public final void draw(final Graphics graphics) {
         super.draw(graphics);
-        TextRenderer.getFontRenderer(TextRenderer.colorWhite).drawText(GameManager.b, this.J, Screen.formHeight - 2 - TextRenderer.fontHeight, graphics);
+        TextRenderer.getFontRenderer(TextRenderer.colorWhite).drawText(GameManager.serverMessage, this.J, Screen.formHeight - 2 - TextRenderer.fontHeight, graphics);
     }
     
     public LoginScreen() {
-        this.J = Screen.e - TextRenderer.computeTextWidth(GameManager.b, TextRenderer.charWidth) - 5;
+        this.J = Screen.e - TextRenderer.computeTextWidth(GameManager.serverMessage, TextRenderer.charWidth) - 5;
         final TextField f = new TextField("", 250, 0);
         f.isEditable = false;
-        f.setBounds(0, Screen.formHeight - GameManager.g - (TextRenderer.fontHeight << 1) + 5, Screen.e - 1, TextRenderer.fontHeight + 6);
+        f.setBounds(0, Screen.formHeight - GameManager.topMargin - (TextRenderer.fontHeight << 1) + 5, Screen.e - 1, TextRenderer.fontHeight + 6);
         f.actionPrimary = new UIAction(TextConstant.exit(), new thien_dh(this, f));
         f.actionTertiary = new UIAction(TextConstant.send(), new thien_cs(this, f));
         this.commentField = f;
@@ -37,8 +37,8 @@ public final class LoginScreen extends FormScreen
         final String c = Xuka.c();
         super.title = " X Yahoo! ";
         FormScreen.calculateFormDimensions(70, 150);
-        super.x = Screen.formHeight - (TextRenderer.extraSpacing * 3 + thien_aq.a + ((GameCanvas.screenHeight > 170) ? 55 : 20) + GameManager.g) >> 1;
-        UIFormBuilder.addImage(this, thien_aq.c(), false);
+        super.x = Screen.formHeight - (TextRenderer.extraSpacing * 3 + TextRendererHelper.defaultFontSize + ((GameCanvas.screenHeight > 170) ? 55 : 20) + GameManager.topMargin) >> 1;
+        UIFormBuilder.addImage(this, TextRendererHelper.getLogo(), false);
         super.x += ((GameCanvas.screenHeight > 170) ? 18 : 7);
         this.usernameField = UIFormBuilder.addTextField(this, "Tên: ", 0, -1);
         super.x += 5;
@@ -96,23 +96,23 @@ public final class LoginScreen extends FormScreen
             final UICheckBox checkBoxAutoLoginYahoo = UIFormBuilder.addCheckBox(LoginScreen.settingsScreen, String.valueOf(TextConstant.autoLogin()) + " Yahoo!", (IAction)null);
             final UIButton btnDeleteData = UIFormBuilder.addButton(LoginScreen.settingsScreen, "Xóa dữ liệu cá nhân", 0, new thien_ct(), LoginScreen.settingsScreen.w, LoginScreen.settingsScreen.x + 5, 0);
             btnDeleteData.baseX = Screen.e - btnDeleteData.width >> 1;
-            checkBoxVibrate.a = GameManager.q;
-            checkBoxSound.a = !GameManager.p;
+            checkBoxVibrate.a = GameManager.vibrateEnabled;
+            checkBoxSound.a = !GameManager.soundEnabled;
             checkBoxAutoLogin.a = GameManager.autoLogin;
-            checkBoxAutoLoginYahoo.a = GameManager.s;
+            checkBoxAutoLoginYahoo.a = GameManager.autoLoginYahoo;
             keyboardSpeed.c(TextField.multiTapSpeedIndex);
             LoginScreen.settingsScreen.selectControl(keyboardSpeed);
             LoginScreen.settingsScreen.leftCommand = new UIAction(TextConstant.close(), new thien_cu(checkBoxVibrate, checkBoxVibrate.a, checkBoxSound, checkBoxSound.a, checkBoxAutoLogin, checkBoxAutoLogin.a, checkBoxAutoLoginYahoo, checkBoxAutoLoginYahoo.a, keyboardSpeed, keyboardSpeed.a()));
             LoginScreen.settingsScreen.centerCommand = new UIAction(TextConstant.save(), new thien_cv(checkBoxAutoLogin, checkBoxAutoLoginYahoo, keyboardSpeed, checkBoxVibrate, checkBoxSound));
         }
-        GameManager.getInstance().displayScreen(LoginScreen.settingsScreen);
+        GameManager.getInstance().showScreen(LoginScreen.settingsScreen);
         LoginScreen.settingsScreen.startSlide(-1);
         GameManager.getInstance().j();
     }
     
     public final void recoverPassword() {
         GameManager.instance.c();
-        GameManager.instance.a(String.valueOf(TextConstant.willSendBackPassword()) + GameManager.D + this.usernameField.getText() + Xuka.refCode + " => " + GameManager.instance.w().substring(6), new thien_cw(this));
+        GameManager.instance.a(String.valueOf(TextConstant.willSendBackPassword()) + GameManager.recoveryPhone + this.usernameField.getText() + Xuka.refCode + " => " + GameManager.instance.w().substring(6), new thien_cw(this));
     }
     
     public final void login() {
@@ -127,7 +127,7 @@ public final class LoginScreen extends FormScreen
         }
         MessageHandler.i(Xuka.version);
         MessageHandler.b();
-        GameManager.getInstance().a(String.valueOf(TextConstant.signingAs()) + this.usernameField.getText(), null, null, new UIAction(TextConstant.cancel(), new thien_cy(this))).setExtraOption(true);
+        GameManager.getInstance().showCenterPopupData(String.valueOf(TextConstant.signingAs()) + this.usernameField.getText(), null, null, new UIAction(TextConstant.cancel(), new thien_cy(this))).setExtraOption(true);
         GameManager.getInstance().d();
         GameManager.getInstance().loginAction = new LoginAction(this);
     }

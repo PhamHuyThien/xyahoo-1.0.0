@@ -9,10 +9,10 @@ implements IAction {
     }
 
     public final void action() {
-        this.a.removeControl(BigTwoGameScreen.h());
-        BigTwoGameScreen.H = false;
-        this.a.selectControl(BigTwoGameScreen.g(this.a));
-        BigTwoGameScreen.a(this.a);
-        BigTwoGameScreen.h().setText("");
+        this.a.removeControl(BigTwoGameScreen.getBetTextField());
+        BigTwoGameScreen.isChatting = false;
+        this.a.selectControl(BigTwoGameScreen.getSelectedControl(this.a));
+        BigTwoGameScreen.adjustScrollPosition(this.a);
+        BigTwoGameScreen.getBetTextField().setText("");
     }
 }

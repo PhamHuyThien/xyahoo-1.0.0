@@ -9,8 +9,8 @@ implements IAction {
     }
 
     public final void action() {
-        if (!GameManager.o.equals("")) {
-            this.a.A.insertText(GameManager.o);
+        if (!GameManager.statusMessage.equals("")) {
+            this.a.A.insertText(GameManager.statusMessage);
         }
     }
 }

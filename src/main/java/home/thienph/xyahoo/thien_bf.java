@@ -11,10 +11,10 @@ implements IAction {
     public final void action() {
         if (this.a.centerCommand.label.equals(TextConstant.ready())) {
             int n = 0;
-            while (n < this.a.F.length) {
-                if (this.a.F[n].a.equals(BigTwoGameScreen.currentGroupName)) {
+            while (n < this.a.players.length) {
+                if (this.a.players[n].playerName.equals(BigTwoGameScreen.currentGroupName)) {
                     this.a.centerCommand.label = "";
-                    MessageHandler.b(BigTwoGameScreen.B, BigTwoGameScreen.currentGroupName);
+                    MessageHandler.b(BigTwoGameScreen.gameRoomId, BigTwoGameScreen.currentGroupName);
                 }
                 ++n;
             }

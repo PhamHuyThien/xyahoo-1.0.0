@@ -13,7 +13,7 @@ extends Screen {
 
     public RoomListScreen() {
         this.isLocked = true;
-        this.contactListUI = new ContactListUI(1, 1, Screen.e - 3, Screen.formHeight - 2 - GameManager.g, 0);
+        this.contactListUI = new ContactListUI(1, 1, Screen.e - 3, Screen.formHeight - 2 - GameManager.topMargin, 0);
         this.addControl(this.contactListUI);
         this.selectControl(this.contactListUI);
         this.rightCommand = new UIAction("Tìm phòng", new thien_eo(this));

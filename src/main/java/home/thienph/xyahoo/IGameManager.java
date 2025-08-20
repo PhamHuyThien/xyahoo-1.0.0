@@ -133,7 +133,7 @@ public interface IGameManager {
 
     public void a(long var1);
 
-    public void a(String var1, thien_aw[] var2, int var3, String var4);
+    public void a(String var1, TableInfo[] var2, int var3, String var4);
 
     public void b(thien_s var1);
 }

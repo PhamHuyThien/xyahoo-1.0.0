@@ -64,7 +64,7 @@ extends UIControlBase {
         TextBox textBox = new TextBox("", "", 500, 0);
         textBox.addCommand(new Command("OK", 4, 0));
         textBox.addCommand(new Command(TextConstant.cancel(), 3, 0));
-        textBox.setCommandListener((CommandListener)new thien_au(this, textBox));
+        textBox.setCommandListener((CommandListener)new SystemInputHandler(this, textBox));
         try {
             if (this.useSystemInputBox) {
                 textBox.setConstraints(3);
@@ -111,7 +111,7 @@ extends UIControlBase {
 
     private void initClearButton() {
         cursorHeight = TextRenderer.fontHeight + 1;
-        this.actionSecondary = new UIAction(TextConstant.clear(), new thien_av(this));
+        this.actionSecondary = new UIAction(TextConstant.clear(), new DeleteCharBeforeCursorAction(this));
         fontWidth = TextRenderer.computeTextWidth("ABC", TextRenderer.charWidth) + 1;
     }
 

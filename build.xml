@@ -13,6 +13,7 @@
 <!--    <property name="lib.dir" value="libs"/>-->
 <!--    <property name="dist.dir" value="dist"/>-->
 <!--    <property name="tool.dir" value="tools"/>-->
+<!--    <property name="emulator.dir" value="F:\source\thienph\AngelChipEmulator.jar"/>-->
 
 <!--    <target name="clean-all" description="Xóa bin.dir và dist.dir">-->
 <!--        <echo message="Deleting ${build.dir} and ${dist.dir}..."/>-->
@@ -66,4 +67,11 @@
 <!--            </manifest>-->
 <!--        </jar>-->
 <!--    </target>-->
+
+<!--    <target name="run-emulator">-->
+<!--        <java jar="${emulator.dir}" fork="true" failonerror="true">-->
+<!--            <arg value="${dist.dir}\xyahoo-100-client.jar"/>-->
+<!--        </java>-->
+<!--    </target>-->
+
 </project>

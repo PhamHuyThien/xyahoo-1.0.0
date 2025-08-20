@@ -11,6 +11,6 @@ implements IAction {
     }
 
     public final void action() {
-        MessageHandler.a(BigTwoGameScreen.B, BigTwoGameScreen.currentGroupName, this.a.F[this.b].a);
+        MessageHandler.a(BigTwoGameScreen.gameRoomId, BigTwoGameScreen.currentGroupName, this.a.players[this.b].playerName);
     }
 }

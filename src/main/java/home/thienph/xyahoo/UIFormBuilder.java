@@ -104,7 +104,7 @@ public class UIFormBuilder implements IAction {
 
       thien_aj var8;
       (var8 = new thien_aj(var1, var4, var5, var6, TextRenderer.fontHeight + 4)).selectedIndex = var2;
-      var8.b = var3;
+      var8.action = var3;
       var8.actionTertiary.actionHandler = new thien_ak(var8);
       if (var0 != null) {
          var0.addControl(var8);

@@ -20,7 +20,7 @@ implements IAction {
             this.c.selectControl(this.b);
             return;
         }
-        GameManager.t.addElement(string);
+        GameManager.blockedUsers.addElement(string);
         MessageHandler.i(BuddyListScreen.currentGroupName, string);
         int n = 0;
         while (n < this.d.a.length) {

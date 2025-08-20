@@ -22,8 +22,8 @@ public final class ChatRoomScreen extends Screen {
       super.title = var1;
       this.A = new TextField();
       this.A.isEditable = false;
-      this.A.setBounds(1, Screen.formHeight - GameManager.g - 2, Screen.e - 3, TextRenderer.fontHeight + 6);
-      this.z = new thien_e(1, 1, Screen.e - 3, Screen.formHeight - GameManager.g - TextRenderer.fontHeight - 7);
+      this.A.setBounds(1, Screen.formHeight - GameManager.topMargin - 2, Screen.e - 3, TextRenderer.fontHeight + 6);
+      this.z = new thien_e(1, 1, Screen.e - 3, Screen.formHeight - GameManager.topMargin - TextRenderer.fontHeight - 7);
       this.addControl(this.z);
       this.addControl(this.A);
       this.selectControl(this.A);
@@ -40,25 +40,25 @@ public final class ChatRoomScreen extends Screen {
       this.D = new PopupSideElementData(this.E);
       super.leftCommand = new UIAction("Menu", new thien_fd(this));
       super.centerCommand = new UIAction("Chat", null);
-      if (GameManager.E != null) {
-         this.z.a(GameManager.E, 2);
+      if (GameManager.promoMessage != null) {
+         this.z.a(GameManager.promoMessage, 2);
       }
    }
 
    public static void e() {
       if (BuddyListScreen.pendingChatTarget != null) {
-         thien_aq.a(BuddyListScreen.pendingChatTarget, 1);
+         TextRendererHelper.computeTextWidthWithOffset(BuddyListScreen.pendingChatTarget, 1);
       }
    }
 
    public final void b(String var1) {
       this.B = var1;
       if (this.B != null) {
-         thien_aq.a(this.B, 1);
+         TextRendererHelper.computeTextWidthWithOffset(this.B, 1);
       }
 
       if (BuddyListScreen.pendingChatTarget != null) {
-         thien_aq.a(BuddyListScreen.pendingChatTarget, 1);
+         TextRendererHelper.computeTextWidthWithOffset(BuddyListScreen.pendingChatTarget, 1);
       }
    }
 
@@ -89,9 +89,9 @@ public final class ChatRoomScreen extends Screen {
 
             Object var5 = null;
             if (this.C) {
-               GameManager.instance.B = BuddyListScreen.currentGroupName;
-               GameManager.instance.C++;
-               if (GameManager.instance.C > 5) {
+               GameManager.instance.lastMessageSender = BuddyListScreen.currentGroupName;
+               GameManager.instance.messageRepeatCount++;
+               if (GameManager.instance.messageRepeatCount > 5) {
 //                  this.z.a("Bạn chỉ có thể chat 5 câu liên tục khi chat nhóm", 1);
 //                  return false;
                }

@@ -9,11 +9,11 @@ implements IAction {
     }
 
     public final void action() {
-        thien_ax.B = false;
-        if (!this.a.Y) {
-            this.a.g();
+        GameBoardControl.isShowingAllCards = false;
+        if (!this.a.isSpectatorMode) {
+            this.a.prepareNextRound();
         }
-        long cfr_ignored_0 = this.a.ac;
-        this.a.a((byte)this.a.Z, this.a.aa, this.a.ab, this.a.ad, this.a.ae, this.a.af, this.a.ag, BigTwoGameScreen.B);
+        long cfr_ignored_0 = this.a.resultTimestamp;
+        this.a.initializeGameSession((byte)this.a.activePlayerCount, this.a.resultPlayerNames, this.a.resultPlayerScores, this.a.resultPlayerCards, this.a.resultPlayerStatuses, this.a.resultPlayerRanks, this.a.resultPlayerRewards, BigTwoGameScreen.gameRoomId);
     }
 }

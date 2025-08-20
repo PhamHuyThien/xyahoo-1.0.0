@@ -417,7 +417,7 @@ public class Screen {
 
     public static void drawFooter(Graphics graphics) {
         if (TextRenderer.useCustomFont) {
-            graphics.drawImage(GameManager.v, 0, formHeight + 2, 20);
+            graphics.drawImage(GameManager.tabBarImage, 0, formHeight + 2, 20);
             return;
         }
         int n = formHeight + 3;

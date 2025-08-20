@@ -143,7 +143,7 @@ public class MessageHandler {
                   }
 
                   formScreen.startSlide(1);
-                  GameManager.instance.displayScreen(formScreen);
+                  GameManager.instance.showScreen(formScreen);
                   if (var107) {
                      GameManager.instance.j();
                   }
@@ -269,7 +269,7 @@ public class MessageHandler {
 
                         boolean var236 = readBool(var1);
                         UIGridMenu var110 = new UIGridMenu(
-                           0, Screen.headerHeight + 7, Screen.e - 3, Screen.formHeight - 3 - GameManager.g, var85, var90, var88, var89, var86, var87, false, 1
+                           0, Screen.headerHeight + 7, Screen.e - 3, Screen.formHeight - 3 - GameManager.topMargin, var85, var90, var88, var89, var86, var87, false, 1
                         );
                         var174.addControl(var110);
                         var174.selectControl(var110);
@@ -457,28 +457,28 @@ public class MessageHandler {
                   GameManager.getInstance().d(var126.title);
                   break;
                case 28:
-                  if (GameManager.instance.n.size() > 0 && ((PopupDialogLayout) GameManager.instance.n.elementAt(0)).showExtraOption) {
+                  if (GameManager.instance.dialogQueue.size() > 0 && ((PopupDialogLayout) GameManager.instance.dialogQueue.elementAt(0)).showExtraOption) {
                      GameManager.instance.c();
                   }
 
                   GameManager.instance.showCenterPopup(readString(var1));
                   break;
                case 29:
-                  String var124 = readString(var1);
-                  String var151 = readString(var1);
-                  byte[] var168 = readByteArray(var1);
-                  String var177 = readString(var1);
-                  byte[] var185 = readByteArray(var1);
-                  String var187 = readString(var1);
-                  byte[] var193 = readByteArray(var1);
-                  UIAction var152 = new UIAction(var151, new thien_f(var168));
-                  UIAction var169 = new UIAction(var177, new thien_j(var185));
-                  UIAction var178 = new UIAction(var187, new thien_k(var193));
-                  if (GameManager.instance.n.size() > 0 && ((PopupDialogLayout) GameManager.instance.n.elementAt(0)).showExtraOption) {
+                  String title = readString(var1);
+                  String leftActionName = readString(var1);
+                  byte[] leftActionData = readByteArray(var1);
+                  String centerActionName = readString(var1);
+                  byte[] centerActionData = readByteArray(var1);
+                  String rightActionName = readString(var1);
+                  byte[] rightActionData = readByteArray(var1);
+                  UIAction leftAction = new UIAction(leftActionName, new LeftButtonAction(leftActionData));
+                  UIAction centerAction = new UIAction(centerActionName, new CenterButtonAction(centerActionData));
+                  UIAction rightAction = new UIAction(rightActionName, new RightButtonAction(rightActionData));
+                  if (GameManager.instance.dialogQueue.size() > 0 && ((PopupDialogLayout) GameManager.instance.dialogQueue.elementAt(0)).showExtraOption) {
                      GameManager.instance.c();
                   }
 
-                  GameManager.instance.a(var124, var152, var169, var178);
+                  GameManager.instance.showCenterPopupData(title, leftAction, centerAction, rightAction);
                   break;
                case 35:
                   int var3 = readInt(var1);
@@ -587,7 +587,7 @@ public class MessageHandler {
    }
 
    public static void b(String var0) {
-      Packet var1 = new Packet(GameManager.a ? 5000011 : 3402, 39);
+      Packet var1 = new Packet(GameManager.isTestMode ? 5000011 : 3402, 39);
       writeString(var0, var1);
       ConnectionManager.sendPacket(var1);
    }

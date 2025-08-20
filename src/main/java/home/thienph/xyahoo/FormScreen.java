@@ -7,7 +7,7 @@ extends Screen {
     public int w;
     public int x;
     public int y;
-    private thien_ao[] sectionHeaders;
+    private SectionHeaderControl[] sectionHeaders;
     private int selectedSectionIndex = -1;
     private Vector formControls = new Vector();
     public static int formXOffset;
@@ -77,25 +77,25 @@ extends Screen {
 
     public final void setSections(String[] stringArray) {
         int n = stringArray.length;
-        this.sectionHeaders = new thien_ao[n];
+        this.sectionHeaders = new SectionHeaderControl[n];
         int n2 = 0;
         while (n2 < n) {
-            this.sectionHeaders[n2] = new thien_ao(stringArray[n2], 0, 0, Screen.e - 1, TextRenderer.fontHeight + 2);
-            this.sectionHeaders[n2].a = this;
-            this.sectionHeaders[n2].b = n2;
+            this.sectionHeaders[n2] = new SectionHeaderControl(stringArray[n2], 0, 0, Screen.e - 1, TextRenderer.fontHeight + 2);
+            this.sectionHeaders[n2].parentForm = this;
+            this.sectionHeaders[n2].sectionIndex = n2;
             ++n2;
         }
     }
 
     public final void toggleSection(int n) {
         if (this.selectedSectionIndex != -1) {
-            this.sectionHeaders[this.selectedSectionIndex].c = false;
+            this.sectionHeaders[this.selectedSectionIndex].isExpanded = false;
         }
         if (this.selectedSectionIndex == n) {
             this.selectedSectionIndex = -1;
         } else {
             this.selectedSectionIndex = n;
-            this.sectionHeaders[this.selectedSectionIndex].c = true;
+            this.sectionHeaders[this.selectedSectionIndex].isExpanded = true;
         }
         FormScreen formScreen2 = this;
         super.clearControls();
@@ -112,7 +112,7 @@ extends Screen {
                 super.addControl(UIControlBase2);
             } else {
                 if (n3 == UIControlBase2.selectedIndex) {
-                    if (formScreen2.controls.size() > 0 && !(formScreen2.controls.lastElement() instanceof thien_ao)) {
+                    if (formScreen2.controls.size() > 0 && !(formScreen2.controls.lastElement() instanceof SectionHeaderControl)) {
                         n2 += 10;
                     }
                     formScreen2.sectionHeaders[n3].baseY = n2;

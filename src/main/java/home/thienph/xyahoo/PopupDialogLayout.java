@@ -80,16 +80,16 @@ public final class PopupDialogLayout {
         while (--n2 >= 0) {
             n = this.popupHeight / 50 + 1;
             while (--n >= 0) {
-                graphics.drawImage(GameManager.w, this.centerX + n2 * 50, this.startY + n * 50, 0);
+                graphics.drawImage(GameManager.dialogBackground, this.centerX + n2 * 50, this.startY + n * 50, 0);
             }
         }
         if (this.popupWidth > 110) {
-            graphics.drawRegion(GameManager.x, 0, 0, 55, 20, 0, this.centerX, this.startY, 0);
-            graphics.drawRegion(GameManager.x, 87, 0, 55, 20, 0, this.centerX + this.width - 55, this.startY, 0);
+            graphics.drawRegion(GameManager.dialogTop, 0, 0, 55, 20, 0, this.centerX, this.startY, 0);
+            graphics.drawRegion(GameManager.dialogTop, 87, 0, 55, 20, 0, this.centerX + this.width - 55, this.startY, 0);
             graphics.setClip(this.centerX + 55, this.startY, this.width - 110, 20);
             n = n2 = (this.width - 110 >> 5) + 1;
             while (--n >= 0) {
-                graphics.drawRegion(GameManager.x, 55, 0, 32, 20, 0, this.centerX + 55 + n * 32, this.startY, 0);
+                graphics.drawRegion(GameManager.dialogTop, 55, 0, 32, 20, 0, this.centerX + 55 + n * 32, this.startY, 0);
             }
         }
         graphics.setClip(-1000, -1000, 5000, 5000);
@@ -106,11 +106,11 @@ public final class PopupDialogLayout {
             ++n2;
         }
         if (this.showExtraOption) {
-            GameManager.instance.a(graphics, this.centerX, this.contentStartY + this.lineCount * TextRenderer.fontHeight + TextRenderer.fontHeight + 3);
+            GameManager.instance.drawLoadingAnimation(graphics, this.centerX, this.contentStartY + this.lineCount * TextRenderer.fontHeight + TextRenderer.fontHeight + 3);
         }
         Screen.drawFooter(graphics);
         graphics.setColor(0xFFFFFF);
-        n2 = GameCanvas.screenHeight - (GameManager.g >> 1) - (TextRenderer.fontHeight >> 1) + (TextRenderer.useCustomFont ? 0 : 2);
+        n2 = GameCanvas.screenHeight - (GameManager.topMargin >> 1) - (TextRenderer.fontHeight >> 1) + (TextRenderer.useCustomFont ? 0 : 2);
         if (this.leftAction != null) {
             TextRenderer.getFontRenderer(TextRenderer.colorWhite).drawText(this.leftAction.label, 4, n2, graphics);
         }

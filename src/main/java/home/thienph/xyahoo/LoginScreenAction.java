@@ -10,7 +10,7 @@ implements IAction {
 
     public final void action() {
         LoginScreen.removeCommentField(this.loginScreen);
-        GameManager.instance.A = false;
+        GameManager.instance.isLoggedIn = false;
         this.loginScreen.login();
     }
 }

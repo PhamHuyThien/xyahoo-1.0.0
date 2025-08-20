@@ -2,15 +2,15 @@ package home.thienph.xyahoo;
 
 final class thien_az
 implements IAction {
-    private thien_ay a;
+    private TableListControl a;
 
-    thien_az(thien_ay thien_ay2) {
-        this.a = thien_ay2;
+    thien_az(TableListControl tableListControl2) {
+        this.a = tableListControl2;
     }
 
     public final void action() {
-        String string = thien_ay.c[thien_ay.a((thien_ay)this.a)].a;
-        if (thien_ay.b(this.a) == 1) {
+        String string = TableListControl.tableList[TableListControl.getSelectedTableIndex((TableListControl)this.a)].tableId;
+        if (TableListControl.getRoomType(this.a) == 1) {
             MessageHandler.a(string, BigTwoGameScreen.currentGroupName);
         }
     }

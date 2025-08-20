@@ -6,6 +6,6 @@ implements IAction {
     }
 
     public final void action() {
-        GameManager.getInstance().showCenterPopup(new String[]{"X Yahoo! " + GameManager.b, "Build ID: 2012-08-9-PM", "Website: mxuka.com", "hotro.xyahoo@gmail.com", "Phone: 0969728701"});
+        GameManager.getInstance().showCenterPopup(new String[]{"X Yahoo! " + GameManager.serverMessage, "Build ID: 2012-08-9-PM", "Website: mxuka.com", "hotro.xyahoo@gmail.com", "Phone: 0969728701"});
     }
 }

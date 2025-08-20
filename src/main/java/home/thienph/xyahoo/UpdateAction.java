@@ -9,11 +9,11 @@ implements IAction {
     }
 
     public final void action() {
-        if (BigTwoGameScreen.ah == 1) {
+        if (BigTwoGameScreen.selectedTableType == 1) {
             UpdateAction updateAction2 = this;
-            updateAction2.a.e();
+            updateAction2.a.leaveGame();
             return;
         }
-        BigTwoGameScreen.e(BigTwoGameScreen.ah);
+        BigTwoGameScreen.exitGame(BigTwoGameScreen.selectedTableType);
     }
 }

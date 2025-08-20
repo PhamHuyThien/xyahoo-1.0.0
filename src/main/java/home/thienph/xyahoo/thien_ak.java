@@ -9,6 +9,6 @@ implements IAction {
     }
 
     public final void action() {
-        this.a.b.action();
+        this.a.action.action();
     }
 }

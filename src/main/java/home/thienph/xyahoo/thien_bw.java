@@ -10,9 +10,9 @@ final class thien_bw implements IAction
     
     public final void action() {
         GameManager.instance.c(BigTwoGameScreen.instance);
-        thien_ay.b = null;
-        thien_ay.a = null;
-        BigTwoGameScreen.a(this.a, (thien_ay)null);
+        TableListControl.playIcon = null;
+        TableListControl.tableImage = null;
+        BigTwoGameScreen.setTableListControl(this.a, (TableListControl)null);
         System.gc();
     }
 }

@@ -9,7 +9,7 @@ implements IAction {
     }
 
     public final void action() {
-        GameManager.getInstance().showPopupSideLayout(BigTwoGameScreen.b(this.a), 0);
-        BigTwoGameScreen.a(this.a);
+        GameManager.getInstance().showPopupSideLayout(BigTwoGameScreen.getGameMenuData(this.a), 0);
+        BigTwoGameScreen.adjustScrollPosition(this.a);
     }
 }

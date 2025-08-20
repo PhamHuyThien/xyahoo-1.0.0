@@ -406,10 +406,10 @@ public final class GameCanvas extends Canvas implements Runnable {
                var1.setColor(1055519);
                var1.fillRect(0, 0, screenWidth, screenHeight);
                if (!isGameStarted) {
-                  var1.drawImage(thien_aq.c(), screenWidth >> 1, (screenHeight >> 1) - 15, 3);
+                  var1.drawImage(TextRendererHelper.getLogo(), screenWidth >> 1, (screenHeight >> 1) - 15, 3);
                   var1.setColor(16777215);
-                  GameManager.instance.a(var1, screenWidth >> 1, (screenHeight + thien_aq.a >> 1) + 3);
-                  TextRenderer.getFontRenderer(TextRenderer.colorWhite).drawText(GameManager.b, screenWidth - 8, screenHeight - TextRenderer.fontHeight - 8, 1, var1, TextRenderer.charWidth, TextRenderer.fontHeight);
+                  GameManager.instance.drawLoadingAnimation(var1, screenWidth >> 1, (screenHeight + TextRendererHelper.defaultFontSize >> 1) + 3);
+                  TextRenderer.getFontRenderer(TextRenderer.colorWhite).drawText(GameManager.serverMessage, screenWidth - 8, screenHeight - TextRenderer.fontHeight - 8, 1, var1, TextRenderer.charWidth, TextRenderer.fontHeight);
                   GameManager.instance.h++;
                }
             default:

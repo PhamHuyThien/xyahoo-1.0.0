@@ -11,7 +11,7 @@ implements IAction {
     public final void action() {
         String string = this.a.z.d();
         if (!string.equals("")) {
-            GameManager.o = string;
+            GameManager.statusMessage = string;
         }
     }
 }

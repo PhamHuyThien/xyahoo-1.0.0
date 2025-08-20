@@ -6,6 +6,6 @@ implements IAction {
     }
 
     public final void action() {
-        MessageHandler.a(BigTwoGameScreen.ah, BigTwoGameScreen.B, BigTwoGameScreen.currentGroupName, false);
+        MessageHandler.a(BigTwoGameScreen.selectedTableType, BigTwoGameScreen.gameRoomId, BigTwoGameScreen.currentGroupName, false);
     }
 }

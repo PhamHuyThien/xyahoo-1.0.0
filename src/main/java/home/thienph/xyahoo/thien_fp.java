@@ -23,12 +23,12 @@ implements IAction {
             return;
         }
         if (this.c.getText().length() < 6 || this.c.getText().length() > 64) {
-            GameManager.getInstance().a(String.valueOf(TextConstant.password()) + TextConstant.lengthMustBeFrom6To64(), (Image)null, 1);
+            GameManager.getInstance().showNotification(String.valueOf(TextConstant.password()) + TextConstant.lengthMustBeFrom6To64(), (Image)null, 1);
             this.a.selectControl(this.c);
             return;
         }
         if (this.c.getText().equals("") || this.d.getText().equals("") || !this.c.getText().equals(this.d.getText())) {
-            GameManager.getInstance().a(TextConstant.typePasswordAgain(), (Image)null, 1);
+            GameManager.getInstance().showNotification(TextConstant.typePasswordAgain(), (Image)null, 1);
             this.a.selectControl(this.c);
             return;
         }

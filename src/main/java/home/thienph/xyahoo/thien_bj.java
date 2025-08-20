@@ -10,7 +10,7 @@ final class thien_bj implements IAction {
    public final void action() {
       thien_bi var1 = this.a;
       thien_bh var2 = this.a.a;
-      BigTwoGameScreen.e();
-      MessageHandler.a(BigTwoGameScreen.ah, BigTwoGameScreen.B, BigTwoGameScreen.currentGroupName, true);
+      BigTwoGameScreen.leaveGame();
+      MessageHandler.a(BigTwoGameScreen.selectedTableType, BigTwoGameScreen.gameRoomId, BigTwoGameScreen.currentGroupName, true);
    }
 }

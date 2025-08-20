@@ -23,21 +23,21 @@ implements IAction {
             GameManager.autoLogin = this.a.a;
             Xuka.saveFlag("atlog", GameManager.autoLogin);
         }
-        if (GameManager.s != this.b.a) {
-            GameManager.s = this.b.a;
-            Xuka.saveFlag("atlogY", GameManager.s);
+        if (GameManager.autoLoginYahoo != this.b.a) {
+            GameManager.autoLoginYahoo = this.b.a;
+            Xuka.saveFlag("atlogY", GameManager.autoLoginYahoo);
         }
         if (TextField.multiTapSpeedIndex != this.c.a()) {
             TextField.multiTapSpeedIndex = this.c.a();
             Xuka.saveCaret(TextField.multiTapSpeedIndex);
         }
-        if (GameManager.q != this.d.a) {
-            GameManager.q = this.d.a;
-            Xuka.saveFlag("vibrate", GameManager.q);
+        if (GameManager.vibrateEnabled != this.d.a) {
+            GameManager.vibrateEnabled = this.d.a;
+            Xuka.saveFlag("vibrate", GameManager.vibrateEnabled);
         }
-        if (GameManager.p != !this.e.a) {
-            GameManager.p = !this.e.a;
-            Xuka.saveFlag("sound", GameManager.p);
+        if (GameManager.soundEnabled != !this.e.a) {
+            GameManager.soundEnabled = !this.e.a;
+            Xuka.saveFlag("sound", GameManager.soundEnabled);
         }
     }
 }

@@ -12,7 +12,7 @@ implements IAction {
 
     public final void action() {
         if (!this.a.C) {
-            GameManager.instance.a(TextConstant.pleaseWait(), (Image)null, 1);
+            GameManager.instance.showNotification(TextConstant.pleaseWait(), (Image)null, 1);
             return;
         }
         this.a.h();

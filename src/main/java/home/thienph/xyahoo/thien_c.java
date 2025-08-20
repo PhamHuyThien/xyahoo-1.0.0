@@ -28,7 +28,7 @@ implements IAction {
             }
         }
         chatRoomScreen2.startSlide(1);
-        GameManager.instance.displayScreen(chatRoomScreen2);
+        GameManager.instance.showScreen(chatRoomScreen2);
         GameManager.instance.d(chatRoomScreen2.title);
     }
 }

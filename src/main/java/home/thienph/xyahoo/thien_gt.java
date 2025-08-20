@@ -15,7 +15,7 @@ implements IAction {
         if (string != null && !string.equals(LoginYahooScreen.A)) {
             LoginYahooScreen.a(this.a, string);
             LoginYahooScreen.z = 0;
-            GameManager.z = true;
+            GameManager.isShowingAnimation = true;
         } else if (n != LoginYahooScreen.z) {
             if (n == 0) {
                 if (string != null && string.length() > 0) {
@@ -24,11 +24,11 @@ implements IAction {
                     MessageHandler.a(0, 2);
                 }
                 LoginYahooScreen.z = 0;
-                GameManager.z = true;
+                GameManager.isShowingAnimation = true;
             } else {
                 MessageHandler.a(12, 2);
                 LoginYahooScreen.z = 12;
-                GameManager.z = true;
+                GameManager.isShowingAnimation = true;
             }
         }
         GameManager.getInstance().c(LoginYahooScreen.d(this.a));

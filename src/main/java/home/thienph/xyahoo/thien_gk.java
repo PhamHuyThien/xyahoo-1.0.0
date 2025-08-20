@@ -74,7 +74,7 @@ final class thien_gk implements IAction {
          } else {
             MessageHandler.b(var1, var2, 1);
             GameManager.getInstance().c(this.c);
-            GameManager.getInstance().d(GameManager.e);
+            GameManager.getInstance().d(GameManager.currentScreen);
          }
       }
    }

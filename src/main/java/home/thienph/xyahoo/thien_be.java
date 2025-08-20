@@ -10,7 +10,7 @@ implements IAction {
 
     public final void action() {
         if (this.a.centerCommand.label.equals(TextConstant.playNow())) {
-            MessageHandler.c(BigTwoGameScreen.B, BigTwoGameScreen.currentGroupName);
+            MessageHandler.c(BigTwoGameScreen.gameRoomId, BigTwoGameScreen.currentGroupName);
         }
     }
 }

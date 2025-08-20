@@ -298,7 +298,7 @@ public final class UIBuddyListControl extends UIControlBase {
       if (this.isLoading) {
          var1.setColor(16777215);
          TextRenderer.getFontRenderer(TextRenderer.colorWhite).drawText(TextConstant.pleaseWait(), this.T, 20, 2, var1, TextRenderer.charWidth, TextRenderer.fontHeight);
-         GameManager.instance.a(var1, this.T, TextRenderer.fontHeight + 35);
+         GameManager.instance.drawLoadingAnimation(var1, this.T, TextRenderer.fontHeight + 35);
       } else if (this.visibleItemCount == 0) {
          var1.setColor(16777215);
          int var9 = this.pleaseWait.length;
@@ -363,7 +363,7 @@ public final class UIBuddyListControl extends UIControlBase {
                var1.setColor(var6.b);
                TextRenderer.getFontRenderer(var6.c).drawText(var11, var7, var2 + 3, var1);
                if (this.isMarkMode && var6.g != 3) {
-                  var1.drawImage(GameManager.y[var6.h ? 1 : 0], super.width - 12, var2 + (this.itemHeight >> 1), 3);
+                  var1.drawImage(GameManager.chatIcons[var6.h ? 1 : 0], super.width - 12, var2 + (this.itemHeight >> 1), 3);
                }
             }
 

@@ -33,7 +33,7 @@ public final class InviteConferenceScreen extends Screen {
 
    public InviteConferenceScreen() {
       this.searchField.isShiftMode = true;
-      this.searchField.setBounds(0, Screen.formHeight - GameManager.g - TextRenderer.fontHeight - 11, Screen.e - 6, TextRenderer.fontHeight + 6);
+      this.searchField.setBounds(0, Screen.formHeight - GameManager.topMargin - TextRenderer.fontHeight - 11, Screen.e - 6, TextRenderer.fontHeight + 6);
       super.title = TextConstant.inviteConference();
       this.addControl(this.buddyListControl);
       this.selectControl(this.buddyListControl);

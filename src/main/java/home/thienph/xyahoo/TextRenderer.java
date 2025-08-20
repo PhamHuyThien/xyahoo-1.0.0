@@ -276,7 +276,7 @@ public final class TextRenderer {
          getFontRenderer(colorSecondary);
          getFontRenderer(colorWhite);
       } else {
-         fontHeight = thien_aq.a();
+         fontHeight = TextRendererHelper.getFontHeight();
       }
 
       lineSpacing = fontHeight + 2;
@@ -317,7 +317,7 @@ public final class TextRenderer {
    }
 
    public static int computeTextWidth(String var0, byte[] var1) {
-      return useCustomFont ? computeTextWidth(var0, 0, var0.length(), var1) : thien_aq.a(var0);
+      return useCustomFont ? computeTextWidth(var0, 0, var0.length(), var1) : TextRendererHelper.computeTextWidth(var0);
    }
 
    private static int computeTextWidth(String var0, int var1, int var2, byte[] var3) {
@@ -337,7 +337,7 @@ public final class TextRenderer {
 
    public final void drawText(String var1, int var2, int var3, Graphics var4) {
       if (!useCustomFont) {
-         thien_aq.a(var4, var1, var2, var3, 0);
+         TextRendererHelper.drawText(var4, var1, var2, var3, 0);
       } else {
          int var5 = var2;
          var3 = var3;
@@ -358,7 +358,7 @@ public final class TextRenderer {
 
    public final void drawText(String var1, int var2, int var3, int var4, Graphics var5, byte[] var6, int var7) {
       if (!useCustomFont) {
-         thien_aq.a(var5, var1, var2, var3, var4 == 1 ? 2 : 1);
+         TextRendererHelper.drawText(var5, var1, var2, var3, var4 == 1 ? 2 : 1);
       } else {
          int var8 = var2;
          var3 = var3;

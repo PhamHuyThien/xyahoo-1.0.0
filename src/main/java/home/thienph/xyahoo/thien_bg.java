@@ -3,20 +3,20 @@ package home.thienph.xyahoo;
 final class thien_bg
 implements IAction {
     private BigTwoGameScreen a;
-    private final thien_ax b;
+    private final GameBoardControl b;
 
-    thien_bg(BigTwoGameScreen bigTwoGameScreen2, thien_ax thien_ax2) {
+    thien_bg(BigTwoGameScreen bigTwoGameScreen2, GameBoardControl gameBoardControl2) {
         this.a = bigTwoGameScreen2;
-        this.b = thien_ax2;
+        this.b = gameBoardControl2;
     }
 
     public final void action() {
-        if (this.b.e) {
-            this.b.e = false;
+        if (this.b.isMyTurn) {
+            this.b.isMyTurn = false;
         }
-        if (BigTwoGameScreen.currentGroupName.equals(this.a.D)) {
-            this.a.P.g = true;
-            MessageHandler.d(BigTwoGameScreen.B, BigTwoGameScreen.currentGroupName);
+        if (BigTwoGameScreen.currentGroupName.equals(this.a.currentPlayerName)) {
+            this.a.gameBoardControl.isGameStarted = true;
+            MessageHandler.d(BigTwoGameScreen.gameRoomId, BigTwoGameScreen.currentGroupName);
         }
     }
 }

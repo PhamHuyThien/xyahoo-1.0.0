@@ -118,7 +118,7 @@ public final class GameHandler extends PacketHandler {
             String var202 = MessageHandler.readString(var1);
             String var216 = MessageHandler.readString(var1);
             String var225 = "";
-            if (GameManager.a) {
+            if (GameManager.isTestMode) {
                var225 = MessageHandler.readString(var1);
             }
 
@@ -148,7 +148,7 @@ public final class GameHandler extends PacketHandler {
                var223.addElement(var241);
             }
 
-            GameManager.t = var223;
+            GameManager.blockedUsers = var223;
             return;
          case 64:
             boolean var232 = MessageHandler.readBool(var1);
@@ -432,16 +432,16 @@ public final class GameHandler extends PacketHandler {
             }
 
             int var221;
-            thien_aw[] var230 = new thien_aw[var221 = MessageHandler.readInt(var1)];
+            TableInfo[] var230 = new TableInfo[var221 = MessageHandler.readInt(var1)];
 
             for (int var238 = 0; var238 < var221; var238++) {
-               var230[var238] = new thien_aw();
-               var230[var238].a = MessageHandler.readString(var1);
-               var230[var238].b = var1.getPayload().readByte();
-               thien_aw var10000 = var230[var238];
+               var230[var238] = new TableInfo();
+               var230[var238].tableId = MessageHandler.readString(var1);
+               var230[var238].gameStatus = var1.getPayload().readByte();
+               TableInfo var10000 = var230[var238];
                long var306 = MessageHandler.readLong(var1);
-               var10000.c = var306 + "$";
-               var230[var238].a((byte) MessageHandler.readInt(var1));
+               var10000.tableName = var306 + "$";
+               var230[var238].setPlayerCount((byte) MessageHandler.readInt(var1));
             }
 
             gameManager.a(var211, var230, 1, var196);
@@ -471,9 +471,9 @@ public final class GameHandler extends PacketHandler {
                }
             }
 
-            BigTwoGameScreen.B = var237;
-            BigTwoGameScreen.instance.C = var57;
-            BigTwoGameScreen.instance.R = MessageHandler.readBool(var1);
+            BigTwoGameScreen.gameRoomId = var237;
+            BigTwoGameScreen.instance.playerBalance = var57;
+            BigTwoGameScreen.instance.isInitialized = MessageHandler.readBool(var1);
             BigTwoGameScreen var178 = BigTwoGameScreen.instance;
             String var307 = MessageHandler.readString(var1);
             String var309 = MessageHandler.readString(var1);
@@ -554,10 +554,10 @@ public final class GameHandler extends PacketHandler {
             }
 
             String var272 = MessageHandler.readString(var1);
-            GameManager.getInstance().a(var272, (Image)null, 1);
+            GameManager.getInstance().showNotification(var272, (Image)null, 1);
             MessageHandler.readInt(var1);
             MessageHandler.readByteArray(var1);
-            if (BigTwoGameScreen.B.equals(var75)) {
+            if (BigTwoGameScreen.gameRoomId.equals(var75)) {
                gameManager.C();
                return;
             }
@@ -605,7 +605,7 @@ public final class GameHandler extends PacketHandler {
                return;
             }
 
-            BigTwoGameScreen.instance.C = var308;
+            BigTwoGameScreen.instance.playerBalance = var308;
             break;
          case 3411:
             MessageHandler.readString(var1);
@@ -787,6 +787,6 @@ public final class GameHandler extends PacketHandler {
 
    private static void b(Packet var0) {
       String var1 = MessageHandler.readString(var0);
-      GameManager.instance.a(var1, (Image)null, 1);
+      GameManager.instance.showNotification(var1, (Image)null, 1);
    }
 }

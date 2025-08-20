@@ -31,7 +31,7 @@ public class Xuka extends MIDlet
         System.out.println("VERSION = " + Xuka.version + "\nIP = " + appProperty + "\nPARTNER_ID = " + appProperty3 + "\nAPP_ID = " + appProperty2 + "\nREF_CODE = " + Xuka.refCode);
         Xuka.serverIPs = new String[] { (appProperty == null || appProperty.length() == 0) ? "112.78.10.113" : appProperty };
         Xuka.version = ((Xuka.version == null || Xuka.version.length() == 0) ? "1.0.0" : Xuka.version);
-        GameManager.b = String.valueOf(Xuka.version) + " Beta";
+        GameManager.serverMessage = String.valueOf(Xuka.version) + " Beta";
         Xuka.refCode = ((Xuka.refCode == null || Xuka.refCode.equalsIgnoreCase("200487")) ? "" : (" " + Xuka.refCode));
         if (appProperty3 == null || appProperty3.length() == 0) {
             appProperty3 = "1";

@@ -42,7 +42,7 @@ extends Screen {
         int n = HomeScreen.instance.menuHome.images[0].getHeight();
         this.P = Screen.e - HomeScreen.instance.menuHome.images[0].getWidth() >> 1;
         int n2 = (TextRenderer.fontHeight + 6 << 2) + 28 + n + 5;
-        this.Q = n2 <= Screen.formHeight - GameManager.g ? GameManager.f - 10 + (Screen.formHeight - GameManager.g - n2 >> 1) : GameManager.f + 5;
+        this.Q = n2 <= Screen.formHeight - GameManager.topMargin ? GameManager.headerHeight - 10 + (Screen.formHeight - GameManager.topMargin - n2 >> 1) : GameManager.headerHeight + 5;
         n = this.Q + n - 3;
         this.I = new thien_ai("Yahoo! ID:", FormScreen.formXOffset, n, TextRenderer.fontHeight);
         this.I.width = FormScreen.formMarginLeft;
@@ -69,8 +69,8 @@ extends Screen {
         int cfr_ignored_0 = this.M.height;
         this.H = new TextField();
         this.H.isShiftMode = true;
-        this.H.setBounds(0, Screen.formHeight - GameManager.g - TextRenderer.fontHeight - 11, Screen.e - 6, TextRenderer.fontHeight + 6);
-        this.w = new UIBuddyListControl(1, 1, Screen.e - 3, Screen.formHeight - 2 - GameManager.g, true);
+        this.H.setBounds(0, Screen.formHeight - GameManager.topMargin - TextRenderer.fontHeight - 11, Screen.e - 6, TextRenderer.fontHeight + 6);
+        this.w = new UIBuddyListControl(1, 1, Screen.e - 3, Screen.formHeight - 2 - GameManager.topMargin, true);
         this.addControl(this.w);
         this.selectControl(this.w);
         this.w.isAutoChatEnabled = true;
@@ -246,11 +246,11 @@ extends Screen {
 
     static void a(LoginYahooScreen loginYahooScreen2) {
         if (D) {
-            GameManager.instance.a("Vui lòng thoát Yahoo! và bỏ chọn đăng nhập ẩn", (Image)null, 1);
+            GameManager.instance.showNotification("Vui lòng thoát Yahoo! và bỏ chọn đăng nhập ẩn", (Image)null, 1);
             return;
         }
-        if (GameManager.z) {
-            GameManager.instance.a("Vui lòng chờ 10s", (Image)null, 1);
+        if (GameManager.isShowingAnimation) {
+            GameManager.instance.showNotification("Vui lòng chờ 10s", (Image)null, 1);
             return;
         }
         if (loginYahooScreen2.V == null) {
@@ -267,7 +267,7 @@ extends Screen {
             loginYahooScreen2.V.leftCommand = new UIAction(TextConstant.cancel(), new thien_gu(loginYahooScreen2));
         }
         loginYahooScreen2.W.c(z == 0 ? 0 : 1);
-        GameManager.getInstance().displayScreen(loginYahooScreen2.V);
+        GameManager.getInstance().showScreen(loginYahooScreen2.V);
         loginYahooScreen2.X.setText(A);
         GameManager.getInstance().j();
     }

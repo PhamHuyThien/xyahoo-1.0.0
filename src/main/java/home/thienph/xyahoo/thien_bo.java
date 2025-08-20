@@ -9,13 +9,13 @@ final class thien_bo
     }
 
     public final void action() {
-        this.a.removeControl(BigTwoGameScreen.I);
-        BigTwoGameScreen.J = false;
-        this.a.selectControl(BigTwoGameScreen.g(this.a));
-        if (BigTwoGameScreen.ah == 1) {
-            MessageHandler.a(BigTwoGameScreen.ah, BigTwoGameScreen.B, BigTwoGameScreen.currentGroupName, BigTwoGameScreen.I.getText());
+        this.a.removeControl(BigTwoGameScreen.chatTextField);
+        BigTwoGameScreen.isChatVisible = false;
+        this.a.selectControl(BigTwoGameScreen.getSelectedControl(this.a));
+        if (BigTwoGameScreen.selectedTableType == 1) {
+            MessageHandler.a(BigTwoGameScreen.selectedTableType, BigTwoGameScreen.gameRoomId, BigTwoGameScreen.currentGroupName, BigTwoGameScreen.chatTextField.getText());
         }
-        BigTwoGameScreen.a(this.a);
-        BigTwoGameScreen.I.setText("");
+        BigTwoGameScreen.adjustScrollPosition(this.a);
+        BigTwoGameScreen.chatTextField.setText("");
     }
 }

@@ -11,13 +11,13 @@ final class thien_bh implements IAction
     }
     
     public final void action() {
-        if (BigTwoGameScreen.d(this.a) == null) {
+        if (BigTwoGameScreen.getContextMenuData(this.a) == null) {
             final Vector vector = new Vector();
-            BigTwoGameScreen.a(this.a, new PopupSideElementData(vector));
-            vector.addElement(BigTwoGameScreen.e(this.a));
-            vector.addElement(BigTwoGameScreen.f(this.a));
-            vector.addElement(new UIAction("R\u1eddi b\u00e0n", new thien_bi(this)));
+            BigTwoGameScreen.setContextMenuData(this.a, new PopupSideElementData(vector));
+            vector.addElement(BigTwoGameScreen.getChatAction(this.a));
+            vector.addElement(BigTwoGameScreen.getSmileyAction(this.a));
+            vector.addElement(new UIAction("Rời bàn", new thien_bi(this)));
         }
-        GameManager.getInstance().showPopupSideLayout(BigTwoGameScreen.d(this.a), 0);
+        GameManager.getInstance().showPopupSideLayout(BigTwoGameScreen.getContextMenuData(this.a), 0);
     }
 }

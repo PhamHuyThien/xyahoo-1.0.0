@@ -7,7 +7,7 @@ extends UIControlBase {
     private String[] c;
     public Integer a;
     private int d;
-    public IAction b;
+    public IAction action;
     private int e;
     private int f;
     private int g;
@@ -46,7 +46,7 @@ extends UIControlBase {
 
     public final void handleKeyPress(int n, int n2) {
         if (this.isSelected()) {
-            this.b.action();
+            this.action.action();
             return;
         }
         this.parentScreen.selectControl(this);
@@ -70,8 +70,8 @@ extends UIControlBase {
     public final void update() {
         if (this.d > 0) {
             --this.d;
-            if (this.d == 0 && this.b != null) {
-                this.b.action();
+            if (this.d == 0 && this.action != null) {
+                this.action.action();
             }
         }
     }

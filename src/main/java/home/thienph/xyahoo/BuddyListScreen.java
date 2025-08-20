@@ -31,7 +31,7 @@ public final class BuddyListScreen extends Screen {
          thien_cl var2;
          (var2 = new thien_cl(TextConstant.rename(), TextConstant.typeNewNameForGroup() + "\"" + this.buddyList.g() + "\"")).D.setText(var1);
          var2.a(new thien_fg(this, var2, var1));
-         GameManager.getInstance().displayScreen(var2);
+         GameManager.getInstance().showScreen(var2);
          GameManager.getInstance().j();
       }
    }
@@ -39,7 +39,7 @@ public final class BuddyListScreen extends Screen {
    public final void startChatWithUser() {
       thien_cl var1;
       (var1 = new thien_cl(TextConstant.chatTo(), TextConstant.enterTheIdYouWantToChat())).a(new thien_fq(this, var1));
-      GameManager.getInstance().displayScreen(var1);
+      GameManager.getInstance().showScreen(var1);
       GameManager.getInstance().j();
    }
 
@@ -78,12 +78,12 @@ public final class BuddyListScreen extends Screen {
       var1.selectControl(var6);
       var1.centerCommand = new UIAction("OK", new thien_gb(this, var6, var1));
       var1.leftCommand = new UIAction(TextConstant.cancel(), new thien_gi(this, var1));
-      GameManager.getInstance().displayScreen(var1);
+      GameManager.getInstance().showScreen(var1);
       GameManager.getInstance().j();
    }
 
    public final void showAddFriendScreen(String var1) {
-      GameManager.e = GameManager.getInstance().u();
+      GameManager.currentScreen = GameManager.getInstance().u();
       Screen var2;
       (var2 = new Screen()).title = TextConstant.addFriend();
       int var3;
@@ -127,7 +127,7 @@ public final class BuddyListScreen extends Screen {
       var2.selectControl(var7);
       var2.centerCommand = new UIAction("OK", new thien_gk(this, var7, var8, var2));
       var2.leftCommand = new UIAction(TextConstant.cancel(), new thien_gl(this, var2));
-      GameManager.instance.a(var2);
+      GameManager.instance.pushScreen(var2);
       GameManager.getInstance().j();
    }
 
@@ -164,7 +164,7 @@ public final class BuddyListScreen extends Screen {
       var9.addElement(new UIAction(TextConstant.cancel(), new thien_fh(this, var1)));
       PopupSideElementData var10 = new PopupSideElementData(var9);
       var1.leftCommand = new UIAction("Menu", new thien_fi(this, var10));
-      GameManager.getInstance().displayScreen(var1);
+      GameManager.getInstance().showScreen(var1);
       GameManager.getInstance().j();
    }
 
@@ -209,7 +209,7 @@ public final class BuddyListScreen extends Screen {
          var2.selectControl(var8);
          var2.centerCommand = new UIAction("OK", new thien_fk(this, var8, var2, var9, var1));
          var2.leftCommand = new UIAction(TextConstant.cancel(), new thien_fl(this, var2));
-         GameManager.getInstance().displayScreen(var2);
+         GameManager.getInstance().showScreen(var2);
          GameManager.getInstance().j();
       }
    }
@@ -246,7 +246,7 @@ public final class BuddyListScreen extends Screen {
       var1.selectControl(var6);
       var1.centerCommand = new UIAction("OK", new thien_fn(this, var6, var8, var1));
       var1.leftCommand = new UIAction(TextConstant.cancel(), new thien_fo(this, var1));
-      GameManager.getInstance().displayScreen(var1);
+      GameManager.getInstance().showScreen(var1);
       GameManager.getInstance().j();
    }
 
@@ -289,7 +289,7 @@ public final class BuddyListScreen extends Screen {
       var1.selectControl(var6);
       var1.centerCommand = new UIAction("OK", new thien_fp(this, var6, var8, var10, var1));
       var1.leftCommand = new UIAction(TextConstant.cancel(), new thien_fr(this, var1));
-      GameManager.getInstance().displayScreen(var1);
+      GameManager.getInstance().showScreen(var1);
       GameManager.getInstance().j();
    }
 
@@ -297,7 +297,7 @@ public final class BuddyListScreen extends Screen {
       thien_cl var1;
       (var1 = new thien_cl(TextConstant.changeFullname(), TextConstant.changeFullname())).D.setText(userFullName);
       var1.a(new thien_fs(this, var1));
-      GameManager.getInstance().displayScreen(var1);
+      GameManager.getInstance().showScreen(var1);
       GameManager.getInstance().j();
    }
 
@@ -307,8 +307,8 @@ public final class BuddyListScreen extends Screen {
       super.title = TextConstant.buddies();
       this.searchField = new TextField();
       this.searchField.isShiftMode = true;
-      this.searchField.setBounds(0, Screen.formHeight - GameManager.g - TextRenderer.fontHeight - 11, Screen.e - 6, TextRenderer.fontHeight + 6);
-      this.buddyList = new UIBuddyListControl(1, 1, Screen.e - 3, Screen.formHeight - 2 - GameManager.g, true);
+      this.searchField.setBounds(0, Screen.formHeight - GameManager.topMargin - TextRenderer.fontHeight - 11, Screen.e - 6, TextRenderer.fontHeight + 6);
+      this.buddyList = new UIBuddyListControl(1, 1, Screen.e - 3, Screen.formHeight - 2 - GameManager.topMargin, true);
       this.buddyList.isAutoChatEnabled = false;
       this.buddyList.isScrollable = true;
       this.addControl(this.buddyList);
@@ -341,7 +341,7 @@ public final class BuddyListScreen extends Screen {
 
    public static void n() {
       MessageHandler.d();
-      GameManager.instance.a(GameManager.t);
+      GameManager.instance.a(GameManager.blockedUsers);
    }
 
    public final void o() {

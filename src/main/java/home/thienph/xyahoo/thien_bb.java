@@ -6,6 +6,6 @@ implements IAction {
     }
 
     public final void action() {
-        GameManager.getInstance().a(0);
+        GameManager.getInstance().showEmoticonPicker(0);
     }
 }

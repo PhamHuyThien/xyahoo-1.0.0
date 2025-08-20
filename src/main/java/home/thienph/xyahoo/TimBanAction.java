@@ -6,10 +6,10 @@ implements IAction {
     }
 
     public final void action() {
-        if (BigTwoGameScreen.ah == 1) {
-            MessageHandler.d(BigTwoGameScreen.ai);
+        if (BigTwoGameScreen.selectedTableType == 1) {
+            MessageHandler.d(BigTwoGameScreen.currentRoomName);
             return;
         }
-        MessageHandler.a(BigTwoGameScreen.ah, BigTwoGameScreen.ai);
+        MessageHandler.a(BigTwoGameScreen.selectedTableType, BigTwoGameScreen.currentRoomName);
     }
 }

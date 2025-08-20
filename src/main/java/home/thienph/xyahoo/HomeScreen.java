@@ -26,7 +26,7 @@ public final class HomeScreen extends FormScreen {
          }
 
          this.menuHome = new UIGridMenu(
-            0, Screen.headerHeight + 7, Screen.e - 3, Screen.formHeight - 3 - GameManager.g, menuLength, menuNames, null, null, menuImages[0].getWidth(), menuImages[0].getHeight(), true, 1
+            0, Screen.headerHeight + 7, Screen.e - 3, Screen.formHeight - 3 - GameManager.topMargin, menuLength, menuNames, null, null, menuImages[0].getWidth(), menuImages[0].getHeight(), true, 1
          );
          UIGridMenu var6 = this.menuHome;
          this.menuHome.images = menuImages;
@@ -92,7 +92,7 @@ public final class HomeScreen extends FormScreen {
             var2.showLoginYahooScreen();
             return;
          case 1:
-            if (GameManager.a) {
+            if (GameManager.isTestMode) {
                var2.x();
                return;
             }
