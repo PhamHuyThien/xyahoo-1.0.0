@@ -1,7 +1,7 @@
 package home.thienph.xyahoo.actions;
 
 import home.thienph.xyahoo.components.TextField;
-import home.thienph.xyahoo.components.UIAction;
+import home.thienph.xyahoo.data.data.UIAction;
 import home.thienph.xyahoo.constants.TextConstant;
 import home.thienph.xyahoo.screens.HomeScreen;
 import home.thienph.xyahoo.screens.Screen;
@@ -16,17 +16,17 @@ implements IAction {
     }
 
     public final void action() {
-        this.homeScreen.G = true;
-        if (this.homeScreen.F == null) {
-            this.homeScreen.F = new TextField("", 250, 0);
-            this.homeScreen.F.isEditable = false;
-            this.homeScreen.F.setBounds(0, Screen.formHeight - (TextRenderer.fontHeight << 1) + 8, Screen.e - 1, TextRenderer.fontHeight + 6);
-            this.homeScreen.F.actionPrimary = new UIAction(TextConstant.exit(), new thien_cf(this));
-            this.homeScreen.F.actionTertiary = new UIAction(TextConstant.send(), new thien_cg(this));
+        this.homeScreen.isInputBlocked = true;
+        if (this.homeScreen.searchTextField == null) {
+            this.homeScreen.searchTextField = new TextField("", 250, 0);
+            this.homeScreen.searchTextField.isEditable = false;
+            this.homeScreen.searchTextField.setBounds(0, Screen.formHeight - (TextRenderer.fontHeight << 1) + 8, Screen.e - 1, TextRenderer.fontHeight + 6);
+            this.homeScreen.searchTextField.actionPrimary = new UIAction(TextConstant.exit(), new thien_cf(this));
+            this.homeScreen.searchTextField.actionTertiary = new UIAction(TextConstant.send(), new thien_cg(this));
         } else {
-            this.homeScreen.F.setText("");
+            this.homeScreen.searchTextField.setText("");
         }
-        this.homeScreen.addControl(this.homeScreen.F);
-        this.homeScreen.selectControl(this.homeScreen.F);
+        this.homeScreen.addControl(this.homeScreen.searchTextField);
+        this.homeScreen.selectControl(this.homeScreen.searchTextField);
     }
 }

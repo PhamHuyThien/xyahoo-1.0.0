@@ -1,19 +1,19 @@
 package home.thienph.xyahoo.managers;
 
-import home.thienph.xyahoo.actions.thien_r;
-import home.thienph.xyahoo.actions.thien_s;
+import home.thienph.xyahoo.data.data.ContactEntry;
+import home.thienph.xyahoo.data.data.ContactDataSource;
 import home.thienph.xyahoo.data.data.TableInfo;
 
 public interface IGameManager {
     public void saveServerConfig(String[] var1, int[] var2);
 
-    public void setBuddyListData(thien_s var1, int var2);
+    public void setBuddyListData(ContactDataSource var1, int var2);
 
     public void a(String var1, String var2, int[] var3, byte var4, String var5, int var6, byte var7, byte var8, byte var9, byte var10, int var11, int var12, String var13, int var14);
 
     public void updateMultipleBuddyStatus(String[] var1, int[] var2, String[] var3);
 
-    public void setYahooBuddyList(thien_s var1);
+    public void setYahooBuddyList(ContactDataSource var1);
 
     public void wrongCredentials();
 
@@ -55,7 +55,7 @@ public interface IGameManager {
 
     public void handleMultipleUsersJoinedConference(String var1, String[] var2);
 
-    public void addFriendToGroup(int var1, thien_r var2, String var3);
+    public void addFriendToGroup(int var1, ContactEntry var2, String var3);
 
     public void tuChoiKetBan(String var1);
 
@@ -139,5 +139,5 @@ public interface IGameManager {
 
     public void showGameTables(String var1, TableInfo[] var2, int var3, String var4);
 
-    public void setCachedBuddyList(thien_s var1);
+    public void setCachedBuddyList(ContactDataSource var1);
 }

@@ -1,5 +1,6 @@
 package home.thienph.xyahoo.components;
 
+import home.thienph.xyahoo.data.data.UIAction;
 import home.thienph.xyahoo.screens.Screen;
 
 import javax.microedition.lcdui.Graphics;

@@ -3,17 +3,18 @@ package home.thienph.xyahoo.actions;
 import home.thienph.xyahoo.managers.GameManager;
 import home.thienph.xyahoo.screens.ChatRoomScreen;
 
-public final class thien_fb
+public final class CopyAction
 implements IAction {
     private ChatRoomScreen chatRoomScreen;
 
-    public thien_fb(ChatRoomScreen chatRoomScreen2) {
+    public CopyAction(ChatRoomScreen chatRoomScreen2) {
         this.chatRoomScreen = chatRoomScreen2;
     }
 
     public final void action() {
-        if (!GameManager.statusMessage.equals("")) {
-            this.chatRoomScreen.A.insertText(GameManager.statusMessage);
+        String string = this.chatRoomScreen.messageList.getSelectedMessage();
+        if (!string.equals("")) {
+            GameManager.statusMessage = string;
         }
     }
 }

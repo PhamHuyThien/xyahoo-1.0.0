@@ -3,7 +3,9 @@ package home.thienph.xyahoo.screens;
 import home.thienph.xyahoo.actions.*;
 import home.thienph.xyahoo.components.*;
 import home.thienph.xyahoo.constants.TextConstant;
+import home.thienph.xyahoo.data.data.ContactDataSource;
 import home.thienph.xyahoo.data.data.PopupSideElementData;
+import home.thienph.xyahoo.data.data.UIAction;
 import home.thienph.xyahoo.managers.GameManager;
 import home.thienph.xyahoo.managers.MessageHandler;
 import home.thienph.xyahoo.main.*;
@@ -16,7 +18,7 @@ import javax.microedition.lcdui.Image;
 
 public final class LoginYahooScreen
 extends Screen {
-    public UIBuddyListControl w;
+    public BuddyListControl w;
     public static String x;
     public static String y;
     public static int z;
@@ -28,12 +30,12 @@ extends Screen {
     public PopupSideElementData B;
     private TextField H;
     public boolean C;
-    private thien_ai I;
+    private UITextLabel I;
     private TextField J;
-    private thien_ai K;
+    private UITextLabel K;
     private TextField L;
     private UICheckBox M;
-    private thien_ai N;
+    private UITextLabel N;
     private UIDropdown O;
     private int P;
     private int Q;
@@ -49,17 +51,17 @@ extends Screen {
         String string = Xuka.d();
         String string2 = Xuka.e();
         this.title = "Yahoo!";
-        int n = HomeScreen.instance.menuHome.images[0].getHeight();
-        this.P = Screen.e - HomeScreen.instance.menuHome.images[0].getWidth() >> 1;
+        int n = HomeScreen.instance.homeGridMenu.images[0].getHeight();
+        this.P = Screen.e - HomeScreen.instance.homeGridMenu.images[0].getWidth() >> 1;
         int n2 = (TextRenderer.fontHeight + 6 << 2) + 28 + n + 5;
         this.Q = n2 <= Screen.formHeight - GameManager.topMargin ? GameManager.headerHeight - 10 + (Screen.formHeight - GameManager.topMargin - n2 >> 1) : GameManager.headerHeight + 5;
         n = this.Q + n - 3;
-        this.I = new thien_ai("Yahoo! ID:", FormScreen.formXOffset, n, TextRenderer.fontHeight);
+        this.I = new UITextLabel("Yahoo! ID:", FormScreen.formXOffset, n, TextRenderer.fontHeight);
         this.I.width = FormScreen.formMarginLeft;
         this.J = new TextField();
         this.J.setBounds(FormScreen.formStartX, n, FormScreen.formWidth, TextRenderer.fontHeight + 6);
         this.J.setInputType(0);
-        this.K = new thien_ai(String.valueOf(TextConstant.password()) + ":", FormScreen.formXOffset, n += this.J.height + 7, TextRenderer.fontHeight);
+        this.K = new UITextLabel(String.valueOf(TextConstant.password()) + ":", FormScreen.formXOffset, n += this.J.height + 7, TextRenderer.fontHeight);
         this.K.width = FormScreen.formMarginLeft;
         this.L = new TextField();
         this.L.setBounds(FormScreen.formStartX, n, FormScreen.formWidth, TextRenderer.fontHeight + 6);
@@ -69,18 +71,18 @@ extends Screen {
         this.J.lineSpacing = -5;
         this.L.setText(string2);
         this.L.lineSpacing = -5;
-        this.N = new thien_ai("Domain:", FormScreen.formXOffset, n += this.L.height + 7, TextRenderer.fontHeight);
+        this.N = new UITextLabel("Domain:", FormScreen.formXOffset, n += this.L.height + 7, TextRenderer.fontHeight);
         this.N.width = FormScreen.formMarginLeft;
         this.O = new UIDropdown(new String[]{"@yahoo", "@ymail", "@rocketmail"}, FormScreen.formStartX, n, FormScreen.formWidth, TextRenderer.fontHeight + 6);
-        this.O.c(Xuka.readDomainYahoo());
+        this.O.setSelectedIndex(Xuka.readDomainYahoo());
         int n3 = Screen.e - (TextRenderer.computeTextWidth(TextConstant.invisible(), TextRenderer.charWidth) + 13 + 4) >> 1;
         this.M = new UICheckBox(TextConstant.invisible(), n3, n += 6 + this.O.height, TextRenderer.computeTextWidth(TextConstant.invisible(), TextRenderer.charWidth) + 13 + 4, TextRenderer.fontHeight + 4);
-        this.M.a = Xuka.readFlag("statusYahoo", false);
+        this.M.isChecked = Xuka.readFlag("statusYahoo", false);
         int cfr_ignored_0 = this.M.height;
         this.H = new TextField();
         this.H.isShiftMode = true;
         this.H.setBounds(0, Screen.formHeight - GameManager.topMargin - TextRenderer.fontHeight - 11, Screen.e - 6, TextRenderer.fontHeight + 6);
-        this.w = new UIBuddyListControl(1, 1, Screen.e - 3, Screen.formHeight - 2 - GameManager.topMargin, true);
+        this.w = new BuddyListControl(1, 1, Screen.e - 3, Screen.formHeight - 2 - GameManager.topMargin, true);
         this.addControl(this.w);
         this.selectControl(this.w);
         this.w.isAutoChatEnabled = true;
@@ -147,7 +149,7 @@ extends Screen {
 
     public final void drawBackground(Graphics graphics) {
         if (!this.F) {
-            graphics.drawImage(HomeScreen.instance.menuHome.images[0], this.P, this.Q, 0);
+            graphics.drawImage(HomeScreen.instance.homeGridMenu.images[0], this.P, this.Q, 0);
         }
         super.drawBackground(graphics);
     }
@@ -166,25 +168,25 @@ extends Screen {
         }
         x = string;
         y = string;
-        z = this.M.a ? 12 : 0;
-        D = this.M.a;
+        z = this.M.isChecked ? 12 : 0;
+        D = this.M.isChecked;
         String string3 = Xuka.readCustomStr(x, true);
         A = string3 == null ? "" : string3;
         Xuka.saveYahooID(string);
         Xuka.saveYahooPW(string2);
-        int n = this.O.a();
-        Xuka.saveDomainYahoo(this.O.a());
+        int n = this.O.getSelectedIndex();
+        Xuka.saveDomainYahoo(this.O.getSelectedIndex());
         if (n == 1 || n == 2) {
-            x = String.valueOf(x) + this.O.b() + ".com";
+            x = String.valueOf(x) + this.O.getSelectedItem() + ".com";
         }
         this.w.isLoading = true;
         this.a(true);
         LoginYahooScreen loginYahooScreen2 = this;
         this.U = GameManager.getChecksumValue(true);
         if (loginYahooScreen2.U != -1) {
-            thien_s thien_s2 = GameManager.loadBuddyList(true, x);
-            if (thien_s2 != null) {
-                GameManager.instance.loginYahooScreen.w.a(thien_s2, -1);
+            ContactDataSource contactDataSource2 = GameManager.loadBuddyList(true, x);
+            if (contactDataSource2 != null) {
+                GameManager.instance.loginYahooScreen.w.setDataSource(contactDataSource2, -1);
             } else {
                 loginYahooScreen2.U = -1;
             }
@@ -201,11 +203,11 @@ extends Screen {
     }
 
     public final void g() {
-        if (this.w.visibleItems != null) {
-            this.w.visibleItems.removeAllElements();
+        if (this.w.displayItems != null) {
+            this.w.displayItems.removeAllElements();
         }
-        this.w.visibleItems = null;
-        this.w.buddyDataModel = null;
+        this.w.displayItems = null;
+        this.w.contactDataSource = null;
     }
 
     private void i() {
@@ -243,7 +245,7 @@ extends Screen {
                 this.i();
             }
             if (!this.H.getText().equals(object)) {
-                this.w.d(this.H.getText());
+                this.w.setSearchFilter(this.H.getText());
             }
         }
         return bl;
@@ -269,14 +271,14 @@ extends Screen {
             loginYahooScreen2.V.title = TextConstant.status();
             FormScreen cfr_ignored_0 = loginYahooScreen2.V;
             FormScreen.calculateFormDimensions(70, 150);
-            loginYahooScreen2.V.x += 20;
+            loginYahooScreen2.V.currentY += 20;
             loginYahooScreen2.W = UIFormBuilder.addDropdown(loginYahooScreen2.V, TextConstant.status(), new String[]{TextConstant.available(), TextConstant.invisible2()});
             loginYahooScreen2.X = UIFormBuilder.addTextFieldWithLabel(loginYahooScreen2.V, TextConstant.statusMessage(), 0, -1);
             loginYahooScreen2.V.selectControl(loginYahooScreen2.W);
             loginYahooScreen2.V.centerCommand = new UIAction("OK", new thien_gt(loginYahooScreen2));
             loginYahooScreen2.V.leftCommand = new UIAction(TextConstant.cancel(), new thien_gu(loginYahooScreen2));
         }
-        loginYahooScreen2.W.c(z == 0 ? 0 : 1);
+        loginYahooScreen2.W.setSelectedIndex(z == 0 ? 0 : 1);
         GameManager.getInstance().showScreen(loginYahooScreen2.V);
         loginYahooScreen2.X.setText(A);
         GameManager.getInstance().goToLastScreen();

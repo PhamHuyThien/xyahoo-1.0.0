@@ -1,6 +1,10 @@
 package home.thienph.xyahoo.components;
 
 import home.thienph.xyahoo.actions.*;
+import home.thienph.xyahoo.data.data.ContactDataSource;
+import home.thienph.xyahoo.data.data.ContactEntry;
+import home.thienph.xyahoo.data.data.ContactGroup;
+import home.thienph.xyahoo.data.data.UIAction;
 import home.thienph.xyahoo.main.GameCanvas;
 import home.thienph.xyahoo.constants.TextConstant;
 import home.thienph.xyahoo.utils.TextRenderer;
@@ -10,130 +14,130 @@ import javax.microedition.lcdui.Graphics;
 
 public final class ContactListUI
 extends UIControlBase {
-    private int e;
-    private int f;
-    private int g;
-    private int h;
-    private int i;
-    private int j;
-    private int k;
-    private int l;
-    public int a;
-    public UIAction b;
-    private UIAction m;
-    private int n;
-    private thien_s B;
-    public Vector c;
-    private thien_u C;
-    public IAction d;
-    private int D;
-    private int E;
-    private int F;
-    private int G;
-    private int H;
-    private int I;
-    private int J;
-    private int K;
-    private boolean L;
-    private int M;
-    private int N;
+    private int targetScrollY;
+    private int scrollVelocity;
+    private int scrollAcceleration;
+    private int currentScrollY;
+    private int maxScrollY;
+    private int itemHeight;
+    private int topVisibleIndex;
+    private int visibleItemCount;
+    public int selectedIndex2;
+    public UIAction selectAction;
+    private UIAction groupAction;
+    private int displayMode; //, chế độ hiển thị (0=normal, 1=expanded)
+    private ContactDataSource dataSource;
+    public Vector displayItems;
+    private DisplayItem selectedItem;
+    public IAction itemSelectCallback;
+    private int textAreaWidth;
+    private int leftMargin;
+    private int iconAreaWidth;
+    private int expandedHeight;
+    private int centerX;
+    private int totalItems;
+    private int itemSpacing;
+    private int halfWidth;
+    private boolean isDragging;
+    private int lastDragX;
+    private int lastDragY;
 
-    public final void a(thien_s thien_s2, int n) {
-        this.B = thien_s2;
-        this.a = 0;
-        this.a();
+    public final void setDataSource(ContactDataSource contactDataSource2, int n) {
+        this.dataSource = contactDataSource2;
+        this.selectedIndex2 = 0;
+        this.rebuildDisplayList();
         this.handleFocus();
     }
 
-    public ContactListUI(int n, int n2, int n3, int n4, int n5) {
+    public ContactListUI(int displayMode, int n2, int n3, int n4, int n5) {
         super(1, 1, n3, n4, true);
         new Vector();
-        this.b = new UIAction(TextConstant.select(), null);
-        this.m = new UIAction("", null);
+        this.selectAction = new UIAction(TextConstant.select(), null);
+        this.groupAction = new UIAction("", null);
         (new String[1])[0] = TextConstant.pleaseWait();
         System.currentTimeMillis();
-        this.n = 0;
+        this.displayMode = 0;
         this.isEnabled = true;
-        this.j = TextRenderer.fontHeight + 3;
-        if (this.j < UIBuddyListControl.statusIcons[0].getHeight()) {
-            this.j = UIBuddyListControl.statusIcons[0].getHeight();
+        this.itemHeight = TextRenderer.fontHeight + 3;
+        if (this.itemHeight < BuddyListControl.statusIcons[0].getHeight()) {
+            this.itemHeight = BuddyListControl.statusIcons[0].getHeight();
         }
-        this.D = n3 - 51;
-        this.E = 1;
-        this.F = 50;
-        this.G = 120;
-        this.K = n3 / 2;
+        this.textAreaWidth = n3 - 51;
+        this.leftMargin = 1;
+        this.iconAreaWidth = 50;
+        this.expandedHeight = 120;
+        this.halfWidth = n3 / 2;
     }
 
-    private void a() {
-        this.c = new Vector();
-        if (this.B == null || this.B.a == null || this.B.a.size() == 0) {
-            this.k = 0;
-            this.l = 0;
-            this.i = 0;
+    private void rebuildDisplayList() {
+        this.displayItems = new Vector();
+        if (this.dataSource == null || this.dataSource.groups == null || this.dataSource.groups.size() == 0) {
+            this.topVisibleIndex = 0;
+            this.visibleItemCount = 0;
+            this.maxScrollY = 0;
             return;
         }
-        Vector vector = this.B.a;
+        Vector vector = this.dataSource.groups;
         int n = vector.size();
         boolean bl = false;
         int n2 = 0;
         while (n2 < n) {
             block12: {
                 Object object;
-                thien_t thien_t2;
+                ContactGroup contactGroup2;
                 block11: {
-                    thien_t2 = (thien_t)vector.elementAt(n2);
-                    object = new thien_u();
-                    new thien_u().d = thien_t2.a();
-                    if (((thien_u)object).d == null || ((thien_u)object).d.length() <= 0) break block11;
-                    ((thien_u)object).a = 1;
-                    ((thien_u)object).g = thien_t2.b();
-                    this.c.addElement(object);
-                    if (((thien_u)object).g == 1) break block12;
+                    contactGroup2 = (ContactGroup)vector.elementAt(n2);
+                    object = new DisplayItem();
+                    new DisplayItem().displayName = contactGroup2.getGroupName();
+                    if (((DisplayItem)object).displayName == null || ((DisplayItem)object).displayName.length() <= 0) break block11;
+                    ((DisplayItem)object).itemType = 1;
+                    ((DisplayItem)object).statusCode = contactGroup2.getGroupStatus();
+                    this.displayItems.addElement(object);
+                    if (((DisplayItem)object).statusCode == 1) break block12;
                 }
-                object = thien_t2.a;
+                object = contactGroup2.contacts;
                 int n3 = ((Vector)object).size();
                 int n4 = 0;
                 while (n4 < n3) {
-                    thien_r thien_r2 = (thien_r)((Vector)object).elementAt(n4);
-                    thien_u thien_u2 = new thien_u();
-                    new thien_u().j = thien_r2.f;
-                    thien_u2.d = thien_r2.a;
-                    thien_u2.g = thien_r2.c;
-                    thien_u2.e = thien_r2.b;
-                    thien_u2.b = thien_r2.a();
-                    thien_u2.c = thien_r2.j;
-                    thien_u2.c = new Integer(thien_r2.a());
-                    thien_u2.h = thien_r2.e;
-                    thien_u2.f = thien_r2.d;
-                    thien_u2.i = thien_r2;
-                    this.c.addElement(thien_u2);
+                    ContactEntry contactEntry2 = (ContactEntry)((Vector)object).elementAt(n4);
+                    DisplayItem displayItem2 = new DisplayItem();
+                    new DisplayItem().additionalData = contactEntry2.permissions;
+                    displayItem2.displayName = contactEntry2.contactId;
+                    displayItem2.statusCode = contactEntry2.statusCode;
+                    displayItem2.statusText = contactEntry2.displayName;
+                    displayItem2.textColor = contactEntry2.getTextColor();
+                    displayItem2.fontRenderer = contactEntry2.colorObject;
+                    displayItem2.fontRenderer = new Integer(contactEntry2.getTextColor());
+                    displayItem2.isSelected = contactEntry2.isOnline;
+                    displayItem2.detailText = contactEntry2.statusMessage;
+                    displayItem2.sourceEntry = contactEntry2;
+                    this.displayItems.addElement(displayItem2);
                     ++n4;
                 }
             }
             ++n2;
         }
-        if (this.a < 0) {
-            this.a = 0;
+        if (this.selectedIndex2 < 0) {
+            this.selectedIndex2 = 0;
         }
-        if (this.a >= this.c.size()) {
-            this.a = this.c.size() - 1;
+        if (this.selectedIndex2 >= this.displayItems.size()) {
+            this.selectedIndex2 = this.displayItems.size() - 1;
         }
-        this.l = this.height / this.j + 1;
-        this.i = this.c.size() * this.j - this.height + 3 + this.j;
-        this.e = this.a * this.j - (this.height >> 1);
-        this.k = this.a - (this.l >> 1);
-        if (this.c.size() - this.a < this.l >> 1) {
-            this.k = this.c.size() - this.l;
+        this.visibleItemCount = this.height / this.itemHeight + 1;
+        this.maxScrollY = this.displayItems.size() * this.itemHeight - this.height + 3 + this.itemHeight;
+        this.targetScrollY = this.selectedIndex2 * this.itemHeight - (this.height >> 1);
+        this.topVisibleIndex = this.selectedIndex2 - (this.visibleItemCount >> 1);
+        if (this.displayItems.size() - this.selectedIndex2 < this.visibleItemCount >> 1) {
+            this.topVisibleIndex = this.displayItems.size() - this.visibleItemCount;
         }
-        if (this.k < 0) {
-            this.k = 0;
+        if (this.topVisibleIndex < 0) {
+            this.topVisibleIndex = 0;
         }
-        if (((thien_u)this.c.elementAt((int)this.a)).a == 1) {
-            this.actionTertiary = this.m;
+        if (((DisplayItem)this.displayItems.elementAt((int)this.selectedIndex2)).itemType == 1) {
+            this.actionTertiary = this.groupAction;
             return;
         }
-        this.actionTertiary = this.b;
+        this.actionTertiary = this.selectAction;
     }
 
     public final boolean handleSoftKey(int n) {
@@ -145,32 +149,32 @@ extends UIControlBase {
     }
 
     public final boolean handleKeyInput(int n) {
-        if (this.c == null || this.c.size() == 0) {
+        if (this.displayItems == null || this.displayItems.size() == 0) {
             return true;
         }
         if (n == 12) {
             System.currentTimeMillis();
-            --this.a;
-            if (this.a < 0) {
-                this.a = this.c.size() - 1;
+            --this.selectedIndex2;
+            if (this.selectedIndex2 < 0) {
+                this.selectedIndex2 = this.displayItems.size() - 1;
             }
         }
         if (n == 13) {
             System.currentTimeMillis();
-            ++this.a;
-            if (this.a >= this.c.size()) {
-                this.a = 0;
+            ++this.selectedIndex2;
+            if (this.selectedIndex2 >= this.displayItems.size()) {
+                this.selectedIndex2 = 0;
             }
         }
         if (n == 12 || n == 13) {
-            this.actionTertiary = ((thien_u)this.c.elementAt((int)this.a)).a == 1 ? this.m : this.b;
-            this.e = this.a * this.j - (this.height >> 1);
-            this.k = this.a - (this.l >> 1);
-            if (this.c.size() - this.a < this.l >> 1) {
-                this.k = this.c.size() - this.l;
+            this.actionTertiary = ((DisplayItem)this.displayItems.elementAt((int)this.selectedIndex2)).itemType == 1 ? this.groupAction : this.selectAction;
+            this.targetScrollY = this.selectedIndex2 * this.itemHeight - (this.height >> 1);
+            this.topVisibleIndex = this.selectedIndex2 - (this.visibleItemCount >> 1);
+            if (this.displayItems.size() - this.selectedIndex2 < this.visibleItemCount >> 1) {
+                this.topVisibleIndex = this.displayItems.size() - this.visibleItemCount;
             }
-            if (this.k < 0) {
-                this.k = 0;
+            if (this.topVisibleIndex < 0) {
+                this.topVisibleIndex = 0;
             }
             GameCanvas.resetKeys();
             if (thien_ar.a) {
@@ -178,88 +182,88 @@ extends UIControlBase {
             }
         }
         if (n == 16) {
-            this.b();
+            this.executeSelectedAction();
             GameCanvas.resetKeys();
         }
         return true;
     }
 
-    private void b() {
-        if (this.a == -1) {
+    private void executeSelectedAction() {
+        if (this.selectedIndex2 == -1) {
             return;
         }
-        this.C = (thien_u)this.c.elementAt(this.a);
-        if (this.C.a == 0) {
-            if (this.d != null) {
-                this.d.action();
+        this.selectedItem = (DisplayItem)this.displayItems.elementAt(this.selectedIndex2);
+        if (this.selectedItem.itemType == 0) {
+            if (this.itemSelectCallback != null) {
+                this.itemSelectCallback.action();
                 return;
             }
         } else {
-            if (this.C.g == 0) {
-                this.B.a(this.C.d, 1);
+            if (this.selectedItem.statusCode == 0) {
+                this.dataSource.setGroupStatus(this.selectedItem.displayName, 1);
             } else {
-                this.B.a(this.C.d, 0);
+                this.dataSource.setGroupStatus(this.selectedItem.displayName, 0);
             }
-            this.a();
+            this.rebuildDisplayList();
         }
     }
 
     public final void draw(Graphics graphics) {
-        this.H = this.width >> 1;
+        this.centerX = this.width >> 1;
         graphics.setClip(this.baseX, this.baseY, this.width + 1, this.height);
         graphics.translate(2, 2);
-        graphics.translate(0, -this.h);
-        int n = this.k * this.j;
-        this.H = this.k + this.l;
-        this.I = this.c.size();
-        this.J = this.j + 2;
+        graphics.translate(0, -this.currentScrollY);
+        int n = this.topVisibleIndex * this.itemHeight;
+        this.centerX = this.topVisibleIndex + this.visibleItemCount;
+        this.totalItems = this.displayItems.size();
+        this.itemSpacing = this.itemHeight + 2;
         int n2 = 0;
         int n3 = this.width - 3;
-        int n4 = this.k;
-        while (n4 <= this.H) {
+        int n4 = this.topVisibleIndex;
+        while (n4 <= this.centerX) {
             String string;
             int n5;
-            if (n4 >= this.I) break;
-            thien_u thien_u2 = (thien_u)this.c.elementAt(n4);
-            n2 = this.j;
-            if (n4 == this.a) {
-                if (this.n == 1 && thien_u2.a == 0 && !thien_u2.e.equals("")) {
+            if (n4 >= this.totalItems) break;
+            DisplayItem displayItem2 = (DisplayItem)this.displayItems.elementAt(n4);
+            n2 = this.itemHeight;
+            if (n4 == this.selectedIndex2) {
+                if (this.displayMode == 1 && displayItem2.itemType == 0 && !displayItem2.statusText.equals("")) {
                     n2 <<= 1;
                 }
                 graphics.setColor(2580);
                 graphics.fillRect(1, n + 1, n3, n2);
                 graphics.setColor(9478569);
                 graphics.drawRoundRect(0, n + 1, n3 + 1, n2, 5, 5);
-                if (n2 > this.j && thien_u2.f != null) {
+                if (n2 > this.itemHeight && displayItem2.detailText != null) {
                     graphics.setColor(3981823);
-                    TextRenderer.getFontRenderer(TextRenderer.colorHighlight).drawText(thien_u2.f, 22, n + this.J, graphics);
+                    TextRenderer.getFontRenderer(TextRenderer.colorHighlight).drawText(displayItem2.detailText, 22, n + this.itemSpacing, graphics);
                 }
             }
             graphics.setColor(0);
-            if (thien_u2.a == 1) {
+            if (displayItem2.itemType == 1) {
                 n5 = 18;
-                graphics.drawImage(UIBuddyListControl.groupIcons[thien_u2.g], 9, n + (this.j >> 1) + 1, 3);
+                graphics.drawImage(BuddyListControl.groupIcons[displayItem2.statusCode], 9, n + (this.itemHeight >> 1) + 1, 3);
             } else {
                 n5 = 22;
-                graphics.drawImage(UIBuddyListControl.statusIcons[thien_u2.g], 11, n + (this.j >> 1) + 2, 3);
+                graphics.drawImage(BuddyListControl.statusIcons[displayItem2.statusCode], 11, n + (this.itemHeight >> 1) + 2, 3);
             }
-            if (thien_u2.a == 1) {
-                string = thien_u2.d;
+            if (displayItem2.itemType == 1) {
+                string = displayItem2.displayName;
                 string = TextRenderer.wrapText(string, this.width - 26, TextRenderer.charWidth);
                 graphics.setColor(16726823);
                 TextRenderer.getFontRenderer(TextRenderer.colorPrimary).drawText(string, n5, n + 2, graphics);
             } else {
-                string = thien_u2.e;
+                string = displayItem2.statusText;
                 if (string != null) {
                     string = TextRenderer.wrapText(string, this.width - 26, TextRenderer.charWidth);
-                    graphics.setColor(thien_u2.b);
-                    TextRenderer.getFontRenderer(thien_u2.c).drawText(string, n5, n + 3, graphics);
+                    graphics.setColor(displayItem2.textColor);
+                    TextRenderer.getFontRenderer(displayItem2.fontRenderer).drawText(string, n5, n + 3, graphics);
                 }
             }
             n += n2;
             ++n4;
         }
-        graphics.translate(0, this.h);
+        graphics.translate(0, this.currentScrollY);
         graphics.translate(-graphics.getTranslateX(), -graphics.getTranslateY());
         graphics.setClip(-1000, -1000, 2000, 2000);
     }
@@ -269,31 +273,31 @@ extends UIControlBase {
 
     public final void update() {
         ContactListUI contactListUI2 = this;
-        if (contactListUI2.h != contactListUI2.e) {
-            contactListUI2.f = contactListUI2.e - contactListUI2.h << 2;
-            contactListUI2.g += contactListUI2.f;
-            contactListUI2.h += contactListUI2.g >> 4;
-            contactListUI2.g &= 0xF;
-            if (contactListUI2.h > contactListUI2.i) {
-                contactListUI2.h = contactListUI2.i;
+        if (contactListUI2.currentScrollY != contactListUI2.targetScrollY) {
+            contactListUI2.scrollVelocity = contactListUI2.targetScrollY - contactListUI2.currentScrollY << 2;
+            contactListUI2.scrollAcceleration += contactListUI2.scrollVelocity;
+            contactListUI2.currentScrollY += contactListUI2.scrollAcceleration >> 4;
+            contactListUI2.scrollAcceleration &= 0xF;
+            if (contactListUI2.currentScrollY > contactListUI2.maxScrollY) {
+                contactListUI2.currentScrollY = contactListUI2.maxScrollY;
             }
-            if (contactListUI2.h < 0) {
-                contactListUI2.h = 0;
+            if (contactListUI2.currentScrollY < 0) {
+                contactListUI2.currentScrollY = 0;
             }
-            contactListUI2.k = contactListUI2.h / contactListUI2.j - 1;
-            if (contactListUI2.k < 0) {
-                contactListUI2.k = 0;
+            contactListUI2.topVisibleIndex = contactListUI2.currentScrollY / contactListUI2.itemHeight - 1;
+            if (contactListUI2.topVisibleIndex < 0) {
+                contactListUI2.topVisibleIndex = 0;
             }
         }
     }
 
     public final void handleFocus() {
-        if (this.c == null) {
+        if (this.displayItems == null) {
             return;
         }
-        if (this.baseY + this.c.size() * this.j >= this.height) {
+        if (this.baseY + this.displayItems.size() * this.itemHeight >= this.height) {
             thien_ar.a = true;
-            thien_ar.a(this.c.size());
+            thien_ar.a(this.displayItems.size());
             return;
         }
         thien_ar.a = false;
@@ -301,53 +305,53 @@ extends UIControlBase {
 
     public final void drawScrollbar(Graphics graphics) {
         if (thien_ar.a) {
-            thien_ar.a(graphics, this.a);
+            thien_ar.a(graphics, this.selectedIndex2);
         }
     }
 
     public final void onDrag(int n, int n2) {
-        this.M = n;
-        this.N = n2;
+        this.lastDragX = n;
+        this.lastDragY = n2;
     }
 
     public final void handleKeyPress(int n, int n2) {
-        if (this.L) {
-            this.L = false;
-            this.e -= (n2 - this.N) * 5;
-            if (this.e < 0) {
-                this.e = 0;
-            } else if (this.e > this.i) {
-                this.e = this.i;
+        if (this.isDragging) {
+            this.isDragging = false;
+            this.targetScrollY -= (n2 - this.lastDragY) * 5;
+            if (this.targetScrollY < 0) {
+                this.targetScrollY = 0;
+            } else if (this.targetScrollY > this.maxScrollY) {
+                this.targetScrollY = this.maxScrollY;
             }
         } else {
-            n = (n2 + this.h) / this.j;
+            n = (n2 + this.currentScrollY) / this.itemHeight;
             if (n < 0) {
                 n = 0;
             }
-            if (n > this.c.size() - 1) {
-                n = this.c.size() - 1;
+            if (n > this.displayItems.size() - 1) {
+                n = this.displayItems.size() - 1;
             }
             if (n < 0) {
                 return;
             }
-            if (this.a == n) {
-                this.b();
+            if (this.selectedIndex2 == n) {
+                this.executeSelectedAction();
                 return;
             }
-            if (this.a > n) {
-                this.a = n;
-            } else if (this.n == 0) {
-                this.a = n;
+            if (this.selectedIndex2 > n) {
+                this.selectedIndex2 = n;
+            } else if (this.displayMode == 0) {
+                this.selectedIndex2 = n;
             } else {
-                thien_u thien_u2 = (thien_u)this.c.elementAt(this.a);
-                if (thien_u2.e == null || thien_u2.e.equals("")) {
-                    this.a = n;
+                DisplayItem displayItem2 = (DisplayItem)this.displayItems.elementAt(this.selectedIndex2);
+                if (displayItem2.statusText == null || displayItem2.statusText.equals("")) {
+                    this.selectedIndex2 = n;
                 } else {
-                    if (this.a == n - 1) {
-                        this.b();
+                    if (this.selectedIndex2 == n - 1) {
+                        this.executeSelectedAction();
                         return;
                     }
-                    this.a = n - 1;
+                    this.selectedIndex2 = n - 1;
                 }
             }
         }
@@ -357,21 +361,21 @@ extends UIControlBase {
     }
 
     public final void handlePointerRelease(int n, int n2) {
-        if (UIBuddyListControl.c(n - this.M) > 1 || UIBuddyListControl.c(n2 - this.N) > 1) {
-            this.L = true;
-            this.e -= n2 - this.N;
-            if (this.e < 0) {
-                this.e = 0;
-            } else if (this.e > this.i) {
-                this.e = this.i;
+        if (BuddyListControl.absoluteValue(n - this.lastDragX) > 1 || BuddyListControl.absoluteValue(n2 - this.lastDragY) > 1) {
+            this.isDragging = true;
+            this.targetScrollY -= n2 - this.lastDragY;
+            if (this.targetScrollY < 0) {
+                this.targetScrollY = 0;
+            } else if (this.targetScrollY > this.maxScrollY) {
+                this.targetScrollY = this.maxScrollY;
             }
-            this.h = this.e;
-            this.k = this.h / this.j - 1;
-            if (this.k < 0) {
-                this.k = 0;
+            this.currentScrollY = this.targetScrollY;
+            this.topVisibleIndex = this.currentScrollY / this.itemHeight - 1;
+            if (this.topVisibleIndex < 0) {
+                this.topVisibleIndex = 0;
             }
-            this.M = n;
-            this.N = n2;
+            this.lastDragX = n;
+            this.lastDragY = n2;
         }
         if (thien_ar.a) {
             thien_ar.a(true);

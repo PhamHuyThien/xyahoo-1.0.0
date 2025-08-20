@@ -19,7 +19,7 @@ implements IAction {
 
     public final void action() {
         MessageHandler.a(this.b, true, "", this.c);
-        this.gameManager.a(this.b, (String[])null, this.d);
+        this.gameManager.createOrJoinConference(this.b, (String[])null, this.d);
         this.gameManager.closeTopDialog();
     }
 }

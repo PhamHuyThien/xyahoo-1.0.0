@@ -503,7 +503,7 @@ public final class GameBoardControl extends UIControlBase
             final int z = this.currentX;
             final int aa = this.currentY;
             Label_0155: {
-                if (UIBuddyListControl.c(this.targetX - this.currentX) > UIBuddyListControl.c(this.deltaX)) {
+                if (BuddyListControl.absoluteValue(this.targetX - this.currentX) > BuddyListControl.absoluteValue(this.deltaX)) {
                     this.currentX += this.deltaX;
                     if (this.currentX != z) {
                         break Label_0155;
@@ -512,7 +512,7 @@ public final class GameBoardControl extends UIControlBase
                 this.currentX = this.targetX;
             }
             Label_0206: {
-                if (UIBuddyListControl.c(this.targetY - this.currentY) > UIBuddyListControl.c(this.deltaY)) {
+                if (BuddyListControl.absoluteValue(this.targetY - this.currentY) > BuddyListControl.absoluteValue(this.deltaY)) {
                     this.currentY += this.deltaY;
                     if (this.currentY != aa) {
                         break Label_0206;

@@ -78,7 +78,7 @@ public final class GamePlayer extends UIControlBase
         this.playerBalance = playerBalance;
         this.position = (byte) emoteTime;
         if (this.cardCount == -1) {
-            final Image[] a2 = UIBuddyListControl.statusIcons;
+            final Image[] a2 = BuddyListControl.statusIcons;
         }
         final int n2 = Screen.formHeight - GameManager.headerHeight - 40 - ((32 > TextRenderer.fontHeight << 1) ? 32 : (TextRenderer.fontHeight << 1)) - 5;
         if (emoteTime % 2 == 0) {

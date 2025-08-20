@@ -4,6 +4,7 @@ import home.thienph.xyahoo.actions.*;
 import home.thienph.xyahoo.components.*;
 import home.thienph.xyahoo.constants.TextConstant;
 import home.thienph.xyahoo.data.data.PopupSideElementData;
+import home.thienph.xyahoo.data.data.UIAction;
 import home.thienph.xyahoo.managers.GameManager;
 import home.thienph.xyahoo.managers.MessageHandler;
 import home.thienph.xyahoo.main.*;
@@ -48,24 +49,24 @@ public final class LoginScreen extends FormScreen
         final String c = Xuka.c();
         super.title = " X Yahoo! ";
         FormScreen.calculateFormDimensions(70, 150);
-        super.x = Screen.formHeight - (TextRenderer.extraSpacing * 3 + TextRendererHelper.defaultFontSize + ((GameCanvas.screenHeight > 170) ? 55 : 20) + GameManager.topMargin) >> 1;
+        super.currentY = Screen.formHeight - (TextRenderer.extraSpacing * 3 + TextRendererHelper.defaultFontSize + ((GameCanvas.screenHeight > 170) ? 55 : 20) + GameManager.topMargin) >> 1;
         UIFormBuilder.addImage(this, TextRendererHelper.getLogo(), false);
-        super.x += ((GameCanvas.screenHeight > 170) ? 18 : 7);
+        super.currentY += ((GameCanvas.screenHeight > 170) ? 18 : 7);
         this.usernameField = UIFormBuilder.addTextField(this, "Tên: ", 0, -1);
-        super.x += 5;
+        super.currentY += 5;
         this.passwordField = UIFormBuilder.addTextField(this, String.valueOf(TextConstant.password()) + ":", 2, -1);
         this.usernameField.lineSpacing = -5;
         this.passwordField.lineSpacing = -5;
         if (GameCanvas.screenHeight > 170) {
-            super.x += 10;
-            super.w = FormScreen.formXOffset;
+            super.currentY += 10;
+            super.contentHeight = FormScreen.formXOffset;
             UIFormBuilder.addWrappedLabels(TextConstant.socialNetworkLicenseNo(), this, -1, 16777215, false, false);
         }
         this.selectControl(this.usernameField);
 
         //
         final Vector vectorSupport = new Vector();
-        vectorSupport.addElement(HomeScreen.uiActionInfo);
+        vectorSupport.addElement(HomeScreen.infoAction);
         vectorSupport.addElement(new UIAction(TextConstant.comment(), new CommentAction(this)));
         vectorSupport.addElement(LoginScreen.callButton);
         //
@@ -99,21 +100,21 @@ public final class LoginScreen extends FormScreen
             System.gc();
             (LoginScreen.settingsScreen = new FormScreen()).title = TextConstant.settings();
             final FormScreen k = LoginScreen.settingsScreen;
-            k.x += 20;
+            k.currentY += 20;
             final UIDropdown keyboardSpeed = UIFormBuilder.addDropdown(LoginScreen.settingsScreen, TextConstant.typingSpeed(), new String[] { "1", "2", "3", "4", "5", "6", "7" });
             final UICheckBox checkBoxSound = UIFormBuilder.addCheckBox(LoginScreen.settingsScreen, TextConstant.sound(), (IAction)null);
             final UICheckBox checkBoxVibrate = UIFormBuilder.addCheckBox(LoginScreen.settingsScreen, TextConstant.vibrate(), (IAction)null);
             final UICheckBox checkBoxAutoLogin = UIFormBuilder.addCheckBox(LoginScreen.settingsScreen, TextConstant.autoLogin(), (IAction)null);
             final UICheckBox checkBoxAutoLoginYahoo = UIFormBuilder.addCheckBox(LoginScreen.settingsScreen, String.valueOf(TextConstant.autoLogin()) + " Yahoo!", (IAction)null);
-            final UIButton btnDeleteData = UIFormBuilder.addButton(LoginScreen.settingsScreen, "Xóa dữ liệu cá nhân", 0, new thien_ct(), LoginScreen.settingsScreen.w, LoginScreen.settingsScreen.x + 5, 0);
+            final UIButton btnDeleteData = UIFormBuilder.addButton(LoginScreen.settingsScreen, "Xóa dữ liệu cá nhân", 0, new thien_ct(), LoginScreen.settingsScreen.contentHeight, LoginScreen.settingsScreen.currentY + 5, 0);
             btnDeleteData.baseX = Screen.e - btnDeleteData.width >> 1;
-            checkBoxVibrate.a = GameManager.vibrateEnabled;
-            checkBoxSound.a = !GameManager.soundEnabled;
-            checkBoxAutoLogin.a = GameManager.autoLogin;
-            checkBoxAutoLoginYahoo.a = GameManager.autoLoginYahoo;
-            keyboardSpeed.c(TextField.multiTapSpeedIndex);
+            checkBoxVibrate.isChecked = GameManager.vibrateEnabled;
+            checkBoxSound.isChecked = !GameManager.soundEnabled;
+            checkBoxAutoLogin.isChecked = GameManager.autoLogin;
+            checkBoxAutoLoginYahoo.isChecked = GameManager.autoLoginYahoo;
+            keyboardSpeed.setSelectedIndex(TextField.multiTapSpeedIndex);
             LoginScreen.settingsScreen.selectControl(keyboardSpeed);
-            LoginScreen.settingsScreen.leftCommand = new UIAction(TextConstant.close(), new thien_cu(checkBoxVibrate, checkBoxVibrate.a, checkBoxSound, checkBoxSound.a, checkBoxAutoLogin, checkBoxAutoLogin.a, checkBoxAutoLoginYahoo, checkBoxAutoLoginYahoo.a, keyboardSpeed, keyboardSpeed.a()));
+            LoginScreen.settingsScreen.leftCommand = new UIAction(TextConstant.close(), new thien_cu(checkBoxVibrate, checkBoxVibrate.isChecked, checkBoxSound, checkBoxSound.isChecked, checkBoxAutoLogin, checkBoxAutoLogin.isChecked, checkBoxAutoLoginYahoo, checkBoxAutoLoginYahoo.isChecked, keyboardSpeed, keyboardSpeed.getSelectedIndex()));
             LoginScreen.settingsScreen.centerCommand = new UIAction(TextConstant.save(), new thien_cv(checkBoxAutoLogin, checkBoxAutoLoginYahoo, keyboardSpeed, checkBoxVibrate, checkBoxSound));
         }
         GameManager.getInstance().showScreen(LoginScreen.settingsScreen);

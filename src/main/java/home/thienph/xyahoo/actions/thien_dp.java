@@ -10,7 +10,7 @@ public final class thien_dp implements IAction {
 
     public final void action() {
         ContactListUI var1 = GameManager.roomListScreen.contactListUI;
-        MessageHandler.b((GameManager.roomListScreen.contactListUI.a < 0 ? null : (thien_u) var1.c.elementAt(var1.a)).d);
+        MessageHandler.b((GameManager.roomListScreen.contactListUI.selectedIndex2 < 0 ? null : (DisplayItem) var1.displayItems.elementAt(var1.selectedIndex2)).displayName);
     }
 }
 

@@ -1,8 +1,8 @@
 package home.thienph.xyahoo.managers;
 
-import home.thienph.xyahoo.actions.thien_r;
-import home.thienph.xyahoo.actions.thien_s;
-import home.thienph.xyahoo.actions.thien_t;
+import home.thienph.xyahoo.data.data.ContactEntry;
+import home.thienph.xyahoo.data.data.ContactDataSource;
+import home.thienph.xyahoo.data.data.ContactGroup;
 import home.thienph.xyahoo.data.networks.Packet;
 import home.thienph.xyahoo.conections.PacketHandler;
 
@@ -40,12 +40,12 @@ public final class Game2Handler extends PacketHandler {
             gameManager.updateBuddyStatus(var17, var21, 2);
             return;
          case 6:
-            thien_s var16 = new thien_s();
+            ContactDataSource var16 = new ContactDataSource();
             int var3 = MessageHandler.readInt(var1);
 
             for (int var4 = 0; var4 < var3; var4++) {
                String var5 = MessageHandler.readString(var1);
-               thien_t var6 = new thien_t(var5);
+               ContactGroup var6 = new ContactGroup(var5);
                int var18 = MessageHandler.readInt(var1);
 
                for (int var7 = 0; var7 < var18; var7++) {
@@ -55,10 +55,10 @@ public final class Game2Handler extends PacketHandler {
                   MessageHandler.readString(var1);
                   String var26 = MessageHandler.readString(var1);
                   MessageHandler.readString(var1);
-                  var6.a(new thien_r(var23, var26, var24, var25, new int[0], 0, 0));
+                  var6.addContact(new ContactEntry(var23, var26, var24, var25, new int[0], 0, 0));
                }
 
-               var16.a.addElement(var6);
+               var16.groups.addElement(var6);
             }
 
             gameManager.setYahooBuddyList(var16);

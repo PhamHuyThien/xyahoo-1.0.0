@@ -16,7 +16,7 @@ implements IAction {
     public final void action() {
         int n;
         String string = ContentFilter.filterProfanity(LoginYahooScreen.b(this.loginYahooScreen).getText().trim());
-        int n2 = n = LoginYahooScreen.c(this.loginYahooScreen).a() == 0 ? 0 : 12;
+        int n2 = n = LoginYahooScreen.c(this.loginYahooScreen).getSelectedIndex() == 0 ? 0 : 12;
         if (string != null && !string.equals(LoginYahooScreen.A)) {
             LoginYahooScreen.a(this.loginYahooScreen, string);
             LoginYahooScreen.z = 0;

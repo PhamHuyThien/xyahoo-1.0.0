@@ -1,7 +1,6 @@
-package home.thienph.xyahoo.components;
+package home.thienph.xyahoo.data.data;
 
 import home.thienph.xyahoo.actions.IAction;
-import home.thienph.xyahoo.data.data.PopupSideElementData;
 
 public final class UIAction {
     public String label;

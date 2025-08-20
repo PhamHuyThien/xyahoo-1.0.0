@@ -5,7 +5,7 @@ import home.thienph.xyahoo.actions.thien_ej;
 import home.thienph.xyahoo.actions.thien_ek;
 import home.thienph.xyahoo.actions.thien_el;
 import home.thienph.xyahoo.components.TextField;
-import home.thienph.xyahoo.components.UIAction;
+import home.thienph.xyahoo.data.data.UIAction;
 import home.thienph.xyahoo.components.UIDropdown;
 import home.thienph.xyahoo.constants.TextConstant;
 import home.thienph.xyahoo.managers.GameManager;
@@ -43,14 +43,14 @@ extends FormScreen {
         System.gc();
         FormScreen.calculateFormDimensions(70, 150);
         this.initLayout();
-        this.x = Screen.formHeight - (TextRenderer.extraSpacing * 3 + TextRendererHelper.defaultFontSize + (GameCanvas.screenHeight > 170 ? 55 : 20) + GameManager.topMargin) >> 1;
+        this.currentY = Screen.formHeight - (TextRenderer.extraSpacing * 3 + TextRendererHelper.defaultFontSize + (GameCanvas.screenHeight > 170 ? 55 : 20) + GameManager.topMargin) >> 1;
         UIFormBuilder.addImage((FormScreen)this, TextRendererHelper.getLogo(), false);
-        this.x += GameCanvas.screenHeight > 170 ? 18 : 7;
+        this.currentY += GameCanvas.screenHeight > 170 ? 18 : 7;
         this.fullNameField = UIFormBuilder.addTextField((FormScreen)this, "Tên: ", 0, -1);
-        this.x += 5;
+        this.currentY += 5;
         this.I = stringArray != null ? UIFormBuilder.addDropdown((FormScreen)this, TextConstant.suggestedId(), stringArray) : null;
         this.E = UIFormBuilder.addTextField((FormScreen)this, String.valueOf(TextConstant.password()) + ":", 2, -1);
-        this.x += 5;
+        this.currentY += 5;
         this.J = UIFormBuilder.addTextField((FormScreen)this, String.valueOf(TextConstant.retype()) + ":", 2, -1);
         if (stringArray != null) {
             this.fullNameField.setText(this.K);
@@ -108,7 +108,7 @@ extends FormScreen {
         this.fullNameField.setText(this.fullNameField.getText().toLowerCase());
         if (this.K != null && this.K.equals(this.fullNameField.getText())) {
             if (this.I != null) {
-                this.G = this.I.b();
+                this.G = this.I.getSelectedItem();
                 if (this.G == null) {
                     this.G = this.K;
                 }

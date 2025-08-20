@@ -33,10 +33,10 @@ implements IAction {
 
     public final void action() {
         GameManager.instance.removeScreen(LoginScreen.getSettingsScreen());
-        this.a.a = this.b;
-        this.c.a = this.d;
-        this.e.a = this.f;
-        this.g.a = this.h;
-        this.i.c(this.j);
+        this.a.isChecked = this.b;
+        this.c.isChecked = this.d;
+        this.e.isChecked = this.f;
+        this.g.isChecked = this.h;
+        this.i.setSelectedIndex(this.j);
     }
 }

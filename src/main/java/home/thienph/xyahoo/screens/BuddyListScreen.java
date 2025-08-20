@@ -2,8 +2,9 @@ package home.thienph.xyahoo.screens;
 
 import home.thienph.xyahoo.actions.*;
 import home.thienph.xyahoo.components.TextField;
-import home.thienph.xyahoo.components.UIAction;
-import home.thienph.xyahoo.components.UIBuddyListControl;
+import home.thienph.xyahoo.components.UITextLabel;
+import home.thienph.xyahoo.data.data.UIAction;
+import home.thienph.xyahoo.components.BuddyListControl;
 import home.thienph.xyahoo.components.UIDropdown;
 import home.thienph.xyahoo.constants.TextConstant;
 import home.thienph.xyahoo.data.data.PopupSideElementData;
@@ -17,7 +18,7 @@ import javax.microedition.lcdui.Graphics;
 
 public final class BuddyListScreen extends Screen {
    public static int[] onlineStatusIcons;
-   public UIBuddyListControl buddyList;
+   public BuddyListControl buddyList;
    public static String currentGroupName;
    public static String userFullName;
    public static String userStatusMessage;
@@ -39,9 +40,9 @@ public final class BuddyListScreen extends Screen {
 
    public final void renameGroup() {
       String var1;
-      if (!(var1 = this.buddyList.g()).equals(TextConstant.services())) {
+      if (!(var1 = this.buddyList.getCurrentGroupName()).equals(TextConstant.services())) {
          thien_cl var2;
-         (var2 = new thien_cl(TextConstant.rename(), TextConstant.typeNewNameForGroup() + "\"" + this.buddyList.g() + "\"")).textField.setText(var1);
+         (var2 = new thien_cl(TextConstant.rename(), TextConstant.typeNewNameForGroup() + "\"" + this.buddyList.getCurrentGroupName() + "\"")).textField.setText(var1);
          var2.a(new thien_fg(this, var2, var1));
          GameManager.getInstance().showScreen(var2);
          GameManager.getInstance().goToLastScreen();
@@ -79,7 +80,7 @@ public final class BuddyListScreen extends Screen {
       }
 
       int var3 = GameCanvas.screenWidth - var2 >> 1;
-      thien_ai var5 = new thien_ai(TextConstant.conferenceSubject(), var3, 10, TextRenderer.fontHeight);
+      UITextLabel var5 = new UITextLabel(TextConstant.conferenceSubject(), var3, 10, TextRenderer.fontHeight);
       int var4 = 10 + 1 + var5.height;
       TextField var6;
       (var6 = new TextField()).setBounds(var3, var4, var2, TextRenderer.fontHeight + 6);
@@ -108,28 +109,28 @@ public final class BuddyListScreen extends Screen {
       }
 
       int var4 = GameCanvas.screenWidth - var3 >> 1;
-      thien_ai var6 = new thien_ai(TextConstant.addId(), var4, 10, TextRenderer.fontHeight);
+      UITextLabel var6 = new UITextLabel(TextConstant.addId(), var4, 10, TextRenderer.fontHeight);
       int var5 = 10 + 1 + var6.height;
       TextField var7;
       (var7 = new TextField()).setBounds(var4, var5, var3, TextRenderer.fontHeight + 6);
       var7.setText(var1);
       var5 += 5 + var7.height;
-      thien_ai var11 = new thien_ai(TextConstant.toNewGroup(), var4, var5, TextRenderer.fontHeight);
+      UITextLabel var11 = new UITextLabel(TextConstant.toNewGroup(), var4, var5, TextRenderer.fontHeight);
       var5 += 1 + var11.height;
       TextField var8;
       (var8 = new TextField()).setBounds(var4, var5, var3, TextRenderer.fontHeight + 6);
-      String var9 = this.buddyList.g();
+      String var9 = this.buddyList.getCurrentGroupName();
       var8.setText(var9);
       if (var8.getText().equals("") || var8.getText().equals(TextConstant.services())) {
          var8.setText("Friends");
       }
 
       var5 += 5 + var8.height;
-      thien_ai var10 = new thien_ai(TextConstant.orExisting(), var4, var5, TextRenderer.fontHeight);
+      UITextLabel var10 = new UITextLabel(TextConstant.orExisting(), var4, var5, TextRenderer.fontHeight);
       var5 += 1 + var10.height;
       UIDropdown var12;
-      (var12 = new UIDropdown(this.buddyList.i(), var4, var5, var3, TextRenderer.fontHeight + 6)).a(var9);
-      var12.b = new thien_gj(this, var8, var12);
+      (var12 = new UIDropdown(this.buddyList.getGroupNames(), var4, var5, var3, TextRenderer.fontHeight + 6)).setSelectedItem(var9);
+      var12.changeHandler = new thien_gj(this, var8, var12);
       var2.addControl(var6);
       var2.addControl(var7);
       var2.addControl(var11);
@@ -156,15 +157,15 @@ public final class BuddyListScreen extends Screen {
       }
 
       int var3 = GameCanvas.screenWidth - var2 >> 1;
-      thien_ai var5 = new thien_ai(TextConstant.broadcastMessage2(), var3, 10, TextRenderer.fontHeight);
+      UITextLabel var5 = new UITextLabel(TextConstant.broadcastMessage2(), var3, 10, TextRenderer.fontHeight);
       int var4 = 10 + 5 + var5.height;
       TextField var6;
       (var6 = new TextField()).setBounds(var3, var4, var2, TextRenderer.fontHeight + 6);
       var4 += 5 + var6.height;
-      thien_ai var7 = new thien_ai(TextConstant.toGroup(), var3, var4, TextRenderer.fontHeight);
+      UITextLabel var7 = new UITextLabel(TextConstant.toGroup(), var3, var4, TextRenderer.fontHeight);
       var4 += 1 + var7.height;
       UIDropdown var8;
-      (var8 = new UIDropdown(this.buddyList.i(), var3, var4, var2, TextRenderer.fontHeight + 6)).a(this.buddyList.g());
+      (var8 = new UIDropdown(this.buddyList.getGroupNames(), var3, var4, var2, TextRenderer.fontHeight + 6)).setSelectedItem(this.buddyList.getCurrentGroupName());
       var1.addControl(var5);
       var1.addControl(var6);
       var1.addControl(var7);
@@ -182,7 +183,7 @@ public final class BuddyListScreen extends Screen {
 
    public final void moveUserToGroup() {
       String var1;
-      if (!(var1 = this.buddyList.h().d).equals(TextConstant.selectService())) {
+      if (!(var1 = this.buddyList.getSelectedItem().displayName).equals(TextConstant.selectService())) {
          Screen var2;
          (var2 = new Screen()).title = TextConstant.moveId3();
          int var3;
@@ -195,24 +196,24 @@ public final class BuddyListScreen extends Screen {
          }
 
          int var4 = GameCanvas.screenWidth - var3 >> 1;
-         thien_ai var6 = new thien_ai(TextConstant.moveId2() + var1, var4, 10, TextRenderer.fontHeight);
+         UITextLabel var6 = new UITextLabel(TextConstant.moveId2() + var1, var4, 10, TextRenderer.fontHeight);
          int var5 = 10 + 5 + var6.height;
-         thien_ai var7 = new thien_ai(TextConstant.toNewGroup(), var4, var5, TextRenderer.fontHeight);
+         UITextLabel var7 = new UITextLabel(TextConstant.toNewGroup(), var4, var5, TextRenderer.fontHeight);
          var5 += 1 + var7.height;
          TextField var8;
          (var8 = new TextField()).setBounds(var4, var5, var3, TextRenderer.fontHeight + 6);
-         String var9 = this.buddyList.g();
+         String var9 = this.buddyList.getCurrentGroupName();
          var8.setText(var9);
          if (var8.getText().equals("") || var8.getText().equals(TextConstant.services())) {
             var8.setText("Friends");
          }
 
          var5 += 5 + var8.height;
-         thien_ai var10 = new thien_ai(TextConstant.orExisting(), var4, var5, TextRenderer.fontHeight);
+         UITextLabel var10 = new UITextLabel(TextConstant.orExisting(), var4, var5, TextRenderer.fontHeight);
          var5 += 1 + var10.height;
          UIDropdown var11;
-         (var11 = new UIDropdown(this.buddyList.i(), var4, var5, var3, TextRenderer.fontHeight + 6)).a(var9);
-         var11.b = new thien_fj(this, var8, var11);
+         (var11 = new UIDropdown(this.buddyList.getGroupNames(), var4, var5, var3, TextRenderer.fontHeight + 6)).setSelectedItem(var9);
+         var11.changeHandler = new thien_fj(this, var8, var11);
          var2.addControl(var6);
          var2.addControl(var7);
          var2.addControl(var8);
@@ -239,18 +240,18 @@ public final class BuddyListScreen extends Screen {
       }
 
       int var3 = GameCanvas.screenWidth - var2 >> 1;
-      thien_ai var5 = new thien_ai(TextConstant.statusMessage(), var3, 10, TextRenderer.fontHeight);
+      UITextLabel var5 = new UITextLabel(TextConstant.statusMessage(), var3, 10, TextRenderer.fontHeight);
       int var4 = 10 + 1 + var5.height;
       TextField var6;
       (var6 = new TextField()).setBounds(var3, var4, var2, TextRenderer.fontHeight + 6);
       var6.setMaxLength(255);
       var6.setText(tempStatusMessage);
       var4 += 10 + var6.height;
-      thien_ai var7 = new thien_ai(TextConstant.status(), var3, var4, TextRenderer.fontHeight);
+      UITextLabel var7 = new UITextLabel(TextConstant.status(), var3, var4, TextRenderer.fontHeight);
       var4 += 1 + var7.height;
       UIDropdown var8 = new UIDropdown(new String[]{TextConstant.available(), TextConstant.invisible2()}, var3, var4, var2, TextRenderer.fontHeight + 6);
-      var8.c(userStatus == 1 ? 0 : 1);
-      var8.b = new thien_fm(this);
+      var8.setSelectedIndex(userStatus == 1 ? 0 : 1);
+      var8.changeHandler = new thien_fm(this);
       var1.addControl(var5);
       var1.addControl(var6);
       var1.addControl(var7);
@@ -275,19 +276,19 @@ public final class BuddyListScreen extends Screen {
       }
 
       int var3 = GameCanvas.screenWidth - var2 >> 1;
-      thien_ai var5 = new thien_ai(TextConstant.oldPassword(), var3, 10, TextRenderer.fontHeight);
+      UITextLabel var5 = new UITextLabel(TextConstant.oldPassword(), var3, 10, TextRenderer.fontHeight);
       int var4 = 10 + 1 + var5.height;
       TextField var6;
       (var6 = new TextField()).setInputType(2);
       var6.setBounds(var3, var4, var2, TextRenderer.fontHeight + 6);
       var4 += var6.height + 6;
-      thien_ai var7 = new thien_ai(TextConstant.newPassword(), var3, var4, TextRenderer.fontHeight);
+      UITextLabel var7 = new UITextLabel(TextConstant.newPassword(), var3, var4, TextRenderer.fontHeight);
       var4 += 1 + var7.height;
       TextField var8;
       (var8 = new TextField()).setInputType(2);
       var8.setBounds(var3, var4, var2, TextRenderer.fontHeight + 6);
       var4 += var8.height + 6;
-      thien_ai var9 = new thien_ai(TextConstant.retype(), var3, var4, TextRenderer.fontHeight);
+      UITextLabel var9 = new UITextLabel(TextConstant.retype(), var3, var4, TextRenderer.fontHeight);
       var4 += 1 + var7.height;
       TextField var10;
       (var10 = new TextField()).setInputType(2);
@@ -320,7 +321,7 @@ public final class BuddyListScreen extends Screen {
       this.searchField = new TextField();
       this.searchField.isShiftMode = true;
       this.searchField.setBounds(0, Screen.formHeight - GameManager.topMargin - TextRenderer.fontHeight - 11, Screen.e - 6, TextRenderer.fontHeight + 6);
-      this.buddyList = new UIBuddyListControl(1, 1, Screen.e - 3, Screen.formHeight - 2 - GameManager.topMargin, true);
+      this.buddyList = new BuddyListControl(1, 1, Screen.e - 3, Screen.formHeight - 2 - GameManager.topMargin, true);
       this.buddyList.isAutoChatEnabled = false;
       this.buddyList.isScrollable = true;
       this.addControl(this.buddyList);
@@ -357,12 +358,12 @@ public final class BuddyListScreen extends Screen {
    }
 
    public final void o() {
-      if (this.buddyList.visibleItems != null) {
-         this.buddyList.visibleItems.removeAllElements();
+      if (this.buddyList.displayItems != null) {
+         this.buddyList.displayItems.removeAllElements();
       }
 
-      this.buddyList.visibleItems = null;
-      this.buddyList.buddyDataModel = null;
+      this.buddyList.displayItems = null;
+      this.buddyList.contactDataSource = null;
    }
 
    public final boolean handleInput(boolean[] var1, boolean[] var2, int[] var3) {
@@ -398,7 +399,7 @@ public final class BuddyListScreen extends Screen {
          }
 
          if (!this.searchField.getText().equals(var4)) {
-            this.buddyList.d(this.searchField.getText());
+            this.buddyList.setSearchFilter(this.searchField.getText());
          }
       }
 

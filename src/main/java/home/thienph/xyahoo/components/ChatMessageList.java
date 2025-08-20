@@ -1,6 +1,7 @@
 package home.thienph.xyahoo.components;
 
 import home.thienph.xyahoo.actions.thien_ar;
+import home.thienph.xyahoo.data.data.UIAction;
 import home.thienph.xyahoo.managers.GameManager;
 import home.thienph.xyahoo.utils.ContentFilter;
 import home.thienph.xyahoo.constants.TextConstant;
@@ -276,7 +277,7 @@ public final class ChatMessageList extends UIControlBase {
    }
 
    public final void handlePointerRelease(int var1, int var2) {
-      if (UIBuddyListControl.c(var1 - this.lastDragX) > 1 || UIBuddyListControl.c(var2 - this.lastDragY) > 1) {
+      if (BuddyListControl.absoluteValue(var1 - this.lastDragX) > 1 || BuddyListControl.absoluteValue(var2 - this.lastDragY) > 1) {
          this.isDragging = true;
          this.targetScrollPosition = this.targetScrollPosition - (var2 - this.lastDragY);
          if (this.targetScrollPosition < 0) {

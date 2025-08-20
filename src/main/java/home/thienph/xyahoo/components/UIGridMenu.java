@@ -14,14 +14,14 @@ extends UIControlBase {
     public Image[] images;
     private int[] iconIds;
     private int[] itemIds;
-    private Vector labels;
-    private int h;
-    private int i;
+    private Vector itemLabels;
+    private int horizontalSpacing;
+    private int textVerticalOffset;
     private int itemCount;
-    private int k;
-    private int l;
-    private int m;
-    private int n;
+    private int startX;
+    private int startY;
+    private int itemHeight;
+    private int maxScrollRows;
     public int selectedCol = 0;
     public int selectedRow = 0;
     private int scrollOffsetY = 0;
@@ -30,24 +30,24 @@ extends UIControlBase {
     private int iconWidth;
     private int iconHeight;
     private boolean useCustomImages;
-    private int G;
+    private int layoutMode; //chế độ layout (1 hoặc 2), 75%
     private int bounceOffset = 0;
     private int lastDragY;
 
-    public UIGridMenu(int n, int n2, int n3, int n4, int n5, String[] stringArray, int[] nArray, int[] nArray2, int n6, int n7, boolean bl, int n8) {
+    public UIGridMenu(int maxScrollRows, int n2, int n3, int n4, int n5, String[] stringArray, int[] nArray, int[] nArray2, int n6, int n7, boolean bl, int n8) {
         this.baseX = 0;
         this.baseY = n2;
         this.width = n3;
         this.height = n4;
         this.isEnabled = true;
         this.itemCount = n5;
-        this.labels = new Vector();
-        n = 0;
+        this.itemLabels = new Vector();
+        maxScrollRows = 0;
         n2 = stringArray.length;
-        while (n < n2) {
-            String[] stringArray2 = TextRenderer.splitString(stringArray[n], '-');
-            this.labels.addElement(stringArray2);
-            ++n;
+        while (maxScrollRows < n2) {
+            String[] stringArray2 = TextRenderer.splitString(stringArray[maxScrollRows], '-');
+            this.itemLabels.addElement(stringArray2);
+            ++maxScrollRows;
         }
         this.itemIds = nArray;
         this.iconIds = nArray2;
@@ -55,31 +55,31 @@ extends UIControlBase {
         this.iconHeight = n7;
         this.useCustomImages = bl;
         this.hasFocus = true;
-        this.G = 1;
+        this.layoutMode = 1;
         UIGridMenu UIGridMenu2 = this;
         this.columns = UIGridMenu2.width / (UIGridMenu2.iconWidth + 25);
         UIGridMenu2.rows = UIGridMenu2.itemCount % UIGridMenu2.columns == 0 ? UIGridMenu2.itemCount / UIGridMenu2.columns : UIGridMenu2.itemCount / UIGridMenu2.columns + 1;
-        UIGridMenu2.h = (UIGridMenu2.width - UIGridMenu2.columns * UIGridMenu2.iconWidth) / (UIGridMenu2.columns + 1);
-        if (UIGridMenu2.G == 1) {
-            UIGridMenu2.i = 32;
-        } else if (UIGridMenu2.G == 2) {
-            UIGridMenu2.i = 32;
+        UIGridMenu2.horizontalSpacing = (UIGridMenu2.width - UIGridMenu2.columns * UIGridMenu2.iconWidth) / (UIGridMenu2.columns + 1);
+        if (UIGridMenu2.layoutMode == 1) {
+            UIGridMenu2.textVerticalOffset = 32;
+        } else if (UIGridMenu2.layoutMode == 2) {
+            UIGridMenu2.textVerticalOffset = 32;
         }
-        UIGridMenu2.m = UIGridMenu2.i + UIGridMenu2.iconHeight + 6;
-        UIGridMenu2.k = (UIGridMenu2.width - UIGridMenu2.columns * (UIGridMenu2.iconWidth + UIGridMenu2.h) >> 1) + (UIGridMenu2.h >> 1);
-        UIGridMenu2.l = UIGridMenu2.baseY;
-        n2 = UIGridMenu2.l + UIGridMenu2.rows * UIGridMenu2.m - UIGridMenu2.height;
-        UIGridMenu2.n = UIGridMenu2.m - n2 % UIGridMenu2.m < 28 ? n2 / UIGridMenu2.m + 1 : n2 / UIGridMenu2.m;
+        UIGridMenu2.itemHeight = UIGridMenu2.textVerticalOffset + UIGridMenu2.iconHeight + 6;
+        UIGridMenu2.startX = (UIGridMenu2.width - UIGridMenu2.columns * (UIGridMenu2.iconWidth + UIGridMenu2.horizontalSpacing) >> 1) + (UIGridMenu2.horizontalSpacing >> 1);
+        UIGridMenu2.startY = UIGridMenu2.baseY;
+        n2 = UIGridMenu2.startY + UIGridMenu2.rows * UIGridMenu2.itemHeight - UIGridMenu2.height;
+        UIGridMenu2.maxScrollRows = UIGridMenu2.itemHeight - n2 % UIGridMenu2.itemHeight < 28 ? n2 / UIGridMenu2.itemHeight + 1 : n2 / UIGridMenu2.itemHeight;
         UIGridMenu2.scrollOffsetY = 0;
         UIGridMenu2.selectedCol = 0;
         UIGridMenu2.selectedRow = 0;
     }
 
-    private boolean d(int n, int n2) {
+    private boolean isSelectedItem(int n, int n2) {
         return n == this.selectedRow && n2 == this.selectedCol;
     }
 
-    private boolean e(int n, int n2) {
+    private boolean isValidItem(int n, int n2) {
         return n * this.columns + n2 <= this.itemCount - 1;
     }
 
@@ -87,11 +87,11 @@ extends UIControlBase {
         return this.itemIds[this.selectedRow * this.columns + this.selectedCol];
     }
 
-    private void a(Graphics graphics, Image image, int n, int n2, boolean bl, int n3) {
+    private void drawMenuItem(Graphics graphics, Image image, int n, int n2, boolean bl, int n3) {
         int n4 = this.iconWidth - image.getWidth() >> 1;
         if (bl) {
-            String[] stringArray = (String[])this.labels.elementAt(n3);
-            UIButton.a(graphics, n - 10, n2 - 6, this.iconWidth + 20, this.iconHeight + 24 + (stringArray.length > 1 ? TextRenderer.fontHeight - 3 : 0), 8);
+            String[] stringArray = (String[])this.itemLabels.elementAt(n3);
+            UIButton.drawRoundedButton(graphics, n - 10, n2 - 6, this.iconWidth + 20, this.iconHeight + 24 + (stringArray.length > 1 ? TextRenderer.fontHeight - 3 : 0), 8);
         }
         graphics.drawImage(image, n + n4, n2, 20);
     }
@@ -114,7 +114,7 @@ extends UIControlBase {
                 break;
             }
             case 15: {
-                if (this.selectedCol >= this.columns - 1 || !this.e(this.selectedRow, this.selectedCol + 1)) break;
+                if (this.selectedCol >= this.columns - 1 || !this.isValidItem(this.selectedRow, this.selectedCol + 1)) break;
                 ++this.selectedCol;
                 n2 = 0;
                 break;
@@ -123,20 +123,20 @@ extends UIControlBase {
                 if (this.selectedRow > 0) {
                     --this.selectedRow;
                     if (this.scrollOffsetY < 0) {
-                        this.scrollOffsetY += this.m;
+                        this.scrollOffsetY += this.itemHeight;
                     }
                 } else {
                     this.selectedRow = this.rows - 1;
-                    n = this.n;
-                    if (!this.e(this.selectedRow, this.selectedCol)) {
+                    n = this.maxScrollRows;
+                    if (!this.isValidItem(this.selectedRow, this.selectedCol)) {
                         --this.selectedRow;
                         --n;
                     }
-                    if (this.l + this.selectedRow * this.m > Screen.formHeight - Screen.topMargin - 30) {
-                        this.scrollOffsetY -= n * this.m;
+                    if (this.startY + this.selectedRow * this.itemHeight > Screen.formHeight - Screen.topMargin - 30) {
+                        this.scrollOffsetY -= n * this.itemHeight;
                     }
                 }
-                this.b();
+                this.updateBounceEffect();
                 n2 = 0;
                 if (!thien_ar.a) break;
                 thien_ar.a(true);
@@ -150,18 +150,18 @@ extends UIControlBase {
                         this.scrollOffsetY = 0;
                         break;
                     }
-                    if (this.e(this.selectedRow + 1, n)) {
+                    if (this.isValidItem(this.selectedRow + 1, n)) {
                         ++this.selectedRow;
                         this.selectedCol = n;
                         n = Screen.formHeight - Screen.topMargin - 30;
-                        n2 = this.rows * this.m;
-                        if (this.l + this.selectedRow * this.m <= n || n2 + this.scrollOffsetY <= n) break;
-                        this.scrollOffsetY -= this.m;
+                        n2 = this.rows * this.itemHeight;
+                        if (this.startY + this.selectedRow * this.itemHeight <= n || n2 + this.scrollOffsetY <= n) break;
+                        this.scrollOffsetY -= this.itemHeight;
                         break;
                     }
                     --n;
                 }
-                this.b();
+                this.updateBounceEffect();
                 n2 = 0;
                 if (!thien_ar.a) break;
                 thien_ar.a(true);
@@ -170,12 +170,12 @@ extends UIControlBase {
         return n2 != 0;
     }
 
-    private void b() {
+    private void updateBounceEffect() {
         this.bounceOffset = 0;
         if (this.selectedRow == 0) {
             return;
         }
-        int n = (this.selectedRow + 1) * this.m + this.scrollOffsetY + 5;
+        int n = (this.selectedRow + 1) * this.itemHeight + this.scrollOffsetY + 5;
         if (this.height - n > 20 && this.selectedRow == this.rows - 1 && this.scrollOffsetY < 0) {
             this.bounceOffset = 30;
             return;
@@ -199,17 +199,17 @@ extends UIControlBase {
          for (int var7 = 0; var7 < var15.itemCount; var7++) {
             var5 = var7 / var15.columns;
             var6 = var7 % var15.columns;
-            var3 = var15.k + var6 * (var15.iconWidth + var15.h);
-            var4 = var15.l + var5 * var15.m + var15.scrollOffsetY + var15.bounceOffset + 5;
-            boolean var19 = var15.d(var5, var6);
+            var3 = var15.startX + var6 * (var15.iconWidth + var15.horizontalSpacing);
+            var4 = var15.startY + var5 * var15.itemHeight + var15.scrollOffsetY + var15.bounceOffset + 5;
+            boolean var19 = var15.isSelectedItem(var5, var6);
             if (var4 + var15.iconHeight + 10 > var15.baseY && var4 < Screen.formHeight) {
                if (var15.useCustomImages) {
-                  var15.a(var2, var15.images[var7], var3, var4, var19, var7);
+                  var15.drawMenuItem(var2, var15.images[var7], var3, var4, var19, var7);
                } else {
-                  var15.a(var2, ImageCacheManager.getImage(var15.iconIds[var7]), var3, var4, var19, var7);
+                  var15.drawMenuItem(var2, ImageCacheManager.getImage(var15.iconIds[var7]), var3, var4, var19, var7);
                }
 
-               String[] var20 = (String[])var15.labels.elementAt(var7);
+               String[] var20 = (String[])var15.itemLabels.elementAt(var7);
                var6 = 0;
 
                for (int var8 = var20.length; var6 < var8; var6++) {
@@ -229,7 +229,7 @@ extends UIControlBase {
    }
 
     public final void handleFocus() {
-        if (this.l + this.rows * this.m > Screen.formHeight) {
+        if (this.startY + this.rows * this.itemHeight > Screen.formHeight) {
             thien_ar.a = true;
             thien_ar.a(this.rows);
             return;
@@ -257,10 +257,10 @@ extends UIControlBase {
         while (n7 < this.itemCount) {
             n5 = n7 / this.columns;
             n6 = n7 % this.columns;
-            n3 = this.k + n6 * (this.iconWidth + this.h);
-            n4 = this.l + n5 * this.m + this.scrollOffsetY + 5;
+            n3 = this.startX + n6 * (this.iconWidth + this.horizontalSpacing);
+            n4 = this.startY + n5 * this.itemHeight + this.scrollOffsetY + 5;
             if (n > n3 - 4 && n < n3 + this.iconWidth + 4 && n2 > n4 + 14 && n2 < n4 + this.iconHeight + 28) {
-                if (this.d(n5, n6)) {
+                if (this.isSelectedItem(n5, n6)) {
                     this.actionTertiary.actionHandler.action();
                     break;
                 }
@@ -277,7 +277,7 @@ extends UIControlBase {
 
     public final void handlePointerRelease(int n, int n2) {
         n = n2 - this.lastDragY;
-        if (UIBuddyListControl.c(n) > 10) {
+        if (BuddyListControl.absoluteValue(n) > 10) {
             if (n > 0) {
                 this.scrollOffsetY += n;
                 if (this.scrollOffsetY > 0) {
@@ -285,8 +285,8 @@ extends UIControlBase {
                 }
             } else {
                 this.scrollOffsetY += n;
-                if (this.scrollOffsetY < -this.n * this.m) {
-                    this.scrollOffsetY = -this.n * this.m;
+                if (this.scrollOffsetY < -this.maxScrollRows * this.itemHeight) {
+                    this.scrollOffsetY = -this.maxScrollRows * this.itemHeight;
                 }
             }
             this.lastDragY = n2;

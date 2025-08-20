@@ -1,8 +1,9 @@
 package home.thienph.xyahoo.components;
 
 import home.thienph.xyahoo.actions.DeleteCharBeforeCursorAction;
-import home.thienph.xyahoo.actions.SystemInputHandler;
 import home.thienph.xyahoo.constants.TextConstant;
+import home.thienph.xyahoo.constants.UIColorConstant;
+import home.thienph.xyahoo.data.data.UIAction;
 import home.thienph.xyahoo.utils.TextRenderer;
 
 import javax.microedition.lcdui.Canvas;
@@ -327,7 +328,7 @@ extends UIControlBase {
             graphics.fillRect(this.baseX + 2, this.baseY + 2, this.width - 3, this.height - 3);
             if (!hasAlphaInput) {
                 graphics.setColor(9478569);
-                UIButton.a(graphics, n2 - fontWidth, this.baseY + 3, fontWidth, this.height - 6);
+                UIButton.drawBorder(graphics, n2 - fontWidth, this.baseY + 3, fontWidth, this.height - 6);
                 graphics.setColor(0xFFFFFF);
                 TextRenderer.getFontRenderer(TextRenderer.colorWhite).drawText(inputModes[this.inputModeIndex], n2 - (fontWidth >> 1) + (TextRenderer.useCustomFont ? 0 : 1), n3, 2, graphics, TextRenderer.charWidth, TextRenderer.fontHeight);
             }
@@ -342,7 +343,7 @@ extends UIControlBase {
             n = bl && !this.isEditable ? 11320516 : 14675958;
         }
         graphics2.setColor(n);
-        UIButton.a(graphics, this.baseX + 1, this.baseY + 1, this.width - 2, this.height - 2);
+        UIButton.drawBorder(graphics, this.baseX + 1, this.baseY + 1, this.width - 2, this.height - 2);
         n2 = this.baseY + 1;
         this.textStartX = 4 + this.scrollOffset + this.baseX;
         graphics.setClip(this.baseX + 3, n2 > this.parentScreen.scrollY ? n2 : this.parentScreen.scrollY, this.width, this.height - 4);

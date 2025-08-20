@@ -15,6 +15,6 @@ public final class thien_fj
     }
 
     public final void action() {
-        this.textField.setText(this.uiDropdown.b());
+        this.textField.setText(this.uiDropdown.getSelectedItem());
     }
 }

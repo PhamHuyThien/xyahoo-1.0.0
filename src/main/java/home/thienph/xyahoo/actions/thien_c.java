@@ -1,34 +1,35 @@
 package home.thienph.xyahoo.actions;
 
-import home.thienph.xyahoo.components.UIBuddyListControl;
+import home.thienph.xyahoo.components.BuddyListControl;
+import home.thienph.xyahoo.data.data.ContactEntry;
 import home.thienph.xyahoo.managers.GameManager;
 import home.thienph.xyahoo.screens.ChatRoomScreen;
 
 public final class thien_c
 implements IAction {
-    private UIBuddyListControl uiBuddyListControl;
+    private BuddyListControl buddyListControl;
 
-    public thien_c(UIBuddyListControl UIBuddyListControl2) {
-        this.uiBuddyListControl = UIBuddyListControl2;
+    public thien_c(BuddyListControl BuddyListControl2) {
+        this.buddyListControl = BuddyListControl2;
     }
 
     public final void action() {
-        Object object = this.uiBuddyListControl.isAutoChatEnabled ? "Y! " + UIBuddyListControl.a((UIBuddyListControl)this.uiBuddyListControl).d : UIBuddyListControl.a((UIBuddyListControl)this.uiBuddyListControl).d;
+        Object object = this.buddyListControl.isAutoChatEnabled ? "Y! " + BuddyListControl.getSelectedDisplayItem((BuddyListControl)this.buddyListControl).displayName : BuddyListControl.getSelectedDisplayItem((BuddyListControl)this.buddyListControl).displayName;
         ChatRoomScreen chatRoomScreen2 = (ChatRoomScreen) GameManager.instance.findScreenByTitle((String)object);
         if (chatRoomScreen2 != null) {
             chatRoomScreen2.startSlide(1);
             GameManager.instance.switchToScreenByTitle((String)object);
             return;
         }
-        if (this.uiBuddyListControl.isAutoChatEnabled) {
-            chatRoomScreen2 = new ChatRoomScreen((String)object, this.uiBuddyListControl.isAutoChatEnabled, false, null);
-            new ChatRoomScreen((String)object, this.uiBuddyListControl.isAutoChatEnabled, false, null).x = UIBuddyListControl.a((UIBuddyListControl)this.uiBuddyListControl).d;
+        if (this.buddyListControl.isAutoChatEnabled) {
+            chatRoomScreen2 = new ChatRoomScreen((String)object, this.buddyListControl.isAutoChatEnabled, false, null);
+            new ChatRoomScreen((String)object, this.buddyListControl.isAutoChatEnabled, false, null).chatPartnerName = BuddyListControl.getSelectedDisplayItem((BuddyListControl)this.buddyListControl).displayName;
         } else {
-            chatRoomScreen2 = new ChatRoomScreen((String)object, this.uiBuddyListControl.isAutoChatEnabled, false, UIBuddyListControl.a((UIBuddyListControl)this.uiBuddyListControl).j);
-            new ChatRoomScreen((String)object, this.uiBuddyListControl.isAutoChatEnabled, false, UIBuddyListControl.a((UIBuddyListControl)this.uiBuddyListControl).j).y = UIBuddyListControl.a((UIBuddyListControl)this.uiBuddyListControl).e.equals("") ? UIBuddyListControl.a((UIBuddyListControl)this.uiBuddyListControl).d : UIBuddyListControl.a((UIBuddyListControl)this.uiBuddyListControl).e;
-            object = UIBuddyListControl.a((UIBuddyListControl)this.uiBuddyListControl).i;
+            chatRoomScreen2 = new ChatRoomScreen((String)object, this.buddyListControl.isAutoChatEnabled, false, BuddyListControl.getSelectedDisplayItem((BuddyListControl)this.buddyListControl).additionalData);
+            new ChatRoomScreen((String)object, this.buddyListControl.isAutoChatEnabled, false, BuddyListControl.getSelectedDisplayItem((BuddyListControl)this.buddyListControl).additionalData).chatPartnerStatus = BuddyListControl.getSelectedDisplayItem((BuddyListControl)this.buddyListControl).statusText.equals("") ? BuddyListControl.getSelectedDisplayItem((BuddyListControl)this.buddyListControl).displayName : BuddyListControl.getSelectedDisplayItem((BuddyListControl)this.buddyListControl).statusText;
+            object = BuddyListControl.getSelectedDisplayItem((BuddyListControl)this.buddyListControl).sourceEntry;
             if (object != null) {
-                chatRoomScreen2.b(Integer.toString(((thien_r)object).i));
+                chatRoomScreen2.setCurrentRoomName(Integer.toString(((ContactEntry)object).additionalFlags));
             }
         }
         chatRoomScreen2.startSlide(1);

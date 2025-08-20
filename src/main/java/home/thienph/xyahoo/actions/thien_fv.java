@@ -12,7 +12,7 @@ implements IAction {
 
     public final void action() {
         this.buddyListScreen.buddyList.isFilterActive = !this.buddyListScreen.buddyList.isFilterActive;
-        this.buddyListScreen.buddyList.c();
-        this.buddyListScreen.buddyList.selectedGroupIndex = 0;
+        this.buddyListScreen.buddyList.rebuildVisibleItems();
+        this.buddyListScreen.buddyList.selectedItemIndex = 0;
     }
 }

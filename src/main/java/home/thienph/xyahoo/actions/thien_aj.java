@@ -1,6 +1,6 @@
 package home.thienph.xyahoo.actions;
 
-import home.thienph.xyahoo.components.UIAction;
+import home.thienph.xyahoo.data.data.UIAction;
 import home.thienph.xyahoo.components.UIControlBase;
 import home.thienph.xyahoo.constants.TextConstant;
 import home.thienph.xyahoo.screens.Screen;

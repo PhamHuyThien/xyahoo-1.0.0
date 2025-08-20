@@ -11,11 +11,11 @@ implements IAction {
     }
 
     public final void action() {
-        thien_u thien_u2 = this.buddyListScreen.buddyList.h();
-        if (thien_u2 == null) {
+        DisplayItem displayItem2 = this.buddyListScreen.buddyList.getSelectedItem();
+        if (displayItem2 == null) {
             return;
         }
-        if (thien_u2.a == 0) {
+        if (displayItem2.itemType == 0) {
             this.buddyListScreen.moveUserToGroup();
             return;
         }

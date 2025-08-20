@@ -24,7 +24,7 @@ implements IAction {
         if (string.equals("")) {
             return;
         }
-        if (this.buddyListScreen.buddyList.c(string)) {
+        if (this.buddyListScreen.buddyList.hasGroup(string)) {
             GameManager.getInstance().showSimpleDialog(TextConstant.thisGroupNameAlreadyExist());
             return;
         }

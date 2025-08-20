@@ -4,6 +4,7 @@ import home.thienph.xyahoo.actions.*;
 import home.thienph.xyahoo.components.*;
 import home.thienph.xyahoo.conections.ConnectionManager;
 import home.thienph.xyahoo.constants.TextConstant;
+import home.thienph.xyahoo.data.data.UIAction;
 import home.thienph.xyahoo.data.networks.ByteBuffer;
 import home.thienph.xyahoo.data.networks.Packet;
 import home.thienph.xyahoo.screens.*;
@@ -92,7 +93,7 @@ public class MessageHandler {
                                  return;
                               }
                            } else if (var199 instanceof UIDropdown) {
-                              var213 = ((UIDropdown)var199).a();
+                              var213 = ((UIDropdown)var199).getSelectedIndex();
                            } else if (var199 instanceof UIGridMenu) {
                               var213 = ((UIGridMenu)var199).getSelectedItemId();
                            }
@@ -117,7 +118,7 @@ public class MessageHandler {
 
                               writeString(var214, var165);
                            } else if (var207 instanceof UIDropdown) {
-                              writeString(((UIDropdown)var207).b(), var165);
+                              writeString(((UIDropdown)var207).getSelectedItem(), var165);
                            }
                         }
                      } else if (var180 == 2) {
@@ -129,8 +130,8 @@ public class MessageHandler {
                            int var198 = readInt(var1);
                            UIControlBase var201;
                            if ((var201 = var191.getControlById(var198)) instanceof UICheckBox) {
-                              boolean var208 = ((UICheckBox)var201).a;
-                              writeBool(((UICheckBox)var201).a, var165);
+                              boolean var208 = ((UICheckBox)var201).isChecked;
+                              writeBool(((UICheckBox)var201).isChecked, var165);
                            }
                         }
                      }
@@ -201,9 +202,9 @@ public class MessageHandler {
                         String var223 = decodePacket(var1);
                         int var224 = readInt(var1);
                         if (var223.equals("")) {
-                           thien_ai var226;
-                           (var226 = UIFormBuilder.addLabel(var174, var224)).a = c(readInt(var1));
-                           var226.b = new Integer(var226.a);
+                           UITextLabel var226;
+                           (var226 = UIFormBuilder.addLabel(var174, var224)).textColor = c(readInt(var1));
+                           var226.fontRenderer = new Integer(var226.textColor);
                            var226.isVisible = !var223.trim().equals("");
                            var142 = var226;
                         } else {
@@ -216,7 +217,7 @@ public class MessageHandler {
                         int var225 = c(readInt(var1));
                         byte[] var227 = readByteArray(var1);
                         thien_aj var228;
-                        (var228 = UIFormBuilder.addCheckBox(var174, var163, var143, new thien_o(var227), var174.w, var174.x, var174.y)).a = new Integer(var225);
+                        (var228 = UIFormBuilder.addCheckBox(var174, var163, var143, new thien_o(var227), var174.contentHeight, var174.currentY, var174.maxContentHeight)).a = new Integer(var225);
                         var142 = var228;
                         break;
                      case 5:
@@ -245,7 +246,7 @@ public class MessageHandler {
 
                         byte[] var237 = readByteArray(var1);
                         UIDropdown var98;
-                        (var98 = UIFormBuilder.addDropdown(var174, var93, var96, var94)).a(new thien_g(var237));
+                        (var98 = UIFormBuilder.addDropdown(var174, var93, var96, var94)).setChangeHandler(new thien_g(var237));
                         var142 = var98;
                         break;
                      case 8:
@@ -292,12 +293,12 @@ public class MessageHandler {
                      case 12:
                         int var231 = readInt(var1);
                         byte[] var77 = readByteArray(var1);
-                        thien_ag var78 = null;
+                        UIImageView var78 = null;
 
                         try {
                            var78 = UIFormBuilder.addImage(var174, var77, var231);
                            byte[] var79 = readByteArray(var1);
-                           var78.b = new thien_p(var79);
+                           var78.clickHandler = new thien_p(var79);
                         } catch (Exception var114) {
                         }
 
@@ -312,7 +313,7 @@ public class MessageHandler {
                         int var99 = readInt(var1);
                         int var100 = readInt(var1);
                         int var101 = readInt(var1);
-                        ((UIDropdown) GameManager.instance.findScreenById(var99).getControlById(var100)).c(var101);
+                        ((UIDropdown) GameManager.instance.findScreenById(var99).getControlById(var100)).setSelectedIndex(var101);
                   }
 
                   var161 = readInt(var1);
@@ -421,21 +422,21 @@ public class MessageHandler {
                   FormScreen var132;
                   UIControlBase var157;
                   (var157 = (var132 = (FormScreen) GameManager.instance.findScreenById(readInt(var1))).getControlById(readInt(var1))).baseY = readInt(var1);
-                  var132.x = var157.baseY + var157.height + 2;
+                  var132.currentY = var157.baseY + var157.height + 2;
                   break;
                case 19:
                   FormScreen var131;
                   UIControlBase var156 = (var131 = (FormScreen) GameManager.instance.findScreenById(readInt(var1))).getControlById(readInt(var1));
                   UIControlBase var172 = var131.getControlById(readInt(var1));
                   var156.baseY = var172.baseY + var172.height + 2;
-                  var131.x = var156.baseY + var156.height + 2;
+                  var131.currentY = var156.baseY + var156.height + 2;
                   break;
                case 20:
                   FormScreen var130;
                   UIControlBase var155 = (var130 = (FormScreen) GameManager.instance.findScreenById(readInt(var1))).getControlById(readInt(var1));
                   UIControlBase var171 = var130.getControlById(readInt(var1));
                   var155.baseY = var171.baseY;
-                  var130.x = var155.baseY + var155.height + 2;
+                  var130.currentY = var155.baseY + var155.height + 2;
                   break;
                case 21:
                   String var129 = readString(var1);
@@ -526,7 +527,7 @@ public class MessageHandler {
                                  return;
                               }
                            } else if (var121 instanceof UIDropdown) {
-                              var3 = ((UIDropdown)var121).a();
+                              var3 = ((UIDropdown)var121).getSelectedIndex();
                            } else if (var121 instanceof UIGridMenu) {
                               var3 = ((UIGridMenu)var121).getSelectedItemId();
                            }
@@ -551,7 +552,7 @@ public class MessageHandler {
 
                               writeString(var167, var5);
                            } else if (var149 instanceof UIDropdown) {
-                              writeString(((UIDropdown)var149).b(), var5);
+                              writeString(((UIDropdown)var149).getSelectedItem(), var5);
                            }
                         }
                      } else if (var7 == 2) {
@@ -563,8 +564,8 @@ public class MessageHandler {
                            int var216 = readInt(var1);
                            UIControlBase var123;
                            if ((var123 = var210.getControlById(var216)) instanceof UICheckBox) {
-                              boolean var150 = ((UICheckBox)var123).a;
-                              writeBool(((UICheckBox)var123).a, var5);
+                              boolean var150 = ((UICheckBox)var123).isChecked;
+                              writeBool(((UICheckBox)var123).isChecked, var5);
                            }
                         }
                      }
@@ -595,7 +596,7 @@ public class MessageHandler {
       ConnectionManager.sendPacket(var1);
    }
 
-   public static void a() {
+   public static void updateRoomList() {
       ConnectionManager.sendPacket(new Packet(5000009, 39));
    }
 

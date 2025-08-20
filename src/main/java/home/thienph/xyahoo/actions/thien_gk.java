@@ -2,6 +2,9 @@ package home.thienph.xyahoo.actions;
 
 import home.thienph.xyahoo.components.TextField;
 import home.thienph.xyahoo.constants.TextConstant;
+import home.thienph.xyahoo.data.data.ContactDataSource;
+import home.thienph.xyahoo.data.data.ContactEntry;
+import home.thienph.xyahoo.data.data.ContactGroup;
 import home.thienph.xyahoo.managers.GameManager;
 import home.thienph.xyahoo.managers.MessageHandler;
 import home.thienph.xyahoo.screens.BuddyListScreen;
@@ -28,10 +31,10 @@ public final class thien_gk implements IAction {
       } else if (var2.equals("")) {
          this.screen.selectControl(this.textField2);
       } else {
-         thien_s var10000 = GameManager.getInstance().buddyListScreen.buddyList.getDataModel();
+         ContactDataSource var10000 = GameManager.getInstance().buddyListScreen.buddyList.getDataModel();
          String var4 = var2;
-         thien_s var3 = var10000;
-         int var5 = var10000.a.size() - 1;
+         ContactDataSource var3 = var10000;
+         int var5 = var10000.groups.size() - 1;
 
          while (true) {
             if (var5 < 0) {
@@ -39,9 +42,9 @@ public final class thien_gk implements IAction {
                break;
             }
 
-            thien_t var6;
-            if ((var6 = (thien_t)var3.a.elementAt(var5)).a().toLowerCase().equals(var4.toLowerCase())) {
-               var13 = var6.a();
+            ContactGroup var6;
+            if ((var6 = (ContactGroup)var3.groups.elementAt(var5)).getGroupName().toLowerCase().equals(var4.toLowerCase())) {
+               var13 = var6.getGroupName();
                break;
             }
 
@@ -56,7 +59,7 @@ public final class thien_gk implements IAction {
          var10000 = GameManager.getInstance().buddyListScreen.buddyList.getDataModel();
          var4 = var1;
          var3 = var10000;
-         var5 = var10000.a.size() - 1;
+         var5 = var10000.groups.size() - 1;
 
          label46:
          while (true) {
@@ -65,9 +68,9 @@ public final class thien_gk implements IAction {
                break;
             }
 
-            thien_t var12;
-            for (int var7 = (var12 = (thien_t)var3.a.elementAt(var5)).a.size() - 1; var7 >= 0; var7--) {
-               if (((thien_r)var12.a.elementAt(var7)).a.equals(var4)) {
+            ContactGroup var12;
+            for (int var7 = (var12 = (ContactGroup)var3.groups.elementAt(var5)).contacts.size() - 1; var7 >= 0; var7--) {
+               if (((ContactEntry)var12.contacts.elementAt(var7)).contactId.equals(var4)) {
                   var15 = true;
                   break label46;
                }

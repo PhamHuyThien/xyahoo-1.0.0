@@ -1,6 +1,6 @@
 package home.thienph.xyahoo.actions;
 
-import home.thienph.xyahoo.components.UIAction;
+import home.thienph.xyahoo.data.data.UIAction;
 import home.thienph.xyahoo.data.data.PopupSideElementData;
 import home.thienph.xyahoo.managers.GameManager;
 import home.thienph.xyahoo.screens.BigTwoGameScreen;

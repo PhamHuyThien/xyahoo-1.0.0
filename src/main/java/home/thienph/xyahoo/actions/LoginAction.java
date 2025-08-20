@@ -1,5 +1,6 @@
 package home.thienph.xyahoo.actions;
 
+import home.thienph.xyahoo.data.data.ContactDataSource;
 import home.thienph.xyahoo.managers.GameManager;
 import home.thienph.xyahoo.screens.BuddyListScreen;
 import home.thienph.xyahoo.screens.InviteConferenceScreen;
@@ -32,9 +33,9 @@ implements IAction {
             GameManager.instance.inviteConferenceScreen = new InviteConferenceScreen();
         }
         if ((n = GameManager.getChecksumValue(false)) != -1) {
-            thien_s thien_s2 = GameManager.loadBuddyList(false, BuddyListScreen.currentGroupName);
-            if (thien_s2 != null) {
-                GameManager.getInstance().buddyListScreen.buddyList.a(thien_s2, -1);
+            ContactDataSource contactDataSource2 = GameManager.loadBuddyList(false, BuddyListScreen.currentGroupName);
+            if (contactDataSource2 != null) {
+                GameManager.getInstance().buddyListScreen.buddyList.setDataSource(contactDataSource2, -1);
             } else {
                 n = -1;
             }

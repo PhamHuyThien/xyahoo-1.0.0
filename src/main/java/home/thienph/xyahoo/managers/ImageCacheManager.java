@@ -1,6 +1,6 @@
 package home.thienph.xyahoo.managers;
 
-import home.thienph.xyahoo.components.UIBuddyListControl;
+import home.thienph.xyahoo.components.BuddyListControl;
 
 import java.io.IOException;
 import java.util.Hashtable;
@@ -19,7 +19,7 @@ public final class ImageCacheManager {
             imageCache.put(new Integer(var0), var1);
          } else {
             MessageHandler.b(var0);
-            var1 = UIBuddyListControl.statusIcons[2];
+            var1 = BuddyListControl.statusIcons[2];
             imageCache.put(new Integer(var0), var1);
          }
 

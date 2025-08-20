@@ -5,6 +5,7 @@ import home.thienph.xyahoo.components.*;
 import home.thienph.xyahoo.constants.TextConstant;
 import home.thienph.xyahoo.data.data.PopupSideElementData;
 import home.thienph.xyahoo.data.data.TableInfo;
+import home.thienph.xyahoo.data.data.UIAction;
 import home.thienph.xyahoo.managers.GameManager;
 import home.thienph.xyahoo.managers.MessageHandler;
 import home.thienph.xyahoo.utils.TextRenderer;
@@ -185,7 +186,7 @@ public final class BigTwoGameScreen extends Screen {
       super.rightCommand = this.findTableAction;
       this.gameMenuItems.removeAllElements();
       this.gameMenuItems.addElement(this.updateAction);
-      this.gameMenuItems.addElement(RoomListScreen.z);
+      this.gameMenuItems.addElement(RoomListScreen.cashInAction);
       this.gameMenuItems.addElement(new UIAction("Rời phòng", new thien_bw(this)));
       super.leftCommand = this.gameMenuAction;
       System.gc();
@@ -329,7 +330,7 @@ public final class BigTwoGameScreen extends Screen {
          this.playerMenuItems.addElement(this.betAction);
       }
 
-      this.playerMenuItems.addElement(RoomListScreen.z);
+      this.playerMenuItems.addElement(RoomListScreen.cashInAction);
       this.playerMenuItems.addElement(new UIAction("Rời bàn", new thien_bc(this)));
       super.leftCommand = new UIAction("Menu", new thien_bd(this));
       super.rightCommand = null;

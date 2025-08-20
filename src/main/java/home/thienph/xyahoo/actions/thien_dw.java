@@ -30,8 +30,8 @@ public final class thien_dw implements IAction {
         GameManager.blockedUsers.addElement(string);
         MessageHandler.i(BuddyListScreen.currentGroupName, string);
         int n = 0;
-        while (n < this.uiDropdown.a.length) {
-            if (string.equals(this.uiDropdown.a[n])) {
+        while (n < this.uiDropdown.options.length) {
+            if (string.equals(this.uiDropdown.options[n])) {
                 this.gameManager.showSimpleDialog(String.valueOf(TextConstant.deleteSuccess()) + string);
                 this.gameManager.removeScreen(this.screen);
                 this.gameManager.goToFirstScreen();

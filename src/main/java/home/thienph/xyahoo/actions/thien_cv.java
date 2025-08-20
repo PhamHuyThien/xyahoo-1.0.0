@@ -25,24 +25,24 @@ public final class thien_cv implements IAction {
     public final void action() {
         GameManager.getInstance().loginScreen.startSlide(1);
         GameManager.getInstance().removeScreen(LoginScreen.getSettingsScreen());
-        if (GameManager.autoLogin != this.a.a) {
-            GameManager.autoLogin = this.a.a;
+        if (GameManager.autoLogin != this.a.isChecked) {
+            GameManager.autoLogin = this.a.isChecked;
             Xuka.saveFlag("atlog", GameManager.autoLogin);
         }
-        if (GameManager.autoLoginYahoo != this.b.a) {
-            GameManager.autoLoginYahoo = this.b.a;
+        if (GameManager.autoLoginYahoo != this.b.isChecked) {
+            GameManager.autoLoginYahoo = this.b.isChecked;
             Xuka.saveFlag("atlogY", GameManager.autoLoginYahoo);
         }
-        if (TextField.multiTapSpeedIndex != this.c.a()) {
-            TextField.multiTapSpeedIndex = this.c.a();
+        if (TextField.multiTapSpeedIndex != this.c.getSelectedIndex()) {
+            TextField.multiTapSpeedIndex = this.c.getSelectedIndex();
             Xuka.saveCaret(TextField.multiTapSpeedIndex);
         }
-        if (GameManager.vibrateEnabled != this.d.a) {
-            GameManager.vibrateEnabled = this.d.a;
+        if (GameManager.vibrateEnabled != this.d.isChecked) {
+            GameManager.vibrateEnabled = this.d.isChecked;
             Xuka.saveFlag("vibrate", GameManager.vibrateEnabled);
         }
-        if (GameManager.soundEnabled != !this.e.a) {
-            GameManager.soundEnabled = !this.e.a;
+        if (GameManager.soundEnabled != !this.e.isChecked) {
+            GameManager.soundEnabled = !this.e.isChecked;
             Xuka.saveFlag("sound", GameManager.soundEnabled);
         }
     }

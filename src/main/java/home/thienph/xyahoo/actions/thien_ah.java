@@ -1,14 +1,15 @@
 package home.thienph.xyahoo.actions;
 
-final class thien_ah
-implements IAction {
-    private thien_ag a;
+import home.thienph.xyahoo.components.UIImageView;
 
-    thien_ah(thien_ag thien_ag2) {
-        this.a = thien_ag2;
+public final class thien_ah implements IAction {
+    private UIImageView uiImageView;
+
+    public thien_ah(UIImageView UIImageView2) {
+        this.uiImageView = UIImageView2;
     }
 
     public final void action() {
-        this.a.handleKeyPress(0, 0);
+        this.uiImageView.handleKeyPress(0, 0);
     }
 }

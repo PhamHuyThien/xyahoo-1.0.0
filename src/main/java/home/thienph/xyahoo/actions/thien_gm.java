@@ -24,7 +24,7 @@ implements IAction {
         if (string.equals("")) {
             return;
         }
-        String string2 = this.uiDropdown.b();
+        String string2 = this.uiDropdown.getSelectedItem();
         MessageHandler.j(string2, string);
         GameManager.getInstance().removeScreen(this.screen);
         GameManager.instance.focusBuddyList();

@@ -14,7 +14,7 @@ implements IAction {
     public final void action() {
         if (BuddyListScreen.isRankingEnabled = !BuddyListScreen.isRankingEnabled) {
             BuddyListScreen buddyListScreen2 = this.buddyListScreen;
-            buddyListScreen2.buddyList.d();
+            buddyListScreen2.buddyList.cleanup();
         }
         Xuka.saveFlag("onrank", BuddyListScreen.isRankingEnabled);
     }

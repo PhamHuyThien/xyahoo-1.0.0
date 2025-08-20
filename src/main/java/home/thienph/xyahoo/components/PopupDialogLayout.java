@@ -1,5 +1,6 @@
 package home.thienph.xyahoo.components;
 
+import home.thienph.xyahoo.data.data.UIAction;
 import home.thienph.xyahoo.managers.GameManager;
 import home.thienph.xyahoo.screens.Screen;
 import home.thienph.xyahoo.main.GameCanvas;
@@ -99,9 +100,9 @@ public final class PopupDialogLayout {
         }
         graphics.setClip(-1000, -1000, 5000, 5000);
         graphics.setColor(0xDDF3FF);
-        UIButton.a(graphics, this.centerX - 1, this.posY, this.popupWidth - 1, this.popupHeight - 1);
+        UIButton.drawBorder(graphics, this.centerX - 1, this.posY, this.popupWidth - 1, this.popupHeight - 1);
         graphics.drawRect(this.centerX - 1, this.posY, this.popupWidth - 1, this.popupHeight - 1);
-        UIButton.a(graphics, this.centerX - 2, this.posY - 1, this.popupWidth + 1, this.popupHeight + 1);
+        UIButton.drawBorder(graphics, this.centerX - 2, this.posY - 1, this.popupWidth + 1, this.popupHeight + 1);
         graphics.setClip(-1000, -1000, 5000, 5000);
         this.centerX = GameCanvas.screenWidth >> 1;
         graphics.setColor(0xFFFFFF);

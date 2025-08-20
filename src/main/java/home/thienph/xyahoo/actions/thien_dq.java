@@ -14,8 +14,8 @@ public final class thien_dq implements IAction {
     }
 
     public final void action() {
-        if (this.uiDropdown.a != null && this.uiDropdown.a.length != 0) {
-            this.textField.setText(this.uiDropdown.b());
+        if (this.uiDropdown.options != null && this.uiDropdown.options.length != 0) {
+            this.textField.setText(this.uiDropdown.getSelectedItem());
         }
     }
 }

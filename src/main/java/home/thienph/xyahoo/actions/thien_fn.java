@@ -23,7 +23,7 @@ implements IAction {
 
     public final void action() {
         String string = ContentFilter.filterProfanity(this.textField.getText().trim());
-        int n = this.uiDropdown.a() == 0 ? 1 : 0;
+        int n = this.uiDropdown.getSelectedIndex() == 0 ? 1 : 0;
         if (n != BuddyListScreen.userStatus) {
             MessageHandler.a(n, 1);
             BuddyListScreen.userStatus = n;

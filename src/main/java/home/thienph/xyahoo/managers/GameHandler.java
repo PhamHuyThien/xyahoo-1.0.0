@@ -1,7 +1,7 @@
 package home.thienph.xyahoo.managers;
 
-import home.thienph.xyahoo.actions.thien_r;
-import home.thienph.xyahoo.actions.thien_s;
+import home.thienph.xyahoo.data.data.ContactEntry;
+import home.thienph.xyahoo.data.data.ContactDataSource;
 import home.thienph.xyahoo.data.networks.Packet;
 import home.thienph.xyahoo.screens.BigTwoGameScreen;
 import home.thienph.xyahoo.conections.PacketHandler;
@@ -28,7 +28,7 @@ public final class GameHandler extends PacketHandler {
       return instance;
    }
 
-   public static void a(IGameManager var0) {
+   public static void setGameManager(IGameManager var0) {
       gameManager = var0;
    }
 
@@ -311,11 +311,11 @@ public final class GameHandler extends PacketHandler {
             }
 
             int var297 = MessageHandler.readInt(var1);
-            thien_r var130 = new thien_r(var125, "", 0, "", var128, 0, var297);
+            ContactEntry var130 = new ContactEntry(var125, "", 0, "", var128, 0, var297);
             var1.getPayload().readByte();
             MessageHandler.readString(var1);
-            var130.a(MessageHandler.readInt(var1));
-            var130.i = MessageHandler.readInt(var1);
+            var130.setTextColor(MessageHandler.readInt(var1));
+            var130.additionalFlags = MessageHandler.readInt(var1);
             var1.getPayload().readByte();
             var1.getPayload().readByte();
             var1.getPayload().readByte();
@@ -358,9 +358,9 @@ public final class GameHandler extends PacketHandler {
             return;
          case 1045:
             int var151 = MessageHandler.readInt(var1);
-            thien_s var152 = new thien_s();
+            ContactDataSource var152 = new ContactDataSource();
             int var153;
-            thien_r[] var154 = new thien_r[var153 = MessageHandler.readInt(var1)];
+            ContactEntry[] var154 = new ContactEntry[var153 = MessageHandler.readInt(var1)];
             String[] var155 = new String[var153];
             Vector var156 = new Vector();
 
@@ -368,10 +368,10 @@ public final class GameHandler extends PacketHandler {
                var155[var300] = MessageHandler.readString(var1);
                String var301 = MessageHandler.readString(var1);
                short var303 = MessageHandler.readShort(var1);
-               var154[var300] = new thien_r(var301, "", 0, "", new int[0], var303, var300);
-               if (var154[var300].g == 8 || var154[var300].g == 4) {
-                  var152.a(var155[var300], var154[var300]);
-               } else if (var154[var300].g == 32) {
+               var154[var300] = new ContactEntry(var301, "", 0, "", new int[0], var303, var300);
+               if (var154[var300].roomId == 8 || var154[var300].roomId == 4) {
+                  var152.addContactToGroup(var155[var300], var154[var300]);
+               } else if (var154[var300].roomId == 32) {
                   var156.addElement(var154[var300]);
                }
             }
@@ -767,8 +767,8 @@ public final class GameHandler extends PacketHandler {
             gameManager.handleCompleteGameResult(var95, var96, 0, var99, var97, var101, var102, var103, var104, var105, var106, var288, var108, var109);
             return;
          case 5000009:
-            thien_s var193 = new thien_s();
-            thien_r[] var4 = new thien_r[var3 = MessageHandler.readInt(var1)];
+            ContactDataSource var193 = new ContactDataSource();
+            ContactEntry[] var4 = new ContactEntry[var3 = MessageHandler.readInt(var1)];
             String[] var5 = new String[var3];
 
             for (int var6 = 0; var6 < var3; var6++) {
@@ -782,8 +782,8 @@ public final class GameHandler extends PacketHandler {
                String var8 = MessageHandler.readString(var1);
                int var9;
                var9 = (var9 = MessageHandler.readInt(var1)) == 0 ? 2 : (var9 == 1 ? 3 : 4);
-               var4[var6] = new thien_r(var7, var8, var9, null, null, -1, var6);
-               var193.a(var5[var6], var4[var6]);
+               var4[var6] = new ContactEntry(var7, var8, var9, null, null, -1, var6);
+               var193.addContactToGroup(var5[var6], var4[var6]);
             }
 
             gameManager.setCachedBuddyList(var193);

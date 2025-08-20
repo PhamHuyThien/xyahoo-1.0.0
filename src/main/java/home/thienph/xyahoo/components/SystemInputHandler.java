@@ -1,6 +1,4 @@
-package home.thienph.xyahoo.actions;
-
-import home.thienph.xyahoo.components.TextField;
+package home.thienph.xyahoo.components;
 
 import javax.microedition.lcdui.Command;
 import javax.microedition.lcdui.CommandListener;

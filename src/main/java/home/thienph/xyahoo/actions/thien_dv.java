@@ -14,7 +14,7 @@ public final class thien_dv implements IAction {
     }
 
     public final void action() {
-        String string = this.uiDropdown.b();
+        String string = this.uiDropdown.getSelectedItem();
         if (!string.equals("---")) {
             this.textField.setText(string);
         }

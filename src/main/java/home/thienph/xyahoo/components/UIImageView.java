@@ -1,35 +1,36 @@
-package home.thienph.xyahoo.actions;
+package home.thienph.xyahoo.components;
 
-import home.thienph.xyahoo.components.UIAction;
-import home.thienph.xyahoo.components.UIColorConstant;
-import home.thienph.xyahoo.components.UIControlBase;
+import home.thienph.xyahoo.actions.IAction;
+import home.thienph.xyahoo.actions.thien_ah;
+import home.thienph.xyahoo.data.data.UIAction;
+import home.thienph.xyahoo.constants.UIColorConstant;
 import home.thienph.xyahoo.constants.TextConstant;
 import home.thienph.xyahoo.managers.ImageCacheManager;
 
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 
-public final class thien_ag extends UIControlBase {
-    private Image c;
-    public byte[] a;
-    private int d;
-    private int e;
-    public IAction b;
-    private int[] f = null;
+public final class UIImageView extends UIControlBase {
+    private Image displayImage;
+    public byte[] imageData;
+    private int targetWidth;
+    private int targetHeight;
+    public IAction clickHandler;
+    private int[] iconPositions = null;
 
     static {
-        String[] stringArray = new String[]{"/", "\\", "<", ">", "?", ":", "\"", "*", "|"};
+        String[] invalidChars = new String[]{"/", "\\", "<", ">", "?", ":", "\"", "*", "|"};
     }
 
-    public final void d(int n, int n2) {
-        this.d = n;
-        this.e = n2;
+    public final void setTargetSize(int n, int n2) {
+        this.targetWidth = n;
+        this.targetHeight = n2;
     }
 
-    public final void a(Image image) {
+    public final void setImage(Image image) {
         Image image2;
-        int n = this.e;
-        int n2 = this.d;
+        int n = this.targetHeight;
+        int n2 = this.targetWidth;
         int n3 = image.getWidth();
         int n4 = image.getHeight();
         if (n3 == n2 && n4 == n) {
@@ -51,10 +52,10 @@ public final class thien_ag extends UIControlBase {
             }
             image2 = Image.createImage((Image)image3);
         }
-        this.c = image2;
+        this.displayImage = image2;
     }
 
-    public thien_ag() {
+    public UIImageView() {
         this.isVisible = false;
         this.actionTertiary = new UIAction(TextConstant.select(), new thien_ah(this));
     }
@@ -64,22 +65,22 @@ public final class thien_ag extends UIControlBase {
     }
 
     public final void handleKeyPress(int n, int n2) {
-        if (this.b != null) {
-            this.b.action();
+        if (this.clickHandler != null) {
+            this.clickHandler.action();
             return;
         }
     }
 
     public final void draw(Graphics graphics) {
-        if (this.c != null) {
-            graphics.drawImage(this.c, this.baseX, this.baseY, 0);
+        if (this.displayImage != null) {
+            graphics.drawImage(this.displayImage, this.baseX, this.baseY, 0);
         }
-        if (this.f != null) {
+        if (this.iconPositions != null) {
             int n = 0;
-            while (n < this.f.length) {
-                int n2 = this.f[n] >> 24;
-                int n3 = this.f[n] << 8 >> 24;
-                short s = (short)this.f[n];
+            while (n < this.iconPositions.length) {
+                int n2 = this.iconPositions[n] >> 24;
+                int n3 = this.iconPositions[n] << 8 >> 24;
+                short s = (short)this.iconPositions[n];
                 Image image = ImageCacheManager.getImage(s);
                 if (image != null) {
                     graphics.drawImage(image, this.baseX + (this.width >> 1) + n2, this.baseY + (this.height >> 1) + n3, 0);
@@ -100,8 +101,8 @@ public final class thien_ag extends UIControlBase {
     public final void update() {
     }
 
-    public final void a(int[] nArray) {
-        this.f = nArray;
+    public final void setIconPositions(int[] nArray) {
+        this.iconPositions = nArray;
     }
 
     public final boolean handleSoftKey(int n) {

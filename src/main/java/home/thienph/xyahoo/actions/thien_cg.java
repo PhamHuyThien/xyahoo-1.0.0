@@ -13,8 +13,8 @@ implements IAction {
 
     public final void action() {
         HomeCommentAction homeCommentAction2 = this.a;
-        HomeScreen.a(homeCommentAction2.homeScreen);
+        HomeScreen.resetSearchField(homeCommentAction2.homeScreen);
         homeCommentAction2 = this.a;
-        MessageHandler.c(homeCommentAction2.homeScreen.F.getText());
+        MessageHandler.c(homeCommentAction2.homeScreen.searchTextField.getText());
     }
 }

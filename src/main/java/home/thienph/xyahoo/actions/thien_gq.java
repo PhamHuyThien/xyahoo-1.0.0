@@ -13,8 +13,8 @@ implements IAction {
 
     public final void action() {
         this.loginYahooScreen.w.isFilterActive = !this.loginYahooScreen.w.isFilterActive;
-        this.loginYahooScreen.w.c();
-        this.loginYahooScreen.w.selectedGroupIndex = 0;
+        this.loginYahooScreen.w.rebuildVisibleItems();
+        this.loginYahooScreen.w.selectedItemIndex = 0;
         Xuka.saveFlag("hideOffline", this.loginYahooScreen.w.isFilterActive);
     }
 }

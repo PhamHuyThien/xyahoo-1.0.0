@@ -10,9 +10,9 @@ import java.util.Vector;
 
 public class FormScreen
 extends Screen {
-    public int w;
-    public int x;
-    public int y;
+    public int contentHeight;
+    public int currentY;
+    public int maxContentHeight;
     private SectionHeaderControl[] sectionHeaders;
     private int selectedSectionIndex = -1;
     private Vector formControls = new Vector();
@@ -26,15 +26,15 @@ extends Screen {
     }
 
     public final void initLayout() {
-        this.y = Screen.e - 30;
-        if (this.y < 100) {
-            this.y = 100;
+        this.maxContentHeight = Screen.e - 30;
+        if (this.maxContentHeight < 100) {
+            this.maxContentHeight = 100;
         }
-        if (this.y > 180) {
-            this.y = 180;
+        if (this.maxContentHeight > 180) {
+            this.maxContentHeight = 180;
         }
-        this.w = Screen.e - this.y >> 1;
-        this.x = 5;
+        this.contentHeight = Screen.e - this.maxContentHeight >> 1;
+        this.currentY = 5;
     }
 
     public static void calculateFormDimensions(int n, int n2) {
@@ -57,7 +57,7 @@ extends Screen {
         this.formControls.addElement(UIControlBase2);
         this.controls.addElement(UIControlBase2);
         if (bl) {
-            this.x = UIControlBase2.baseY + UIControlBase2.height + 2;
+            this.currentY = UIControlBase2.baseY + UIControlBase2.height + 2;
         }
     }
 
@@ -68,7 +68,7 @@ extends Screen {
         UIControlBase2.parentScreen = this;
         this.formControls.addElement(UIControlBase2);
         this.controls.addElement(UIControlBase2);
-        this.x = UIControlBase2.baseY + UIControlBase2.height + 2;
+        this.currentY = UIControlBase2.baseY + UIControlBase2.height + 2;
     }
 
     public final void removeControl(UIControlBase UIControlBase2) {

@@ -1,7 +1,7 @@
 package home.thienph.xyahoo.actions;
 
 import home.thienph.xyahoo.components.TextField;
-import home.thienph.xyahoo.components.UIAction;
+import home.thienph.xyahoo.data.data.UIAction;
 import home.thienph.xyahoo.constants.TextConstant;
 import home.thienph.xyahoo.screens.FormScreen;
 import home.thienph.xyahoo.utils.UIFormBuilder;

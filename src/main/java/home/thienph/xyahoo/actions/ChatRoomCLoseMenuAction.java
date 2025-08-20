@@ -4,18 +4,18 @@ import home.thienph.xyahoo.managers.GameManager;
 import home.thienph.xyahoo.managers.MessageHandler;
 import home.thienph.xyahoo.screens.ChatRoomScreen;
 
-public final class thien_fc
+public final class ChatRoomCLoseMenuAction
 implements IAction {
     private ChatRoomScreen chatRoomScreen;
-    private final boolean b;
+    private final boolean isGroupChat;
 
-    public thien_fc(ChatRoomScreen chatRoomScreen2, boolean bl) {
+    public ChatRoomCLoseMenuAction(ChatRoomScreen chatRoomScreen2, boolean bl) {
         this.chatRoomScreen = chatRoomScreen2;
-        this.b = bl;
+        this.isGroupChat = bl;
     }
 
     public final void action() {
-        if (this.b) {
+        if (this.isGroupChat) {
             MessageHandler.h(this.chatRoomScreen.subtitle);
         }
         GameManager.getInstance().removeScreen(this.chatRoomScreen);

@@ -3,8 +3,8 @@ package home.thienph.xyahoo.screens;
 import home.thienph.xyahoo.actions.IAction;
 import home.thienph.xyahoo.actions.thien_ar;
 import home.thienph.xyahoo.components.TextField;
-import home.thienph.xyahoo.components.UIAction;
-import home.thienph.xyahoo.components.UIBuddyListControl;
+import home.thienph.xyahoo.data.data.UIAction;
+import home.thienph.xyahoo.components.BuddyListControl;
 import home.thienph.xyahoo.components.UIControlBase;
 import home.thienph.xyahoo.managers.GameManager;
 import home.thienph.xyahoo.main.*;
@@ -390,7 +390,7 @@ public class Screen {
             UIControlBase2.handlePointerRelease(n - UIControlBase2.baseX, n2 + this.scrollY - UIControlBase2.baseY);
             return;
         }
-        if (!this.isLocked && UIBuddyListControl.c(n2 - this.lastTouchY) > 1) {
+        if (!this.isLocked && BuddyListControl.absoluteValue(n2 - this.lastTouchY) > 1) {
             this.isDragging = true;
             this.scrollTargetY -= n2 - this.lastTouchY;
             if (this.scrollTargetY < 0) {

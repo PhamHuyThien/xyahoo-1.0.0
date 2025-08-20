@@ -1,4 +1,4 @@
-package home.thienph.xyahoo.components;
+package home.thienph.xyahoo.constants;
 
 public final class UIColorConstant {
     private static final int themeIndex = 0;

@@ -2,6 +2,7 @@ package home.thienph.xyahoo.components;
 
 import home.thienph.xyahoo.actions.thien_ar;
 import home.thienph.xyahoo.actions.thien_az;
+import home.thienph.xyahoo.data.data.UIAction;
 import home.thienph.xyahoo.screens.Screen;
 import home.thienph.xyahoo.data.data.TableInfo;
 import home.thienph.xyahoo.utils.TextRenderer;
@@ -92,7 +93,7 @@ public final class TableListControl
             n = this.startX + n4 * this.horizontalSpacing;
             n2 = this.startY + n3 * this.verticalSpacing + this.scrollOffset;
             if (this.isSelectedTable(n3, n4)) {
-                UIButton.a(graphics, n - 35, n2 - 27, tableWidth + 22, tableHeight + 31, 8);
+                UIButton.drawRoundedButton(graphics, n - 35, n2 - 27, tableWidth + 22, tableHeight + 31, 8);
             }
             graphics.drawImage(tableImage, n, n2, 3);
             if (tableList[n5].getPlayerCount() > 0) {
@@ -235,7 +236,7 @@ public final class TableListControl
 
     public final void handlePointerRelease(int n, int n2) {
         n = n2 - this.lastDragY;
-        if (UIBuddyListControl.c(n) > 10) {
+        if (BuddyListControl.absoluteValue(n) > 10) {
             if (n > 0) {
                 this.scrollOffset += n;
                 if (this.scrollOffset > 0) {

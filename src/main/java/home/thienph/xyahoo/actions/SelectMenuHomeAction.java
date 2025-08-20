@@ -12,8 +12,8 @@ implements IAction {
     }
 
     public final void action() {
-        UIGridMenu UIGridMenu2 = this.homeScreen.menuHome;
+        UIGridMenu UIGridMenu2 = this.homeScreen.homeGridMenu;
         int n = UIGridMenu2.selectedRow * UIGridMenu2.columns + UIGridMenu2.selectedCol;
-        this.homeScreen.openMenu(n);
+        this.homeScreen.openMenuByIndex(n);
     }
 }

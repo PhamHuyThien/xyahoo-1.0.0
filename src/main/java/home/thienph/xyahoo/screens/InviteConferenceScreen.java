@@ -1,11 +1,11 @@
 package home.thienph.xyahoo.screens;
 
-import home.thienph.xyahoo.actions.thien_co;
-import home.thienph.xyahoo.actions.thien_cp;
-import home.thienph.xyahoo.actions.thien_u;
+import home.thienph.xyahoo.actions.OkInviteConferenceAction;
+import home.thienph.xyahoo.actions.CloseInviteConferenceAction;
+import home.thienph.xyahoo.actions.DisplayItem;
 import home.thienph.xyahoo.components.TextField;
-import home.thienph.xyahoo.components.UIAction;
-import home.thienph.xyahoo.components.UIBuddyListControl;
+import home.thienph.xyahoo.data.data.UIAction;
+import home.thienph.xyahoo.components.BuddyListControl;
 import home.thienph.xyahoo.constants.TextConstant;
 import home.thienph.xyahoo.managers.GameManager;
 import home.thienph.xyahoo.utils.TextRenderer;
@@ -14,21 +14,21 @@ import java.util.Vector;
 import javax.microedition.lcdui.Graphics;
 
 public final class InviteConferenceScreen extends Screen {
-   private UIBuddyListControl buddyListControl = GameManager.getInstance().buddyListScreen.buddyList;
-   public String w;
-   public String x;
+   private BuddyListControl buddyListControl = GameManager.getInstance().buddyListScreen.buddyList;
+   public String roomId;
+   public String roomName;
    private boolean isSearchActive;
    private final TextField searchField = new TextField();
 
    public final String[] getSelectedBuddyIds() {
       Vector var1 = new Vector();
-      Vector var2 = this.buddyListControl.visibleItems;
+      Vector var2 = this.buddyListControl.displayItems;
 
       for (int var3 = 0; var3 < var2.size(); var3++) {
-         thien_u var4;
-         if ((var4 = (thien_u)var2.elementAt(var3)).a == 0 && var4.h) {
-            var4.h = false;
-            var1.addElement(var4.d);
+         DisplayItem var4;
+         if ((var4 = (DisplayItem)var2.elementAt(var3)).itemType == 0 && var4.isSelected) {
+            var4.isSelected = false;
+            var1.addElement(var4.displayName);
          }
       }
 
@@ -47,17 +47,17 @@ public final class InviteConferenceScreen extends Screen {
       super.title = TextConstant.inviteConference();
       this.addControl(this.buddyListControl);
       this.selectControl(this.buddyListControl);
-      super.rightCommand = new UIAction("OK", new thien_co(this));
-      super.leftCommand = new UIAction(TextConstant.cancel(), new thien_cp(this));
+      super.rightCommand = new UIAction("OK", new OkInviteConferenceAction(this));
+      super.leftCommand = new UIAction(TextConstant.cancel(), new CloseInviteConferenceAction(this));
    }
 
    public final void clearBuddyList() {
-      if (this.buddyListControl.visibleItems != null) {
-         this.buddyListControl.visibleItems.removeAllElements();
+      if (this.buddyListControl.displayItems != null) {
+         this.buddyListControl.displayItems.removeAllElements();
       }
 
-      this.buddyListControl.visibleItems = null;
-      this.buddyListControl.buddyDataModel = null;
+      this.buddyListControl.displayItems = null;
+      this.buddyListControl.contactDataSource = null;
    }
 
    public final void updateLayout() {
@@ -101,7 +101,7 @@ public final class InviteConferenceScreen extends Screen {
          }
 
          if (!this.searchField.getText().equals(var4)) {
-            this.buddyListControl.d(this.searchField.getText());
+            this.buddyListControl.setSearchFilter(this.searchField.getText());
          }
       }
 
