@@ -1110,7 +1110,7 @@ public final class GameManager implements IGameManager {
                   }
                }
 
-               if (isTextFieldControl(var11.padding)) {
+               if (isTextFieldControl(var11.id)) {
                   ((TextField)var11.getControlById(2)).insertText(TextRenderer.emoticons[this.emoticonY * 6 + this.emoticonX]);
                } else {
                   ChatRoomScreen var24;
@@ -2050,7 +2050,7 @@ public final class GameManager implements IGameManager {
 
       while (--var2 >= 0) {
          Screen var3;
-         if ((var3 = (Screen)this.screenStack.elementAt(var2)).padding == var1) {
+         if ((var3 = (Screen)this.screenStack.elementAt(var2)).id == var1) {
             return var3;
          }
       }

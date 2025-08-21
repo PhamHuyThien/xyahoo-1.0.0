@@ -145,7 +145,7 @@ public class MessageHandler {
                   String var105 = decodePacket(var1);
                   formScreen.title = var105;
                   int var106 = readInt(var1);
-                  formScreen.padding = var106;
+                  formScreen.id = var106;
                   boolean var107 = readBool(var1);
                   Screen var108;
                   if ((var108 = GameManager.instance.findScreenById(var106)) != null) {

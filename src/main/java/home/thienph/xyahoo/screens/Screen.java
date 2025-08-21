@@ -36,7 +36,7 @@ public class Screen {
     public int scrollY;
     private int scrollVelocity;
     private int scrollDelta;
-    public int padding;
+    public int id;
     public boolean isScrolling = false;
     private int controlCount;
     public boolean scrollLock = false;
