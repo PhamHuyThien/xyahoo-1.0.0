@@ -14,7 +14,7 @@ public final class thien_dy implements IAction {
     }
 
     public final void action() {
-        MessageHandler.c(LoginYahooScreen.x, this.b, 1);
+        MessageHandler.c(LoginYahooScreen.currentUsername, this.b, 1);
         this.gameManager.closeTopDialog();
     }
 }

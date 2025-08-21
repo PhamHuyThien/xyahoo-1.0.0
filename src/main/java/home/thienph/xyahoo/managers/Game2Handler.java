@@ -1,6 +1,6 @@
 package home.thienph.xyahoo.managers;
 
-import home.thienph.xyahoo.data.data.ContactEntry;
+import home.thienph.xyahoo.data.data.ContactInfo;
 import home.thienph.xyahoo.data.data.ContactDataSource;
 import home.thienph.xyahoo.data.data.ContactGroup;
 import home.thienph.xyahoo.data.networks.Packet;
@@ -18,44 +18,44 @@ public final class Game2Handler extends PacketHandler {
       gameManager.handleDisconnect();
    }
 
-   protected final void handle(Packet var1, int var2) {
-      switch (var2) {
+   protected final void handle(Packet packet, int commandId) {
+      switch (commandId) {
          case -5:
             gameManager.yahooLoginSuccess();
             return;
          case 3:
-            String var20 = MessageHandler.readString(var1);
-            MessageHandler.readString(var1);
-            String var22 = MessageHandler.readString(var1);
+            String var20 = MessageHandler.readString(packet);
+            MessageHandler.readString(packet);
+            String var22 = MessageHandler.readString(packet);
             gameManager.receiveYahooMessage(var20, var22);
             return;
          case 5:
-            String var17 = MessageHandler.readString(var1);
-            int var19 = MessageHandler.readInt(var1);
-            String var21 = MessageHandler.readString(var1);
-            MessageHandler.readString(var1);
-            MessageHandler.readString(var1);
-            MessageHandler.readString(var1);
+            String var17 = MessageHandler.readString(packet);
+            int var19 = MessageHandler.readInt(packet);
+            String var21 = MessageHandler.readString(packet);
+            MessageHandler.readString(packet);
+            MessageHandler.readString(packet);
+            MessageHandler.readString(packet);
             gameManager.setBuddyOnlineStatus(var17, var19, 2);
             gameManager.updateBuddyStatus(var17, var21, 2);
             return;
          case 6:
             ContactDataSource var16 = new ContactDataSource();
-            int var3 = MessageHandler.readInt(var1);
+            int var3 = MessageHandler.readInt(packet);
 
             for (int var4 = 0; var4 < var3; var4++) {
-               String var5 = MessageHandler.readString(var1);
+               String var5 = MessageHandler.readString(packet);
                ContactGroup var6 = new ContactGroup(var5);
-               int var18 = MessageHandler.readInt(var1);
+               int var18 = MessageHandler.readInt(packet);
 
                for (int var7 = 0; var7 < var18; var7++) {
-                  String var23 = MessageHandler.readString(var1);
-                  int var24 = MessageHandler.readInt(var1);
-                  String var25 = MessageHandler.readString(var1);
-                  MessageHandler.readString(var1);
-                  String var26 = MessageHandler.readString(var1);
-                  MessageHandler.readString(var1);
-                  var6.addContact(new ContactEntry(var23, var26, var24, var25, new int[0], 0, 0));
+                  String contactId = MessageHandler.readString(packet);
+                  int statusCode = MessageHandler.readInt(packet);
+                  String var25 = MessageHandler.readString(packet);
+                  MessageHandler.readString(packet);
+                  String var26 = MessageHandler.readString(packet);
+                  MessageHandler.readString(packet);
+                  var6.addContact(new ContactInfo(contactId, var26, statusCode, var25, new int[0], 0, 0));
                }
 
                var16.groups.addElement(var6);
@@ -64,21 +64,21 @@ public final class Game2Handler extends PacketHandler {
             gameManager.setYahooBuddyList(var16);
             return;
          case 27:
-            String var15 = MessageHandler.readString(var1);
-            String var13 = MessageHandler.readString(var1);
+            String var15 = MessageHandler.readString(packet);
+            String var13 = MessageHandler.readString(packet);
             System.out.println("fromUser = " + var15 + "; toUser = " + var13);
             gameManager.receiveBuzz(var15);
             return;
          case 32:
-            String var8 = MessageHandler.readString(var1);
-            MessageHandler.readString(var1);
-            String var9 = MessageHandler.readString(var1);
-            String var10 = MessageHandler.readString(var1);
+            String var8 = MessageHandler.readString(packet);
+            MessageHandler.readString(packet);
+            String var9 = MessageHandler.readString(packet);
+            String var10 = MessageHandler.readString(packet);
             gameManager.handleYahooMessage(var8, var9, var10);
             return;
          case 34:
             int var12;
-            if ((var12 = MessageHandler.readInt(var1)) == -1) {
+            if ((var12 = MessageHandler.readInt(packet)) == -1) {
                gameManager.yahooLoginFailed();
                return;
             }
@@ -91,13 +91,13 @@ public final class Game2Handler extends PacketHandler {
          case 55:
             return;
          case 56:
-            int var11 = MessageHandler.readInt(var1);
+            int var11 = MessageHandler.readInt(packet);
             gameManager.saveYahooChecksum(var11);
             return;
          case 77:
-            String var14 = MessageHandler.readString(var1);
-            MessageHandler.readString(var1);
-            MessageHandler.readString(var1);
+            String var14 = MessageHandler.readString(packet);
+            MessageHandler.readString(packet);
+            MessageHandler.readString(packet);
             gameManager.acceptAddFriend(var14);
       }
    }

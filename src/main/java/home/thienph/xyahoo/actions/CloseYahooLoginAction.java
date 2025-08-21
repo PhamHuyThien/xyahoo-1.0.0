@@ -3,11 +3,10 @@ package home.thienph.xyahoo.actions;
 import home.thienph.xyahoo.managers.GameManager;
 import home.thienph.xyahoo.screens.LoginYahooScreen;
 
-public final class thien_gr
-implements IAction {
+public final class CloseYahooLoginAction implements IAction {
     private LoginYahooScreen loginYahooScreen;
 
-    public thien_gr(LoginYahooScreen loginYahooScreen2) {
+    public CloseYahooLoginAction(LoginYahooScreen loginYahooScreen2) {
         this.loginYahooScreen = loginYahooScreen2;
     }
 

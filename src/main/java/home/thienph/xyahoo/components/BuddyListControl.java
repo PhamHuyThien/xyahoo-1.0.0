@@ -2,7 +2,7 @@ package home.thienph.xyahoo.components;
 
 import home.thienph.xyahoo.actions.*;
 import home.thienph.xyahoo.data.data.ContactDataSource;
-import home.thienph.xyahoo.data.data.ContactEntry;
+import home.thienph.xyahoo.data.data.ContactInfo;
 import home.thienph.xyahoo.data.data.ContactGroup;
 import home.thienph.xyahoo.data.data.UIAction;
 import home.thienph.xyahoo.managers.GameManager;
@@ -127,7 +127,7 @@ public final class BuddyListControl extends UIControlBase {
                var4 = var10.contacts.size();
 
                for (int var7 = 0; var7 < var4; var7++) {
-                  ContactEntry var8 = (ContactEntry)var12.elementAt(var7);
+                  ContactInfo var8 = (ContactInfo)var12.elementAt(var7);
                   DisplayItem var9;
                   (var9 = new DisplayItem()).additionalData = var8.permissions;
                   var9.displayName = var8.contactId;
@@ -529,7 +529,7 @@ public final class BuddyListControl extends UIControlBase {
          ContactDataSource var3 = this.contactDataSource;
 
          for (int var6 = this.contactDataSource.groups.size() - 1; var6 >= 0; var6--) {
-            ContactEntry var7;
+            ContactInfo var7;
             if ((var7 = ((ContactGroup)var3.groups.elementAt(var6)).findContactByName(var4)) != null) {
                var7.statusCode = var5;
             }
@@ -568,7 +568,7 @@ public final class BuddyListControl extends UIControlBase {
          ContactDataSource var4 = this.contactDataSource;
 
          for (int var7 = this.contactDataSource.groups.size() - 1; var7 >= 0; var7--) {
-            ContactEntry var8;
+            ContactInfo var8;
             if ((var8 = ((ContactGroup)var4.groups.elementAt(var7)).findContactByName(var5)) != null) {
                var8.statusMessage = var6;
             }
@@ -645,7 +645,7 @@ public final class BuddyListControl extends UIControlBase {
          for (int var4 = this.contactDataSource.groups.size() - 1; var4 >= 0; var4--) {
             ContactGroup var5;
             for (int var6 = (var5 = (ContactGroup)var2.groups.elementAt(var4)).contacts.size() - 1; var6 >= 0; var6--) {
-               if (((ContactEntry)var5.contacts.elementAt(var6)).contactId.equals(var3)) {
+               if (((ContactInfo)var5.contacts.elementAt(var6)).contactId.equals(var3)) {
                   var5.contacts.removeElementAt(var6);
                   break label46;
                }
@@ -726,13 +726,13 @@ public final class BuddyListControl extends UIControlBase {
    public final void moveContactToGroup(String var1, String var2) {
       var2 = var1;
       ContactDataSource var9 = this.contactDataSource;
-      ContactEntry var4 = null;
+      ContactInfo var4 = null;
 
       for (int var5 = var9.groups.size() - 1; var5 >= 0; var5--) {
          ContactGroup var6;
          for (int var7 = (var6 = (ContactGroup)var9.groups.elementAt(var5)).contacts.size() - 1; var7 >= 0; var7--) {
-            ContactEntry var8;
-            if ((var8 = (ContactEntry)var6.contacts.elementAt(var7)).contactId.equals(var2)) {
+            ContactInfo var8;
+            if ((var8 = (ContactInfo)var6.contacts.elementAt(var7)).contactId.equals(var2)) {
                var4 = var8;
                var6.contacts.removeElementAt(var7);
                break;

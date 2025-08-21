@@ -2,7 +2,7 @@ package home.thienph.xyahoo.components;
 
 import home.thienph.xyahoo.actions.*;
 import home.thienph.xyahoo.data.data.ContactDataSource;
-import home.thienph.xyahoo.data.data.ContactEntry;
+import home.thienph.xyahoo.data.data.ContactInfo;
 import home.thienph.xyahoo.data.data.ContactGroup;
 import home.thienph.xyahoo.data.data.UIAction;
 import home.thienph.xyahoo.main.GameCanvas;
@@ -99,18 +99,18 @@ extends UIControlBase {
                 int n3 = ((Vector)object).size();
                 int n4 = 0;
                 while (n4 < n3) {
-                    ContactEntry contactEntry2 = (ContactEntry)((Vector)object).elementAt(n4);
+                    ContactInfo contactInfo2 = (ContactInfo)((Vector)object).elementAt(n4);
                     DisplayItem displayItem2 = new DisplayItem();
-                    new DisplayItem().additionalData = contactEntry2.permissions;
-                    displayItem2.displayName = contactEntry2.contactId;
-                    displayItem2.statusCode = contactEntry2.statusCode;
-                    displayItem2.statusText = contactEntry2.displayName;
-                    displayItem2.textColor = contactEntry2.getTextColor();
-                    displayItem2.fontRenderer = contactEntry2.colorObject;
-                    displayItem2.fontRenderer = new Integer(contactEntry2.getTextColor());
-                    displayItem2.isSelected = contactEntry2.isOnline;
-                    displayItem2.detailText = contactEntry2.statusMessage;
-                    displayItem2.sourceEntry = contactEntry2;
+                    new DisplayItem().additionalData = contactInfo2.permissions;
+                    displayItem2.displayName = contactInfo2.contactId;
+                    displayItem2.statusCode = contactInfo2.statusCode;
+                    displayItem2.statusText = contactInfo2.displayName;
+                    displayItem2.textColor = contactInfo2.getTextColor();
+                    displayItem2.fontRenderer = contactInfo2.colorObject;
+                    displayItem2.fontRenderer = new Integer(contactInfo2.getTextColor());
+                    displayItem2.isSelected = contactInfo2.isOnline;
+                    displayItem2.detailText = contactInfo2.statusMessage;
+                    displayItem2.sourceEntry = contactInfo2;
                     this.displayItems.addElement(displayItem2);
                     ++n4;
                 }

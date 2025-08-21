@@ -1,6 +1,6 @@
 package home.thienph.xyahoo.managers;
 
-import home.thienph.xyahoo.data.data.ContactEntry;
+import home.thienph.xyahoo.data.data.ContactInfo;
 import home.thienph.xyahoo.data.data.ContactDataSource;
 import home.thienph.xyahoo.data.data.TableInfo;
 
@@ -45,7 +45,7 @@ public interface IGameManager {
 
     public void cannotCreateConference();
 
-    public void showConferenceInviteDialog(String var1, String var2, String var3);
+    public void showConferenceInviteDialog(String userInvite, String roomId, String groupChatName);
 
     public void handleUserJoinedConference(String var1, String var2);
 
@@ -55,7 +55,7 @@ public interface IGameManager {
 
     public void handleMultipleUsersJoinedConference(String var1, String[] var2);
 
-    public void addFriendToGroup(int var1, ContactEntry var2, String var3);
+    public void addFriendToGroup(int var1, ContactInfo var2, String var3);
 
     public void tuChoiKetBan(String var1);
 

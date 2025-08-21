@@ -111,12 +111,12 @@ public final class ChatRoomScreen extends Screen {
 
                MessageHandler.f(super.subtitle, this.inputTextField.getText());
             } else if (this.isPrivateChat) {
-               MessageHandler.a((String)(var5 = LoginYahooScreen.x), this.chatPartnerName, this.inputTextField.getText(), 2);
+               MessageHandler.a((String)(var5 = LoginYahooScreen.currentUsername), this.chatPartnerName, this.inputTextField.getText(), 2);
             } else {
                MessageHandler.a((String)(var5 = BuddyListScreen.currentGroupName), super.title, this.inputTextField.getText(), 1);
             }
 
-            this.messageList.addUserMessage(this.isPrivateChat ? LoginYahooScreen.y : BuddyListScreen.userStatusMessage, this.inputTextField.getText(), 0);
+            this.messageList.addUserMessage(this.isPrivateChat ? LoginYahooScreen.originalUsername : BuddyListScreen.userStatusMessage, this.inputTextField.getText(), 0);
             this.messageList.scrollToBottom();
             this.inputTextField.setText("");
             return false;

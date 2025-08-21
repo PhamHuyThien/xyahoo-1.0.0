@@ -97,8 +97,8 @@ public final class BuddyListScreen extends Screen {
 
    public final void showAddFriendScreen(String var1) {
       GameManager.currentScreen = GameManager.getInstance().getCurrentScreen();
-      Screen var2;
-      (var2 = new Screen()).title = TextConstant.addFriend();
+      Screen screen = new Screen();
+      screen.title = TextConstant.addFriend();
       int var3;
       if ((var3 = GameCanvas.screenWidth - 30) > 150) {
          var3 = 180;
@@ -131,16 +131,16 @@ public final class BuddyListScreen extends Screen {
       UIDropdown var12;
       (var12 = new UIDropdown(this.buddyList.getGroupNames(), var4, var5, var3, TextRenderer.fontHeight + 6)).setSelectedItem(var9);
       var12.changeHandler = new thien_gj(this, var8, var12);
-      var2.addControl(var6);
-      var2.addControl(var7);
-      var2.addControl(var11);
-      var2.addControl(var8);
-      var2.addControl(var10);
-      var2.addControl(var12);
-      var2.selectControl(var7);
-      var2.centerCommand = new UIAction("OK", new thien_gk(this, var7, var8, var2));
-      var2.leftCommand = new UIAction(TextConstant.cancel(), new thien_gl(this, var2));
-      GameManager.instance.pushScreen(var2);
+      screen.addControl(var6);
+      screen.addControl(var7);
+      screen.addControl(var11);
+      screen.addControl(var8);
+      screen.addControl(var10);
+      screen.addControl(var12);
+      screen.selectControl(var7);
+      screen.centerCommand = new UIAction("OK", new thien_gk(this, var7, var8, screen));
+      screen.leftCommand = new UIAction(TextConstant.cancel(), new thien_gl(this, screen));
+      GameManager.instance.pushScreen(screen);
       GameManager.getInstance().goToLastScreen();
    }
 

@@ -82,12 +82,12 @@ public final class HomeScreen extends FormScreen {
       return super.handleInput(var1, var2, var3);
    }
 
-   public static void navigateToScreen(int var0, int var1) {
-      Screen var2;
-      if ((var2 = GameManager.instance.findScreenById(var0)) != null) {
+   public static void navigateToScreen(int screenId, int var1) {
+      Screen screen = GameManager.instance.findScreenById(screenId);
+      if (screen != null) {
          GameManager.instance.closeTopDialog();
-         var2.startSlide(1);
-         GameManager.instance.switchToScreen(var2);
+         screen.startSlide(1);
+         GameManager.instance.switchToScreen(screen);
       } else {
          MessageHandler.a(var1);
       }

@@ -15,27 +15,27 @@ implements IAction {
 
     public final void action() {
         int n;
-        String string = ContentFilter.filterProfanity(LoginYahooScreen.b(this.loginYahooScreen).getText().trim());
-        int n2 = n = LoginYahooScreen.c(this.loginYahooScreen).getSelectedIndex() == 0 ? 0 : 12;
-        if (string != null && !string.equals(LoginYahooScreen.A)) {
+        String string = ContentFilter.filterProfanity(LoginYahooScreen.getStatusMessageTextField(this.loginYahooScreen).getText().trim());
+        int n2 = n = LoginYahooScreen.getStatusDropdown(this.loginYahooScreen).getSelectedIndex() == 0 ? 0 : 12;
+        if (string != null && !string.equals(LoginYahooScreen.statusMessage)) {
             LoginYahooScreen.a(this.loginYahooScreen, string);
-            LoginYahooScreen.z = 0;
+            LoginYahooScreen.loginStatus = 0;
             GameManager.isShowingAnimation = true;
-        } else if (n != LoginYahooScreen.z) {
+        } else if (n != LoginYahooScreen.loginStatus) {
             if (n == 0) {
                 if (string != null && string.length() > 0) {
                     LoginYahooScreen.a(this.loginYahooScreen, string);
                 } else {
                     MessageHandler.a(0, 2);
                 }
-                LoginYahooScreen.z = 0;
+                LoginYahooScreen.loginStatus = 0;
                 GameManager.isShowingAnimation = true;
             } else {
                 MessageHandler.a(12, 2);
-                LoginYahooScreen.z = 12;
+                LoginYahooScreen.loginStatus = 12;
                 GameManager.isShowingAnimation = true;
             }
         }
-        GameManager.getInstance().removeScreen(LoginYahooScreen.d(this.loginYahooScreen));
+        GameManager.getInstance().removeScreen(LoginYahooScreen.getStatusForm(this.loginYahooScreen));
     }
 }

@@ -1,7 +1,7 @@
 package home.thienph.xyahoo.actions;
 
 import home.thienph.xyahoo.components.TextField;
-import home.thienph.xyahoo.data.data.ContactEntry;
+import home.thienph.xyahoo.data.data.ContactInfo;
 import home.thienph.xyahoo.managers.GameManager;
 import home.thienph.xyahoo.managers.MessageHandler;
 import home.thienph.xyahoo.screens.BuddyListScreen;
@@ -24,7 +24,7 @@ public final class thien_ds implements IAction {
         if (this.textField.getText().equals("")) {
             return;
         }
-        this.gameManager.buddyListScreen.buddyList.getDataModel().addContactToGroup(this.textField.getText(), new ContactEntry(this.c, "", 0, "", new int[0], 0, 0));
+        this.gameManager.buddyListScreen.buddyList.getDataModel().addContactToGroup(this.textField.getText(), new ContactInfo(this.c, "", 0, "", new int[0], 0, 0));
         this.gameManager.buddyListScreen.buddyList.rebuildVisibleItems();
         BuddyListScreen buddyListScreen2 = this.gameManager.buddyListScreen;
         buddyListScreen2.buddyList.cleanup();

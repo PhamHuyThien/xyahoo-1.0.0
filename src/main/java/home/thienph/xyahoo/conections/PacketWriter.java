@@ -60,8 +60,8 @@ public final class PacketWriter implements Runnable {
             }
         }
 
-        if (ConnectionManager.isConnected && ConnectionManager.ConnectionListener != null) {
-            ConnectionManager.ConnectionListener.onDisconnect();
+        if (ConnectionManager.isConnected && ConnectionManager.packetHandler != null) {
+            ConnectionManager.packetHandler.onDisconnect();
         }
     }
 }

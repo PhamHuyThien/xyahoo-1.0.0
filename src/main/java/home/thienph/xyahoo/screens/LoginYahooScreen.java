@@ -18,246 +18,246 @@ import javax.microedition.lcdui.Image;
 
 public final class LoginYahooScreen
 extends Screen {
-    public BuddyListControl w;
-    public static String x;
-    public static String y;
-    public static int z;
-    public static String A;
-    private static boolean D;
-    private boolean E;
-    private boolean F;
-    private Vector G;
-    public PopupSideElementData B;
-    private TextField H;
-    public boolean C;
-    private UITextLabel I;
-    private TextField J;
-    private UITextLabel K;
-    private TextField L;
-    private UICheckBox M;
-    private UITextLabel N;
-    private UIDropdown O;
-    private int P;
-    private int Q;
-    private UIAction R;
-    private UIAction S;
-    private UIAction T;
-    private int U;
-    private FormScreen V;
-    private UIDropdown W;
-    private TextField X;
+    public BuddyListControl buddyListControl;
+    public static String currentUsername;
+    public static String originalUsername;
+    public static int loginStatus;
+    public static String statusMessage;
+    private static boolean isInvisibleMode;
+    private boolean isSearchMode;
+    private boolean isLoggedIn;
+    private Vector menuActions;
+    public PopupSideElementData popupMenuData;
+    private TextField searchTextField;
+    public boolean shouldSignOut;
+    private UITextLabel yahooIdLabel;
+    private TextField usernameTextField;
+    private UITextLabel passwordLabel;
+    private TextField passwordTextField;
+    private UICheckBox invisibleCheckbox;
+    private UITextLabel domainLabel;
+    private UIDropdown domainDropdown;
+    private int logoXPosition;
+    private int logoYPosition;
+    private UIAction menuAction;
+    private UIAction signInAction;
+    private UIAction closeAction;
+    private int checksumValue;
+    private FormScreen statusFormScreen;
+    private UIDropdown statusDropdown;
+    private TextField statusMessageTextField;
 
     public LoginYahooScreen() {
         String string = Xuka.d();
         String string2 = Xuka.e();
         this.title = "Yahoo!";
         int n = HomeScreen.instance.homeGridMenu.images[0].getHeight();
-        this.P = Screen.e - HomeScreen.instance.homeGridMenu.images[0].getWidth() >> 1;
+        this.logoXPosition = Screen.e - HomeScreen.instance.homeGridMenu.images[0].getWidth() >> 1;
         int n2 = (TextRenderer.fontHeight + 6 << 2) + 28 + n + 5;
-        this.Q = n2 <= Screen.formHeight - GameManager.topMargin ? GameManager.headerHeight - 10 + (Screen.formHeight - GameManager.topMargin - n2 >> 1) : GameManager.headerHeight + 5;
-        n = this.Q + n - 3;
-        this.I = new UITextLabel("Yahoo! ID:", FormScreen.formXOffset, n, TextRenderer.fontHeight);
-        this.I.width = FormScreen.formMarginLeft;
-        this.J = new TextField();
-        this.J.setBounds(FormScreen.formStartX, n, FormScreen.formWidth, TextRenderer.fontHeight + 6);
-        this.J.setInputType(0);
-        this.K = new UITextLabel(String.valueOf(TextConstant.password()) + ":", FormScreen.formXOffset, n += this.J.height + 7, TextRenderer.fontHeight);
-        this.K.width = FormScreen.formMarginLeft;
-        this.L = new TextField();
-        this.L.setBounds(FormScreen.formStartX, n, FormScreen.formWidth, TextRenderer.fontHeight + 6);
-        this.L.setInputType(2);
-        this.L.isShiftMode = true;
-        this.J.setText(string);
-        this.J.lineSpacing = -5;
-        this.L.setText(string2);
-        this.L.lineSpacing = -5;
-        this.N = new UITextLabel("Domain:", FormScreen.formXOffset, n += this.L.height + 7, TextRenderer.fontHeight);
-        this.N.width = FormScreen.formMarginLeft;
-        this.O = new UIDropdown(new String[]{"@yahoo", "@ymail", "@rocketmail"}, FormScreen.formStartX, n, FormScreen.formWidth, TextRenderer.fontHeight + 6);
-        this.O.setSelectedIndex(Xuka.readDomainYahoo());
+        this.logoYPosition = n2 <= Screen.formHeight - GameManager.topMargin ? GameManager.headerHeight - 10 + (Screen.formHeight - GameManager.topMargin - n2 >> 1) : GameManager.headerHeight + 5;
+        n = this.logoYPosition + n - 3;
+        this.yahooIdLabel = new UITextLabel("Yahoo! ID:", FormScreen.formXOffset, n, TextRenderer.fontHeight);
+        this.yahooIdLabel.width = FormScreen.formMarginLeft;
+        this.usernameTextField = new TextField();
+        this.usernameTextField.setBounds(FormScreen.formStartX, n, FormScreen.formWidth, TextRenderer.fontHeight + 6);
+        this.usernameTextField.setInputType(0);
+        this.passwordLabel = new UITextLabel(String.valueOf(TextConstant.password()) + ":", FormScreen.formXOffset, n += this.usernameTextField.height + 7, TextRenderer.fontHeight);
+        this.passwordLabel.width = FormScreen.formMarginLeft;
+        this.passwordTextField = new TextField();
+        this.passwordTextField.setBounds(FormScreen.formStartX, n, FormScreen.formWidth, TextRenderer.fontHeight + 6);
+        this.passwordTextField.setInputType(2);
+        this.passwordTextField.isShiftMode = true;
+        this.usernameTextField.setText(string);
+        this.usernameTextField.lineSpacing = -5;
+        this.passwordTextField.setText(string2);
+        this.passwordTextField.lineSpacing = -5;
+        this.domainLabel = new UITextLabel("Domain:", FormScreen.formXOffset, n += this.passwordTextField.height + 7, TextRenderer.fontHeight);
+        this.domainLabel.width = FormScreen.formMarginLeft;
+        this.domainDropdown = new UIDropdown(new String[]{"@yahoo", "@ymail", "@rocketmail"}, FormScreen.formStartX, n, FormScreen.formWidth, TextRenderer.fontHeight + 6);
+        this.domainDropdown.setSelectedIndex(Xuka.readDomainYahoo());
         int n3 = Screen.e - (TextRenderer.computeTextWidth(TextConstant.invisible(), TextRenderer.charWidth) + 13 + 4) >> 1;
-        this.M = new UICheckBox(TextConstant.invisible(), n3, n += 6 + this.O.height, TextRenderer.computeTextWidth(TextConstant.invisible(), TextRenderer.charWidth) + 13 + 4, TextRenderer.fontHeight + 4);
-        this.M.isChecked = Xuka.readFlag("statusYahoo", false);
-        int cfr_ignored_0 = this.M.height;
-        this.H = new TextField();
-        this.H.isShiftMode = true;
-        this.H.setBounds(0, Screen.formHeight - GameManager.topMargin - TextRenderer.fontHeight - 11, Screen.e - 6, TextRenderer.fontHeight + 6);
-        this.w = new BuddyListControl(1, 1, Screen.e - 3, Screen.formHeight - 2 - GameManager.topMargin, true);
-        this.addControl(this.w);
-        this.selectControl(this.w);
-        this.w.isAutoChatEnabled = true;
-        this.w.isFilterActive = Xuka.readFlag("hideOffline", true);
-        this.G = new Vector();
-        this.G.addElement(new UIAction(TextConstant.showHideOffline(), new thien_gq(this)));
-        this.G.addElement(new UIAction(TextConstant.status(), new thien_gv(this)));
-        this.G.addElement(new UIAction(TextConstant.inviteYahoo(), new thien_gw(this)));
-        this.G.addElement(new UIAction(TextConstant.signOutYahoo(), new thien_gx(this)));
+        this.invisibleCheckbox = new UICheckBox(TextConstant.invisible(), n3, n += 6 + this.domainDropdown.height, TextRenderer.computeTextWidth(TextConstant.invisible(), TextRenderer.charWidth) + 13 + 4, TextRenderer.fontHeight + 4);
+        this.invisibleCheckbox.isChecked = Xuka.readFlag("statusYahoo", false);
+        int cfr_ignored_0 = this.invisibleCheckbox.height;
+        this.searchTextField = new TextField();
+        this.searchTextField.isShiftMode = true;
+        this.searchTextField.setBounds(0, Screen.formHeight - GameManager.topMargin - TextRenderer.fontHeight - 11, Screen.e - 6, TextRenderer.fontHeight + 6);
+        this.buddyListControl = new BuddyListControl(1, 1, Screen.e - 3, Screen.formHeight - 2 - GameManager.topMargin, true);
+        this.addControl(this.buddyListControl);
+        this.selectControl(this.buddyListControl);
+        this.buddyListControl.isAutoChatEnabled = true;
+        this.buddyListControl.isFilterActive = Xuka.readFlag("hideOffline", true);
+        this.menuActions = new Vector();
+        this.menuActions.addElement(new UIAction(TextConstant.showHideOffline(), new YahooShowHideOfflineAction(this)));
+        this.menuActions.addElement(new UIAction(TextConstant.status(), new YahooStatusAction(this)));
+        this.menuActions.addElement(new UIAction(TextConstant.inviteYahoo(), new InviteYahooAction(this)));
+        this.menuActions.addElement(new UIAction(TextConstant.signOutYahoo(), new LogoutYahooAction(this)));
     }
 
-    public final void e() {
-        if (this.C || this.F) {
-            this.C = false;
-            MessageHandler.b(x, 2);
-            this.a(false);
+    public final void cleanup() {
+        if (this.shouldSignOut || this.isLoggedIn) {
+            this.shouldSignOut = false;
+            MessageHandler.b(currentUsername, 2);
+            this.switchMode(false);
         }
-        GameManager.instance.removeScreen(this.V);
-        this.V = null;
+        GameManager.instance.removeScreen(this.statusFormScreen);
+        this.statusFormScreen = null;
     }
 
-    public final void a(boolean bl) {
-        this.F = bl;
+    public final void switchMode(boolean bl) {
+        this.isLoggedIn = bl;
         if (bl) {
-            if (this.B == null) {
-                this.B = new PopupSideElementData(this.G);
-                this.R = new UIAction("Menu", new thien_gy(this));
+            if (this.popupMenuData == null) {
+                this.popupMenuData = new PopupSideElementData(this.menuActions);
+                this.menuAction = new UIAction("Menu", new ClickMenuYahooLoginAction(this));
             }
-            this.leftCommand = this.R;
+            this.leftCommand = this.menuAction;
             this.centerCommand = null;
-            this.removeControl(this.I);
-            this.removeControl(this.J);
-            this.removeControl(this.K);
-            this.removeControl(this.L);
-            this.removeControl(this.M);
-            this.removeControl(this.N);
-            this.removeControl(this.O);
-            this.addControl(this.w);
-            this.selectControl(this.w);
+            this.removeControl(this.yahooIdLabel);
+            this.removeControl(this.usernameTextField);
+            this.removeControl(this.passwordLabel);
+            this.removeControl(this.passwordTextField);
+            this.removeControl(this.invisibleCheckbox);
+            this.removeControl(this.domainLabel);
+            this.removeControl(this.domainDropdown);
+            this.addControl(this.buddyListControl);
+            this.selectControl(this.buddyListControl);
         } else {
-            if (this.S == null) {
-                this.S = new UIAction(TextConstant.signIn(), new thien_gz(this));
-                this.T = new UIAction(TextConstant.close(), new thien_gr(this));
+            if (this.signInAction == null) {
+                this.signInAction = new UIAction(TextConstant.signIn(), new ClickLoginYahooAction(this));
+                this.closeAction = new UIAction(TextConstant.close(), new CloseYahooLoginAction(this));
             }
-            this.centerCommand = this.S;
-            this.leftCommand = this.T;
-            this.i();
-            this.removeControl(this.w);
-            this.addControl(this.I);
-            this.addControl(this.J);
-            this.addControl(this.K);
-            this.addControl(this.L);
-            this.addControl(this.N);
-            this.addControl(this.O);
-            this.addControl(this.M);
-            this.selectControl(this.J);
+            this.centerCommand = this.signInAction;
+            this.leftCommand = this.closeAction;
+            this.exitSearchMode();
+            this.removeControl(this.buddyListControl);
+            this.addControl(this.yahooIdLabel);
+            this.addControl(this.usernameTextField);
+            this.addControl(this.passwordLabel);
+            this.addControl(this.passwordTextField);
+            this.addControl(this.domainLabel);
+            this.addControl(this.domainDropdown);
+            this.addControl(this.invisibleCheckbox);
+            this.selectControl(this.usernameTextField);
         }
         this.scrollTargetY = 0;
         this.scrollY = 0;
         LoginYahooScreen loginYahooScreen2 = this;
-        loginYahooScreen2.w.handleFocus();
+        loginYahooScreen2.buddyListControl.handleFocus();
         System.gc();
     }
 
     public final void drawBackground(Graphics graphics) {
-        if (!this.F) {
-            graphics.drawImage(HomeScreen.instance.homeGridMenu.images[0], this.P, this.Q, 0);
+        if (!this.isLoggedIn) {
+            graphics.drawImage(HomeScreen.instance.homeGridMenu.images[0], this.logoXPosition, this.logoYPosition, 0);
         }
         super.drawBackground(graphics);
     }
 
-    public final void f() {
-        this.J.setText(this.J.getText().trim().toLowerCase());
-        String string = this.J.getText();
-        String string2 = this.L.getText();
+    public final void performLogin() {
+        this.usernameTextField.setText(this.usernameTextField.getText().trim().toLowerCase());
+        String string = this.usernameTextField.getText();
+        String string2 = this.passwordTextField.getText();
         if (string.equals("")) {
-            this.selectControl(this.J);
+            this.selectControl(this.usernameTextField);
             return;
         }
         if (string2.equals("")) {
-            this.selectControl(this.L);
+            this.selectControl(this.passwordTextField);
             return;
         }
-        x = string;
-        y = string;
-        z = this.M.isChecked ? 12 : 0;
-        D = this.M.isChecked;
-        String string3 = Xuka.readCustomStr(x, true);
-        A = string3 == null ? "" : string3;
+        currentUsername = string;
+        originalUsername = string;
+        loginStatus = this.invisibleCheckbox.isChecked ? 12 : 0;
+        isInvisibleMode = this.invisibleCheckbox.isChecked;
+        String string3 = Xuka.readCustomStr(currentUsername, true);
+        statusMessage = string3 == null ? "" : string3;
         Xuka.saveYahooID(string);
         Xuka.saveYahooPW(string2);
-        int n = this.O.getSelectedIndex();
-        Xuka.saveDomainYahoo(this.O.getSelectedIndex());
+        int n = this.domainDropdown.getSelectedIndex();
+        Xuka.saveDomainYahoo(this.domainDropdown.getSelectedIndex());
         if (n == 1 || n == 2) {
-            x = String.valueOf(x) + this.O.getSelectedItem() + ".com";
+            currentUsername = String.valueOf(currentUsername) + this.domainDropdown.getSelectedItem() + ".com";
         }
-        this.w.isLoading = true;
-        this.a(true);
+        this.buddyListControl.isLoading = true;
+        this.switchMode(true);
         LoginYahooScreen loginYahooScreen2 = this;
-        this.U = GameManager.getChecksumValue(true);
-        if (loginYahooScreen2.U != -1) {
-            ContactDataSource contactDataSource2 = GameManager.loadBuddyList(true, x);
+        this.checksumValue = GameManager.getChecksumValue(true);
+        if (loginYahooScreen2.checksumValue != -1) {
+            ContactDataSource contactDataSource2 = GameManager.loadBuddyList(true, currentUsername);
             if (contactDataSource2 != null) {
-                GameManager.instance.loginYahooScreen.w.setDataSource(contactDataSource2, -1);
+                GameManager.instance.loginYahooScreen.buddyListControl.setDataSource(contactDataSource2, -1);
             } else {
-                loginYahooScreen2.U = -1;
+                loginYahooScreen2.checksumValue = -1;
             }
         }
-        MessageHandler.login(string, string2, z, 2, this.U);
+        MessageHandler.login(string, string2, loginStatus, 2, this.checksumValue);
     }
 
     public final void updateLayout() {
-        this.w.handleFocus();
+        this.buddyListControl.handleFocus();
     }
 
     public final void drawOverlay(Graphics graphics) {
-        this.w.drawScrollbar(graphics);
+        this.buddyListControl.drawScrollbar(graphics);
     }
 
-    public final void g() {
-        if (this.w.displayItems != null) {
-            this.w.displayItems.removeAllElements();
+    public final void clearBuddyList() {
+        if (this.buddyListControl.displayItems != null) {
+            this.buddyListControl.displayItems.removeAllElements();
         }
-        this.w.displayItems = null;
-        this.w.contactDataSource = null;
+        this.buddyListControl.displayItems = null;
+        this.buddyListControl.contactDataSource = null;
     }
 
-    private void i() {
-        this.selectControl(this.w);
-        this.removeControl(this.H);
-        this.E = false;
+    private void exitSearchMode() {
+        this.selectControl(this.buddyListControl);
+        this.removeControl(this.searchTextField);
+        this.isSearchMode = false;
     }
 
     public final boolean handleInput(boolean[] blArray, boolean[] blArray2, int[] nArray) {
         Object object;
-        if (nArray[0] > 32 && !this.E && this.F) {
+        if (nArray[0] > 32 && !this.isSearchMode && this.isLoggedIn) {
             object = this;
-            ((LoginYahooScreen)object).H.setText("");
-            ((Screen)object).addControl(((LoginYahooScreen)object).H);
-            ((Screen)object).selectControl(((LoginYahooScreen)object).H);
-            ((LoginYahooScreen)object).E = true;
+            ((LoginYahooScreen)object).searchTextField.setText("");
+            ((Screen)object).addControl(((LoginYahooScreen)object).searchTextField);
+            ((Screen)object).selectControl(((LoginYahooScreen)object).searchTextField);
+            ((LoginYahooScreen)object).isSearchMode = true;
         }
         object = "";
-        if (this.E) {
+        if (this.isSearchMode) {
             if (blArray[12]) {
                 blArray[12] = false;
-                this.w.handleKeyInput(12);
+                this.buddyListControl.handleKeyInput(12);
             } else if (blArray[13]) {
                 blArray[13] = false;
-                this.w.handleKeyInput(13);
+                this.buddyListControl.handleKeyInput(13);
             } else if (blArray[16]) {
                 blArray[16] = false;
-                this.w.handleKeyInput(16);
+                this.buddyListControl.handleKeyInput(16);
             }
-            object = this.H.getText();
+            object = this.searchTextField.getText();
         }
         boolean bl = super.handleInput(blArray, blArray2, nArray);
-        if (this.E) {
-            if (this.H.getText().equals("")) {
-                this.i();
+        if (this.isSearchMode) {
+            if (this.searchTextField.getText().equals("")) {
+                this.exitSearchMode();
             }
-            if (!this.H.getText().equals(object)) {
-                this.w.setSearchFilter(this.H.getText());
+            if (!this.searchTextField.getText().equals(object)) {
+                this.buddyListControl.setSearchFilter(this.searchTextField.getText());
             }
         }
         return bl;
     }
 
     public final void h() {
-        Xuka.setXpamFlag(x);
+        Xuka.setXpamFlag(currentUsername);
         GameManager.getInstance().showConfirmDialog(String.valueOf(TextConstant.inviteYourYahoo()) + "?", new thien_gs(this));
     }
 
-    public static void a(LoginYahooScreen loginYahooScreen2) {
-        if (D) {
+    public static void showInviteDialog(LoginYahooScreen loginYahooScreen2) {
+        if (isInvisibleMode) {
             GameManager.instance.showNotification("Vui lòng thoát Yahoo! và bỏ chọn đăng nhập ẩn", (Image)null, 1);
             return;
         }
@@ -265,40 +265,40 @@ extends Screen {
             GameManager.instance.showNotification("Vui lòng chờ 10s", (Image)null, 1);
             return;
         }
-        if (loginYahooScreen2.V == null) {
+        if (loginYahooScreen2.statusFormScreen == null) {
             System.gc();
-            loginYahooScreen2.V = new FormScreen();
-            loginYahooScreen2.V.title = TextConstant.status();
-            FormScreen cfr_ignored_0 = loginYahooScreen2.V;
+            loginYahooScreen2.statusFormScreen = new FormScreen();
+            loginYahooScreen2.statusFormScreen.title = TextConstant.status();
+            FormScreen cfr_ignored_0 = loginYahooScreen2.statusFormScreen;
             FormScreen.calculateFormDimensions(70, 150);
-            loginYahooScreen2.V.currentY += 20;
-            loginYahooScreen2.W = UIFormBuilder.addDropdown(loginYahooScreen2.V, TextConstant.status(), new String[]{TextConstant.available(), TextConstant.invisible2()});
-            loginYahooScreen2.X = UIFormBuilder.addTextFieldWithLabel(loginYahooScreen2.V, TextConstant.statusMessage(), 0, -1);
-            loginYahooScreen2.V.selectControl(loginYahooScreen2.W);
-            loginYahooScreen2.V.centerCommand = new UIAction("OK", new thien_gt(loginYahooScreen2));
-            loginYahooScreen2.V.leftCommand = new UIAction(TextConstant.cancel(), new thien_gu(loginYahooScreen2));
+            loginYahooScreen2.statusFormScreen.currentY += 20;
+            loginYahooScreen2.statusDropdown = UIFormBuilder.addDropdown(loginYahooScreen2.statusFormScreen, TextConstant.status(), new String[]{TextConstant.available(), TextConstant.invisible2()});
+            loginYahooScreen2.statusMessageTextField = UIFormBuilder.addTextFieldWithLabel(loginYahooScreen2.statusFormScreen, TextConstant.statusMessage(), 0, -1);
+            loginYahooScreen2.statusFormScreen.selectControl(loginYahooScreen2.statusDropdown);
+            loginYahooScreen2.statusFormScreen.centerCommand = new UIAction("OK", new thien_gt(loginYahooScreen2));
+            loginYahooScreen2.statusFormScreen.leftCommand = new UIAction(TextConstant.cancel(), new thien_gu(loginYahooScreen2));
         }
-        loginYahooScreen2.W.setSelectedIndex(z == 0 ? 0 : 1);
-        GameManager.getInstance().showScreen(loginYahooScreen2.V);
-        loginYahooScreen2.X.setText(A);
+        loginYahooScreen2.statusDropdown.setSelectedIndex(loginStatus == 0 ? 0 : 1);
+        GameManager.getInstance().showScreen(loginYahooScreen2.statusFormScreen);
+        loginYahooScreen2.statusMessageTextField.setText(statusMessage);
         GameManager.getInstance().goToLastScreen();
     }
 
-    public static TextField b(LoginYahooScreen loginYahooScreen2) {
-        return loginYahooScreen2.X;
+    public static TextField getStatusMessageTextField(LoginYahooScreen loginYahooScreen2) {
+        return loginYahooScreen2.statusMessageTextField;
     }
 
-    public static UIDropdown c(LoginYahooScreen loginYahooScreen2) {
-        return loginYahooScreen2.W;
+    public static UIDropdown getStatusDropdown(LoginYahooScreen loginYahooScreen2) {
+        return loginYahooScreen2.statusDropdown;
     }
 
    public static void a(LoginYahooScreen var0, String var1) {
       MessageHandler.a(var1, 2);
-      A = var1;
-      Xuka.saveCustomStr(x, var1, true);
+      statusMessage = var1;
+      Xuka.saveCustomStr(currentUsername, var1, true);
    }
 
-    public static FormScreen d(LoginYahooScreen loginYahooScreen2) {
-        return loginYahooScreen2.V;
+    public static FormScreen getStatusForm(LoginYahooScreen loginYahooScreen2) {
+        return loginYahooScreen2.statusFormScreen;
     }
 }

@@ -12,20 +12,20 @@ public final class ContactGroup {
         this.contacts = new Vector();
     }
 
-    public final void addContact(ContactEntry foundContact) {
+    public final void addContact(ContactInfo foundContact) {
         this.contacts.addElement(foundContact);
     }
 
-    public final ContactEntry findContactByName(String string) {
-        ContactEntry contactEntry2 = null;
+    public final ContactInfo findContactByName(String string) {
+        ContactInfo contactInfo2 = null;
         int n = this.contacts.size();
         while (--n >= 0) {
-            ContactEntry contactEntry3 = (ContactEntry)this.contacts.elementAt(n);
-            if (!contactEntry3.contactId.equals(string)) continue;
-            contactEntry2 = contactEntry3;
+            ContactInfo contactInfo3 = (ContactInfo)this.contacts.elementAt(n);
+            if (!contactInfo3.contactId.equals(string)) continue;
+            contactInfo2 = contactInfo3;
             break;
         }
-        return contactEntry2;
+        return contactInfo2;
     }
 
     public final String getGroupName() {

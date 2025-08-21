@@ -14,7 +14,7 @@ public final class thien_dz implements IAction {
     }
 
     public final void action() {
-        MessageHandler.c(LoginYahooScreen.x, this.b, 0);
+        MessageHandler.c(LoginYahooScreen.currentUsername, this.b, 0);
         this.gameManager.closeTopDialog();
     }
 }

@@ -814,8 +814,8 @@ public class MessageHandler {
    public static void a(String var0, int var1) {
       Packet var2 = new Packet(8, var1 == 1 ? 2 : 20);
       if (var1 == 2) {
-         LoginYahooScreen.A = var0;
-         Xuka.saveCustomStr(LoginYahooScreen.x, var0, true);
+         LoginYahooScreen.statusMessage = var0;
+         Xuka.saveCustomStr(LoginYahooScreen.currentUsername, var0, true);
       }
 
       writeString(var0, var2);

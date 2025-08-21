@@ -2,14 +2,14 @@ package home.thienph.xyahoo.actions;
 
 import home.thienph.xyahoo.conections.ConnectionManager;
 import home.thienph.xyahoo.data.networks.Packet;
-import home.thienph.xyahoo.screens.RoomListScreen;
+import home.thienph.xyahoo.screens.GameRoomListScreen;
 
 public final class thien_eo
 implements IAction {
-    private RoomListScreen roomListScreen;
+    private GameRoomListScreen gameRoomListScreen;
 
-    public thien_eo(RoomListScreen roomListScreen2) {
-        this.roomListScreen = roomListScreen2;
+    public thien_eo(GameRoomListScreen gameRoomListScreen2) {
+        this.gameRoomListScreen = gameRoomListScreen2;
     }
 
     public final void action() {

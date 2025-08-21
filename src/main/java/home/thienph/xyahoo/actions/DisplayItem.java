@@ -1,6 +1,6 @@
 package home.thienph.xyahoo.actions;
 
-import home.thienph.xyahoo.data.data.ContactEntry;
+import home.thienph.xyahoo.data.data.ContactInfo;
 
 public final class DisplayItem {
     public int itemType;
@@ -11,6 +11,6 @@ public final class DisplayItem {
     public String detailText;
     public int statusCode; // mã trạng thái (online/offline/busy...), 90%
     public boolean isSelected;
-    public ContactEntry sourceEntry;
+    public ContactInfo sourceEntry;
     public int[] additionalData;
 }

@@ -19,13 +19,13 @@ implements IAction {
 
     public final void action() {
         String string;
-        String string2 = string = this.chatRoomScreen.isPrivateChat ? LoginYahooScreen.x : BuddyListScreen.currentGroupName;
+        String string2 = string = this.chatRoomScreen.isPrivateChat ? LoginYahooScreen.currentUsername : BuddyListScreen.currentGroupName;
         if (this.isPrivateChat) {
             MessageHandler.a(string, this.chatRoomScreen.chatPartnerName, 2);
         } else {
             MessageHandler.a(string, this.chatRoomScreen.title, 1);
         }
-        this.chatRoomScreen.messageList.addUserMessage(this.isPrivateChat ? LoginYahooScreen.y : BuddyListScreen.userStatusMessage, this.isPrivateChat ? TextConstant.buzz[0] : TextConstant.buzz(), 0);
+        this.chatRoomScreen.messageList.addUserMessage(this.isPrivateChat ? LoginYahooScreen.originalUsername : BuddyListScreen.userStatusMessage, this.isPrivateChat ? TextConstant.buzz[0] : TextConstant.buzz(), 0);
         GameManager.getInstance().vibrate();
         this.chatRoomScreen.messageList.scrollToBottom();
     }

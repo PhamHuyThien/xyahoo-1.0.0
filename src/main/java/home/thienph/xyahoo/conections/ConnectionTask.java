@@ -30,9 +30,9 @@ final class ConnectionTask implements Runnable {
             ConnectionManager.isConnected = false;
 
             try {
-               if (ConnectionManager.ConnectionListener != null) {
+               if (ConnectionManager.packetHandler != null) {
                   ConnectionManager.disconnect();
-                  ConnectionManager.ConnectionListener.onConnect();
+                  ConnectionManager.packetHandler.onConnect();
                   return;
                }
             } catch (Exception var2) {
@@ -63,7 +63,7 @@ final class ConnectionTask implements Runnable {
       (ConnectionManager.writerThread = new Thread(ConnectionManager.getPacketWriter())).start();
       (ConnectionManager.readerThread = new Thread(new PacketReaderThread())).start();
       ConnectionManager.isConnecting = false;
-      ConnectionManager.ConnectionListener.shutdown();
+      ConnectionManager.packetHandler.shutdown();
       System.out.println("Connected!");
    }
 }

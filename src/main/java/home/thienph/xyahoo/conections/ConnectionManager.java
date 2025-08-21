@@ -10,7 +10,7 @@ import java.util.Hashtable;
 public final class ConnectionManager {
     private static DataOutputStream outputStream;
     public static InputStream inputStream;
-    public static PacketHandler ConnectionListener;
+    public static PacketHandler packetHandler;
     private static SocketConnection socket;
     public static boolean isConnected;
     public static boolean isConnecting;

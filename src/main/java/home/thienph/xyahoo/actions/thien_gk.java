@@ -3,7 +3,7 @@ package home.thienph.xyahoo.actions;
 import home.thienph.xyahoo.components.TextField;
 import home.thienph.xyahoo.constants.TextConstant;
 import home.thienph.xyahoo.data.data.ContactDataSource;
-import home.thienph.xyahoo.data.data.ContactEntry;
+import home.thienph.xyahoo.data.data.ContactInfo;
 import home.thienph.xyahoo.data.data.ContactGroup;
 import home.thienph.xyahoo.managers.GameManager;
 import home.thienph.xyahoo.managers.MessageHandler;
@@ -70,7 +70,7 @@ public final class thien_gk implements IAction {
 
             ContactGroup var12;
             for (int var7 = (var12 = (ContactGroup)var3.groups.elementAt(var5)).contacts.size() - 1; var7 >= 0; var7--) {
-               if (((ContactEntry)var12.contacts.elementAt(var7)).contactId.equals(var4)) {
+               if (((ContactInfo)var12.contacts.elementAt(var7)).contactId.equals(var4)) {
                   var15 = true;
                   break label46;
                }

@@ -1,8 +1,8 @@
 package home.thienph.xyahoo.main;
 
 import home.thienph.xyahoo.actions.thien_ev;
-import home.thienph.xyahoo.data.networks.Packet;
 import home.thienph.xyahoo.conections.ConnectionManager;
+import home.thienph.xyahoo.data.networks.Packet;
 import home.thienph.xyahoo.managers.Game2Handler;
 import home.thienph.xyahoo.managers.GameHandler;
 import home.thienph.xyahoo.managers.GameManager;
@@ -45,17 +45,16 @@ public final class GameCanvas extends Canvas implements Runnable {
       gameState = 0;
       TextRenderer.initFont();
       GameHandler gameHandler = GameHandler.getInstance();
+      Game2Handler game2Handler = Game2Handler.getInstance();
       ConnectionManager.registerCallback(1, gameHandler);
-      ConnectionManager.registerCallback(1001, gameHandler);
-      ConnectionManager.registerCallback(1000, gameHandler);
+      ConnectionManager.registerCallback(2, game2Handler);
       ConnectionManager.registerCallback(39, gameHandler);
-      ConnectionManager.registerCallback(2, Game2Handler.getInstance());
       ConnectionManager.registerCallback(48, gameHandler);
       ConnectionManager.registerCallback(1001, gameHandler);
-      ConnectionManager.ConnectionListener = gameHandler;
-      GameManager gameManager;
-      GameHandler.setGameManager(gameManager = GameManager.getInstance());
-      Game2Handler.setGameManager(gameManager);
+      ConnectionManager.registerCallback(1000, gameHandler);
+      ConnectionManager.packetHandler = gameHandler;
+      GameHandler.setGameManager(GameManager.getInstance());
+      Game2Handler.setGameManager(GameManager.getInstance());
       ConnectionManager.sendPacket(new Packet(-2, -1));
       new Thread(this).start();
    }

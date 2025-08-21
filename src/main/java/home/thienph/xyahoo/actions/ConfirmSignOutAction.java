@@ -13,7 +13,7 @@ implements IAction {
         }
         catch (Exception exception) {}
         if (GameManager.instance.loginYahooScreen != null) {
-            GameManager.instance.loginYahooScreen.e();
+            GameManager.instance.loginYahooScreen.cleanup();
         }
         GameManager.getInstance().closeTopDialog();
         GameManager.getInstance().logout();

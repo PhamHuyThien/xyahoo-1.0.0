@@ -110,7 +110,7 @@ public final class GameManager implements IGameManager {
    public static String recoveryPhone;
    public static String promoMessage;
    public HomeScreen homeScreen;
-   public static RoomListScreen roomListScreen;
+   public static GameRoomListScreen gameRoomListScreen;
 
    static {
       try {
@@ -605,7 +605,7 @@ public final class GameManager implements IGameManager {
       this.inviteConferenceScreen.clearBuddyList();
       this.buddyListScreen.o();
       if (this.loginYahooScreen != null) {
-         this.loginYahooScreen.g();
+         this.loginYahooScreen.clearBuddyList();
       }
 
       int var1 = ConnectionManager.dataUsage;
@@ -1298,8 +1298,8 @@ public final class GameManager implements IGameManager {
       return var1;
    }
 
-   private static void saveChecksum(int var0, boolean var1) {
-      Xuka.writeRecord(var1 ? "yahoocs" : "vitalkcs", intToBytes(var0));
+   private static void saveChecksum(int value, boolean isYahoo) {
+      Xuka.writeRecord(isYahoo ? "yahoocs" : "vitalkcs", intToBytes(value));
    }
 
    public static int getChecksumValue(boolean var0) {
@@ -1320,10 +1320,10 @@ public final class GameManager implements IGameManager {
             writeInt(var3, var10.size());
 
             for (int var6 = 0; var6 < var10.size(); var6++) {
-               ContactEntry var7 = (ContactEntry)var10.elementAt(var6);
+               ContactInfo var7 = (ContactInfo)var10.elementAt(var6);
                writeString(var3, var7.contactId);
                writeString(var3, var7.displayName);
-               writeInt(var3, var7.userLevel);
+               writeInt(var3, var7.index);
             }
          }
 
@@ -1352,10 +1352,10 @@ public final class GameManager implements IGameManager {
                int var5 = readInt(var10);
 
                for (int var6 = 0; var6 < var5; var6++) {
-                  ContactEntry var7;
-                  (var7 = new ContactEntry()).contactId = readString(var10);
+                  ContactInfo var7;
+                  (var7 = new ContactInfo()).contactId = readString(var10);
                   var7.displayName = readString(var10);
-                  var7.userLevel = readInt(var10);
+                  var7.index = readInt(var10);
                   var4.addContact(var7);
                }
 
@@ -1400,45 +1400,43 @@ public final class GameManager implements IGameManager {
       }
    }
 
-   public final ChatRoomScreen createChatRoom(String var1) {
-      ChatRoomScreen var2;
-      if ((var2 = (ChatRoomScreen)this.findScreenByTitle(var1)) == null) {
-         DisplayItem var3;
-         if ((var3 = this.buddyListScreen.buddyList.findDisplayItem(var1)) == null) {
-            var2 = new ChatRoomScreen(var1, false, false, null);
+   public final ChatRoomScreen createChatRoom(String title) {
+      ChatRoomScreen chatRoomScreen = (ChatRoomScreen) this.findScreenByTitle(title);
+      if (chatRoomScreen == null) {
+         DisplayItem displayItem = this.buddyListScreen.buddyList.findDisplayItem(title);
+         if (displayItem == null) {
+            chatRoomScreen = new ChatRoomScreen(title, false, false, null);
          } else {
-            (var2 = new ChatRoomScreen(var1, false, false, var3.additionalData)).setCurrentRoomName(Integer.toString(var3.sourceEntry.additionalFlags));
+            (chatRoomScreen = new ChatRoomScreen(title, false, false, displayItem.additionalData)).setCurrentRoomName(Integer.toString(displayItem.sourceEntry.additionalFlags));
          }
 
-         if (var3 != null && var3.statusText != null && !var3.statusText.equals("")) {
-            var2.chatPartnerStatus = var3.statusText;
+         if (displayItem != null && displayItem.statusText != null && !displayItem.statusText.equals("")) {
+            chatRoomScreen.chatPartnerStatus = displayItem.statusText;
          } else {
-            var2.chatPartnerStatus = var1;
+            chatRoomScreen.chatPartnerStatus = title;
          }
-
-         this.showScreen(var2);
+         this.showScreen(chatRoomScreen);
       }
-
-      return var2;
+      return chatRoomScreen;
    }
 
    public final void receivePrivateMessage(String var1, String var2) {
       if (!isUserBlocked(var1)) {
-         ChatRoomScreen var3;
-         if (!(var3 = this.createChatRoom(var1)).title.equals(this.activeScreen.title)) {
+         ChatRoomScreen chatRoomScreen = this.createChatRoom(var1);
+         if (!chatRoomScreen.title.equals(this.activeScreen.title)) {
             String var4 = TextRenderer.wrapText(var2, GameCanvas.screenWidth - GameCanvas.screenWidth / 3, TextRenderer.charWidth);
             this.showNotification(var1 + " chat: " + var4 + "...", (Image) null, 1);
-            var3.isScrolling = true;
+            chatRoomScreen.isScrolling = true;
             this.vibrate();
          }
 
-         boolean var5 = var3.messageList.isAtBottom();
-         var3.messageList.addUserMessage(var3.chatPartnerStatus, var2, 1);
+         boolean var5 = chatRoomScreen.messageList.isAtBottom();
+         chatRoomScreen.messageList.addUserMessage(chatRoomScreen.chatPartnerStatus, var2, 1);
          if (var5) {
-            var3.messageList.scrollToBottom();
+            chatRoomScreen.messageList.scrollToBottom();
          }
 
-         var3.isVisible = true;
+         chatRoomScreen.isVisible = true;
       }
    }
 
@@ -1507,7 +1505,7 @@ public final class GameManager implements IGameManager {
             break;
          case 2:
             try {
-               this.loginYahooScreen.w.updateContactMessage(var1, var2, 1);
+               this.loginYahooScreen.buddyListControl.updateContactMessage(var1, var2, 1);
                return;
             } catch (Exception var4) {
             }
@@ -1536,7 +1534,7 @@ public final class GameManager implements IGameManager {
             break;
          case 2:
             try {
-               if (this.loginYahooScreen != null && this.loginYahooScreen.w != null && this.loginYahooScreen.w.updateContactStatus(var1, var2)) {
+               if (this.loginYahooScreen != null && this.loginYahooScreen.buddyListControl != null && this.loginYahooScreen.buddyListControl.updateContactStatus(var1, var2)) {
                   String var8 = var2 == 1 ? TextConstant.isOnline() : TextConstant.isOffline();
                   int var4 = this.activeScreen instanceof ChatRoomScreen ? 2 : 0;
                   this.showNotification("Y! " + var1 + var8, var2 == 1 ? BuddyListControl.statusIcons[1] : BuddyListControl.statusIcons[0], var4);
@@ -1577,7 +1575,7 @@ public final class GameManager implements IGameManager {
       this.showSimpleDialog(var1 + TextConstant.refusedToBeAdded());
    }
 
-   public final void addFriendToGroup(int var1, ContactEntry var2, String var3) {
+   public final void addFriendToGroup(int var1, ContactInfo var2, String var3) {
       this.buddyListScreen.buddyList.contactDataSource.addContactToGroup(var3, var2);
       this.buddyListScreen.buddyList.rebuildVisibleItems();
       BuddyListControl.cleanup();
@@ -1604,16 +1602,16 @@ public final class GameManager implements IGameManager {
       this.showChatRoomList();
    }
 
-   public final void createOrJoinConference(String var1, String[] var2, String var3) {
-      var3 = var3 + " " + var1;
-      ChatRoomScreen var4;
-      (var4 = new ChatRoomScreen(var3, false, true, null)).subtitle = var1;
+   public final void createOrJoinConference(String roomId, String[] var2, String userInvite) {
+      userInvite = userInvite + " " + roomId;
+      ChatRoomScreen chatRoomScreen = new ChatRoomScreen(userInvite, false, true, null);
+      (chatRoomScreen).subtitle = roomId;
       int var5 = this.screenCount;
 
       while (--var5 >= 0) {
-         Screen var6;
-         if ((var6 = (Screen)this.screenStack.elementAt(var5)).subtitle == var1) {
-            var4 = (ChatRoomScreen)var6;
+         Screen screen = (Screen)this.screenStack.elementAt(var5);
+         if (screen.subtitle == roomId) {
+            chatRoomScreen = (ChatRoomScreen) screen;
          }
       }
 
@@ -1621,23 +1619,23 @@ public final class GameManager implements IGameManager {
          this.inviteeCount = var2.length;
 
          for (int var8 = 0; var8 < this.inviteeCount; var8++) {
-            var4.messageList.addMessage(TextConstant.inviting() + var2[var8] + "...", 1);
+            chatRoomScreen.messageList.addMessage(TextConstant.inviting() + var2[var8] + "...", 1);
          }
 
-         var4.messageList.scrollToBottom();
+         chatRoomScreen.messageList.scrollToBottom();
       }
 
-      this.showScreen(var4);
-      this.switchToScreenByTitle(var3);
+      this.showScreen(chatRoomScreen);
+      this.switchToScreenByTitle(userInvite);
    }
 
-   public final void showConferenceInviteDialog(String var1, String var2, String var3) {
-      if (!isUserBlocked(var1)) {
+   public final void showConferenceInviteDialog(String userInvite, String roomId, String groupChatName) {
+      if (!isUserBlocked(userInvite)) {
          this.showCenterDialog(
-            new String[]{var1 + TextConstant.inviteConference2(), var3},
+            new String[]{userInvite + TextConstant.inviteConference2(), groupChatName},
             new UIAction(TextConstant.cancel(), new thien_ed(this)),
-            new UIAction("OK", new thien_ee(this, var2, var1, var3)),
-            new UIAction(TextConstant.cancel(), new thien_ef(this, var2, var1))
+            new UIAction("OK", new AcceptInviteJoinGroupAction(this, roomId, userInvite, groupChatName)),
+            new UIAction(TextConstant.cancel(), new thien_ef(this, roomId, userInvite))
          );
       }
    }
@@ -1729,13 +1727,13 @@ public final class GameManager implements IGameManager {
    }
 
    public final void yahooDisconnected() {
-      this.loginYahooScreen.C = false;
-      this.loginYahooScreen.a(false);
+      this.loginYahooScreen.shouldSignOut = false;
+      this.loginYahooScreen.switchMode(false);
       this.showNotification(TextConstant.disconnectYahoo(), (Image)null, 0);
    }
 
    public final void yahooLoginFailed() {
-      this.loginYahooScreen.a(false);
+      this.loginYahooScreen.switchMode(false);
       this.showSimpleDialog(TextConstant.wrongYahooIdOrPassword());
    }
 
@@ -1813,9 +1811,9 @@ public final class GameManager implements IGameManager {
    }
 
    public final void showRoomList() {
-      if (roomListScreen != null && this.containsScreen(roomListScreen)) {
-         roomListScreen.startSlide(1);
-         this.switchToScreen(roomListScreen);
+      if (gameRoomListScreen != null && this.containsScreen(gameRoomListScreen)) {
+         gameRoomListScreen.startSlide(1);
+         this.switchToScreen(gameRoomListScreen);
       } else {
          MessageHandler.updateRoomList();
       }
@@ -1826,7 +1824,7 @@ public final class GameManager implements IGameManager {
       if (this.containsScreen(this.loginYahooScreen)) {
          this.switchToScreen(this.loginYahooScreen);
       } else {
-         this.loginYahooScreen.a(false);
+         this.loginYahooScreen.switchMode(false);
          this.showScreen(this.loginYahooScreen);
          this.switchToScreen(this.loginYahooScreen);
       }
@@ -1874,9 +1872,9 @@ public final class GameManager implements IGameManager {
       this.removeScreen(this.loginScreen);
       if (autoLoginYahoo) {
          this.initializeYahooLogin();
-         this.loginYahooScreen.a(false);
+         this.loginYahooScreen.switchMode(false);
          this.showScreen(this.loginYahooScreen);
-         this.loginYahooScreen.f();
+         this.loginYahooScreen.performLogin();
       }
 
       TextRendererHelper.releaseLogo();
@@ -1895,22 +1893,22 @@ public final class GameManager implements IGameManager {
    }
 
    public final void yahooLoginSuccess() {
-      if (LoginYahooScreen.z == 0 && LoginYahooScreen.A != null && LoginYahooScreen.A.length() > 0) {
-         MessageHandler.a(LoginYahooScreen.A, 2);
+      if (LoginYahooScreen.loginStatus == 0 && LoginYahooScreen.statusMessage != null && LoginYahooScreen.statusMessage.length() > 0) {
+         MessageHandler.a(LoginYahooScreen.statusMessage, 2);
       }
 
-      this.loginYahooScreen.C = true;
-      this.loginYahooScreen.a(true);
-      if (Xuka.readXpamFlag(LoginYahooScreen.x) == 0) {
+      this.loginYahooScreen.shouldSignOut = true;
+      this.loginYahooScreen.switchMode(true);
+      if (Xuka.readXpamFlag(LoginYahooScreen.currentUsername) == 0) {
          this.loginYahooScreen.h();
       }
    }
 
    public final void setYahooBuddyList(ContactDataSource var1) {
-      loadChecksum(var1, true, LoginYahooScreen.x);
-      this.loginYahooScreen.w.setDataSource(var1, -1);
+      loadChecksum(var1, true, LoginYahooScreen.currentUsername);
+      this.loginYahooScreen.buddyListControl.setDataSource(var1, -1);
       this.loginYahooScreen.isVisible = true;
-      this.loginYahooScreen.w.isLoading = false;
+      this.loginYahooScreen.buddyListControl.isLoading = false;
    }
 
    public final void showAddFriendDialog(String var1) {
@@ -2077,7 +2075,7 @@ public final class GameManager implements IGameManager {
          ContactDataSource var8 = this.buddyListScreen.buddyList.contactDataSource;
 
          for (int var4 = this.buddyListScreen.buddyList.contactDataSource.groups.size() - 1; var4 >= 0; var4--) {
-            ContactEntry var5;
+            ContactInfo var5;
             if ((var5 = ((ContactGroup)var8.groups.elementAt(var4)).findContactByName(var9)) != null) {
                var5.permissions = var3;
             }
@@ -2376,7 +2374,7 @@ public final class GameManager implements IGameManager {
                var16.detailText = var13;
             }
 
-            ContactEntry var17;
+            ContactInfo var17;
             (var17 = var16.sourceEntry).displayName = var2;
             var17.permissions = var3;
             var17.additionalFlags = var6;
@@ -2397,7 +2395,7 @@ public final class GameManager implements IGameManager {
          int var7 = (var6 = (ContactGroup)var4.groups.elementAt(var5)).contacts.size();
 
          while (--var7 >= 0) {
-            ContactEntry var8 = (ContactEntry)var6.contacts.elementAt(var7);
+            ContactInfo var8 = (ContactInfo)var6.contacts.elementAt(var7);
             int var9 = var1.length;
 
             while (--var9 >= 0) {
@@ -2448,20 +2446,20 @@ public final class GameManager implements IGameManager {
    }
 
    public final void setCachedBuddyList(ContactDataSource var1) {
-      if (roomListScreen == null) {
-         (roomListScreen = new RoomListScreen()).contactListUI.itemSelectCallback = new thien_dp(this);
-         roomListScreen.contactListUI.selectAction.label = "Vào phòng";
-         roomListScreen.title = "Tiến Lên Miền Nam";
-         roomListScreen.selectedRoomIndex = 0;
-         roomListScreen.setWrappedText(roomListScreen.title);
+      if (gameRoomListScreen == null) {
+         (gameRoomListScreen = new GameRoomListScreen()).contactListUI.itemSelectCallback = new thien_dp(this);
+         gameRoomListScreen.contactListUI.selectAction.label = "Vào phòng";
+         gameRoomListScreen.title = "Tiến Lên Miền Nam";
+         gameRoomListScreen.selectedRoomIndex = 0;
+         gameRoomListScreen.setWrappedText(gameRoomListScreen.title);
       }
 
-      roomListScreen.contactListUI.setDataSource(var1, 0);
-      roomListScreen.startSlide(1);
-      if (!this.containsScreen(roomListScreen)) {
-         this.showScreen(roomListScreen);
+      gameRoomListScreen.contactListUI.setDataSource(var1, 0);
+      gameRoomListScreen.startSlide(1);
+      if (!this.containsScreen(gameRoomListScreen)) {
+         this.showScreen(gameRoomListScreen);
       }
 
-      this.switchToScreen(roomListScreen);
+      this.switchToScreen(gameRoomListScreen);
    }
 }

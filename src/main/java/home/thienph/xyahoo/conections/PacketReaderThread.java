@@ -48,8 +48,8 @@ implements Runnable {
 
         // Xử lý disconnect
         try {
-            if (ConnectionManager.isConnected && ConnectionManager.ConnectionListener != null) {
-                ConnectionManager.ConnectionListener.onDisconnect();
+            if (ConnectionManager.isConnected && ConnectionManager.packetHandler != null) {
+                ConnectionManager.packetHandler.onDisconnect();
             }
             if (ConnectionManager.getSocketConnection() != null) {
                 ConnectionManager.resetConnection();

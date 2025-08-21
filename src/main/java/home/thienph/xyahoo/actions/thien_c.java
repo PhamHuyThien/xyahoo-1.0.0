@@ -1,7 +1,7 @@
 package home.thienph.xyahoo.actions;
 
 import home.thienph.xyahoo.components.BuddyListControl;
-import home.thienph.xyahoo.data.data.ContactEntry;
+import home.thienph.xyahoo.data.data.ContactInfo;
 import home.thienph.xyahoo.managers.GameManager;
 import home.thienph.xyahoo.screens.ChatRoomScreen;
 
@@ -29,7 +29,7 @@ implements IAction {
             new ChatRoomScreen((String)object, this.buddyListControl.isAutoChatEnabled, false, BuddyListControl.getSelectedDisplayItem((BuddyListControl)this.buddyListControl).additionalData).chatPartnerStatus = BuddyListControl.getSelectedDisplayItem((BuddyListControl)this.buddyListControl).statusText.equals("") ? BuddyListControl.getSelectedDisplayItem((BuddyListControl)this.buddyListControl).displayName : BuddyListControl.getSelectedDisplayItem((BuddyListControl)this.buddyListControl).statusText;
             object = BuddyListControl.getSelectedDisplayItem((BuddyListControl)this.buddyListControl).sourceEntry;
             if (object != null) {
-                chatRoomScreen2.setCurrentRoomName(Integer.toString(((ContactEntry)object).additionalFlags));
+                chatRoomScreen2.setCurrentRoomName(Integer.toString(((ContactInfo)object).additionalFlags));
             }
         }
         chatRoomScreen2.startSlide(1);

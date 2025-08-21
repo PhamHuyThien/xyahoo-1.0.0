@@ -3,7 +3,7 @@ package home.thienph.xyahoo.conections;
 import home.thienph.xyahoo.data.networks.Packet;
 
 public abstract class PacketHandler {
-   protected abstract void handle(Packet var1, int commandId);
+   protected abstract void handle(Packet packet, int commandId);
 
    public final void dispatch(Packet packet) {
       int commandId = packet.getCommandId();

@@ -10,7 +10,7 @@ import home.thienph.xyahoo.managers.GameManager;
 import java.util.Vector;
 import javax.microedition.lcdui.Graphics;
 
-public final class RoomListScreen
+public final class GameRoomListScreen
 extends Screen {
     public ContactListUI contactListUI;
     public int selectedRoomIndex;
@@ -18,7 +18,7 @@ extends Screen {
     public PopupSideElementData popupMenuData;
     public static UIAction cashInAction = new UIAction("Nạp xuxu", new CashInXuxuAction());
 
-    public RoomListScreen() {
+    public GameRoomListScreen() {
         this.isLocked = true;
         this.contactListUI = new ContactListUI(1, 1, Screen.e - 3, Screen.formHeight - 2 - GameManager.topMargin, 0);
         this.addControl(this.contactListUI);
